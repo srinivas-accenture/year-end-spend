@@ -1,16 +1,14 @@
 /* Font-face and global resets */
 @font-face {
   font-family: "SC Prosper Sans";
-  src: url("https://av.sc.com/sg/YEC21/SCProsperSans-Medium.woff2")
-    format("woff2");
+  src: url("https://av.sc.com/sg/YEC21/SCProsperSans-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "SC Prosper Sans";
-  src: url("https://av.sc.com/sg/YEC21/SCProsperSans-Regular.woff2")
-    format("woff2");
+  src: url("https://av.sc.com/sg/YEC21/SCProsperSans-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -75,20 +73,13 @@ body {
   position: relative;
   overflow: hidden;
 }
-.sc-year-spend-campaign
-  .sc-year-spend-campaign-end
-  .sc-year-spend-container
-  .sc-year-spend-slider {
+.sc-year-spend-campaign .sc-year-spend-campaign-end .sc-year-spend-container .sc-year-spend-slider {
   position: relative;
   width: 100vw;
   height: 100vh;
   z-index: 12;
 }
-.sc-year-spend-campaign
-  .sc-year-spend-campaign-end
-  .sc-year-spend-container
-  .sc-year-spend-slider
-  .sc-year-spend-slider-img {
+.sc-year-spend-campaign .sc-year-spend-campaign-end .sc-year-spend-container .sc-year-spend-slider .sc-year-spend-slider-img {
   position: absolute;
   z-index: 13;
   width: 138px;
@@ -97,33 +88,21 @@ body {
   transform-origin: center center;
   touch-action: none;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   -webkit-user-drag: none;
   transition: outline 0.2s ease;
 }
-.sc-year-spend-campaign
-  .sc-year-spend-campaign-end
-  .sc-year-spend-container
-  .sc-year-spend-slider
-  .sc-year-spend-slider-img
-  img {
+.sc-year-spend-campaign .sc-year-spend-campaign-end .sc-year-spend-container .sc-year-spend-slider .sc-year-spend-slider-img img {
   width: 100%;
   height: 100%;
   pointer-events: none;
   display: block;
 }
-.sc-year-spend-campaign
-  .sc-year-spend-campaign-end
-  .sc-year-spend-container
-  .sc-year-spend-slider
-  .sc-year-spend-slider-img.sc-year-spend-active {
+.sc-year-spend-campaign .sc-year-spend-campaign-end .sc-year-spend-container .sc-year-spend-slider .sc-year-spend-slider-img.sc-year-spend-active {
   outline-offset: 4px;
 }
-.sc-year-spend-campaign
-  .sc-year-spend-campaign-end
-  .sc-year-spend-container
-  .sc-year-spend-pocket {
+.sc-year-spend-campaign .sc-year-spend-campaign-end .sc-year-spend-container .sc-year-spend-pocket {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -131,18 +110,11 @@ body {
   bottom: -320px;
   pointer-events: none;
 }
-.sc-year-spend-campaign
-  .sc-year-spend-campaign-end
-  .sc-year-spend-container
-  .sc-year-spend-pocket
-  .sc-year-spend-pocket-camera {
+.sc-year-spend-campaign .sc-year-spend-campaign-end .sc-year-spend-container .sc-year-spend-pocket .sc-year-spend-pocket-camera {
   width: 488px;
   height: 439px;
 }
-.sc-year-spend-campaign
-  .sc-year-spend-campaign-end
-  .sc-year-spend-container
-  .sc-year-spend-bg-dark-blue {
+.sc-year-spend-campaign .sc-year-spend-campaign-end .sc-year-spend-container .sc-year-spend-bg-dark-blue {
   position: absolute;
   top: 0;
   left: 0;
@@ -152,4 +124,4 @@ body {
   background-image: url("../images/sc-year-end-spend-bg-dark-blue.png");
   background-position: top left;
   background-size: cover;
-} /*# sourceMappingURL=sc-year-end-spend-campaign.css.map */
+}/*# sourceMappingURL=sc-year-end-spend-campaign.css.map */

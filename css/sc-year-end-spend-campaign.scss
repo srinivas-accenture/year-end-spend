@@ -38,7 +38,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #333;
+  background-color: $color-grey-dark-6; // #333 from sc-colors.scss
 }
 
 /* Variables */
@@ -73,7 +73,7 @@ $pocket-height: 439px;
       max-width: $maxwidth-container;
       height: 100%;
       min-height: fit-content;
-      background: linear-gradient(0deg, #00a79d 52.53%, #0473ea 139.43%);
+      background: linear-gradient(0deg, $color-sky-blue-7 52.53%, $color-blue-22 139.43%);
       display: flex;
       flex-direction: column;
       justify-content: center;

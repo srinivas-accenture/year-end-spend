@@ -51,7 +51,7 @@ class ScYearEndSpendSlider {
     this.pgpocket = document.getElementById(this.pocketId);
     this.pgbgdark = document.getElementById(this.bgDarkId);
     this.polaroidResult = document.getElementById(this.resultId);
-
+    this.pgslider.style.display = "block";
     if (
       !this.pgslider ||
       !this.pgpocket ||

@@ -311,11 +311,61 @@
       transition: opacity 0.5s ease-in-out 4s;
     }
   </style> -->
+  <script>
+    window.general = {
+      country: 'sg',
+      language: 'en',
+      platform: 'app webview',
+      primaryCategory: 'rtim-retarget',
+      subCategory1: 'year-end-spend',
+      subCategory2: '',
+      buildDetails: 'web1.0',
+      libDetails: 'dev',
+      pageType: 'campaign',
+      segment: 'personal',
+      userStatus: 'logged in',
+      userType: 'etb',
+      customerSegment: 'personal',
+      productName: 'na',
+      formName: 'na',
+      productCategory: 'credit-cards',
+      productSubcategory: '',
+      deviceType: 'primary',
+      environment: 'dev',
+      getDataFromRTIM: false,
+      mockDataUrl: './json/mockdata/sc-mid-year-spend-campaign-mockdata.json',
+      tcUrl: 'https://www.sc.com/sg/terms-and-conditions/pinballsurewin/',
+      scrollTolerance: Math.max(50, window.innerHeight * 0.02),
+      shareObject: {
+        message: 'I’ve just won {{reward}} from Standard Chartered’s Pinball Sure-Win Promotion!\n\nJoin the fun today! Spend, play and win with SC Credit Card to unlock sure-win prizes including a Paris Getaway for Two (flights, hotels, and iconic experiences), Samsonite luggage, cashback and more!\n\n1. Already a SC Cardholder? Log in to SC Mobile, go to the Discover tab and register for ‘Pinball Sure-Win’ Promotion\n2. Don’t have a card ? Apply now via SC Singapore (SG) Website.'
+      }
+    };
+    window.gamePlayAnimation = {
+      pathPoints: ["", "b", "c",],
+      pathGift: ["", "b", "c",],
+      pathGrandPrize: "",
+      pathVoucher: ["", "b", "c",],
+      pathCashback: ["", "b", "c",],
+      prizeImgPoints: "./json/lottie/sc-mid-year-spend-gameplay-body-prize-points.json",
+      prizeImgGift: "./json/lottie/sc-mid-year-spend-gameplay-body-prize-exclusivegift.json",
+      prizeImgGrandPrize: "./json/lottie/sc-mid-year-spend-gameplay-body-prize-grandprize.json",
+      prizeImgVoucher: "./json/lottie/sc-mid-year-spend-gameplay-body-prize-voucher.json",
+      prizeImgCashback: "./json/lottie/sc-mid-year-spend-gameplay-body-prize-cashback.json",
+      lottieConfetti: "./json/lottie/sc-mid-year-spend-gameplay-confetti-effect.json",
+      imageMute: "./images/sc-mid-year-spend-header-sound-icon-mute.png",
+      imageUnmute: "./images/sc-mid-year-spend-header-sound-icon-unmute.png",
+      bgMusic: "https://av.sc.com/sg/midyearspend/sc-mid-year-spend-backgroundmusic.mp3",
+      collision: "https://av.sc.com/sg/midyearspend/sc-mid-year-spend-gameplay-collision.mp3",
+      launchPowerup: "https://av.sc.com/sg/midyearspend/sc-mid-year-spend-gameplay-launch-powerup.mp3",
+      launchError: "https://av.sc.com/sg/midyearspend/sc-mid-year-spend-gameplay-launch-error.mp3",
+      gameSuccess: "https://av.sc.com/sg/midyearspend/sc-mid-year-spend-gameplay-launch-completed.mp3"
+    };
+  </script>
 </head>
 
 <body>
   <div class="sc-year-end-spend-campaign">
-    <div class="sc-year-end-spend-polaroid-game">
+   <div class="sc-year-end-spend-polaroid-game">
       <div class="sc-year-end-spend-polaroid-game__wrapper">
         <div class="sc-year-end-spend-polaroid-game__header">
           <div class="sc-year-end-spend-polaroid-game__header-title">

@@ -43,7 +43,6 @@ class ScYearEndSpendSlider {
     this.movedY = 0;
     this.gesture = null;
     this.dragging = false;
-    // Do not call init here; wait for images to load
   }
 
   // Initialize DOM references, config, and event bindings
@@ -72,10 +71,10 @@ class ScYearEndSpendSlider {
 
     // Load config from dataset
     const ds = this.pgslider.dataset;
-    this.itemW = parseInt(ds.itemWidth) || 138;
-    this.itemH = parseInt(ds.itemHeight) || 185;
-    this.spacingX = parseInt(ds.spacingX) || 140;
-    this.curveIntensity = parseInt(ds.curveIntensity) || 40;
+    this.itemW = parseInt(ds.itemWidth) || this.itemW;
+    this.itemH = parseInt(ds.itemHeight) || this.itemH;
+    this.spacingX = parseInt(ds.spacingX) || this.spacingX;
+    this.curveIntensity = parseInt(ds.curveIntensity) || this.curveIntensity;
     this.angles = ds.angles
       ? ds.angles.split(",").map(Number)
       : [0, -20, -40, -65, -90];
@@ -349,39 +348,5 @@ const instance = new ScYearEndSpendSlider(
   "polaroid-game-bg-dark",
   "polaroid-result"
 );
-
-// Wait for all images in the slider to load before initializing layout
-function imagesLoaded(container, callback) {
-  const images = Array.from(container.querySelectorAll("img"));
-  let loaded = 0;
-  if (images.length === 0) {
-    callback();
-    return;
-  }
-  images.forEach((img) => {
-    if (img.complete) {
-      loaded++;
-      if (loaded === images.length) callback();
-    } else {
-      img.addEventListener("load", () => {
-        loaded++;
-        if (loaded === images.length) callback();
-      });
-      img.addEventListener("error", () => {
-        loaded++;
-        if (loaded === images.length) callback();
-      });
-    }
-  });
-}
-
-window.addEventListener("load", function () {
-  const slider = document.getElementById("polaroid-game-slider");
-  if (slider) {
-    imagesLoaded(slider, () => {
-      instance.init();
-    });
-  }
-});
 
 export default instance;

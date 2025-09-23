@@ -2,14 +2,22 @@
  * Class representing the Polaroid Game slider.
  * Handles layout, rendering, and drag interactions.
  */
-class ScYESGameScreen {
-  constructor() {
-    this.sectionId = "sc-year-end-spend-polaroid-game-section";
-    this.sliderId = "polaroid-game-slider";
-    this.pocketId = "polaroid-game-pocket";
-    this.bgDarkId = "polaroid-game-bg-dark";
-    this.resultId = "polaroid-result";
-    this.pgsection = null;
+// ScYearEndSpendSlider manages the polaroid slider UI, layout, rendering, and drag interactions.
+class ScYearEndSpendSlider {
+  /**
+   * @param {string} sliderId - ID of the slider container.
+   * @param {string} pocketId - ID of the pocket element.
+   * @param {string} bgDarkId - ID of the dark background element.
+   * @param {string} resultId - ID of the result container.
+   */
+  constructor(pgsectionId, sliderId, pocketId, bgDarkId, resultId) {
+    // Store element IDs for later use in init
+    this.pgsection = pgsectionId;
+    this.sliderId = sliderId;
+    this.pocketId = pocketId;
+    this.bgDarkId = bgDarkId;
+    this.resultId = resultId;
+    // Initialize all properties
     this.pgslider = null;
     this.pgpocket = null;
     this.pgbgdark = null;
@@ -36,17 +44,15 @@ class ScYESGameScreen {
     this.movedY = 0;
     this.gesture = null;
     this.dragging = false;
-    //this.init();
   }
-
   // Initialize DOM references, config, and event bindings
   init() {
-    this.pgsection = document.getElementById(this.sectionId);
+    this.pgsection = document.getElementById(this.pgsection);
     this.pgslider = document.getElementById(this.sliderId);
     this.pgpocket = document.getElementById(this.pocketId);
     this.pgbgdark = document.getElementById(this.bgDarkId);
     this.polaroidResult = document.getElementById(this.resultId);
-    this.pgslider.style.display = "block";
+
     if (
       !this.pgslider ||
       !this.pgpocket ||
@@ -55,6 +61,7 @@ class ScYESGameScreen {
     ) {
       throw new Error("One or more required elements not found.");
     }
+
     this.items = Array.from(
       this.pgslider.querySelectorAll(
         ".sc-year-end-spend-polaroid-game__slider-img"
@@ -62,30 +69,35 @@ class ScYESGameScreen {
     );
     this.num = this.items.length;
     if (this.num === 0) throw new Error("No slider items found.");
+
+    // Load config from dataset
     const ds = this.pgslider.dataset;
-    this.itemW = parseInt(ds.itemWidth) || this.itemW;
-    this.itemH = parseInt(ds.itemHeight) || this.itemH;
-    this.spacingX = parseInt(ds.spacingX) || this.spacingX;
-    this.curveIntensity = parseInt(ds.curveIntensity) || this.curveIntensity;
-    this.angles = ds.angles ? ds.angles.split(",").map(Number) : this.angles;
-    this.swipeThreshold = parseInt(ds.swipeThreshold) || this.swipeThreshold;
-    this.verticalThreshold =
-      parseInt(ds.verticalThreshold) || this.verticalThreshold;
+    this.itemW = parseInt(ds.itemWidth) || 138;
+    this.itemH = parseInt(ds.itemHeight) || 185;
+    this.spacingX = parseInt(ds.spacingX) || 140;
+    this.curveIntensity = parseInt(ds.curveIntensity) || 40;
+    this.angles = ds.angles
+      ? ds.angles.split(",").map(Number)
+      : [0, -20, -40, -65, -90];
+    this.swipeThreshold = parseInt(ds.swipeThreshold) || 30;
+    this.verticalThreshold = parseInt(ds.verticalThreshold) || 60;
+
     this.offset = Math.floor(this.num / 2);
     this.baseX = 0;
     this.baseY = 0;
     this.activeItem = null;
     this.maxIndex = this.angles.length - 1;
+
     this.startX = this.startY = this.lastX = this.lastY = 0;
     this.movedX = this.movedY = 0;
     this.gesture = null;
     this.dragging = false;
+
     this.bindEvents();
     this.updateLayout();
     this.render();
   }
 
-  // Calculate layout values based on container and item sizes
   updateLayout() {
     try {
       if (!this.items[0]) return;
@@ -96,11 +108,15 @@ class ScYESGameScreen {
       this.baseX = sw / 2 - this.itemW / 2;
       this.baseY = sh / 2 - this.itemH / 2;
     } catch (err) {
-      // console.warn("updateLayout error:", err.message);
+      //          console.warn("updateLayout error:", err.message);
     }
   }
 
-  // Get rotation angle for item position (for curved effect)
+  /**
+   * Get angle for curve.
+   * @param {number} t - Position offset.
+   * @returns {number} rotation angle.
+   */
   angleForPos(t) {
     const sign = t < 0 ? -1 : 1;
     const a = Math.abs(t);
@@ -112,7 +128,7 @@ class ScYESGameScreen {
     );
   }
 
-  // Render slider items: position, scale, rotate, and highlight center
+  /** Render slider items */
   render() {
     try {
       this.activeItem = null;
@@ -139,18 +155,22 @@ class ScYESGameScreen {
         }
       });
     } catch (err) {
-      // console.warn("render error:", err.message);
+      //          console.warn("render error:", err.message);
     }
   }
 
-  // Get pointer coords from event
+  /**
+   * Get pointer coords.
+   * @param {Event} e - Mouse or touch event.
+   * @returns {{x:number,y:number}}
+   */
   getPoint(e) {
     if (e.touches && e.touches.length)
       return { x: e.touches[0].clientX, y: e.touches[0].clientY };
     return { x: e.clientX, y: e.clientY };
   }
 
-  // Touch/mouse drag start handler
+  /** Drag start */
   onStart(e) {
     try {
       const p = this.getPoint(e);
@@ -160,11 +180,11 @@ class ScYESGameScreen {
       this.dragging = true;
       this.movedX = this.movedY = 0;
     } catch (err) {
-      // console.warn("onStart error:", err.message);
+      //          console.warn("onStart error:", err.message);
     }
   }
 
-  // Touch/mouse drag move handler
+  /** Drag move */
   onMove(e) {
     try {
       if (!this.dragging) return;
@@ -175,6 +195,7 @@ class ScYESGameScreen {
       const dyStep = p.y - this.lastY;
       this.lastX = p.x;
       this.lastY = p.y;
+
       if (!this.gesture) {
         if (
           Math.abs(this.movedX) > 12 &&
@@ -204,11 +225,11 @@ class ScYESGameScreen {
         gsap.set(this.activeItem, { y: base + this.movedY * 0.65 });
       }
     } catch (err) {
-      // console.warn("onMove error:", err.message);
+      //          console.warn("onMove error:", err.message);
     }
   }
 
-  // Touch/mouse drag end handler
+  /** Drag end */
   onEnd() {
     try {
       if (!this.dragging) return;
@@ -296,11 +317,11 @@ class ScYESGameScreen {
         }
       }
     } catch (err) {
-      // console.warn("onEnd error:", err.message);
+      //          console.warn("onEnd error:", err.message);
     }
   }
 
-  // Set up event listeners for resize and touch/mouse events
+  /** Bind mouse/touch events */
   bindEvents() {
     window.addEventListener("resize", () => {
       this.updateLayout();
@@ -323,11 +344,11 @@ class ScYESGameScreen {
   }
 }
 
-const instance = new ScYESGameScreen();
-//   "sc-year-end-spend-polaroid-game-section",
-//   "polaroid-game-slider",
-//   "polaroid-game-pocket",
-//   "polaroid-game-bg-dark",
-//   "polaroid-result"
+const instance = new ScYearEndSpendSlider(
+  "polaroid-game-slider",
+  "polaroid-game-pocket",
+  "polaroid-game-bg-dark",
+  "polaroid-result"
+);
 
 export default instance;

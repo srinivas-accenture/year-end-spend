@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Polaroid Game</title>
+
+  <!-- mid year spend AA script -->
+  <link rel="stylesheet" href="https://av.sc.com/assets/global/css/style-base.min.css?ver=aad39ed">
+  <link rel="stylesheet" href="./css/sc-year-end-spend-polaroid-game.css">
+  <!-- mid year spend campaign utils -->
+  <script src="https://av.sc.com/assets/global/js/utils.min.js?ver=b3210ad" id="utility-js"></script>
+  <!-- GSAP & Lottie -->
+  <script src="https://av.sc.com/sg/assets/parallax/gsap.min.js"></script>
+  <script src="https://av.sc.com/global/assets/js/gsap/motionpath.min.js"></script>
+  <script src="https://av.sc.com/sg/lottie.min.js"></script>
+
+</head>
+
+<body>
+  <div class="sc-year-end-spend-campaign">
+    <div class="sc-year-end-spend-polaroid-game" id="sc-year-end-spend-polaroid-game-section">
+      <div class="sc-year-end-spend-polaroid-game__wrapper">
+        <div class="sc-year-end-spend-polaroid-game__header">
+          <div class="sc-year-end-spend-polaroid-game__header-title">
+            <img src="images/sc-year-end-spend-header.png">
+          </div>
+        </div>
+
+        <div class="sc-year-end-spend-polaroid-game__dispense-polaroid-result" id="polaroid-result">
+          <div class="sc-year-end-spend-polaroid-game__result-title">For this round<br>you’ve collected</div>
+          <div class="sc-year-end-spend-polaroid-game__polaroid-card-result">
+            <div class="sc-year-end-spend-polaroid-game__polaroid-card">
+              <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
+                <img src="images/sc-year-end-spend-photo-card-1.png">
+              </div>
+            </div>
+            <div class="sc-year-end-spend-polaroid-game__polaroid-card">
+              <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
+                <img src="images/sc-year-end-spend-photo-card-2.png">
+              </div>
+            </div>
+            <div class="sc-year-end-spend-polaroid-game__polaroid-card">
+              <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
+                <img src="images/sc-year-end-spend-photo-card-3.png">
+              </div>
+            </div>
+          </div>
+          <div class="sc-year-end-spend-polaroid-game__prize-detail">
+            <div class="sc-year-end-spend-polaroid-game__prize-info">
+              1 additional chance(s)<br>in the Grand Draw
+            </div>
+            <div class="sc-year-end-spend-polaroid-game__line"></div>
+            <div class="sc-year-end-spend-polaroid-game__prize-info">
+              1 pair of flight tickets to Bali card
+            </div>
+            <div class="sc-year-end-spend-polaroid-game__line"></div>
+            <div class="sc-year-end-spend-polaroid-game__prize-info">
+              1 Lerouy Michelin-starred dining<br>experience (for two) card
+            </div>
+          </div>
+          <div class="sc-year-end-spend-polaroid-game__action">
+            <div class="sc-year-end-spend-polaroid-game__action-title">You have <span
+                class="sc-year-end-spend-polaroid-game__card-left-no">9</span> pack(s) left</div>
+            <div class="sc-year-end-spend-polaroid-game__2-btn-row">
+              <button class="sc-year-end-spend-polaroid-game__btn-01" type="button" data-type="button"
+                data-title="Open another">Open another</button>
+              <button class="sc-year-end-spend-polaroid-game__btn-01" type="button" data-type="button"
+                data-title="Open all">Open all</button>
+            </div>
+            <button class="sc-year-end-spend-polaroid-game__btn-02" type="button" data-type="button"
+              data-title="View photo card collection">View photo card collection</button>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- slider with config via data-* -->
+      <div id="polaroid-game-slider" class="sc-year-end-spend-polaroid-game__slider" data-item-width="138"
+        data-item-height="185" data-spacing-x="190" data-curve-intensity="40" data-angles="0,-20,-40,-65,-90"
+        data-swipe-threshold="30" data-vertical-threshold="60">
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="1">
+          <img src="images/sc-year-end-spend-pack-alpine.png" alt="1">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="2">
+          <img src="images/sc-year-end-spend-pack-beach.png" alt="2">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="3">
+          <img src="images/sc-year-end-spend-pack-bluedove.png" alt="3">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="4">
+          <img src="images/sc-year-end-spend-pack-fresh.png" alt="4">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="5">
+          <img src="images/sc-year-end-spend-pack-greendove.png" alt="5">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="6">
+          <img src="images/sc-year-end-spend-pack-meal.png" alt="6">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="7">
+          <img src="images/sc-year-end-spend-pack-moon.png" alt="7">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="8">
+          <img src="images/sc-year-end-spend-pack-sky.png" alt="8">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="9">
+          <img src="images/sc-year-end-spend-pack-village.png" alt="9">
+        </div>
+      </div>
+
+      <div id="polaroid-game-pocket" class="sc-year-end-spend-polaroid-game__pocket">
+        <div class="sc-year-end-spend-polaroid-game__pocket-camera sc-year-end-spend-polaroid-game__pocket-camera-top">
+          <img src="images/sc-year-end-spend-pocket-camera-top.png">
+        </div>
+        <div
+          class="sc-year-end-spend-polaroid-game__pocket-camera sc-year-end-spend-polaroid-game__pocket-camera-bottom">
+          <img src="images/sc-year-end-spend-pocket-camera-bottom.png">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__dispense-polaroid">
+          <img src="images/sc-year-end-spend-dispensing.png">
+          <img src="images/sc-year-end-spend-dispensing.png">
+          <img src="images/sc-year-end-spend-dispensing.png">
+        </div>
+      </div>
+
+      <div class="sc-year-end-spend-polaroid-game__bg-dark-blue" id="polaroid-game-bg-dark"></div>
+      <div class="sc-year-end-spend-polaroid-game__bg-light-blue" id="polaroid-game-bg-light"></div>
+    </div>
+  </div>
+
+ <script type="module" src="./js/sc-year-end-spend-main.js"></script>
+</body>
+
+</html>

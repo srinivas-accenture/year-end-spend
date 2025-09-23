@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Polaroid Game</title>
+
+  <!-- mid year spend AA script -->
+  <link rel="stylesheet" href="https://av.sc.com/assets/global/css/style-base.min.css?ver=aad39ed">
+  <!-- mid year spend campaign utils -->
+  <script src="https://av.sc.com/assets/global/js/utils.min.js?ver=b3210ad" id="utility-js"></script>
+  <!-- GSAP & Lottie -->
+  <script src="https://av.sc.com/sg/assets/parallax/gsap.min.js"></script>
+  <script src="https://av.sc.com/global/assets/js/gsap/motionpath.min.js"></script>
+  <script src="https://av.sc.com/sg/lottie.min.js"></script>
+
+  <style>
+    @font-face {
+      font-family: "SC Prosper Sans";
+      src: url("https://av.sc.com/sg/YEC21/SCProsperSans-Medium.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "SC Prosper Sans";
+      src: url("https://av.sc.com/sg/YEC21/SCProsperSans-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body,
+    button,
+    input,
+    textarea {
+      font-family: "SC Prosper Sans", "Arial", "sans-serif" !important;
+    }
+
+    html,
+    body {
+      width: 100%;
+      border: 0px !important;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #333;
+    }
+
+    .sc-year-end-spend-campaign {
+      width: 100%;
+      min-height: 100dvh;
+      font-family: "SC Prosper Sans", "Arial", "sans-serif" !important;
+      overflow: hidden;
+    }
+
+    .sc-year-end-spend-polaroid-game {
+      width: 100%;
+      max-width: 460px;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      /*      overflow-y: auto;*/
+      scroll-behavior: smooth;
+      margin: 0 auto;
+      -webkit-overflow-scrolling: touch;
+      touch-action: none;
+    }
+
+    .sc-year-end-spend-polaroid-game__wrapper {
+      flex-direction: column;
+      display: flex;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 5;
+    }
+
+    .sc-year-end-spend-polaroid-game__header {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding-top: min(60px, calc(0.065 * 100vh));
+      padding-bottom: min(40px, calc(0.043 * 100vh));
+    }
+
+    .sc-year-end-spend-polaroid-game__header-title {
+      width: min(344px, calc(0.80 * 100vw));
+      height: auto;
+    }
+
+    .sc-year-end-spend-polaroid-game__header-title img {
+      width: 100%;
+    }
+
+    .sc-year-end-spend-polaroid-game__slider {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 12;
+    }
+
+    .sc-year-end-spend-polaroid-game__slider-img {
+      position: absolute;
+      z-index: 13;
+      width: 138px;
+      height: 185px;
+      overflow: hidden;
+      transform-origin: center center;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .sc-year-end-spend-polaroid-game__slider-img img {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      display: block;
+    }
+
+    .sc-year-end-spend-polaroid-game__pocket {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 50%) scale(1.0);
+      z-index: 14;
+      bottom: -65px;
+      pointer-events: none;
+    }
+
+    .sc-year-end-spend-polaroid-game__pocket .sc-year-end-spend-polaroid-game__pocket-camera {
+      width: min(488px, calc(1.13 * 100vw));
+    }
+
+    .sc-year-end-spend-polaroid-game__pocket img {
+      display: block;
+      width: 100%;
+    }
+
+    .sc-year-end-spend-polaroid-game__pocket .sc-year-end-spend-polaroid-game__dispense-polaroid img {
+      position: absolute;
+      z-index: 14;
+      left: 50%;
+      top: 5%;
+      transform: translate(-50%, 50%) scale(1.0);
+      width: 340px;
+    }
+
+    .sc-year-end-spend-polaroid-game__pocket.active {
+      bottom: 50%;
+      transform: translate(-50%, 50%) scale(0.6);
+      transition: top, bottom, transform, 0.7s ease-in-out 0.5s;
+    }
+
+    .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img {
+      top: 1300px;
+      transform: translate(-50%, 50%) scale(2.0);
+    }
+
+    .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(1) {
+      transition: top, transform, 0.5s ease-in-out 2s;
+    }
+
+    .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(2) {
+      transition: top, transform, 0.5s ease-in-out 2.2s;
+    }
+
+    .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(3) {
+      transition: top, transform, 0.5s ease-in-out 2.4s;
+    }
+
+    .sc-year-end-spend-polaroid-game__pocket .sc-year-end-spend-polaroid-game__pocket-camera-top,
+    .sc-year-end-spend-polaroid-game__pocket .sc-year-end-spend-polaroid-game__pocket-camera-bottom {
+      position: relative;
+    }
+
+    .sc-year-end-spend-polaroid-game__pocket .sc-year-end-spend-polaroid-game__pocket-camera-top {
+      z-index: 15;
+    }
+
+    .sc-year-end-spend-polaroid-game__pocket .sc-year-end-spend-polaroid-game__pocket-camera-bottom {
+      z-index: 13;
+      top: -1px;
+    }
+
+    .sc-year-end-spend-polaroid-game__bg-dark-blue,
+    .sc-year-end-spend-polaroid-game__bg-light-blue {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-position: top left;
+      background-size: cover;
+    }
+
+    .sc-year-end-spend-polaroid-game__bg-dark-blue {
+      z-index: 3;
+      background-image: url(images/sc-year-end-spend-bg-dark-blue.png);
+      opacity: 1;
+    }
+
+    .sc-year-end-spend-polaroid-game__bg-light-blue {
+      z-index: 2;
+      background-image: url(images/sc-year-end-spend-bg-light-blue.png);
+    }
+
+    .sc-year-end-spend-polaroid-game__bg-dark-blue.dismiss {
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .sc-year-end-spend-polaroid-game__dispense-polaroid-result {
+      position: relative;
+      z-index: 3;
+      opacity: 0;
+      pointer-events: none;
+      color: #fff;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    .sc-year-end-spend-polaroid-game__polaroid-card-result {
+      position: relative;
+      width: 100%;
+      top: 30px
+    }
+
+    .sc-year-end-spend-polaroid-game__polaroid-card {
+      background-color: #fff;
+      border-radius: 3px;
+      box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+      padding: 7px;
+      width: min(156px, calc(0.2930232558 * 100vw));
+      top: 40px;
+      opacity: 0
+    }
+
+    .sc-year-end-spend-polaroid-game__polaroid-card-img {
+      position: relative;
+      width: 100%
+    }
+
+    .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(1) {
+      position: relative;
+      z-index: 2;
+      margin: 0 auto
+    }
+
+    .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(2),
+    .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(3) {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) rotate(0);
+    }
+
+    .sc-year-end-spend-polaroid-game__polaroid-card-img::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      background-color: #020B43;
+      top: 0;
+      left: 0;
+      opacity: 1
+    }
+
+    .sc-year-end-spend-polaroid-game__polaroid-card-img img {
+      width: 100%;
+      position: relative;
+      z-index: 1
+    }
+
+    .sc-year-end-spend-polaroid-game__dispense-polaroid-result.result-show .sc-year-end-spend-polaroid-game__polaroid-card {
+      top: 0;
+      opacity: 1;
+      transition: top, opacity, 0.5s ease-in-out 2s;
+    }
+
+    .sc-year-end-spend-polaroid-game__dispense-polaroid-result.result-show .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(2) {
+      left: 25%;
+      top: 0px;
+      transform: translateX(-50%) rotate(-20deg);
+      transition: top, transform, 0.5s ease-in-out 3s;
+    }
+
+    .sc-year-end-spend-polaroid-game__dispense-polaroid-result.result-show .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(3) {
+      left: 75%;
+      top: 0px;
+      transform: translateX(-50%) rotate(20deg);
+      transition: top, transform, 0.5s ease-in-out 3s;
+    }
+
+    .sc-year-end-spend-polaroid-game__dispense-polaroid-result.result-show .sc-year-end-spend-polaroid-game__polaroid-card-img::before {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out 4s;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sc-year-end-spend-campaign">
+    <div class="sc-year-end-spend-polaroid-game">
+      <div class="sc-year-end-spend-polaroid-game__wrapper">
+        <div class="sc-year-end-spend-polaroid-game__header">
+          <div class="sc-year-end-spend-polaroid-game__header-title">
+            <img src="images/sc-year-end-spend-header.png">
+          </div>
+        </div>
+
+        <div class="sc-year-end-spend-polaroid-game__dispense-polaroid-result" id="polaroid-result">
+          <div>For this round<br>you’ve collected</div>
+          <div class="sc-year-end-spend-polaroid-game__polaroid-card-result">
+            <div class="sc-year-end-spend-polaroid-game__polaroid-card">
+              <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
+                <img src="images/sc-year-end-spend-photo-card-1.png">
+              </div>
+              <div class="">sdfds</div>
+            </div>
+            <div class="sc-year-end-spend-polaroid-game__polaroid-card">
+              <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
+                <img src="images/sc-year-end-spend-photo-card-2.png">
+              </div>
+              <div class="">sdfds</div>
+            </div>
+            <div class="sc-year-end-spend-polaroid-game__polaroid-card">
+              <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
+                <img src="images/sc-year-end-spend-photo-card-3.png">
+              </div>
+              <div class="">sdfds</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- slider with config via data-* -->
+      <div id="polaroid-game-slider"
+        class="sc-year-end-spend-polaroid-game__slider"
+        data-item-width="138"
+        data-item-height="185"
+        data-spacing-x="190"
+        data-curve-intensity="40"
+        data-angles="0,-20,-40,-65,-90"
+        data-swipe-threshold="30"
+        data-vertical-threshold="60">
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="1">
+          <img src="images/sc-year-end-spend-pack-alpine.png" alt="1">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="2">
+          <img src="images/sc-year-end-spend-pack-beach.png" alt="2">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="3">
+          <img src="images/sc-year-end-spend-pack-bluedove.png" alt="3">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="4">
+          <img src="images/sc-year-end-spend-pack-fresh.png" alt="4">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="5">
+          <img src="images/sc-year-end-spend-pack-greendove.png" alt="5">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="6">
+          <img src="images/sc-year-end-spend-pack-meal.png" alt="6">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="7">
+          <img src="images/sc-year-end-spend-pack-moon.png" alt="7">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="8">
+          <img src="images/sc-year-end-spend-pack-sky.png" alt="8">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="9">
+          <img src="images/sc-year-end-spend-pack-village.png" alt="9">
+        </div>
+      </div>
+
+      <div id="polaroid-game-pocket" class="sc-year-end-spend-polaroid-game__pocket">
+        <div class="sc-year-end-spend-polaroid-game__pocket-camera sc-year-end-spend-polaroid-game__pocket-camera-top">
+          <img src="images/sc-year-end-spend-pocket-camera-top.png">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__pocket-camera sc-year-end-spend-polaroid-game__pocket-camera-bottom">
+          <img src="images/sc-year-end-spend-pocket-camera-bottom.png">
+        </div>
+        <div class="sc-year-end-spend-polaroid-game__dispense-polaroid">
+          <img src="images/sc-year-end-spend-dispensing.png">
+          <img src="images/sc-year-end-spend-dispensing.png">
+          <img src="images/sc-year-end-spend-dispensing.png">
+        </div>
+      </div>
+
+      <div class="sc-year-end-spend-polaroid-game__bg-dark-blue" id="polaroid-game-bg-dark"></div>
+      <div class="sc-year-end-spend-polaroid-game__bg-light-blue" id="polaroid-game-bg-light"></div>
+    </div>
+  </div>
+
+ <script type="module" src="./js/sc-year-end-spend-game-flow-v.js"></script>
+</body>
+</html>

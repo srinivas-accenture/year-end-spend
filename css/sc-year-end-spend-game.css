@@ -91,6 +91,10 @@ textarea {
   background-size: 100%;
   background-repeat: repeat;
   background-image: url(../images/sc-year-end-spend-bg-light-blue.png);
+  width: calc(100% + min(4px, calc(0.0093023256 * 100vw)));
+}
+.sc-year-end-spend-polaroid-game.active-scroll .sc-year-end-spend-polaroid-game__pocket .sc-year-end-spend-polaroid-game__pocket-camera img {
+  margin-left: min(4px, calc(0.0093023256 * 100vw));
 }
 .sc-year-end-spend-polaroid-game__wrapper {
   flex-direction: column;

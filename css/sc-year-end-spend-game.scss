@@ -134,6 +134,11 @@ $height-breakpoints-basewidth: (
       background-size: 100%;
       background-repeat: repeat;
       background-image: url(../images/sc-year-end-spend-bg-light-blue.png);
+      width: calc(100% + calc(min(4px, #{responsive-font(4px)})));
+    }
+
+    .sc-year-end-spend-polaroid-game__pocket .sc-year-end-spend-polaroid-game__pocket-camera img{
+      margin-left: calc(min(4px, #{responsive-font(4px)}));
     }
   }
 

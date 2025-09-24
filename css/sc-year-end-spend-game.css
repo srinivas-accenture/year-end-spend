@@ -286,7 +286,7 @@ textarea {
   width: 100%;
   height: 100%;
   z-index: 3;
-  background-color: #020B43;
+  background-color: #020b43;
   top: 0;
   left: 0;
   opacity: 1;
@@ -384,4 +384,4 @@ textarea {
 }
 .sc-year-end-spend-polaroid-game #polaroid-game-slider {
   display: none;
-}/*# sourceMappingURL=sc-year-end-spend-polaroid-game.css.map */
+}/*# sourceMappingURL=sc-year-end-spend-game.css.map */

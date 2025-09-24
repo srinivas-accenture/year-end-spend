@@ -89,6 +89,7 @@ class ScYESGameScreen {
     this.eventListeners = [];
     this.activeAnimations = new Set();
     this.isInitialized = false;
+    this.debugMode = true; // Set to true to enable debug logging
   }
 
   /**
@@ -710,6 +711,15 @@ class ScYESGameScreen {
       gesture: this.gesture,
       isDragging: this.isDragging,
     };
+  }
+
+  /**
+   * Log current game state
+   */
+  logCurrentState() {
+    if (this.debugMode) {
+      console.log("Current state:", this.getState());
+    }
   }
 
   /**

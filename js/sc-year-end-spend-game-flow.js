@@ -1,33 +1,81 @@
-/**
- * Class representing the Polaroid Game slider.
- * Handles layout, rendering, and drag interactions.
- */
 class ScYESGameScreen {
   constructor() {
-    this.sectionId = "sc-year-end-spend-polaroid-game-section";
-    this.sliderId = "polaroid-game-slider";
-    this.pocketId = "polaroid-game-pocket";
-    this.bgDarkId = "polaroid-game-bg-dark";
-    this.resultId = "polaroid-result";
-    this.pgsection = null;
-    this.pgslider = null;
-    this.pgpocket = null;
-    this.pgbgdark = null;
-    this.polaroidResult = null;
+    // Configuration Constants
+    this.CONFIG = {
+      DOM_IDS: {
+        SECTION: "sc-year-end-spend-polaroid-game-section",
+        SLIDER: "polaroid-game-slider",
+        POCKET: "polaroid-game-pocket",
+        BG_DARK: "polaroid-game-bg-dark",
+        RESULT: "polaroid-result",
+      },
+
+      CSS_SELECTORS: {
+        SLIDER_IMAGE: ".sc-year-end-spend-polaroid-game__slider-img",
+      },
+
+      CSS_CLASSES: {
+        ACTIVE: "active",
+        RESULT_SHOW: "result-show",
+        ACTIVE_SCROLL: "active-scroll",
+        DISMISS: "dismiss",
+        DISMISS_CARD: "dismiss-card",
+      },
+
+      DEFAULTS: {
+        ITEM_WIDTH: 138,
+        ITEM_HEIGHT: 185,
+        SPACING_X: 140,
+        CURVE_INTENSITY: 40,
+        ANGLES: [0, -20, -40, -65, -90],
+        SWIPE_THRESHOLD: 30,
+        VERTICAL_THRESHOLD: 60,
+        GESTURE_THRESHOLD: 12,
+        DRAG_SENSITIVITY: 480,
+        VERTICAL_DRAG_MULTIPLIER: 0.65,
+        MIN_SCALE: 0.5,
+        SCALE_STEP: 0.1,
+        Z_INDEX_BASE: 100,
+        Z_INDEX_STEP: 10,
+      },
+
+      ANIMATIONS: {
+        CAROUSEL_TRANSITION: { duration: 0.5, ease: "power3.out" },
+        SNAP_BACK: { duration: 0.28, ease: "power2.out" },
+        SNAP_BACK_EXTENDED: { duration: 0.32, ease: "power2.out" },
+        CARD_DROP: { duration: 0.6, ease: "back.in" },
+        SLIDER_FADE: { duration: 0.4, ease: "power2.in" },
+        POCKET_FADE: { duration: 0.1, ease: "power2.out" },
+        RESULT_SHOW: { duration: 0.8, delay: 1, ease: "power2.in" },
+      },
+
+      TIMING: {
+        POCKET_DELAY: 2600,
+      },
+    };
+
+    // DOM Elements
+    this.elements = {};
     this.items = [];
-    this.num = 0;
-    this.itemW = 138;
-    this.itemH = 185;
-    this.spacingX = 140;
-    this.curveIntensity = 40;
-    this.angles = [0, -20, -40, -65, -90];
-    this.swipeThreshold = 30;
-    this.verticalThreshold = 60;
+
+    // Layout Properties
+    this.itemWidth = this.CONFIG.DEFAULTS.ITEM_WIDTH;
+    this.itemHeight = this.CONFIG.DEFAULTS.ITEM_HEIGHT;
+    this.spacingX = this.CONFIG.DEFAULTS.SPACING_X;
+    this.curveIntensity = this.CONFIG.DEFAULTS.CURVE_INTENSITY;
+    this.angles = [...this.CONFIG.DEFAULTS.ANGLES];
+    this.swipeThreshold = this.CONFIG.DEFAULTS.SWIPE_THRESHOLD;
+    this.verticalThreshold = this.CONFIG.DEFAULTS.VERTICAL_THRESHOLD;
+
+    // Game State
+    this.itemCount = 0;
     this.offset = 0;
     this.baseX = 0;
     this.baseY = 0;
     this.activeItem = null;
     this.maxIndex = 0;
+
+    // Gesture State
     this.startX = 0;
     this.startY = 0;
     this.lastX = 0;
@@ -35,299 +83,677 @@ class ScYESGameScreen {
     this.movedX = 0;
     this.movedY = 0;
     this.gesture = null;
-    this.dragging = false;
-    //this.init();
+    this.isDragging = false;
+
+    // Management
+    this.eventListeners = [];
+    this.activeAnimations = new Set();
+    this.isInitialized = false;
   }
 
-  // Initialize DOM references, config, and event bindings
+  /**
+   * Initialize the game
+   */
   init() {
-    this.pgsection = document.getElementById(this.sectionId);
-    this.pgslider = document.getElementById(this.sliderId);
-    this.pgpocket = document.getElementById(this.pocketId);
-    this.pgbgdark = document.getElementById(this.bgDarkId);
-    this.polaroidResult = document.getElementById(this.resultId);
-    this.pgslider.style.display = "block";
-    if (
-      !this.pgslider ||
-      !this.pgpocket ||
-      !this.pgbgdark ||
-      !this.polaroidResult
-    ) {
-      throw new Error("One or more required elements not found.");
+    try {
+      this.initializeElements();
+      this.parseDatasetConfiguration();
+      this.setupGameState();
+      this.bindEventListeners();
+      this.updateLayoutDimensions();
+      this.renderCarousel();
+      this.isInitialized = true;
+
+      console.log("ScYESGameScreen: Initialized successfully");
+    } catch (error) {
+      console.error("ScYESGameScreen: Initialization failed:", error.message);
+      throw error;
     }
+  }
+
+  /**
+   * Initialize DOM elements and validate their existence
+   */
+  initializeElements() {
+    const elementsToFind = {
+      section: this.CONFIG.DOM_IDS.SECTION,
+      slider: this.CONFIG.DOM_IDS.SLIDER,
+      pocket: this.CONFIG.DOM_IDS.POCKET,
+      bgDark: this.CONFIG.DOM_IDS.BG_DARK,
+      result: this.CONFIG.DOM_IDS.RESULT,
+    };
+
+    for (const [key, id] of Object.entries(elementsToFind)) {
+      const element = document.getElementById(id);
+      if (!element) {
+        throw new Error(`Required element not found: ${id}`);
+      }
+      this.elements[key] = element;
+    }
+
+    // Initialize slider visibility
+    this.elements.slider.style.display = "block";
+
+    // Find slider items
     this.items = Array.from(
-      this.pgslider.querySelectorAll(
-        ".sc-year-end-spend-polaroid-game__slider-img"
+      this.elements.slider.querySelectorAll(
+        this.CONFIG.CSS_SELECTORS.SLIDER_IMAGE
       )
     );
-    this.num = this.items.length;
-    if (this.num === 0) throw new Error("No slider items found.");
-    const ds = this.pgslider.dataset;
-    this.itemW = parseInt(ds.itemWidth) || this.itemW;
-    this.itemH = parseInt(ds.itemHeight) || this.itemH;
-    this.spacingX = parseInt(ds.spacingX) || this.spacingX;
-    this.curveIntensity = parseInt(ds.curveIntensity) || this.curveIntensity;
-    this.angles = ds.angles ? ds.angles.split(",").map(Number) : this.angles;
-    this.swipeThreshold = parseInt(ds.swipeThreshold) || this.swipeThreshold;
+
+    if (this.items.length === 0) {
+      throw new Error("No slider items found");
+    }
+  }
+
+  /**
+   * Parse configuration from HTML dataset attributes
+   */
+  parseDatasetConfiguration() {
+    const dataset = this.elements.slider.dataset;
+
+    // Override defaults with dataset values if present
+    this.itemWidth =
+      parseInt(dataset.itemWidth) || this.CONFIG.DEFAULTS.ITEM_WIDTH;
+    this.itemHeight =
+      parseInt(dataset.itemHeight) || this.CONFIG.DEFAULTS.ITEM_HEIGHT;
+    this.spacingX =
+      parseInt(dataset.spacingX) || this.CONFIG.DEFAULTS.SPACING_X;
+    this.curveIntensity =
+      parseInt(dataset.curveIntensity) || this.CONFIG.DEFAULTS.CURVE_INTENSITY;
+    this.angles = dataset.angles
+      ? dataset.angles.split(",").map(Number)
+      : [...this.CONFIG.DEFAULTS.ANGLES];
+    this.swipeThreshold =
+      parseInt(dataset.swipeThreshold) || this.CONFIG.DEFAULTS.SWIPE_THRESHOLD;
     this.verticalThreshold =
-      parseInt(ds.verticalThreshold) || this.verticalThreshold;
-    this.offset = Math.floor(this.num / 2);
-    this.baseX = 0;
-    this.baseY = 0;
-    this.activeItem = null;
+      parseInt(dataset.verticalThreshold) ||
+      this.CONFIG.DEFAULTS.VERTICAL_THRESHOLD;
+  }
+
+  /**
+   * Setup initial game state values
+   */
+  setupGameState() {
+    this.itemCount = this.items.length;
+    this.offset = Math.floor(this.itemCount / 2);
     this.maxIndex = this.angles.length - 1;
+    this.activeItem = null;
+    this.resetGestureState();
+  }
+
+  /**
+   * Reset gesture tracking state
+   */
+  resetGestureState() {
     this.startX = this.startY = this.lastX = this.lastY = 0;
     this.movedX = this.movedY = 0;
     this.gesture = null;
-    this.dragging = false;
-    this.bindEvents();
-    this.updateLayout();
-    this.render();
+    this.isDragging = false;
   }
 
-  // Calculate layout values based on container and item sizes
-  updateLayout() {
+  /**
+   * Bind all event listeners with proper cleanup tracking
+   */
+  bindEventListeners() {
+    // Window resize
+    this.addEventListenerWithCleanup(window, "resize", () => {
+      this.updateLayoutDimensions();
+      this.renderCarousel();
+    });
+
+    // Touch events
+    this.addEventListenerWithCleanup(
+      document,
+      "touchstart",
+      (e) => {
+        this.handleGestureStart(e);
+      },
+      { passive: true }
+    );
+
+    this.addEventListenerWithCleanup(
+      document,
+      "touchmove",
+      (e) => {
+        this.handleGestureMove(e);
+      },
+      { passive: false }
+    );
+
+    this.addEventListenerWithCleanup(
+      document,
+      "touchend",
+      () => {
+        this.handleGestureEnd();
+      },
+      { passive: true }
+    );
+
+    // Mouse events
+    this.addEventListenerWithCleanup(document, "mousedown", (e) => {
+      if (e.button === 0) {
+        this.handleGestureStart(e);
+      }
+    });
+
+    this.addEventListenerWithCleanup(document, "mousemove", (e) => {
+      this.handleGestureMove(e);
+    });
+
+    this.addEventListenerWithCleanup(document, "mouseup", () => {
+      this.handleGestureEnd();
+    });
+  }
+
+  /**
+   * Add event listener with cleanup tracking
+   */
+  addEventListenerWithCleanup(element, event, handler, options = {}) {
+    const wrappedHandler = (e) => {
+      if (this.isInitialized) {
+        try {
+          handler(e);
+        } catch (error) {
+          console.warn(
+            `ScYESGameScreen: Error in ${event} handler:`,
+            error.message
+          );
+        }
+      }
+    };
+
+    element.addEventListener(event, wrappedHandler, options);
+
+    this.eventListeners.push({
+      element,
+      event,
+      handler: wrappedHandler,
+      options,
+    });
+  }
+
+  /**
+   * Update layout dimensions based on current element sizes
+   */
+  updateLayoutDimensions() {
     try {
-      if (!this.items[0]) return;
-      this.itemW = this.items[0].offsetWidth || this.itemW;
-      this.itemH = this.items[0].offsetHeight || this.itemH;
-      const sw = this.pgslider.clientWidth;
-      const sh = this.pgslider.clientHeight;
-      this.baseX = sw / 2 - this.itemW / 2;
-      this.baseY = sh / 2 - this.itemH / 2;
-    } catch (err) {
-      // console.warn("updateLayout error:", err.message);
+      if (this.items.length === 0) return;
+
+      // Update item dimensions from actual DOM
+      const firstItem = this.items[0];
+      if (firstItem) {
+        this.itemWidth = firstItem.offsetWidth || this.itemWidth;
+        this.itemHeight = firstItem.offsetHeight || this.itemHeight;
+      }
+
+      // Calculate base position for centering
+      const sliderWidth = this.elements.slider.clientWidth;
+      const sliderHeight = this.elements.slider.clientHeight;
+
+      this.baseX = sliderWidth / 2 - this.itemWidth / 2;
+      this.baseY = sliderHeight / 2 - this.itemHeight / 2;
+    } catch (error) {
+      console.warn(
+        "ScYESGameScreen: Error updating layout dimensions:",
+        error.message
+      );
     }
   }
 
-  // Get rotation angle for item position (for curved effect)
-  angleForPos(t) {
-    const sign = t < 0 ? -1 : 1;
-    const a = Math.abs(t);
-    if (a >= this.maxIndex) return sign * this.angles[this.maxIndex];
-    const k = Math.floor(a);
-    const frac = a - k;
+  /**
+   * Calculate angle for item at given position
+   */
+  calculateItemAngle(position) {
+    const sign = position < 0 ? -1 : 1;
+    const absPosition = Math.abs(position);
+
+    if (absPosition >= this.maxIndex) {
+      return sign * this.angles[this.maxIndex];
+    }
+
+    const floorIndex = Math.floor(absPosition);
+    const fraction = absPosition - floorIndex;
+
     return (
-      sign * (this.angles[k] + (this.angles[k + 1] - this.angles[k]) * frac)
+      sign *
+      (this.angles[floorIndex] +
+        (this.angles[floorIndex + 1] - this.angles[floorIndex]) * fraction)
     );
   }
 
-  // Render slider items: position, scale, rotate, and highlight center
-  render() {
+  /**
+   * Calculate scale for item at given position
+   */
+  calculateItemScale(position) {
+    const absPosition = Math.abs(position);
+    return Math.max(
+      1 - absPosition * this.CONFIG.DEFAULTS.SCALE_STEP,
+      this.CONFIG.DEFAULTS.MIN_SCALE
+    );
+  }
+
+  /**
+   * Calculate z-index for item at given position
+   */
+  calculateItemZIndex(position) {
+    const absPosition = Math.abs(position);
+    return Math.round(
+      this.CONFIG.DEFAULTS.Z_INDEX_BASE -
+        absPosition * this.CONFIG.DEFAULTS.Z_INDEX_STEP
+    );
+  }
+
+  /**
+   * Render the carousel with all items positioned
+   */
+  renderCarousel() {
+    if (!this.items || this.items.length === 0) return;
+
     try {
       this.activeItem = null;
       const centerIndex = Math.round(this.offset);
-      this.items.forEach((el, i) => {
-        const pos = i - this.offset;
-        const absPos = Math.abs(pos);
-        if (absPos > this.maxIndex + 0.5) {
-          gsap.set(el, { opacity: 0, pointerEvents: "none" });
-          el.classList.remove("active");
+
+      this.items.forEach((element, index) => {
+        const position = index - this.offset;
+        const absPosition = Math.abs(position);
+
+        // Hide items that are too far from center
+        if (absPosition > this.maxIndex + 0.5) {
+          this.setElementTransform(element, {
+            opacity: 0,
+            pointerEvents: "none",
+          });
+          element.classList.remove(this.CONFIG.CSS_CLASSES.ACTIVE);
           return;
         }
-        const x = this.baseX + pos * this.spacingX;
-        const y = this.baseY - Math.pow(pos, 2) * this.curveIntensity;
-        const angle = this.angleForPos(pos);
-        const scale = Math.max(1 - absPos * 0.1, 0.5);
-        const zIndex = Math.round(100 - absPos * 10);
-        gsap.set(el, { x, y, scale, rotation: angle, zIndex, opacity: 1 });
-        el.classList.remove("active");
-        if (i === centerIndex) {
-          el.dataset.centerY = String(y);
-          this.activeItem = el;
-          el.classList.add("active");
+
+        // Calculate item properties
+        const x = this.baseX + position * this.spacingX;
+        const y = this.baseY - Math.pow(position, 2) * this.curveIntensity;
+        const angle = this.calculateItemAngle(position);
+        const scale = this.calculateItemScale(position);
+        const zIndex = this.calculateItemZIndex(position);
+
+        // Apply transforms
+        this.setElementTransform(element, {
+          x,
+          y,
+          scale,
+          rotation: angle,
+          zIndex,
+          opacity: 1,
+          pointerEvents: "auto",
+        });
+
+        // Manage active state
+        element.classList.remove(this.CONFIG.CSS_CLASSES.ACTIVE);
+
+        if (index === centerIndex) {
+          element.dataset.centerY = String(y);
+          this.activeItem = element;
+          element.classList.add(this.CONFIG.CSS_CLASSES.ACTIVE);
         }
       });
-    } catch (err) {
-      // console.warn("render error:", err.message);
+    } catch (error) {
+      console.warn("ScYESGameScreen: Error during rendering:", error.message);
     }
   }
 
-  // Get pointer coords from event
-  getPoint(e) {
-    if (e.touches && e.touches.length)
-      return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    return { x: e.clientX, y: e.clientY };
+  /**
+   * Set element transform using GSAP
+   */
+  setElementTransform(element, properties) {
+    gsap.set(element, properties);
   }
 
-  // Touch/mouse drag start handler
-  onStart(e) {
+  /**
+   * Get pointer coordinates from mouse or touch event
+   */
+  getPointerCoordinates(event) {
+    if (event.touches && event.touches.length > 0) {
+      return {
+        x: event.touches[0].clientX,
+        y: event.touches[0].clientY,
+      };
+    }
+    return {
+      x: event.clientX,
+      y: event.clientY,
+    };
+  }
+
+  /**
+   * Handle gesture start (touch/mouse down)
+   */
+  handleGestureStart(event) {
+    if (!this.isInitialized) return;
+
     try {
-      const p = this.getPoint(e);
-      this.startX = this.lastX = p.x;
-      this.startY = this.lastY = p.y;
+      const point = this.getPointerCoordinates(event);
+      this.startX = this.lastX = point.x;
+      this.startY = this.lastY = point.y;
       this.gesture = null;
-      this.dragging = true;
+      this.isDragging = true;
       this.movedX = this.movedY = 0;
-    } catch (err) {
-      // console.warn("onStart error:", err.message);
+    } catch (error) {
+      console.warn("ScYESGameScreen: Error in gesture start:", error.message);
     }
   }
 
-  // Touch/mouse drag move handler
-  onMove(e) {
+  /**
+   * Handle gesture move (touch/mouse move)
+   */
+  handleGestureMove(event) {
+    if (!this.isInitialized || !this.isDragging) return;
+
     try {
-      if (!this.dragging) return;
-      const p = this.getPoint(e);
-      this.movedX = p.x - this.startX;
-      this.movedY = p.y - this.startY;
-      const dxStep = p.x - this.lastX;
-      const dyStep = p.y - this.lastY;
-      this.lastX = p.x;
-      this.lastY = p.y;
+      const point = this.getPointerCoordinates(event);
+      this.movedX = point.x - this.startX;
+      this.movedY = point.y - this.startY;
+
+      const deltaX = point.x - this.lastX;
+      const deltaY = point.y - this.lastY;
+
+      this.lastX = point.x;
+      this.lastY = point.y;
+
+      // Determine gesture type if not already determined
       if (!this.gesture) {
+        const absMovedX = Math.abs(this.movedX);
+        const absMovedY = Math.abs(this.movedY);
+
         if (
-          Math.abs(this.movedX) > 12 &&
-          Math.abs(this.movedX) > Math.abs(this.movedY)
+          absMovedX > this.CONFIG.DEFAULTS.GESTURE_THRESHOLD &&
+          absMovedX > absMovedY
         ) {
           this.gesture = "horizontal";
-          e.preventDefault();
+          event.preventDefault();
         } else if (
-          Math.abs(this.movedY) > 12 &&
-          Math.abs(this.movedY) > Math.abs(this.movedX)
+          absMovedY > this.CONFIG.DEFAULTS.GESTURE_THRESHOLD &&
+          absMovedY > absMovedX
         ) {
-          const centerEl = this.items[Math.round(this.offset)];
+          const centerElement = this.items[Math.round(this.offset)];
           this.gesture =
-            centerEl && centerEl.classList.contains("active")
+            centerElement &&
+            centerElement.classList.contains(this.CONFIG.CSS_CLASSES.ACTIVE)
               ? "vertical"
               : "horizontal";
-          if (this.gesture === "horizontal") e.preventDefault();
-        } else return;
-      }
-      if (this.gesture === "horizontal") {
-        e.preventDefault();
-        this.offset -= dxStep / 480;
-        this.render();
-      }
-      if (this.gesture === "vertical" && this.activeItem && this.movedY > 20) {
-        const base = parseFloat(this.activeItem.dataset.centerY || this.baseY);
-        gsap.set(this.activeItem, { y: base + this.movedY * 0.65 });
-      }
-    } catch (err) {
-      // console.warn("onMove error:", err.message);
-    }
-  }
 
-  // Touch/mouse drag end handler
-  onEnd() {
-    try {
-      if (!this.dragging) return;
-      this.dragging = false;
-      if (this.gesture === "horizontal" || this.gesture === null) {
-        const current = Math.round(this.offset);
-        let target = current;
-        if (this.movedX < -this.swipeThreshold) target = current + 1;
-        else if (this.movedX > this.swipeThreshold) target = current - 1;
-        target = Math.max(0, Math.min(this.num - 1, target));
-        gsap.to(this, {
-          offset: target,
-          duration: 0.5,
-          ease: "power3.out",
-          onUpdate: () => this.render(),
-        });
-        return;
-      }
-      if (this.gesture === "vertical" && this.activeItem) {
-        if (Math.abs(this.movedY) < this.verticalThreshold) {
-          const base = parseFloat(
-            this.activeItem.dataset.centerY || this.baseY
-          );
-          gsap.to(this.activeItem, {
-            y: base,
-            duration: 0.28,
-            ease: "power2.out",
-          });
+          if (this.gesture === "horizontal") {
+            event.preventDefault();
+          }
+        } else {
           return;
         }
-        const pgpocketBox = this.pgpocket.getBoundingClientRect();
-        const imgBox = this.activeItem.getBoundingClientRect();
-        const overlap =
-          imgBox.bottom > pgpocketBox.top &&
-          imgBox.left < pgpocketBox.right &&
-          imgBox.right > pgpocketBox.left;
-        if (overlap) {
-          gsap.to(this.activeItem, {
-            y: window.innerHeight + 200,
-            scale: 0.45,
-            opacity: 0,
-            duration: 0.6,
-            ease: "back.in",
-            onComplete: () => {
-              this.activeItem.style.display = "none";
-              gsap.to(this.pgslider, {
-                opacity: 0,
-                duration: 0.4,
-                ease: "power2.in",
-                onComplete: () => {
-                  this.pgslider.style.display = "none";
-                  this.pgpocket.classList.add("active");
-                  this.pgbgdark.classList.add("dismiss");
-                  setTimeout(() => {
-                    gsap.to(this.pgpocket, {
-                      opacity: 0,
-                      duration: 0.1,
-                      ease: "power2.out",
-                      onComplete: () => {
-                        gsap.to(this.polaroidResult, {
-                          opacity: 1,
-                          delay: 1,
-                          duration: 0.8,
-                          ease: "power2.in",
-                        });
-                        this.polaroidResult.classList.add("result-show");
-                        this.pgsection.classList.add("active-scroll");
-                        this.pgpocket.classList.add("dismiss-card");
-                      },
-                    });
-                  }, 2600);
-                },
-              });
-            },
-          });
-        } else {
-          const base = parseFloat(
-            this.activeItem.dataset.centerY || this.baseY
-          );
-          gsap.to(this.activeItem, {
-            y: base,
-            duration: 0.32,
-            ease: "power2.out",
-          });
-        }
       }
-    } catch (err) {
-      // console.warn("onEnd error:", err.message);
+
+      // Handle horizontal carousel movement
+      if (this.gesture === "horizontal") {
+        event.preventDefault();
+        this.offset -= deltaX / this.CONFIG.DEFAULTS.DRAG_SENSITIVITY;
+        this.renderCarousel();
+      }
+
+      // Handle vertical item dragging
+      if (this.gesture === "vertical" && this.activeItem && this.movedY > 20) {
+        const baseY = parseFloat(this.activeItem.dataset.centerY || this.baseY);
+        const newY =
+          baseY + this.movedY * this.CONFIG.DEFAULTS.VERTICAL_DRAG_MULTIPLIER;
+        this.setElementTransform(this.activeItem, { y: newY });
+      }
+    } catch (error) {
+      console.warn("ScYESGameScreen: Error in gesture move:", error.message);
     }
   }
 
-  // Set up event listeners for resize and touch/mouse events
-  bindEvents() {
-    window.addEventListener("resize", () => {
-      this.updateLayout();
-      this.render();
+  /**
+   * Handle gesture end (touch/mouse up)
+   */
+  handleGestureEnd() {
+    if (!this.isInitialized || !this.isDragging) return;
+
+    try {
+      this.isDragging = false;
+
+      if (this.gesture === "horizontal" || this.gesture === null) {
+        this.handleHorizontalGestureEnd();
+      } else if (this.gesture === "vertical" && this.activeItem) {
+        this.handleVerticalGestureEnd();
+      }
+    } catch (error) {
+      console.warn("ScYESGameScreen: Error in gesture end:", error.message);
+    }
+  }
+
+  /**
+   * Handle end of horizontal carousel gesture
+   */
+  handleHorizontalGestureEnd() {
+    const currentIndex = Math.round(this.offset);
+    let targetIndex = currentIndex;
+
+    // Determine swipe direction
+    if (this.movedX < -this.swipeThreshold) {
+      targetIndex = currentIndex + 1;
+    } else if (this.movedX > this.swipeThreshold) {
+      targetIndex = currentIndex - 1;
+    }
+
+    // Clamp to valid range
+    targetIndex = Math.max(0, Math.min(this.itemCount - 1, targetIndex));
+
+    // Animate to target
+    const animation = gsap.to(this, {
+      offset: targetIndex,
+      ...this.CONFIG.ANIMATIONS.CAROUSEL_TRANSITION,
+      onUpdate: () => this.renderCarousel(),
+      onComplete: () => {
+        this.activeAnimations.delete(animation);
+      },
     });
-    document.addEventListener("touchstart", (e) => this.onStart(e), {
-      passive: true,
+
+    this.activeAnimations.add(animation);
+  }
+
+  /**
+   * Handle end of vertical drag gesture
+   */
+  handleVerticalGestureEnd() {
+    if (Math.abs(this.movedY) < this.verticalThreshold) {
+      this.snapActiveItemBack();
+      return;
+    }
+
+    // Check if item overlaps with pocket
+    if (this.checkItemPocketOverlap()) {
+      this.executeCardDropSequence();
+    } else {
+      this.snapActiveItemBack(true);
+    }
+  }
+
+  /**
+   * Check if active item overlaps with pocket
+   */
+  checkItemPocketOverlap() {
+    if (!this.activeItem) return false;
+
+    try {
+      const pocketRect = this.elements.pocket.getBoundingClientRect();
+      const itemRect = this.activeItem.getBoundingClientRect();
+
+      return (
+        itemRect.bottom > pocketRect.top &&
+        itemRect.left < pocketRect.right &&
+        itemRect.right > pocketRect.left
+      );
+    } catch (error) {
+      console.warn("ScYESGameScreen: Error checking overlap:", error.message);
+      return false;
+    }
+  }
+
+  /**
+   * Snap active item back to original position
+   */
+  snapActiveItemBack(extended = false) {
+    if (!this.activeItem) return;
+
+    const baseY = parseFloat(this.activeItem.dataset.centerY || this.baseY);
+    const animConfig = extended
+      ? this.CONFIG.ANIMATIONS.SNAP_BACK_EXTENDED
+      : this.CONFIG.ANIMATIONS.SNAP_BACK;
+
+    const animation = gsap.to(this.activeItem, {
+      y: baseY,
+      ...animConfig,
+      onComplete: () => {
+        this.activeAnimations.delete(animation);
+      },
     });
-    document.addEventListener("touchmove", (e) => this.onMove(e), {
-      passive: false,
+
+    this.activeAnimations.add(animation);
+  }
+
+  /**
+   * Execute complete card drop animation sequence
+   */
+  executeCardDropSequence() {
+    if (!this.activeItem) return;
+
+    // Phase 1: Drop the card
+    const dropAnimation = gsap.to(this.activeItem, {
+      y: window.innerHeight + 200,
+      scale: 0.45,
+      opacity: 0,
+      ...this.CONFIG.ANIMATIONS.CARD_DROP,
+      onComplete: () => {
+        this.activeAnimations.delete(dropAnimation);
+        this.activeItem.style.display = "none";
+        this.executeSliderFadeOut();
+      },
     });
-    document.addEventListener("touchend", () => this.onEnd(), {
-      passive: true,
+
+    this.activeAnimations.add(dropAnimation);
+  }
+
+  /**
+   * Execute slider fade out animation
+   */
+  executeSliderFadeOut() {
+    const fadeAnimation = gsap.to(this.elements.slider, {
+      opacity: 0,
+      ...this.CONFIG.ANIMATIONS.SLIDER_FADE,
+      onComplete: () => {
+        this.activeAnimations.delete(fadeAnimation);
+        this.elements.slider.style.display = "none";
+        this.elements.pocket.classList.add(this.CONFIG.CSS_CLASSES.ACTIVE);
+        this.elements.bgDark.classList.add(this.CONFIG.CSS_CLASSES.DISMISS);
+
+        setTimeout(() => {
+          this.executePocketFadeOut();
+        }, this.CONFIG.TIMING.POCKET_DELAY);
+      },
     });
-    document.addEventListener("mousedown", (e) => {
-      if (e.button === 0) this.onStart(e);
+
+    this.activeAnimations.add(fadeAnimation);
+  }
+
+  /**
+   * Execute pocket fade out animation
+   */
+  executePocketFadeOut() {
+    const pocketAnimation = gsap.to(this.elements.pocket, {
+      opacity: 0,
+      ...this.CONFIG.ANIMATIONS.POCKET_FADE,
+      onComplete: () => {
+        this.activeAnimations.delete(pocketAnimation);
+        this.showGameResult();
+      },
     });
-    document.addEventListener("mousemove", (e) => this.onMove(e));
-    document.addEventListener("mouseup", () => this.onEnd());
+
+    this.activeAnimations.add(pocketAnimation);
+  }
+
+  /**
+   * Show final game result with animation
+   */
+  showGameResult() {
+    const resultAnimation = gsap.to(this.elements.result, {
+      opacity: 1,
+      ...this.CONFIG.ANIMATIONS.RESULT_SHOW,
+      onComplete: () => {
+        this.activeAnimations.delete(resultAnimation);
+      },
+    });
+
+    this.activeAnimations.add(resultAnimation);
+
+    // Add CSS classes for final state
+    this.elements.result.classList.add(this.CONFIG.CSS_CLASSES.RESULT_SHOW);
+    this.elements.section.classList.add(this.CONFIG.CSS_CLASSES.ACTIVE_SCROLL);
+    this.elements.pocket.classList.add(this.CONFIG.CSS_CLASSES.DISMISS_CARD);
+  }
+
+  /**
+   * Get current game state
+   */
+  getState() {
+    return {
+      offset: this.offset,
+      activeItemIndex: this.activeItem
+        ? Array.from(this.items).indexOf(this.activeItem)
+        : -1,
+      itemCount: this.itemCount,
+      isInitialized: this.isInitialized,
+      gesture: this.gesture,
+      isDragging: this.isDragging,
+    };
+  }
+
+  /**
+   * Clean up all resources and remove event listeners
+   */
+  destroy() {
+    try {
+      // Kill all active animations
+      this.activeAnimations.forEach((animation) => {
+        if (animation && animation.kill) {
+          animation.kill();
+        }
+      });
+      this.activeAnimations.clear();
+
+      // Remove all event listeners
+      this.eventListeners.forEach(({ element, event, handler, options }) => {
+        element.removeEventListener(event, handler, options);
+      });
+      this.eventListeners = [];
+
+      // Reset state
+      this.isInitialized = false;
+      this.activeItem = null;
+      this.resetGestureState();
+
+      console.log("ScYESGameScreen: Destroyed successfully");
+    } catch (error) {
+      console.warn("ScYESGameScreen: Error during destruction:", error.message);
+    }
+  }
+
+  /**
+   * Restart the game (clean destroy and reinitialize)
+   */
+  restart() {
+    this.destroy();
+    setTimeout(() => {
+      this.init();
+    }, 100);
   }
 }
 
+// Create and export instance
 const instance = new ScYESGameScreen();
-//   "sc-year-end-spend-polaroid-game-section",
-//   "polaroid-game-slider",
-//   "polaroid-game-pocket",
-//   "polaroid-game-bg-dark",
-//   "polaroid-result"
 
 export default instance;

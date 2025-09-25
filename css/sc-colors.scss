@@ -122,7 +122,6 @@ $color-grey-light-28: #9b9b9b;
 $color-grey-light-29: #eaf0f8;
 $color-grey-light-30: #f4f4f4;
 
-
 $color-grey-dots: #afb0b2;
 $color-yellow-light: #fffddb;
 $color-gold: #f9e377;
@@ -223,13 +222,14 @@ $color-green-light-14: #38d200;
 $color-black-translucent-80: rgba($color-black, 0.8);
 
 $color-red-4: #b24008;
-$color-red-5: #ff0000;
+$color-red-5: #f00;
 $color-red-6: #ff6481;
 
-$color-blue-1: #0000ff00;
+$color-blue-1: #00f0;
 $color-blue-dark-13: #000f47;
 $color-blue-dark-14: #0c3285;
 $color-blue-dark-15: #2c3a87;
+$color-blue-dark-16: #020b43;
 $color-blue-light-12: #85acd7;
 $color-sky-blue-7: #00a79d;
 $color-sky-blue-7-translucent-0: rgba($color-sky-blue-7, 0);
@@ -265,14 +265,19 @@ $color-grey-light-49: #7b9bac;
 $color-grey-light-50: #7c9cad;
 $color-grey-light-51: #b7d3e4;
 $color-grey-light-52: #b2cedc;
+$color-grey-light-53: #dcdcdc80;
 $color-grey-light-gainsboro-0: rgba($color-grey-light-gainsboro, 0);
 
 $color-white-smoke-9: #e3e7e8;
 $color-white-smoke-10: rgba($color-white, 0.4);
+$color-white-smoke-11: #eee;
+$color-white-smoke-12: #f0f0f0;
 $color-white-translucent-0: rgba($color-white, 0);
+$color-white-translucent-1: rgba($color-white, 0.1);
 $color-white-translucent-3: rgba($color-white, 0.3);
 $color-white-translucent-25: rgba($color-white, 0.25);
 $color-white-translucent-52: rgba($color-white, 0.52);
+$color-white-translucent-8: rgba($color-white, 0.8);
 $color-white-translucent-100: rgba($color-white, 1);
 
 $color-yellow-3: #a47b52;
@@ -282,7 +287,7 @@ $color-green-10: #154a02;
 $color-green-light-15: #74df4c;
 $color-green-light-16: #5ed981;
 
-$color-pink: #ff00ff;
+$color-pink: #f0f;
 
 $color-black-1: #000000b0;
 $color-black-2: #2f2f2f;
@@ -295,6 +300,67 @@ $color-black-translucent-3: rgba($color-black, 0.3);
 $color-black-translucent-25: rgba($color-black, 0.25);
 $color-black-translucent-60: rgba($color-black, 0.6);
 
-//sc-year-end-spend
-$background-color_3: #020b43;
-$color-grey-light-31: #f0f0f0;
+$color-yellow-5: #ffe58f;
+$color-yellow-light-3: #fff8e5;
+$color-orange-2: #d48806;
+$color-red-7: #d9534f;
+
+// HK Gamification - newly added;
+$color-white-smoke: #f2f2f2;
+$color-white-honeydew: #fbfffa;
+$color-gray-gainsboro: #d9d9d9;
+$color-gray-light-gainsboro: #dadada;
+$color-gray-very-light: #cdcdcd;
+$color-gray-nobel: #979797;
+$color-gray-chateau: #a8a9aa;
+$color-gray-light: #ccc;
+$color-gray-bright: #525355;
+$color-gray-atomic: #3a474e;
+$color-green-scream: #4bf04b;
+$color-green-salad: #4caf50;
+$color-green-kelly: #38d200;
+$color-green-snowy-mint: #d7f6cc;
+$color-green-tara: #d4ffd7;
+$color-green-pastel: #71e371;
+$color-green-light-sea: #10c0b8;
+$color-blue-navy: #0473ea;
+$color-blue-spacific: #0294c5;
+$color-blue-madison: #2c3e50;
+$color-blue-alice: #e7f3f9;
+$color-blue-pattens: #d3e4f1;
+$color-black-aurbergine: #231f20;
+$color-gainsboro: #e2e2e2;
+$color-alice-blue: #ebf8fd;
+$color-aluminium: #868788;
+$color-grey-gainsboro: #dcdcdc;
+$color-blue-midnight: #020b43;
+$color-sonic-silver: #757575;
+$color-grey-gains: #e0e0e0;
+$color-light-black: rgba($color-black, 0.1);
+$color-black-welcome-modal: rgba($color-black, 0.6);
+$color-black-cathy-modal: rgba($color-black, 0.8);
+$color-black-scratch-modal: rgba($color-black, 0.4);
+
+
+// yes campaign - newly added;
+$color-blue-light-13: #d2e6fa;
+$color-blue-22-translucent-20: rgba($color-blue-22, 0.2);
+$color-grey-dark-16: #5d5d5d;
+$color-grey-dark-17: #7e7e7e;
+$color-grey-dark-18: #2d2d2de5;
+$color-grey-dark-19: #999999;
+$color-grey-dark-20: #a2a2a2;
+$color-grey-dark-21: #525355b2;
+$color-grey-dark-22: #52535533;
+$color-blue-light-14: #0473ea33;
+$color-white-smoke-13: #ffffff1a;
+$color-white-smoke-14: #e6f1fd;
+$color-white-smoke-15: #dcffd0;
+$color-blue-light-15: #044c9a;
+$color-blue-light-16: #003e81;
+$color-blue-light-17: #0e2d67;
+$color-blue-light-18: #026dea;
+$color-blue-light-19: #cde3fb;
+$color-blue-light-19-translucent-0: rgba($color-blue-light-19, 0);
+$color-blue-light-20: #81b9f4;
+$color-blue-light-21: #4f9df0;

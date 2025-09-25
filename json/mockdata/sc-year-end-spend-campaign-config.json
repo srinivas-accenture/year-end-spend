@@ -1,0 +1,23 @@
+[
+  {
+    "campaign": {
+      "placeholder": "gamification_offers",
+      "offer": {
+        "registration": "EGCCYESRegistration",
+        "landing": "EGCCYESLanding",
+        "checkin": "EGCCYESDigitialReactivation",
+        "summary": "EGCCYESSummary",
+        "fields": {
+          "Registered": "Registered",
+          "CampaignExpiryDate": "CampaignExpiryDate",
+          "PacksCount": "Chances",
+          "AllCards": "AllCards",
+          "AllRewards": "AllRewards"
+        },
+        "groupId": "groupId"
+      },
+      "expiryDayDelay": 14,
+      "termsLink": "https://www.sc.com/sg/terms-and-conditions/pinballsurewin/"
+    }
+  }
+]

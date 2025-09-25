@@ -1,0 +1,247 @@
+{
+  "data": {
+    "offers": {
+      "__typename": "CustomerOffers",
+      "placeholder": "gamification_offers",
+      "offers": [
+        {
+          "__typename": "CustomerOffer",
+          "id": "EGCCYESRegistration1",
+          "title": "<span style='font-size:10; color: white;'>Your loan is pre-approved</span>",
+          "message": "<span style='font-size:10; color: white;'>Fast-track your way to</span><br>n<span style='font-size:14; color: white;'><b>S$0</b></span><br>n<span style='font-size:10; color: white;'>at <b>6.88</b>% p.a.<br>(EIR <b>22.22</b>% p.a.)<br><br>Valid for this month</span>",
+          "images": {
+            "__typename": "ImageSet",
+            "small": "https://av.sc.com/nextgen/sg/content/lottie/creative1_CashOnePreApproved_HomeBanner.json",
+            "medium": "https://av.sc.com/nextgen/sg/content/lottie/creative1_CashOnePreApproved_HomeBanner.json",
+            "large": "https://av.sc.com/nextgen/sg/content/lottie/creative1_CashOnePreApproved_HomeBanner.json"
+          },
+          "primarycta": {
+            "__typename": "CtaLink",
+            "label": "",
+            "link": "",
+            "deeplink": ""
+          },
+          "secondarycta": {
+            "__typename": "CtaLink",
+            "label": "Fund",
+            "link": "https://www.sc.com/sg/investment/funds/",
+            "deeplink": "https://www.sc.com/sg/investment/funds/"
+          },
+          "feedback": {
+            "__typename": "CustomerOfferFeedback",
+            "name": "EGCCYESRegistration",
+            "group": "Borrow",
+            "interactionId": "847407551958252077",
+            "issue": "Sales1",
+            "rank": 1,
+            "placement": "gamification_offers"
+          },
+          "index": 0,
+          "fields": [
+            {
+              "__typename": "NameValuePair",
+              "name": "Registered",
+              "value": "N"
+            },
+            {
+              "__typename": "NameValuePair",
+              "name": "CampaignExpiryDate",
+              "value": "28 February 2026"
+            }
+          ]
+        },
+        {
+          "__typename": "CustomerOffer",
+          "id": "EGCCYESDigitialReactivation",
+          "title": "<span style='font-size:10; color: white;'>Your loan is pre-approved</span>",
+          "message": "<span style='font-size:10; color: white;'>Fast-track your way to</span><br>n<span style='font-size:14; color: white;'><b>S$0</b></span><br>n<span style='font-size:10; color: white;'>at <b>6.88</b>% p.a.<br>(EIR <b>22.22</b>% p.a.)<br><br>Valid for this month</span>",
+          "images": {
+            "__typename": "ImageSet",
+            "small": "https://av.sc.com/nextgen/sg/content/lottie/creative1_CashOnePreApproved_HomeBanner.json",
+            "medium": "https://av.sc.com/nextgen/sg/content/lottie/creative1_CashOnePreApproved_HomeBanner.json",
+            "large": "https://av.sc.com/nextgen/sg/content/lottie/creative1_CashOnePreApproved_HomeBanner.json"
+          },
+          "primarycta": {
+            "__typename": "CtaLink",
+            "label": "",
+            "link": "",
+            "deeplink": ""
+          },
+          "secondarycta": {
+            "__typename": "CtaLink",
+            "label": "Fund",
+            "link": "https://www.sc.com/sg/investment/funds/",
+            "deeplink": "https://www.sc.com/sg/investment/funds/"
+          },
+          "feedback": {
+            "__typename": "CustomerOfferFeedback",
+            "name": "EGCCYESDigitialReactivation",
+            "group": "Borrow",
+            "interactionId": "847407551958252077",
+            "issue": "Sales1",
+            "rank": 1,
+            "placement": "gamification_offers"
+          },
+          "index": 0,
+          "fields": [
+            {
+              "__typename": "NameValuePair",
+              "name": "Registered",
+              "value": "N"
+            },
+            {
+              "__typename": "NameValuePair",
+              "name": "CampaignExpiryDate",
+              "value": "28 February 2026"
+            },
+            {
+              "__typename": "NameValuePair",
+              "name": "TotalCheckinCount",
+              "value": "0"
+            },
+            {
+              "__typename": "NameValuePair",
+              "name": "DailyCheckin",
+              "value": "n"
+            }
+          ]
+        },
+        {
+          "__typename": "CustomerOffer",
+          "id": "EGCCYESLanding",
+          "title": "<span style='font-size:10; color: white;'>Your loan is pre-approved</span>",
+          "message": "<span style='font-size:10; color: white;'>Fast-track your way to</span><br>n<span style='font-size:14; color: white;'><b>S$0</b></span><br>n<span style='font-size:10; color: white;'>at <b>6.88</b>% p.a.<br>(EIR <b>22.22</b>% p.a.)<br><br>Valid for this month</span>",
+          "images": {
+            "__typename": "ImageSet",
+            "small": "https://av.sc.com/nextgen/sg/content/lottie/creative1_CashOnePreApproved_HomeBanner.json",
+            "medium": "https://av.sc.com/nextgen/sg/content/lottie/creative1_CashOnePreApproved_HomeBanner.json",
+            "large": "https://av.sc.com/nextgen/sg/content/lottie/creative1_CashOnePreApproved_HomeBanner.json"
+          },
+          "primarycta": {
+            "__typename": "CtaLink",
+            "label": "",
+            "link": "",
+            "deeplink": ""
+          },
+          "secondarycta": {
+            "__typename": "CtaLink",
+            "label": "Fund",
+            "link": "https://www.sc.com/sg/investment/funds/",
+            "deeplink": "https://www.sc.com/sg/investment/funds/"
+          },
+          "feedback": {
+            "__typename": "CustomerOfferFeedback",
+            "name": "EGCCYESLanding",
+            "group": "Borrow",
+            "interactionId": "847407551958252077",
+            "issue": "Sales1",
+            "rank": 1,
+            "placement": "gamification_offers"
+          },
+          "index": 0,
+          "fields": [
+            {
+              "__typename": "NameValuePair",
+              "name": "Registered",
+              "value": "Y"
+            },
+            {
+              "__typename": "NameValuePair",
+              "name": "CampaignExpiryDate",
+              "value": "28 February 2026"
+            },
+            {
+              "__typename": "NameValuePair",
+              "name": "Chances",
+              "value": "7"
+            },
+            {
+              "__typename": "NameValuePair",
+              "name": "AllCards",
+              "value": "[{\"groupId\":\"groupId1\",\"RewardAmount\":1,\"RewardType\":\"Dining\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"\",\"RewardStatus\":\"Issued\",\"Reward\":\"Dining_000001\",\"RewardProvider\":\"Lerouy\",\"RewardIssueType\":\"Card\",\"RewardExpiryDate\":\"30 April 2025\"},{\"groupId\":\"groupId3\",\"RewardAmount\":0,\"RewardType\":\"Travel\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"\",\"RewardStatus\":\"Issued\",\"Reward\":\"Travel_000002\",\"RewardProvider\":\"Bali\",\"RewardIssueType\":\"Card\",\"RewardExpiryDate\":\"30 April 2025\"},{\"groupId\":\"groupId2\",\"RewardAmount\":50,\"RewardType\":\"Dining\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"\",\"RewardStatus\":\"Issued\",\"Reward\":\"Dining_000002\",\"RewardProvider\":\"Lerouy\",\"RewardIssueType\":\"Card\",\"RewardExpiryDate\":\"30 April 2025\"},{\"groupId\":\"groupId1\",\"RewardAmount\":0,\"RewardType\":\"Luggage\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"\",\"RewardStatus\":\"Issued\",\"Reward\":\"Luggage_000001\",\"RewardProvider\":\"Luggage\",\"RewardIssueType\":\"Card\",\"RewardExpiryDate\":\"30 April 2025\"},{\"groupId\":\"groupId1\",\"RewardAmount\":0,\"RewardType\":\"Travel\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"\",\"RewardStatus\":\"Issued\",\"Reward\":\"Travel_000001\",\"RewardProvider\":\"Bali\",\"RewardIssueType\":\"Card\",\"RewardExpiryDate\":\"30 April 2025\"},{\"groupId\":\"groupId3\",\"RewardAmount\":10,\"RewardType\":\"Dining\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"\",\"RewardStatus\":\"Issued\",\"Reward\":\"Dining_000003\",\"RewardProvider\":\"Lerouy\",\"RewardIssueType\":\"Card\",\"RewardExpiryDate\":\"28 April 2025\"},{\"groupId\":\"groupId2\",\"RewardAmount\":15,\"RewardType\":\"Luggage\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"\",\"RewardStatus\":\"Issued\",\"Reward\":\"Luggage_000002\",\"RewardProvider\":\"Luggage\",\"RewardIssueType\":\"Card\",\"RewardExpiryDate\":\"27 April 2025\"},{\"groupId\":\"groupId3\",\"RewardAmount\":15,\"RewardType\":\"Luggage\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"\",\"RewardStatus\":\"Issued\",\"Reward\":\"Luggage_000003\",\"RewardProvider\":\"Luggage\",\"RewardIssueType\":\"Card\",\"RewardExpiryDate\":\"27 April 2025\"},{\"groupId\":\"groupId2\",\"RewardAmount\":15,\"RewardType\":\"Travel\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"\",\"RewardStatus\":\"Issued\",\"Reward\":\"Travel_000002\",\"RewardProvider\":\"Bali\",\"RewardIssueType\":\"Card\",\"RewardExpiryDate\":\"27 April 2025\"}]"
+            },
+            {
+              "__typename": "NameValuePair",
+              "name": "AllRewards",
+              "value": "[{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":1,\"RewardType\":\"Cashback\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"08 July 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"CCCashBack_000001\",\"RewardProvider\":\"Internal\",\"RewardIssueType\":\"Cashback\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":0,\"RewardType\":\"1x All-Expenses Paid Paris Getaway For Two\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"08 April 2024\",\"RewardStatus\":\"Acquired\",\"Reward\":\"GrandPrize_001\",\"RewardProvider\":\"External\",\"RewardIssueType\":\"Grand Prize\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":50,\"RewardType\":\"Miles\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"08 April 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"Miles_000001\",\"RewardProvider\":\"Internal\",\"RewardIssueType\":\"Miles\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":0,\"RewardType\":\"1GB Klook eSIM\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"16 April 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"ONR1CJGIH6AI3AU8\",\"RewardProvider\":\"Grab\",\"RewardIssueType\":\"Coupon\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":0,\"RewardType\":\"Abalone\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"05 May 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"Gift_00001\",\"RewardProvider\":\"External\",\"RewardIssueType\":\"Gift\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":10,\"RewardType\":\"Cashback\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"26 May 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"CCCashBack_000002\",\"RewardProvider\":\"Internal\",\"RewardIssueType\":\"Cashback\",\"RewardExpiryDate\":\"28 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":15,\"RewardType\":\"Shopback Voucher\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"15 Jun 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"ONR1CJGIH6dd3AU8\",\"RewardProvider\":\"Grab\",\"RewardIssueType\":\"Coupon\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"08 April 2025\",\"RewardExpiryDate\":\"27 April 2025\"}]"
+            }
+          ]
+        },
+        {
+          "__typename": "CustomerOffer",
+          "id": "EGCCYESSummary",
+          "title": "<span style='font-size:10; color: white;'>Your loan is pre-approved</span>",
+          "message": "<span style='font-size:10; color: white;'>Fast-track your way to</span>n<span style='font-size: 14; color: white;'><b>S$0</b></span>n<span style='font-size: 10; color: white;'>at <b>6.88</b>% p.a.(EIR <b>22.22</b>% p.a.) Valid for this month</span>",
+          "images": {
+            "__typename": "ImageSet",
+            "small": "https://av.sc.com/nextgen/sg/content/lottie/creative1_CashOnePreApproved_HomeBanner.json",
+            "medium": "https://av.sc.com/nextgen/sg/content/lottie/creative1_CashOnePreApproved_HomeBanner.json",
+            "large": "https://av.sc.com/nextgen/sg/content/lottie/creative1_CashOnePreApproved_HomeBanner.json"
+          },
+          "primarycta": {
+            "__typename": "CtaLink",
+            "label": "",
+            "link": "",
+            "deeplink": ""
+          },
+          "secondarycta": {
+            "__typename": "CtaLink",
+            "label": "Fund",
+            "link": "https://www.sc.com/sg/investment/funds/",
+            "deeplink": "https://www.sc.com/sg/investment/funds/"
+          },
+          "feedback": {
+            "__typename": "CustomerOfferFeedback",
+            "name": "EGCCMidYearSpend_Summary",
+            "group": "Borrow",
+            "interactionId": "847407551958252077",
+            "issue": "Sales1",
+            "rank": 1,
+            "placement": "gamification_offers"
+          },
+          "index": 0,
+          "fields": [
+            {
+              "value": "Y",
+              "name": "ActiveCustomer"
+            },
+            {
+              "value": "Y",
+              "name": "Registered"
+            },
+            {
+              "value": "31 July 2025",
+              "name": "CampaignExpiryDate"
+            },
+            {
+              "name": "CashbackAggregated",
+              "value": "1500"
+            },
+            {
+              "name": "MilesAggregated",
+              "value": "1500"
+            },
+            {
+              "name": "GiftAggregated",
+              "value": "100"
+            },
+            {
+              "name": "VoucherAggregated",
+              "value": "20"
+            },
+            {
+              "name": "GrandPrize",
+              "value": "1"
+            },
+            {
+              "name": "AllRewards",
+              "value": "[{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":0,\"RewardType\":\"1x All-Expenses Paid Paris Getaway For Two\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"08 April 2024\",\"RewardStatus\":\"Acquired\",\"Reward\":\"GrandPrize_001\",\"RewardProvider\":\"External\",\"RewardIssueType\":\"Grand Prize\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":1,\"RewardType\":\"Cashback\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"08 July 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"CCCashBack_000001\",\"RewardProvider\":\"Internal\",\"RewardIssueType\":\"Cashback\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":50,\"RewardType\":\"Miles\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"08 April 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"Miles_000001\",\"RewardProvider\":\"Internal\",\"RewardIssueType\":\"Miles\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":0,\"RewardType\":\"1GB Klook eSIM\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"16 April 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"ONR1CJGIH6AI3AU8\",\"RewardProvider\":\"Grab\",\"RewardIssueType\":\"Coupon\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":0,\"RewardType\":\"Abalone\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"05 May 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"Gift_00001\",\"RewardProvider\":\"External\",\"RewardIssueType\":\"Gift\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":10,\"RewardType\":\"Cashback\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"26 May 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"CCCashBack_000002\",\"RewardProvider\":\"Internal\",\"RewardIssueType\":\"Cashback\",\"RewardExpiryDate\":\"28 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":15,\"RewardType\":\"Shopback Voucher\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"15 Jun 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"ONR1CJGIH6dd3AU8\",\"RewardProvider\":\"Grab\",\"RewardIssueType\":\"Coupon\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"08 April 2025\",\"RewardExpiryDate\":\"27 April 2025\"}]"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responseId ": "cb2_1729664887725 ",
+  "status ": "OK "
+}

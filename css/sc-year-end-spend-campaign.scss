@@ -1,0 +1,3715 @@
+@import './sc-colors.scss';
+
+/* Common styles start */
+@font-face {
+  font-family: 'SC Prosper Sans';
+  src: url('https://av.sc.com/sg/YEC21/SCProsperSans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SC Prosper Sans';
+  src: url('https://av.sc.com/sg/YEC21/SCProsperSans-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SC Prosper Sans';
+  src: url('https://av.sc.com/sg/YEC21/SCProsperSans-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SC Prosper Sans';
+  src: url('https://av.sc.com/sg/YEC21/SCProsperSans-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+button,
+input,
+textarea {
+  font-family: 'SC Prosper Sans', 'Arial', 'sans-serif' !important;
+}
+
+html,
+body {
+  width: 100%;
+  border: 0px !important;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Common styles end */
+
+/* Variable start */
+$maxwidth-container: 460px;
+$design-width-base: 430px;
+
+// for smaller screen
+$smaller-height-lg: 740px;
+$smaller-height-sm: 667px;
+
+$design-base-height: 932px;
+
+$breakpoints-width-normal: 93%;
+/* Variable end */
+
+/* function & mixin start */
+@function responsive-size($px-size, $device-width: $design-width-base) {
+  $ratio-value: $px-size / $device-width;
+  @return calc(#{$ratio-value} * 100%);
+}
+
+@function responsive-font($px-size, $device-width: $design-width-base) {
+  $ratio-value: $px-size / $device-width;
+  @return calc(#{$ratio-value} * 100vw);
+}
+
+@function responsive-height($px-size, $device-height: $design-base-height) {
+  $ratio-value: $px-size / $device-height;
+  @return calc(#{$ratio-value} * 100vh);
+}
+
+// Map of property values by breakpoint
+$height-breakpoints-basewidth: (
+  $smaller-height-lg: 80%,
+    $smaller-height-sm: 79%
+    );
+
+  // Multi-property mixin
+  @mixin responsive-height-properties($property, $values-map) {
+    @each $max-height, $value in $values-map {
+      @media screen and (max-height: $max-height) {
+        #{$property}: $value;
+      }
+    }
+  }
+
+  /* function & mixin end */
+
+  /* Spend and Win Journey styles start */
+  .sc-year-end-spend-campaign {
+    width: 100%;
+    max-width: $maxwidth-container;
+    min-height: 100dvh;
+    font-family: 'SC Prosper Sans', 'Arial', 'sans-serif' !important;
+    overflow: hidden;
+
+    /* Loader page styles */
+    .sc-year-end-spend-loader {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: $color-blue-light-13;
+      background-image: url('https://av.sc.com/sg/content/images/sc-year-end-spend-background-texture-long.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-blend-mode: overlay;
+      margin: 0 auto;
+      position: relative;
+      z-index: 6;
+
+      lottie-player {
+        width: calc(min(110px, #{responsive-font(110px)}));
+        height: auto;
+      }
+
+      &--hide {
+        display: none !important;
+      }
+    }
+
+    /* Registration page styles */
+    .sc-year-end-spend-registration {
+      width: 100%;
+      height: 100%;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      background-color: $color-blue-light-19;
+      background-image: url('https://av.sc.com/sg/content/images/sc-year-end-spend-background-texture-long.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-blend-mode: overlay;
+      overflow: hidden;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      position: relative;
+      z-index: 1;
+
+      // always visible purpose
+      -webkit-overflow-scrolling: touch;
+
+      &::-webkit-scrollbar {
+        width: calc(min(4px, #{responsive-font(4px)}));
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $color-white-smoke-12;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $color-black-translucent-3;
+        border-radius: 4px;
+      }
+
+      &__wrapper {
+        width: 100%;
+        height: 100%;
+        min-height: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img,
+        svg {
+          width: 100%;
+          height: auto;
+        }
+
+        .sc-year-end-spend-registration {
+          &__top {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: calc(min(29px, #{responsive-height(29px)})) calc(min(20px, #{responsive-font(20px)})) calc(min(10px, #{responsive-height(10px)}));
+
+            .sc-year-end-spend-registration {
+              &__header {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: calc(min(15px, #{responsive-height(15px)}));
+
+                &-close {
+                  width: calc(min(20px, #{responsive-font(20px)}));
+                  align-self: flex-end;
+                }
+
+                &-masthead {
+                  width: 100%;
+                }
+              }
+            }
+          }
+
+          &__middle {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: calc(min(30px, #{responsive-height(30px)})) calc(min(25px, #{responsive-font(25px)}));
+            gap: calc(min(50px, #{responsive-height(50px)}));
+
+            .sc-year-end-spend-registration {
+              &__intro {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: calc(min(12px, #{responsive-height(12px)}));
+                font-size: calc(min(16px, #{responsive-font(16px)}));
+                line-height: 142%;
+                font-weight: 400;
+                letter-spacing: 0;
+                text-align: center;
+                color: $color-grey-dark-9;
+
+                &-head {
+                  font-size: calc(min(26px, #{responsive-font(26px)}));
+                  line-height: 120%;
+                  font-weight: 600;
+                }
+
+                &-description {
+                  font-size: calc(min(16px, #{responsive-font(16px)}));
+                  line-height: 142%;
+                  font-weight: 400;
+                }
+              }
+
+              &__grand-prize {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                background-color: transparent;
+                position: relative;
+                margin-top: 100px;
+
+                @media screen and (width: 344px) and (height:882px) {
+                  margin-top: 90px;
+                }
+
+                &-card {
+                  width: 50%;
+                  height: auto;
+                  position: absolute;
+
+                  &-stack {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    position: absolute;
+                    top: -120px;
+                  }
+                }
+
+                &-card1 {
+                  left: 10%;
+                  z-index: 1;
+                }
+
+                &-card2 {
+                  right: 10%;
+                  z-index: 2;
+                }
+
+                &-contents {
+                  width: 100%;
+                  background-color: $color-white;
+                  padding: calc(min(15px, #{responsive-height(15px)})) calc(min(15px, #{responsive-font(15px)}));
+                  font-size: calc(min(16px, #{responsive-font(16px)}));
+                  line-height: 142.3%;
+                  font-weight: 400;
+                  border-radius: 10px;
+                  padding-top: calc(min(80px, #{responsive-height(80px)}));
+                  position: relative;
+
+                  @media screen and (max-width: 344px) and (max-height:882px) {
+                    padding-top: calc(min(50px, #{responsive-height(50px)}));
+                  }
+
+                  @media screen and (width: 360px) and (height:740px) {
+                    padding-top: calc(min(70px, #{responsive-height(70px)}));
+                  }
+
+                  @media screen and (width: 414px) and (height:736px) {
+                    padding-top: calc(min(100px, #{responsive-height(100px)}));
+                  }
+
+                  .sc-year-end-spend-registration__grand-prize {
+                    &-head {
+                      width: 100%;
+                      font-size: calc(min(22px, #{responsive-font(22px)}));
+                      line-height: 142.3%;
+                      font-weight: 600;
+                      color: $color-blue-22;
+                      padding-bottom: calc(min(10px, #{responsive-height(10px)}));
+                    }
+
+                    &__list {
+                      width: 100%;
+                      padding-left: 1.5em;
+                      list-style: disc;
+
+                      &-head {
+                        width: 100%;
+                        font-size: calc(min(16px, #{responsive-font(16px)}));
+                        line-height: 142.3%;
+                        font-weight: 500;
+                      }
+
+                      &-item {
+                        width: 100%;
+                        display: list-item;
+                        font-size: calc(min(16px, #{responsive-font(16px)}));
+                        line-height: 142.3%;
+                        font-weight: 400;
+                      }
+                    }
+                  }
+                }
+              }
+
+              &__prize {
+                width: 100%;
+                background: $color-white-translucent-60;
+                padding: calc(min(16px, #{responsive-height(16px)})) calc(min(16px, #{responsive-font(16px)}));
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: calc(min(15px, #{responsive-height(15px)}));
+
+                &-head {
+                  width: fit-content;
+                  font-size: calc(min(18px, #{responsive-font(18px)}));
+                  line-height: 120%;
+                  font-weight: 600;
+                  font-style: normal;
+                  letter-spacing: 0;
+                  color: $color-blue-22;
+
+
+                  &-wrapper {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    padding-bottom: calc(min(10px, #{responsive-height(10px)}));
+                  }
+
+                  &-name {
+                    font-size: calc(min(22px, #{responsive-font(22px)}));
+                    line-height: 120%;
+                    font-weight: 600;
+                    font-style: normal;
+                    letter-spacing: 0;
+                  }
+
+                  &-count {
+                    font-size: calc(min(18px, #{responsive-font(18px)}));
+                    line-height: 120%;
+                    font-weight: 600;
+                    font-style: normal;
+                    letter-spacing: 0;
+                    text-align: center;
+                  }
+                }
+
+                &-tile {
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  background: $color-blue-22-translucent-20;
+                  padding: calc(min(11px, #{responsive-height(11px)})) calc(min(11px, #{responsive-font(11px)}));
+                  border-radius: 10px;
+
+                  &-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    gap: calc(min(10px, #{responsive-height(10px)}));
+                  }
+
+                  &-col {
+                    display: flex;
+                    gap: calc(min(10px, #{responsive-font(10px)}));
+                  }
+
+                  &-col:last-child {
+                    padding-right: calc(min(14px, #{responsive-font(14px)}));
+                  }
+
+                  .sc-year-end-spend-registration__prize {
+                    &-image {
+                      width: calc(min(87px, #{responsive-font(87px)}));
+                      height: auto;
+                    }
+
+                    &-name,
+                    &-count {
+                      font-size: calc(min(16px, #{responsive-font(16px)}));
+                      line-height: 142%;
+                      font-weight: 400;
+                      font-style: normal;
+                      letter-spacing: 0;
+                      vertical-align: middle;
+                      align-self: center;
+                      color: $color-grey-dark-16;
+                    }
+
+                    &-count {
+                      font-weight: 600;
+                      text-align: center;
+                    }
+                  }
+                }
+
+                &-footnote {
+                  font-size: calc(min(10px, #{responsive-font(10px)}));
+                  line-height: 100%;
+                  font-weight: 400;
+                  font-style: normal;
+                  letter-spacing: 0;
+                  color: $color-grey-dark-16;
+                }
+              }
+
+              &__how-it-works {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: calc(min(24px, #{responsive-height(24px)}));
+
+                &-head {
+                  font-size: calc(min(22px, #{responsive-font(22px)}));
+                  line-height: 120%;
+                  font-weight: 600;
+                  letter-spacing: 0;
+                  text-align: center;
+                  color: $color-blue-22;
+                  padding: 0px calc(min(24px, #{responsive-font(24px)}));
+                }
+
+                &-body {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: calc(min(24px, #{responsive-height(24px)}));
+                  padding: 0px calc(min(24px, #{responsive-font(24px)}));
+                  font-size: calc(min(16px, #{responsive-font(16px)}));
+                  line-height: 142%;
+                  font-weight: 600;
+                  font-style: normal;
+                  letter-spacing: 0;
+                  text-align: center;
+                }
+
+                &-steps {
+                  width: 100%;
+                  list-style: none;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: calc(min(24px, #{responsive-height(24px)}));
+                }
+
+                &-step {
+                  width: 100%;
+                  font-size: calc(min(16px, #{responsive-font(16px)}));
+                  line-height: 142%;
+                  font-weight: 400;
+                  font-style: normal;
+                  letter-spacing: 0;
+                  text-align: center;
+                  color: $color-grey-dark-16;
+
+                  &-label {
+                    font-weight: 600;
+                  }
+                }
+
+                &-note {
+                  width: 100%;
+                  font-size: calc(min(10px, #{responsive-font(10px)}));
+                  line-height: 142%;
+                  font-weight: 400;
+                  font-style: normal;
+                  letter-spacing: 0;
+                  text-align: center;
+                  color: $color-grey-dark-16;
+                }
+
+                .sc-year-end-spend-registration {
+                  &__how-to-unlock-link {
+                    font-size: calc(min(16px, #{responsive-font(16px)}));
+                    line-height: 142%;
+                    font-weight: 600;
+                    font-style: normal;
+                    letter-spacing: 0;
+                    text-align: center;
+                    text-decoration: underline;
+                    text-decoration-style: solid;
+                    text-decoration-thickness: 0%;
+                    text-decoration-skip-ink: auto;
+                    color: $color-grey-dark-16;
+                    ;
+                  }
+                }
+
+                .sc-year-end-spend-registration {
+                  &__prize {
+                    &-sets {
+                      width: 100%;
+                      display: flex;
+                      flex-direction: column;
+                      gap: calc(min(20px, #{responsive-height(20px)}));
+                      background: $color-white-translucent-50;
+                      border-radius: 10px;
+                      padding: calc(min(30px, #{responsive-height(30px)})) calc(min(5px, #{responsive-font(5px)}));
+                    }
+
+                    &-set {
+                      width: 100%;
+                      display: flex;
+                      flex-direction: column;
+                      gap: 6px;
+
+                      &-head {
+                        font-size: calc(min(16px, #{responsive-font(16px)}));
+                        line-height: 120%;
+                        font-weight: 600;
+                        letter-spacing: 0;
+                        text-align: center;
+                        color: $color-grey-dark-9;
+                      }
+
+                      &-cards {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        gap: calc(min(8px, #{responsive-font(8px)}));
+                      }
+
+                      &-card {
+                        width: calc(min(67px, #{responsive-font(67px)}));
+                        height: auto;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          &__bottom {
+            width: 100%;
+            max-width: $maxwidth-container;
+            position: fixed;
+            bottom: 0;
+            z-index: 3;
+            padding: 0px 0px calc(min(24px, #{responsive-height(24px)}));
+            background: linear-gradient(360deg, $color-blue-light-19 82.35%, $color-blue-light-19-translucent-0 104.71%);
+
+            .sc-year-end-spend-registration {
+              &__footer {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: calc(min(24px, #{responsive-height(24px)}));
+                padding: 0px calc(min(24px, #{responsive-font(24px)})) 0px;
+
+                &-top {
+                  display: flex;
+                  flex-direction: column;
+                  gap: calc(min(24px, #{responsive-height(24px)}));
+                }
+
+                &-head {
+                  font-weight: 500;
+                  font-style: normal;
+                  font-size: calc(min(22px, #{responsive-font(22px)}));
+                  line-height: 118%;
+                  letter-spacing: 0;
+                  text-align: center;
+                  color: $color-grey-dark-16;
+                }
+              }
+
+              &__button-register {
+                width: 100%;
+                font-size: calc(min(20px, #{responsive-font(20px)}));
+                line-height: 100%;
+                font-weight: 600;
+                font-style: normal;
+                letter-spacing: 0;
+                text-align: center;
+                color: $color-white;
+                border-radius: 100px;
+                padding: calc(min(20px, #{responsive-height(20px)})) calc(min(28px, #{responsive-font(28px)}));
+                border: 0;
+                background: $color-blue-light-18;
+              }
+
+              &__disclaimer {
+                font-size: calc(min(12px, #{responsive-font(12px)}));
+                line-height: 154%;
+                font-style: normal;
+                font-weight: 400;
+                letter-spacing: 0;
+                text-align: center;
+                color: $color-grey-dark-16;
+
+                &-label {
+                  font-weight: 600;
+                  font-style: normal;
+                }
+              }
+
+              &__terms-link.sc-year-end-spend-campaign__terms-link {
+                text-align: center;
+                white-space: nowrap;
+                text-decoration: underline;
+                text-decoration-style: solid;
+                text-decoration-thickness: 10%;
+                text-decoration-skip-ink: auto;
+                color: $color-grey-dark-16;
+              }
+            }
+          }
+        }
+
+        .sc-year-end-spend-registration__bottom:not(.sc-year-end-spend-registration__bottom--visible) .sc-year-end-spend-registration__footer {
+          padding-top: calc(min(43px, #{responsive-height(43px)}));
+        }
+
+        .sc-year-end-spend-registration__bottom:not(.sc-year-end-spend-registration__bottom--visible) .sc-year-end-spend-registration__footer-bottom {
+          display: none;
+        }
+
+        .sc-year-end-spend-registration__bottom:not(.sc-year-end-spend-registration__bottom--visible) .sc-year-end-spend-registration__footer-head {
+          font-size: 16px;
+        }
+      }
+
+      &--hide {
+        opacity: 0 !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        visibility: hidden !important;
+      }
+    }
+
+    /* Registration confirmation page styles */
+    .sc-year-end-spend-reg-confirmation {
+      width: 100%;
+      max-width: $maxwidth-container;
+      height: 100%;
+      min-height: 100dvh;
+      position: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $color-grey-dark-18;
+      z-index: 10;
+      top: 0;
+
+      &__wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: calc(min(30px, #{responsive-height(30px)}));
+        padding: calc(min(24px, #{responsive-height(24px)})) calc(min(24px, #{responsive-font(24px)}));
+        position: relative;
+
+        .sc-year-end-spend-reg-confirmation {
+          &__top {
+            width: 100%;
+            height: fit-content;
+            padding: calc(min(24px, #{responsive-height(24px)})) calc(min(24px, #{responsive-font(24px)})) calc(min(40px, #{responsive-height(40px)}));
+            border-radius: 16px;
+            border: 4px solid $color-blue-22;
+            background: $color-white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: calc(min(29px, #{responsive-height(29px)}));
+            position: relative;
+            padding-top: 21%;
+
+            .sc-year-end-spend-reg-confirmation {
+              &__image {
+                width: 50%;
+                height: auto;
+                position: absolute;
+                top: -50%;
+              }
+
+              &__title {
+                font-size: calc(min(20px, #{responsive-font(20px)}));
+                line-height: 150%;
+                font-weight: 700;
+                font-style: normal;
+                letter-spacing: 0;
+                text-align: center;
+                color: $color-blue-22;
+              }
+
+              &__message {
+                font-size: calc(min(20px, #{responsive-font(20px)}));
+                line-height: 150%;
+                font-weight: 400;
+                font-style: normal;
+                letter-spacing: 0;
+                text-align: center;
+                color: $color-grey-dark-21;
+              }
+
+              &__button-get-started {
+                width: 100%;
+                font-size: calc(min(20px, #{responsive-font(20px)}));
+                line-height: 100%;
+                font-weight: 700;
+                font-style: normal;
+                letter-spacing: 0;
+                text-align: center;
+                color: $color-white;
+                border-radius: 100px;
+                padding: calc(min(20px, #{responsive-height(20px)})) calc(min(28px, #{responsive-font(28px)}));
+                border: 0;
+                background: $color-blue-22;
+              }
+            }
+          }
+
+          &__bottom {
+            .sc-year-end-spend-reg-confirmation {
+              &__button-close {
+                width: calc(min(60px, #{responsive-font(60px)}));
+                height: auto;
+
+                img {
+                  width: 100%;
+                  height: auto;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &--hide {
+        opacity: 0 !important;
+        height: 0 !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+        visibility: hidden !important;
+      }
+    }
+
+    /* Landing page styles */
+    .sc-year-end-spend-landing {
+      width: 100%;
+      height: 100%;
+      min-height: 100dvh;
+      background-color: $color-blue-dark-16;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+
+      &__wrapper {
+        width: 100%;
+        height: 100%;
+        min-height: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: calc(min(30px, #{responsive-height(30px)}));
+
+        @media screen and (max-width: 414px) and (max-height: 846px) {
+          gap: calc(min(24px, #{responsive-height(24px)}));
+        }
+
+        img,
+        svg {
+          width: 100%;
+          height: auto;
+        }
+
+        .sc-year-end-spend-landing {
+          &__top {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: calc(min(30px, #{responsive-height(30px)})) calc(min(24px, #{responsive-font(24px)})) 0px;
+
+            @media screen and (max-width: 414px) and (max-height: 736px) {
+              padding: calc(min(25px, #{responsive-height(25px)})) calc(min(20px, #{responsive-font(20px)})) 0px;
+            }
+
+            @media screen and (max-width: 375px) and (max-height: 700px) {
+              padding: calc(min(25px, #{responsive-height(25px)})) calc(min(20px, #{responsive-font(20px)})) 0px;
+            }
+
+            .sc-year-end-spend-landing {
+              &__header {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: calc(min(5px, #{responsive-height(5px)}));
+
+                &-close {
+                  width: calc(min(20px, #{responsive-font(20px)}));
+                  align-self: flex-end;
+
+                  // @media screen and (max-width: 414px) and (max-height: 846px) {
+                  //   width: calc(min(18px, #{responsive-font(18px)}));
+                  // }
+                }
+
+                &-masthead {
+                  width: 100%;
+                  height: auto;
+
+                  @media screen and (max-width: 414px) and (max-height: 736px) {
+                    width: 90%;
+                  }
+
+                  @media screen and (max-width: 375px) and (max-height: 700px) {
+                    width: 90%;
+                  }
+
+                }
+              }
+            }
+          }
+
+          &__middle {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px;
+            gap: 5px;
+
+            @media screen and (width: 344px) and (height: 882px) {
+              gap: calc(min(30px, #{responsive-height(30px)}));
+            }
+
+            .sc-year-end-spend-landing {
+              &__intro {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: calc(min(14px, #{responsive-height(14px)}));
+                font-size: calc(min(16px, #{responsive-font(16px)}));
+                line-height: 142%;
+                font-weight: 400;
+                font-style: normal;
+                letter-spacing: 0;
+                text-align: center;
+                color: $color-white;
+                padding: 0px calc(min(24px, #{responsive-font(24px)}));
+
+                // @media screen and (max-width: 390px) and (max-height: 846px) {
+                //   font-size: calc(min(15px, #{responsive-font(15px)}));
+                //   // gap: calc(min(8px, #{responsive-height(8px)}));
+                //   padding: 0px calc(min(20px, #{responsive-font(20px)}));
+                // }
+
+                @media screen and (max-width: 414px) and (max-height: 736px) {
+                  font-size: calc(min(14px, #{responsive-font(14px)}));
+                  // gap: calc(min(7px, #{responsive-height(7px)}));
+                  padding: 0px calc(min(20px, #{responsive-font(20px)}));
+                }
+
+                &-head {
+                  font-size: calc(min(22px, #{responsive-font(22px)}));
+                  line-height: 120%;
+                  font-weight: 600;
+
+                  // @media screen and (max-width: 390px) and (max-height: 846px) {
+                  //   font-size: calc(min(21px, #{responsive-font(21px)}));
+                  // }
+
+                  @media screen and (max-width: 414px) and (max-height: 736px) {
+                    font-size: calc(min(20px, #{responsive-font(20px)}));
+                  }
+                }
+
+                &-description {
+                  font-size: calc(min(16px, #{responsive-font(16px)}));
+                  line-height: 142%;
+                  font-weight: 400;
+
+                  // @media screen and (max-width: 390px) and (max-height: 846px) {
+                  //   font-size: calc(min(15px, #{responsive-font(15px)}));
+                  // }
+
+                  @media screen and (max-width: 414px) and (max-height: 736px) {
+                    font-size: calc(min(14px, #{responsive-font(14px)}));
+                  }
+                }
+              }
+
+              &__background-image {
+                width: 100%;
+                height: auto;
+
+                @media screen and (max-width: 414px) and (max-height: 736px) {
+                  width: 90%;
+                  height: 72%;
+                }
+              }
+            }
+          }
+
+          &__bottom {
+            width: 100%;
+            max-width: $maxwidth-container;
+            position: absolute;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            gap: calc(min(24px, #{responsive-height(24px)}));
+            padding: 0px calc(min(24px, #{responsive-font(24px)})) calc(min(30px, #{responsive-height(30px)}));
+
+            @media screen and (max-width: 414px) and (max-height: 736px) {
+              gap: calc(min(20px, #{responsive-height(20px)}));
+              padding: 0px calc(min(20px, #{responsive-font(20px)})) calc(min(25px, #{responsive-height(25px)}));
+            }
+
+            @media screen and (max-width: 375px) and (max-height: 700px) {
+              gap: calc(min(20px, #{responsive-height(20px)}));
+              padding: 0px calc(min(20px, #{responsive-font(20px)})) calc(min(25px, #{responsive-height(25px)}));
+            }
+
+            .sc-year-end-spend-landing {
+              &__packs {
+                &-title {
+                  width: 100%;
+                  font-size: calc(min(20px, #{responsive-font(20px)}));
+                  line-height: 100%;
+                  font-weight: 400;
+                  font-style: normal;
+                  letter-spacing: 0;
+                  text-align: center;
+                  color: $color-white;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: center;
+                  align-items: center;
+                  gap: calc(min(10px, #{responsive-font(10px)}));
+
+                  @media screen and (max-width: 375px) and (max-height: 700px) {
+                    font-size: calc(min(18px, #{responsive-font(18px)}));
+                    gap: calc(min(8px, #{responsive-font(8px)}));
+                  }
+                }
+
+                &-count {
+                  font-size: calc(min(39.51px, #{responsive-font(39.51px)}));
+                  line-height: 100%;
+                  font-weight: 600;
+                  font-style: normal;
+                  letter-spacing: 0;
+
+                  @media screen and (max-width: 375px) and (max-height: 700px) {
+                    font-size: calc(min(35px, #{responsive-font(35px)}));
+                  }
+                }
+              }
+
+              &__button {
+                width: 100%;
+                font-size: calc(min(20px, #{responsive-font(20px)}));
+                line-height: 100%;
+                font-weight: 600;
+                font-style: normal;
+                letter-spacing: 0;
+                text-align: center;
+                color: $color-white;
+                padding: calc(min(20px, #{responsive-height(20px)})) calc(min(28px, #{responsive-font(28px)}));
+                background: transparent;
+                border-radius: 100px;
+                border: 2px solid $color-white;
+
+                @media screen and (max-width: 375px) and (max-height: 700px) {
+                  font-size: calc(min(18px, #{responsive-font(18px)}));
+                  padding: calc(min(18px, #{responsive-height(18px)})) calc(min(24px, #{responsive-font(24px)}));
+                }
+
+                &-wrapper {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  gap: calc(min(16px, #{responsive-height(16px)}));
+
+                  // @media screen and (max-width: 375px) and (max-height: 700px) {
+                  //   gap: calc(min(14px, #{responsive-height(14px)}));
+                  // }
+                }
+
+                &-horizontal {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: row;
+                  gap: calc(min(12px, #{responsive-font(12px)}));
+
+                  @media screen and (max-width: 375px) and (max-height: 700px) {
+                    gap: calc(min(8px, #{responsive-font(8px)}));
+                  }
+                }
+
+                &-play-now,
+                &-unlock-packs {
+                  background: $color-blue-light-18;
+                  border: 0;
+                }
+
+                &-view-prizes,
+                &-check-in {
+                  width: 50%;
+                  min-width: fit-content;
+                  font-size: calc(min(17px, #{responsive-font(17px)}));
+
+                  @media screen and (max-width: 375px) and (max-height: 700px) {
+                    font-size: calc(min(15px, #{responsive-font(15px)}));
+                  }
+                }
+
+                &-unlock-packs {
+                  display: none;
+                }
+              }
+
+              &__link {
+                font-size: calc(min(20px, #{responsive-font(20px)}));
+                line-height: 100%;
+                font-weight: 600;
+                font-style: normal;
+                letter-spacing: 0;
+                text-align: center;
+                text-decoration: underline;
+                text-decoration-style: solid;
+                text-decoration-thickness: 0%;
+                text-decoration-skip-ink: auto;
+                color: $color-white;
+
+                @media screen and (max-width: 414px) and (max-height: 736px) {
+                  font-size: calc(min(18px, #{responsive-font(18px)}));
+                }
+
+                @media screen and (max-width: 375px) and (max-height: 700px) {
+                  font-size: calc(min(18px, #{responsive-font(18px)}));
+                }
+
+                &-wrapper {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: calc(min(24px, #{responsive-height(24px)}));
+                  padding-top: calc(min(10px, #{responsive-height(10px)}));
+                  position: relative;
+
+                  @media screen and (max-width: 414px) and (max-height: 736px) {
+                    gap: calc(min(20px, #{responsive-height(20px)}));
+                    padding-top: 0;
+                  }
+
+                  @media screen and (max-width: 375px) and (max-height: 700px) {
+                    gap: calc(min(20px, #{responsive-height(20px)}));
+                    padding-top: 0;
+                  }
+                }
+              }
+
+              &__terms-link {
+                font-size: calc(min(15px, #{responsive-font(15px)}));
+                line-height: 100%;
+                font-weight: 400;
+                font-style: normal;
+                letter-spacing: 0;
+                text-align: center;
+                text-decoration-thickness: 6%;
+
+                // @media screen and (max-width: 414px) and (max-height: 846px) {
+                //   font-size: calc(min(13px, #{responsive-font(13px)}));
+                // }
+              }
+
+              // &__options-wrapper {
+              //   width: 100%;
+              //   display: flex;
+              //   flex-direction: column;
+              //   justify-content: center;
+              //   align-items: center;
+              //   gap: calc(min(16px, #{responsive-font(16px)}));
+              //   position: relative;
+
+              //   .sc-year-end-spend-landing {
+              //     &__customisation {
+              //       width: calc(min(55px, #{responsive-font(55px)}));
+              //       height: auto;
+              //       position: absolute;
+              //       right: 0;
+
+              //       @media screen and (max-width: 414px) and (max-height: 846px) {
+              //         width: calc(min(50px, #{responsive-font(50px)}));
+              //       }
+              //     }
+
+
+              //   }
+              // }
+            }
+          }
+        }
+      }
+
+      &.zero-packs {
+        .sc-year-end-spend-landing__button-unlock-packs {
+          display: block;
+        }
+
+        .sc-year-end-spend-landing__button-play-now {
+          display: none;
+        }
+      }
+
+      &--hide {
+        opacity: 0 !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        visibility: hidden !important;
+      }
+    }
+
+    /* Profile Customisation page styles */
+    .sc-year-end-spend-profile-customisation {
+      width: 100%;
+      height: 100%;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      background-color: $color-blue-light-19;
+      background-image: url('https://av.sc.com/sg/content/images/sc-year-end-spend-background-texture-long.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-blend-mode: overlay;
+      position: relative;
+      z-index: 1;
+
+
+      &__wrapper {
+        width: 100%;
+        height: 100%;
+        min-height: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img,
+        svg {
+          width: 100%;
+          height: auto;
+        }
+
+        .sc-year-end-spend-profile-customisation {
+          &__top {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+
+            .sc-year-end-spend-profile-customisation {
+              &__header {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: calc(min(15px, #{responsive-height(15px)}));
+                position: relative;
+
+                &-back {
+                  width: calc(min(15px, #{responsive-font(15px)}));
+                  height: auto;
+                  position: absolute;
+                  left: 0;
+                }
+              }
+            }
+          }
+
+          &__middle {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            gap: calc(min(50px, #{responsive-height(50px)}));
+
+            .sc-year-end-spend-profile-customisation {
+              &__content {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+              }
+
+              &__title {
+                font-size: calc(min(22px, #{responsive-font(22px)}));
+                line-height: 100%;
+                font-weight: 700;
+                font-style: normal;
+                letter-spacing: 0;
+                text-align: center;
+              }
+
+              &__message {
+                font-size: calc(min(18px, #{responsive-font(18px)}));
+                line-height: 100%;
+                font-weight: 400;
+                font-style: normal;
+                letter-spacing: 0;
+                text-align: center;
+              }
+            }
+          }
+        }
+      }
+
+      &--hide {
+        opacity: 0 !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        visibility: hidden !important;
+      }
+    }
+
+    /* Instruction modal styles */
+    .sc-year-end-spend-instruction-modal {
+      width: 100%;
+      max-width: $maxwidth-container;
+      height: 100%;
+      min-height: 100dvh;
+      position: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $color-grey-dark-18;
+      padding: calc(min(24px, #{responsive-height(24px)})) calc(min(24px, #{responsive-font(24px)}));
+      z-index: 10;
+      top: 0;
+
+      &__wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: calc(min(30px, #{responsive-height(30px)}));
+        position: relative;
+
+        .sc-year-end-spend-instruction-modal {
+          &__top {
+            width: 100%;
+            height: 70%;
+            border-radius: 16px;
+            background: $color-white;
+            border: 6px solid $color-blue-22;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px;
+            gap: 0px;
+
+            .sc-year-end-spend-instruction-modal {
+              &__content {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                padding: calc(min(30px, #{responsive-height(30px)})) calc(min(24px, #{responsive-font(24px)})) calc(min(24px, #{responsive-height(24px)}));
+                gap: calc(min(20px, #{responsive-height(20px)}));
+
+                &-head {
+                  font-size: calc(min(21px, #{responsive-font(21px)}));
+                  line-height: 100%;
+                  font-weight: 700;
+                  font-style: normal;
+                  letter-spacing: 0;
+                  color: $color-blue-22;
+                }
+
+                &-body {
+                  width: 100%;
+                  height: 100%;
+                  overflow: hidden;
+                  display: flex;
+                  flex-direction: column;
+                  gap: calc(min(20px, #{responsive-height(20px)}));
+
+                  .sc-year-end-spend-instruction-modal {
+                    &__tab {
+                      width: 50%;
+                      border: 0;
+                      background-color: inherit;
+                      border-bottom: 2px solid #A2A2A2;
+                      font-size: calc(min(16px, #{responsive-font(16px)}));
+                      line-height: 100%;
+                      font-weight: 500;
+                      font-style: normal;
+                      letter-spacing: 0;
+                      text-align: center;
+                      color: $color-grey-dark-19;
+                      padding: 8px 24px;
+
+                      &-wrapper {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        gap: 0px;
+                      }
+
+                      &-body {
+                        width: 100%;
+                        height: 100%;
+                        overflow: hidden;
+                        overflow-y: auto;
+                        display: none;
+
+                        // always visible purpose
+                        -webkit-overflow-scrolling: touch;
+
+                        &::-webkit-scrollbar {
+                          width: calc(min(8px, #{responsive-font(8px)}));
+                        }
+
+                        &::-webkit-scrollbar-track {
+                          background: $color-blue-light-20;
+                          border-radius: 10px;
+                        }
+
+                        &::-webkit-scrollbar-thumb {
+                          background-color: $color-blue-light-21;
+                          border-radius: 10px;
+                        }
+
+                        &.active {
+                          display: block !important;
+                        }
+                      }
+
+                      &-list {
+                        list-style: none;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        gap: calc(min(20px, #{responsive-height(20px)}));
+                      }
+
+                      &-item {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: calc(min(25px, #{responsive-font(25px)}));
+
+                        &-icon {
+                          width: calc(min(48px, #{responsive-font(48px)}));
+                          height: auto;
+
+                          img {
+                            width: 100%;
+                            height: auto;
+                          }
+                        }
+
+                        &-content {
+                          width: 100%;
+                          display: flex;
+                          flex-direction: column;
+                          gap: 4px;
+                        }
+
+                        &-head {
+                          font-size: calc(min(16px, #{responsive-font(16px)}));
+                          line-height: 1.3;
+                          font-weight: 700;
+                          font-style: normal;
+                          letter-spacing: 0;
+                          color: $color-grey-dark-9;
+                        }
+
+                        &-para {
+                          font-size: calc(min(14px, #{responsive-font(14px)}));
+                          line-height: 1.3;
+                          font-weight: 400;
+                          font-style: normal;
+                          letter-spacing: 0;
+                          color: $color-grey-dark-9;
+                        }
+                      }
+
+                      &.active {
+                        border-bottom: 3px solid $color-blue-22;
+                        color: $color-blue-22;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          &__bottom {
+            .sc-year-end-spend-instruction-modal {
+              &__button-close {
+                width: calc(min(60px, #{responsive-font(60px)}));
+                height: auto;
+
+                img {
+                  width: 100%;
+                  height: auto;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &--hide {
+        opacity: 0 !important;
+        height: 0 !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+        visibility: hidden !important;
+      }
+    }
+
+    /* Instruction page styles */
+    .sc-year-end-spend-instruction {
+      width: 100%;
+      height: 100%;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      background-color: $color-blue-light-19;
+      background-image: url('https://av.sc.com/sg/content/images/sc-year-end-spend-background-texture-long.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-blend-mode: overlay;
+      position: relative;
+      z-index: 1;
+
+
+      &__wrapper {
+        width: 100%;
+        height: 100%;
+        min-height: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 17px;
+      }
+
+      img,
+      svg {
+        width: 100%;
+        height: auto;
+      }
+
+      &__top {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 19px 24px 0px;
+      }
+
+      &__header {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: calc(min(15px, #{responsive-height(15px)}));
+        position: relative;
+
+        &-back {
+          width: calc(min(15px, #{responsive-font(15px)}));
+          height: auto;
+          position: absolute;
+          left: 0;
+        }
+
+        &-title {
+          font-size: calc(min(24px, #{responsive-font(24px)}));
+          line-height: 1.2;
+          font-weight: 700;
+          font-style: normal;
+          letter-spacing: 0;
+          text-align: center;
+          color: #0473EA;
+        }
+      }
+
+      &__middle {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: calc(min(21px, #{responsive-height(21px)}));
+      }
+
+      &__tabs {
+        padding: 0px 43px;
+        display: flex;
+        width: 100%;
+
+        &-button {
+          width: 100%;
+          padding: calc(min(8px, #{responsive-height(8px)})) calc(min(24px, #{responsive-font(24px)}));
+          border: none;
+          background: none;
+          cursor: pointer;
+          outline: none;
+          font-size: calc(min(16px, #{responsive-font(16px)}));
+          line-height: 100%;
+          font-weight: 700;
+          color: $color-grey-dark-19;
+          border-bottom: 2px solid $color-grey-dark-20;
+
+          &.active {
+            border-bottom: 3px solid $color-blue-22;
+            color: $color-blue-22;
+          }
+        }
+
+        &-content {
+          width: 100%;
+          display: none;
+          padding: 0px 27px;
+
+          &.active {
+            display: block !important;
+          }
+        }
+
+        &-tile {
+          //padding: 18px 24px 24px;
+          display: flex;
+          flex-direction: column;
+          border: 1px solid #fff;
+          border-radius: 10px;
+          background: #fff;
+
+          &-title {
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 1.2;
+            color: #0473EA;
+            letter-spacing: 0%;
+            vertical-align: middle;
+            padding: 16px 10px;
+          }
+
+          // &-wrapper {
+          //   max-height: 0;
+          //   overflow: hidden;
+          //   transition: max-height 0.3s ease;
+          // }
+
+          &-content {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: #E6F1FD;
+            padding: 16px 24px;
+
+          }
+
+          &-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            span {
+              font-size: 16px;
+              font-weight: 700;
+              line-height: 1.3;
+              letter-spacing: 0%;
+              color: #525355;
+            }
+
+            p {
+              font-size: 14px;
+              font-weight: 400;
+              line-height: 1.3;
+              letter-spacing: 0%;
+              color: #525355;
+
+              span {
+                font-size: 14px;
+                font-weight: 700;
+                line-height: 1.3;
+                letter-spacing: 0%;
+                color: #525355;
+                text-decoration: underline;
+                text-decoration-style: solid;
+                letter-spacing: 0%;
+                -webkit-text-decoration-skip: ink;
+                text-decoration-skip-ink: auto;
+                text-decoration-thickness: 0%;
+                text-underline-offset: 16%;
+              }
+            }
+          }
+
+          &-images {
+            display: flex;
+            width: 67px;
+            height: auto;
+            gap: 8px;
+
+            img {
+              width: 100%;
+              height: auto;
+              box-shadow: 0px 2px 2px 0px #00000059;
+            }
+          }
+
+          &-footer {
+            font-size: 10px;
+            font-weight: 400;
+            line-height: 1.42;
+            letter-spacing: 0%;
+            color: #5D5D5D;
+          }
+
+          &-view-less,
+          &-view-more {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: calc(min(5px, #{responsive-font(5px)}));
+
+            padding: calc(min(10px, #{responsive-height(10px)})) calc(min(10px, #{responsive-font(10px)}));
+            background: $color-white-smoke-14;
+
+            img {
+              width: calc(min(7.76px, #{responsive-font(7.76px)}));
+              height: calc(min(7.66px, #{responsive-height(7.66px)}));
+            }
+
+            span {
+              font-weight: 400;
+              font-size: calc(min(10px, #{responsive-font(10px)}));
+              line-height: 1.42;
+              color: $color-grey-dark-16;
+            }
+          }
+        }
+      }
+
+      &__bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        width: 100%;
+        max-width: $maxwidth-container;
+        position: fixed;
+        bottom: 0;
+        z-index: 3;
+        padding: 30px 29px;
+
+        &-title {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          font-size: 20px;
+          font-weight: 400;
+          line-height: 100%;
+          color: #0473EA;
+        }
+
+        &-packs {
+          line-height: 100%;
+          letter-spacing: 0;
+          font-weight: 700;
+          font-size: 39.51px;
+        }
+
+        &-content {
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 1.3;
+          color: #5D5D5D;
+          vertical-align: bottom;
+          text-align: center;
+        }
+
+        &-tc {
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 100%;
+          color: #5D5D5D;
+          text-decoration: underline;
+          text-decoration-style: solid;
+          letter-spacing: 0%;
+          -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
+          text-decoration-thickness: 6%;
+          text-underline-offset: 16%;
+        }
+
+        &-back {
+          width: 100%;
+          font-size: calc(min(16px, #{responsive-font(16px)}));
+          line-height: 100%;
+          font-weight: 700;
+          font-style: normal;
+          letter-spacing: 0;
+          text-align: center;
+          color: $color-white;
+          border-radius: 30px;
+          padding: 16px 24px;
+          border: 0;
+          background: $color-blue-light-18;
+        }
+      }
+
+
+      &--hide {
+        opacity: 0 !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        visibility: hidden !important;
+      }
+    }
+
+    /* Check-in modal styles */
+    .sc-year-end-spend-checkin-modal {
+      width: 100%;
+      max-width: $maxwidth-container;
+      height: 100%;
+      min-height: 100dvh;
+      position: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $color-grey-dark-18;
+      padding: calc(min(24px, #{responsive-height(24px)})) calc(min(24px, #{responsive-font(24px)}));
+      z-index: 10;
+      top: 0;
+
+      &__wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: calc(min(30px, #{responsive-height(30px)}));
+        position: relative;
+
+        .sc-year-end-spend-checkin-modal {
+          &__top {
+            width: 100%;
+            padding: calc(min(24px, #{responsive-height(24px)})) calc(min(24px, #{responsive-font(24px)}));
+            border-radius: 16px;
+            background: $color-white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: calc(min(48px, #{responsive-height(48px)}));
+
+            .sc-year-end-spend-checkin-modal {
+              &__content {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+              }
+
+              &__title {
+                font-size: calc(min(18px, #{responsive-font(18px)}));
+                line-height: 100%;
+                font-weight: 700;
+                font-style: normal;
+                letter-spacing: 0;
+                text-align: center;
+              }
+
+              &__message {
+                font-size: calc(min(18px, #{responsive-font(18px)}));
+                line-height: 100%;
+                font-weight: 400;
+                font-style: normal;
+                letter-spacing: 0;
+                text-align: center;
+              }
+            }
+          }
+
+          &__bottom {
+            .sc-year-end-spend-checkin-modal {
+              &__button-close {
+                width: calc(min(60px, #{responsive-font(60px)}));
+                height: auto;
+
+                img {
+                  width: 100%;
+                  height: auto;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &--hide {
+        opacity: 0 !important;
+        height: 0 !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+        visibility: hidden !important;
+      }
+    }
+
+    /* Card Collection page styles*/
+    .sc-year-end-spend-card-collection {
+      width: 100%;
+      height: 100%;
+      min-height: 100dvh;
+      overflow: hidden;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: calc(min(31px, #{responsive-height(31px)}));
+
+
+      &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: calc(min(24px, #{responsive-height(24px)})) calc(min(19px, #{responsive-font(19px)})) 0px calc(min(19px, #{responsive-font(19px)}));
+
+        &-back {
+          width: calc(min(15px, #{responsive-font(15px)}));
+          height: auto;
+
+          &-image {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        &-title {
+          flex: 1;
+          text-align: center;
+          font-weight: 600;
+          font-size: calc(min(24px, #{responsive-font(24px)}));
+          line-height: 1.2;
+          color: $color-blue-22;
+        }
+
+        &-close {
+          width: calc(min(20px, #{responsive-font(20px)}));
+          height: auto;
+
+          &-image {
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+
+      &__body {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+
+        img {
+          width: calc(min(57px, #{responsive-font(57px)}));
+          height: auto;
+        }
+
+        .sc-year-end-spend-card-collection {
+          &__tabs {
+            width: 100%;
+            display: flex;
+
+            &-button {
+              width: 100%;
+              padding: calc(min(8px, #{responsive-height(8px)})) calc(min(24px, #{responsive-font(24px)}));
+              border: none;
+              background: none;
+              cursor: pointer;
+              outline: none;
+              font-size: calc(min(16px, #{responsive-font(16px)}));
+              line-height: 100%;
+              font-weight: 700;
+              color: $color-grey-dark-19;
+              border-bottom: 2px solid $color-grey-dark-20;
+
+              &.active {
+                border-bottom: 3px solid $color-blue-22;
+                color: $color-blue-22;
+              }
+            }
+
+            &-content {
+              width: 100%;
+              height: 100%;
+              padding: calc(min(30px, #{responsive-height(30px)})) calc(min(24px, #{responsive-font(24px)}));
+              display: none;
+              flex-direction: column;
+              gap: calc(min(19px, #{responsive-height(19px)}));
+              min-height: fit-content;
+              background: $color-blue-light-14;
+              background-image: url('https://av.sc.com/sg/content/images/sc-year-end-spend-background-texture-long.png');
+              background-position: center;
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-blend-mode: overlay;
+
+              &.active {
+                display: flex;
+              }
+            }
+
+            &-jet {
+              display: flex;
+              flex-direction: column;
+              border: 1px solid $color-white;
+              border-radius: 10px;
+              background: $color-white;
+              padding: calc(min(14px, #{responsive-height(14px)})) calc(min(11px, #{responsive-font(11px)}));
+              gap: calc(min(12px, #{responsive-height(12px)}));
+
+              &-title {
+                font-size: calc(min(16px, #{responsive-font(16px)}));
+                color: $color-blue-22;
+                font-weight: 700;
+                line-height: 1.2;
+              }
+
+              &-chances {
+                height: calc(min(24px, #{responsive-height(24px)}));
+                align-self: center;
+                border-radius: 26px;
+                padding: calc(min(4px, #{responsive-height(4px)})) calc(min(12px, #{responsive-font(12px)}));
+                display: flex;
+                justify-content: center;
+                gap: calc(min(10px, #{responsive-font(10px)}));
+                background: $color-white;
+                font-size: calc(min(12px, #{responsive-font(12px)}));
+                color: $color-grey-dark-21;
+                line-height: 100%;
+                font-weight: 600;
+                letter-spacing: 0;
+                text-align: center;
+                border: 1px solid $color-grey-dark-21
+              }
+
+              &-wrapper {
+                display: flex;
+                justify-content: space-between;
+              }
+            }
+
+            &-tile {
+              display: flex;
+              flex-direction: column;
+              border: 1px solid $color-white;
+              border-radius: 10px;
+              background: $color-white;
+
+              &-wrapper {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+
+                &.expanded {
+                  max-height: 1000px; // adjust as needed for content
+                }
+              }
+
+              &-title {
+                font-size: calc(min(16px, #{responsive-font(16px)}));
+                line-height: 1.2;
+                font-weight: 700;
+                vertical-align: middle;
+                color: $color-blue-22;
+                padding: calc(min(13px, #{responsive-height(13px)})) calc(min(114px, #{responsive-font(114px)})) calc(min(13px, #{responsive-height(13px)})) calc(min(11px, #{responsive-font(11px)}));
+              }
+
+              &-line {
+                border: 1px solid $color-grey-dark-9;
+                opacity: 50%;
+              }
+
+              &-view-less,
+              &-view-more {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: calc(min(5px, #{responsive-font(5px)}));
+
+                padding: calc(min(10px, #{responsive-height(10px)})) calc(min(10px, #{responsive-font(10px)}));
+                background: $color-white-smoke-14;
+
+                img {
+                  width: calc(min(7.76px, #{responsive-font(7.76px)}));
+                  height: calc(min(7.66px, #{responsive-height(7.66px)}));
+                }
+
+                span {
+                  font-weight: 400;
+                  font-size: calc(min(10px, #{responsive-font(10px)}));
+                  line-height: 1.42;
+                  color: $color-grey-dark-16;
+                }
+              }
+            }
+
+            &-reward {
+              background: $color-white-smoke-15;
+              padding: calc(min(17px, #{responsive-height(17px)})) calc(min(11px, #{responsive-font(11px)}));
+              display: flex;
+              flex-direction: column;
+              gap: calc(min(16px, #{responsive-height(16px)}));
+
+              &-gray {
+                background: $color-white-smoke-14;
+              }
+
+              &-header {
+                display: flex;
+                justify-content: space-between;
+              }
+
+              &-title {
+                font-size: calc(min(16px, #{responsive-font(16px)}));
+                line-height: 1.42;
+                font-weight: 700;
+              }
+
+              &-prize {
+                padding: calc(min(4px, #{responsive-height(4px)})) calc(min(12px, #{responsive-font(12px)}));
+                border-radius: 26px;
+                font-size: calc(min(12px, #{responsive-font(12px)}));
+                font-weight: 700;
+                line-height: 100%;
+                text-align: center;
+                color: $color-white;
+                background: $color-green-light-14;
+                border: 1px solid $color-green-light-14;
+              }
+
+              &-number {
+                padding: calc(min(4px, #{responsive-height(4px)})) calc(min(12px, #{responsive-font(12px)}));
+                border-radius: 26px;
+                font-size: calc(min(12px, #{responsive-font(12px)}));
+                line-height: 100%;
+                font-weight: 700;
+                text-align: center;
+                color: $color-grey-dark-21;
+                background: $color-white;
+                border: 1px solid $color-grey-dark-21
+              }
+
+              &-cards {
+                display: flex;
+                flex-direction: column;
+                gap: calc(min(10px, #{responsive-height(10px)}));
+
+                &-title {
+                  font-size: calc(min(12px, #{responsive-font(12px)}));
+                  line-height: 1.42;
+                  font-weight: 600;
+                  color: $color-grey-dark-16;
+                }
+
+                &-image {
+                  display: flex;
+                  width: 100%;
+                  height: auto;
+                  gap: calc(min(5px, #{responsive-font(5px)}));
+
+                  img {
+                    width: calc(min(57px, #{responsive-font(57px)}));
+                    height: auto;
+                  }
+                }
+              }
+            }
+
+            &-travel {
+              display: flex;
+              flex-direction: column;
+              gap: calc(min(16px, #{responsive-height(16px)}));
+              padding: calc(min(17px, #{responsive-height(17px)})) calc(min(11px, #{responsive-font(11px)}));
+              background: $color-white-smoke-15;
+
+              &-gray {
+                background: $color-white-smoke-14;
+              }
+
+              &-header {
+                display: flex;
+                justify-content: space-between;
+              }
+
+              &-title {
+                font-size: calc(min(12px, #{responsive-font(12px)}));
+                line-height: 1.42;
+                font-weight: 600;
+                color: $color-grey-dark-16;
+              }
+
+              &-number {
+                font-size: calc(min(12px, #{responsive-font(12px)}));
+                font-weight: 600;
+                line-height: 100%;
+                text-align: center;
+                padding: calc(min(4px, #{responsive-height(4px)})) calc(min(12px, #{responsive-font(12px)}));
+                color: $color-grey-dark-21;
+                background: $color-white;
+                border-radius: 26px;
+                border: 1px solid $color-grey-dark-21
+              }
+
+              &-cards {
+                display: flex;
+                width: 100%;
+                height: auto;
+                gap: calc(min(5px, #{responsive-font(5px)}));
+
+                img {
+                  width: calc(min(57px, #{responsive-font(57px)}));
+                  height: auto;
+                }
+              }
+            }
+
+            &-bonus {
+              &-content {
+                display: flex;
+                flex-direction: column;
+                gap: calc(min(10px, #{responsive-height(10px)}));
+                background: $color-white-smoke-14;
+                padding: calc(min(17px, #{responsive-height(17px)})) calc(min(11px, #{responsive-font(11px)}));
+              }
+
+              &-header {
+                font-weight: 500;
+                font-size: calc(min(12px, #{responsive-font(12px)}));
+                line-height: 1.42;
+                color: $color-grey-dark-16;
+              }
+
+              &-cards {
+                display: flex;
+                width: 100%;
+                height: auto;
+                gap: calc(min(5px, #{responsive-font(5px)}));
+
+                img {
+                  width: calc(min(57px, #{responsive-font(57px)}));
+                  height: auto;
+                }
+              }
+            }
+
+            &-prize {
+              &-header {
+                padding: calc(min(8px, #{responsive-height(8px)})) calc(min(55px, #{responsive-font(55px)})) 0px;
+
+                &-title {
+                  font-size: calc(min(26px, #{responsive-font(26px)}));
+                  line-height: 30px;
+                  font-weight: 700;
+                  text-align: center;
+                  color: $color-blue-22;
+                  background: linear-gradient(91.99deg, $color-blue-22 16.6%, $color-blue-light-15 38.9%, $color-blue-22 62.99%, $color-blue-light-16 90.16%);
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                  background-clip: text;
+                  color: transparent;
+                }
+              }
+
+              &-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: calc(min(16px, #{responsive-height(16px)}));
+                padding-top: calc(min(11px, #{responsive-height(11px)}));
+              }
+
+              &-tile {
+                display: flex;
+                flex-direction: column;
+                border: 1px solid $color-grey-dark-22;
+                border-radius: 10px;
+
+                &-header {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  gap: calc(min(25px, #{responsive-font(25px)}));
+                  background: $color-grey-dark-9;
+                  border-top-left-radius: 10px;
+                  border-top-right-radius: 10px;
+                  padding: calc(min(10px, #{responsive-height(10px)})) calc(min(20px, #{responsive-font(20px)}));
+                  background: linear-gradient(90.7deg, $color-blue-22 -1.39%, $color-blue-light-17 98.54%);
+
+                  h4 {
+                    font-size: calc(min(16px, #{responsive-font(16px)}));
+                    line-height: 1.2;
+                    font-weight: 700;
+                    vertical-align: middle;
+                    color: $color-white;
+                  }
+                }
+
+                &-oval {
+                  width: calc(min(37px, #{responsive-font(37px)}));
+                  height: calc(min(37px, #{responsive-height(37px)}));
+                  border-radius: 60px;
+                  background: $color-white-smoke-13;
+                  padding: calc(min(4px, #{responsive-height(4px)})) calc(min(11px, #{responsive-font(11px)})) calc(min(2px, #{responsive-height(2px)})) calc(min(12px, #{responsive-font(12px)}));
+                }
+
+                &-number {
+                  font-weight: 700;
+                  font-size: calc(min(24px, #{responsive-font(24px)}));
+                  line-height: 100%;
+                  color: $color-white;
+                }
+
+                &-content {
+                  display: flex;
+                  justify-content: space-between;
+                  padding: (min(10px, #{responsive-height(10px)})) calc(min(20px, #{responsive-font(20px)})) 0px;
+
+                  span {
+                    font-weight: 400;
+                    font-size: calc(min(16px, #{responsive-font(16px)}));
+                    line-height: 100%;
+                    color: $color-grey-dark-9;
+                  }
+
+                  a {
+                    font-size: calc(min(14px, #{responsive-font(14px)}));
+                    line-height: 100%;
+                    font-weight: 700;
+                    color: $color-blue-22;
+                    text-decoration: underline;
+                    text-decoration-style: solid;
+                    letter-spacing: 0%;
+                    text-decoration-skip-ink: auto;
+                    text-decoration-thickness: 0%;
+                    text-underline-offset: 5%;
+                  }
+                }
+
+                &-line {
+                  border: 1px solid $color-grey-dark-22;
+                }
+
+                &-wrapper {
+                  display: flex;
+                  flex-direction: column;
+                  gap: calc(min(10px, #{responsive-height(10px)}));
+                  background: $color-white;
+
+                  max-height: 0;
+                  overflow: hidden;
+                  transition: max-height 0.3s ease;
+
+                  &.expanded {
+                    max-height: 500px; // adjust as needed for content
+                  }
+                }
+
+                &-view-more,
+                &-view-less {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: calc(min(5px, #{responsive-font(5px)}));
+                  padding: calc(min(10px, #{responsive-height(10px)})) calc(min(10px, #{responsive-font(10px)}));
+                  background: $color-white;
+                  border-bottom-left-radius: 10px;
+                  border-bottom-right-radius: 10px;
+
+                  img {
+                    width: calc(min(7.76px, #{responsive-font(7.76px)}));
+                    height: calc(min(7.66px, #{responsive-height(7.66px)}));
+                  }
+
+                  span {
+                    font-weight: 400;
+                    font-size: calc(min(10px, #{responsive-font(10px)}));
+                    line-height: 1.42;
+                    color: $color-grey-dark-16;
+                  }
+                }
+              }
+
+              &-button {
+                border: 1px solid $color-blue-22;
+                border-radius: 25px;
+                font-weight: 700;
+                font-size: calc(min(20px, #{responsive-font(20px)}));
+                line-height: 100%;
+                text-align: center;
+                color: $color-white;
+                background: $color-blue-22;
+
+                width: 100%;
+                height: calc(min(50px, #{responsive-height(50px)}));
+                font-style: normal;
+                letter-spacing: 0;
+                padding: calc(min(13px, #{responsive-height(13px)})) calc(min(13px, #{responsive-font(13px)}));
+                align-self: center;
+
+                &-wrapper {
+                  padding-top: calc(min(11px, #{responsive-height(11px)}));
+                }
+              }
+            }
+
+          }
+        }
+      }
+
+      &--hide {
+        display: none !important;
+      }
+    }
+
+    /* Reward modal page styles */
+    .sc-year-end-spend-reward-popup {
+      width: 100%;
+      height: 100%;
+      max-width: $maxwidth-container;
+      display: flex;
+      flex-direction: column;
+      background-color: $color-black-translucent-80;
+      position: fixed;
+      top: 0;
+      z-index: 5;
+
+
+      &__container {
+        pointer-events: none;
+
+        lottie-player {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 10;
+          width: 100%;
+          height: 100%;
+          background-color: transparent;
+        }
+      }
+
+      &__body {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 5;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 24px;
+        padding: 30% calc(min(20px, #{responsive-font(20px)})) calc(min(24px, #{responsive-height(24px)})) calc(min(20px, #{responsive-font(20px)}));
+
+        .sc-year-end-spend-reward-popup {
+          &__top {
+            width: 100%;
+            border-radius: 16px;
+            border: 4px solid $color-blue-22;
+            background: $color-white;
+            position: relative;
+
+            .sc-year-end-spend-reward-popup {
+              &__card {
+                height: auto;
+                position: absolute;
+                width: calc(min(156px, #{responsive-font(156px)}));
+
+                &-stack {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: row;
+                  position: absolute;
+                  top: -22%;
+                }
+
+                &--1 {
+                  left: 3%;
+                  z-index: 1;
+                  transform: rotate(-10.79deg);
+                }
+
+                &--2 {
+                  left: 28%;
+                  z-index: 3;
+                  top: calc(min(18px, #{responsive-height(18px)}));
+                }
+
+                &--3 {
+                  right: 4%;
+                  z-index: 2;
+                  transform: rotate(7.35deg);
+                }
+              }
+
+              &__content {
+                width: 100%;
+                border-radius: 0px 0px 24px 24px;
+                padding: calc(min(120px, #{responsive-height(120px)})) calc(min(20px, #{responsive-size(20px)})) calc(min(35px, #{responsive-height(35px)})) calc(min(20px, #{responsive-size(20px)}));
+
+                @media screen and (max-height: 481px) {
+                  padding: calc(min(160px, #{responsive-height(160px)})) calc(min(24px, #{responsive-size(24px)})) calc(min(24px, #{responsive-height(24px)})) calc(min(24px, #{responsive-size(24px)}));
+                }
+
+                @media screen and (min-height: 482px) and (max-height: 732px) {
+                  padding: calc(min(140px, #{responsive-height(140px)})) calc(min(24px, #{responsive-size(24px)})) calc(min(24px, #{responsive-height(24px)})) calc(min(24px, #{responsive-size(24px)}));
+                }
+
+                @media screen and (min-height: 732px) and (max-height: 812px) {
+                  padding: calc(min(130px, #{responsive-height(130px)})) calc(min(24px, #{responsive-size(24px)})) calc(min(24px, #{responsive-height(24px)})) calc(min(24px, #{responsive-size(24px)}));
+                }
+
+                &-top {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  align-content: center;
+                  justify-content: center;
+                  padding-bottom: calc(min(32px, #{responsive-height(32px)}));
+                  gap: calc(min(16px, #{responsive-height(16px)}));
+                }
+
+                &-bottom {
+                  width: 100%;
+                  position: relative;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: space-between;
+                  padding-top: calc(min(10px, #{responsive-height(10px)}));
+                  align-items: center;
+                  gap: calc(min(16px, #{responsive-height(16px)}));
+
+                  .sc-year-end-spend-reward-popup {
+                    &__share-link {
+                      font-size: calc(min(16px, #{responsive-font(16px)}));
+                      line-height: 100%;
+                      font-style: normal;
+                      font-weight: 400;
+                      text-decoration: none;
+                      color: $color-grey-dark-9;
+
+                      /* (iPhone 6/7/8 Plus) */
+                      @media screen and (max-height: $smaller-height-lg) {
+                        font-size: calc(min(14px, #{responsive-font(14px)}));
+                      }
+
+                      /* (iPhone SE, 6/7/8) */
+                      @media screen and (max-height: $smaller-height-sm) {
+                        font-size: calc(min(13px, #{responsive-font(13px)}));
+                      }
+
+                      img {
+                        width: calc(min(20px, #{responsive-font(20px)}));
+                        height: auto;
+                        display: inline-block;
+                        margin-right: 2px;
+                        vertical-align: middle;
+
+                        // (iPhone 6/7/8 Plus)
+                        @media screen and (max-height: $smaller-height-lg) {
+                          width: calc(min(18px, #{responsive-font(18px)}));
+                        }
+
+                        // (iPhone SE, 6/7/8)
+                        @media screen and (max-height: $smaller-height-sm) {
+                          width: calc(min(17px, #{responsive-font(17px)}));
+                        }
+                      }
+                    }
+                  }
+                }
+
+                &-splitter {
+                  align-self: center;
+                  width: 100%;
+                  position: relative;
+
+                  &-line {
+                    border-top: 0.5px dashed $color-grey-dark-9;
+                  }
+                }
+
+                .sc-year-end-spend-reward-popup {
+                  &__success {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    gap: calc(min(8px, #{responsive-height(8px)}));
+
+                    &-title {
+                      font-size: calc(min(24px, #{responsive-font(24px)}));
+                      line-height: 1.5;
+                      font-weight: 700;
+                      color: $color-blue-22;
+                    }
+
+                    &-message {
+                      font-size: calc(min(18px, #{responsive-font(18px)}));
+                      line-height: 1;
+                      font-weight: 500;
+                      font-style: Medium;
+                      letter-spacing: 0%;
+                      color: $color-grey-dark-9;
+                      text-align: center;
+                    }
+                  }
+
+                  &__reward {
+                    &-name {
+                      font-size: calc(min(20px, #{responsive-font(20px)}));
+                      line-height: 1.5;
+                      font-weight: 700;
+                      color: $color-blue-22;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          &__bottom {
+            .sc-year-end-spend-reward-popup {
+              &__close {
+                width: calc(min(60px, #{responsive-font(60px)}));
+                height: auto;
+                margin-top: responsive-height(25px);
+
+                img {
+                  width: 100%;
+                  height: auto;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &__button {
+        width: 100%;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: responsive-size(15px) responsive-size(18px);
+        font-size: calc(min(19px, #{responsive-font(19px)}));
+        border-radius: 30px;
+        display: block;
+        font-weight: 700;
+        background: $color-blue-22;
+        color: $color-white;
+      }
+
+      &__close {
+        margin-top: responsive-height(25px);
+      }
+
+      &__close-timer {
+        text-align: center;
+        color: $color-white;
+        font-size: calc(min(16px, #{responsive-font(16px)}));
+        font-weight: 400;
+        bottom: calc(min(36px, #{responsive-height(36px)}));
+        position: absolute;
+      }
+
+      &--show {
+        display: block !important;
+      }
+
+      &--hide {
+        opacity: 0 !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        visibility: hidden !important;
+      }
+    }
+
+    /* Reward details page styles */
+    .sc-year-end-spend-reward-details {
+      width: 100%;
+      max-width: $maxwidth-container;
+      height: 100%;
+      background-color: $color-black-translucent-80;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      z-index: 5;
+
+      &__container {
+        pointer-events: none;
+
+        lottie-player {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: transparent;
+          z-index: 10;
+        }
+      }
+
+      &__body {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        box-shadow: 0 4px 6px $color-black-translucent-1;
+        z-index: 5;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 24px;
+        padding: 24% calc(min(20px, #{responsive-font(20px)})) calc(min(24px, #{responsive-height(24px)})) calc(min(20px, #{responsive-font(20px)}));
+
+        .sc-year-end-spend-reward-details {
+          &__top {
+            width: 100%;
+            border-radius: 16px;
+            background: $color-white;
+            border: 4px solid $color-blue-22;
+            gap: calc(min(29px, #{responsive-height(29px)}));
+            position: relative;
+
+            .sc-year-end-spend-reward-details {
+              &__card {
+                height: auto;
+                position: absolute;
+                width: calc(min(156px, #{responsive-font(156px)}));
+
+                &-stack {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: row;
+                  position: absolute;
+                  top: -22%;
+                }
+
+                &--1 {
+                  left: 3%;
+                  z-index: 1;
+                  transform: rotate(-10.79deg);
+                }
+
+                &--2 {
+                  left: 28%;
+                  z-index: 3;
+                  top: calc(min(18px, #{responsive-height(18px)}));
+                }
+
+                &--3 {
+                  right: 4%;
+                  z-index: 2;
+                  transform: rotate(7.35deg);
+                }
+              }
+
+              &__content {
+                width: 100%;
+                border-radius: 0px 0px 24px 24px;
+                padding: calc(min(120px, #{responsive-height(120px)})) calc(min(24px, #{responsive-size(24px)})) calc(min(24px, #{responsive-height(24px)})) calc(min(24px, #{responsive-size(24px)}));
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: calc(min(29px, #{responsive-height(29px)}));
+
+                @media screen and (max-height: 481px) {
+                  padding: calc(min(160px, #{responsive-height(160px)})) calc(min(24px, #{responsive-size(24px)})) calc(min(24px, #{responsive-height(24px)})) calc(min(24px, #{responsive-size(24px)}));
+                }
+
+                @media screen and (min-height: 482px) and (max-height: 732px) {
+                  padding: calc(min(140px, #{responsive-height(140px)})) calc(min(24px, #{responsive-size(24px)})) calc(min(24px, #{responsive-height(24px)})) calc(min(24px, #{responsive-size(24px)}));
+                }
+
+                @media screen and (min-height: 732px) and (max-height: 812px) {
+                  padding: calc(min(130px, #{responsive-height(130px)})) calc(min(24px, #{responsive-size(24px)})) calc(min(24px, #{responsive-height(24px)})) calc(min(24px, #{responsive-size(24px)}));
+                }
+
+                &-middle {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  align-content: center;
+                  justify-content: center;
+                  gap: calc(min(16px, #{responsive-height(16px)}));
+                }
+
+                &-actions {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  align-items: center;
+                  position: relative;
+                  font-size: calc(min(16px, #{responsive-font(16px)}));
+                  line-height: 100%;
+                  font-style: normal;
+                  font-weight: 400;
+
+                  .sc-year-end-spend-reward-details {
+                    &__terms-link {
+                      font-size: calc(min(16px, #{responsive-font(16px)}));
+                      line-height: 100%;
+                      font-style: normal;
+                      font-weight: 400;
+                      text-decoration: underline;
+                      text-underline-offset: 3px;
+                      text-underline-position: below;
+                      color: $color-grey-dark-9;
+
+                      /* (iPhone 6/7/8 Plus) */
+                      @media screen and (max-height: $smaller-height-lg) {
+                        font-size: calc(min(14px, #{responsive-font(14px)}));
+                      }
+
+                      /* (iPhone SE, 6/7/8) */
+                      @media screen and (max-height: $smaller-height-sm) {
+                        font-size: calc(min(13px, #{responsive-font(13px)}));
+                      }
+                    }
+
+                    &__share-link {
+                      font-size: calc(min(16px, #{responsive-font(16px)}));
+                      line-height: 100%;
+                      font-style: normal;
+                      font-weight: 400;
+                      text-decoration: none;
+                      color: $color-grey-dark-9;
+
+                      /* (iPhone 6/7/8 Plus) */
+                      @media screen and (max-height: $smaller-height-lg) {
+                        font-size: calc(min(14px, #{responsive-font(14px)}));
+                      }
+
+                      /* (iPhone SE, 6/7/8) */
+                      @media screen and (max-height: $smaller-height-sm) {
+                        font-size: calc(min(13px, #{responsive-font(13px)}));
+                      }
+
+                      img {
+                        width: calc(min(20px, #{responsive-font(20px)}));
+                        height: auto;
+                        display: inline-block;
+                        margin-right: 2px;
+                        vertical-align: middle;
+
+                        // (iPhone 6/7/8 Plus)
+                        @media screen and (max-height: $smaller-height-lg) {
+                          width: calc(min(18px, #{responsive-font(18px)}));
+                        }
+
+                        // (iPhone SE, 6/7/8)
+                        @media screen and (max-height: $smaller-height-sm) {
+                          width: calc(min(17px, #{responsive-font(17px)}));
+                        }
+                      }
+                    }
+                  }
+                }
+
+                &-splitter {
+                  align-self: center;
+                  width: 100%;
+                  position: relative;
+
+                  &-line {
+                    border-top: 0.5px dashed $color-grey-dark-9;
+                  }
+                }
+
+                .sc-year-end-spend-reward-details {
+                  &__reward {
+                    font-size: calc(min(20px, #{responsive-font(20px)}));
+                    line-height: 30px;
+                    font-weight: 700;
+                    font-style: normal;
+                    letter-spacing: 0;
+                    text-align: center;
+
+                    &-title,
+                    &-name {
+                      font-size: calc(min(20px, #{responsive-font(20px)}));
+                      line-height: 1.4;
+                      font-weight: 700;
+                      color: $color-blue-22;
+                    }
+                  }
+
+                  &__expiry {
+                    font-size: calc(min(16px, #{responsive-font(16px)}));
+                    line-height: 1.3;
+                    font-weight: 500;
+                    letter-spacing: 0;
+                    text-align: center;
+                    color: $color-grey-dark-9;
+
+                    /* (iPhone 6/7/8 Plus) */
+                    @media screen and (max-height: $smaller-height-lg) {
+                      font-size: calc(min(14px, #{responsive-font(14px)}));
+                    }
+
+                    /* (iPhone SE, 6/7/8) */
+                    @media screen and (max-height: $smaller-height-sm) {
+                      font-size: calc(min(13px, #{responsive-font(13px)}));
+                    }
+
+                    &-details {
+                      width: 100%;
+                      display: flex;
+                      flex-direction: column;
+                      gap: 4px;
+                    }
+                  }
+
+                  &__label {
+                    font-size: calc(min(14px, #{responsive-font(14px)}));
+                    line-height: 1.3;
+                    font-weight: 400;
+                    letter-spacing: 0;
+                    text-align: center;
+                    color: $color-grey-medium-13;
+                  }
+
+                  &__redeem {
+                    &-details {
+                      width: 100%;
+                      display: flex;
+                      flex-direction: column;
+                      gap: 4px;
+                      padding: 0 calc(min(13px, #{responsive-font(13px)}))
+                    }
+
+                    &-message {
+                      font-size: calc(min(16px, #{responsive-font(16px)}));
+                      line-height: 1.3;
+                      font-weight: 400;
+                      letter-spacing: 0;
+                      text-align: center;
+                      color: $color-grey-dark-9;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          &__bottom {
+            .sc-year-end-spend-reward-details {
+              &__close {
+                width: calc(min(60px, #{responsive-font(60px)}));
+                height: auto;
+                margin-top: responsive-height(25px);
+
+                img,
+                svg {
+                  width: 100%;
+                  height: auto;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &--show {
+        display: block !important;
+      }
+
+      &--hide {
+        opacity: 0 !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        visibility: hidden !important;
+      }
+    }
+
+    /* End campaign page styles */
+    .sc-year-end-spend-campaign-end {
+      width: 100%;
+      height: 100%;
+      min-height: 100dvh;
+      background-color: $color-blue-light-19;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+
+      &__wrapper {
+        width: 100%;
+        height: 100%;
+        min-height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: calc(min(30px, #{responsive-height(30px)}));
+
+        .sc-year-end-spend-campaign-end {
+          &__content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+          }
+
+          &__title {
+            font-size: 18px;
+            line-height: 100%;
+            font-weight: 700;
+            font-style: normal;
+            letter-spacing: 0;
+            text-align: center;
+          }
+
+          &__message {
+            font-size: 18px;
+            line-height: 100%;
+            font-weight: 400;
+            font-style: normal;
+            letter-spacing: 0;
+            text-align: center;
+          }
+
+          &__button-back {
+            width: 100%;
+            font-size: 20px;
+            line-height: 100%;
+            font-weight: 600;
+            font-style: normal;
+            letter-spacing: 0;
+            text-align: center;
+            color: $color-white;
+            border-radius: 100px;
+            padding: 20px 28px;
+            border: 0;
+            background: $color-grey-dark-17;
+          }
+        }
+      }
+
+      &--hide {
+        display: none !important;
+      }
+    }
+
+    /* Error page style */
+    .sc-year-end-spend-error {
+      width: 100%;
+      height: 100%;
+      min-height: 100dvh;
+      background-color: $color-blue-light-19;
+      background-image: url('../images/sc-year-end-spend-background-texture-blue.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+
+      &__wrapper {
+        width: 100%;
+        height: 100%;
+        min-height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: calc(min(30px, #{responsive-height(30px)}));
+
+        @media screen and (max-width: 375px) and (max-height: 700px) {
+          gap: calc(min(25px, #{responsive-height(25px)}));
+        }
+
+        img,
+        svg {
+          width: 100%;
+          height: auto;
+        }
+
+        .sc-year-end-spend-error {
+          &__top {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: calc(min(56px, #{responsive-height(56px)})) calc(min(24px, #{responsive-font(24px)})) 0px;
+
+            @media screen and (max-width: 375px) and (max-height: 700px) {
+              padding-top: calc(min(30px, #{responsive-height(30px)}));
+            }
+
+            .sc-year-end-spend-error {
+              &__header {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: calc(min(5px, #{responsive-height(5px)}));
+
+                &-masthead {
+                  width: 100%;
+                  height: auto;
+
+                  @media screen and (max-width: 414px) and (max-height: 736px) {
+                    width: 95%;
+                  }
+
+                  @media screen and (max-width: 375px) and (max-height: 700px) {
+                    width: 95%;
+                  }
+                }
+              }
+            }
+          }
+
+          &__middle {
+            width: 100%;
+            display: flex;
+            padding: calc(min(30px, #{responsive-height(30px)})) calc(min(24px, #{responsive-font(24px)})) 0px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: calc(min(30px, #{responsive-height(30px)}));
+
+            @media screen and (max-width: 375px) and (max-height: 700px) {
+              padding-top: calc(min(20px, #{responsive-height(20px)}));
+              gap: calc(min(25px, #{responsive-height(25px)}));
+            }
+
+            .sc-year-end-spend-error {
+              &__background-image {
+                width: calc(min(234px, #{responsive-font(234px)}));
+                height: auto;
+
+                @media screen and (max-width: 414px) and (max-height: 736px) {
+                  width: calc(min(210px, #{responsive-font(210px)}));
+                }
+
+                @media screen and (max-width: 375px) and (max-height: 700px) {
+                  width: calc(min(210px, #{responsive-font(210px)}));
+                }
+              }
+
+              &__content {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: calc(min(16px, #{responsive-height(16px)}));
+                padding: calc(min(24px, #{responsive-height(24px)})) calc(min(24px, #{responsive-font(24px)}));
+                font-size: calc(min(20px, #{responsive-font(20px)}));
+                line-height: 1.3;
+                font-weight: 400;
+                font-style: normal;
+                letter-spacing: 0;
+                text-align: center;
+                color: $color-white;
+
+                @media screen and (max-width: 375px) and (max-height: 700px) {
+                  gap: calc(min(14px, #{responsive-height(14px)}));
+                  padding: calc(min(20px, #{responsive-height(20px)})) calc(min(20px, #{responsive-font(20px)}));
+                  font-size: calc(min(18px, #{responsive-font(18px)}));
+                }
+
+                &-title {
+                  font-size: calc(min(26px, #{responsive-font(26px)}));
+                  line-height: 120%;
+                  font-weight: 700;
+                  font-style: normal;
+                  letter-spacing: 0;
+                  text-align: center;
+                  color: $color-white;
+
+                  @media screen and (max-width: 375px) and (max-height: 700px) {
+                    font-size: calc(min(22px, #{responsive-font(22px)}));
+                  }
+                }
+
+                &-description {
+                  font-size: calc(min(20px, #{responsive-font(20px)}));
+                  line-height: 1.3;
+                  font-weight: 400;
+                  font-style: normal;
+                  letter-spacing: 0;
+                  text-align: center;
+                  color: $color-white;
+
+                  @media screen and (max-width: 375px) and (max-height: 700px) {
+                    font-size: calc(min(18px, #{responsive-font(18px)}));
+                  }
+                }
+              }
+            }
+          }
+
+          &__bottom {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0px calc(min(24px, #{responsive-font(24px)})) calc(min(30px, #{responsive-height(30px)}));
+
+            @media screen and (max-width: 375px) and (max-height: 700px) {
+              padding-bottom: calc(min(25px, #{responsive-font(25px)}));
+            }
+
+            .sc-year-end-spend-error {
+              &__button {
+                width: 100%;
+                padding: calc(min(20px, #{responsive-height(20px)})) calc(min(28px, #{responsive-font(28px)}));
+                border: 0;
+                border-radius: 100px;
+                font-size: calc(min(20px, #{responsive-font(20px)}));
+                line-height: 100%;
+                font-weight: 700;
+                font-style: normal;
+                letter-spacing: 0;
+                text-align: center;
+                color: $color-blue-22;
+                background-color: $color-white;
+
+                @media screen and (max-width: 375px) and (max-height: 700px) {
+                  padding: calc(min(18px, #{responsive-height(18px)})) calc(min(20px, #{responsive-font(20px)}));
+                  font-size: calc(min(18px, #{responsive-font(18px)}));
+                }
+
+                &-wrapper {
+                  width: 100%;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  flex-direction: column;
+                  gap: calc(min(20px, #{responsive-height(20px)}));
+
+                  @media screen and (max-width: 375px) and (max-height: 700px) {
+                    gap: calc(min(16px, #{responsive-height(16px)}));
+                  }
+                }
+
+                &-go-back {
+                  border: 2px solid $color-white;
+                  background: transparent;
+                  color: $color-white;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &--hide {
+        display: none !important;
+      }
+    }
+
+    /* Popup modal styles start */
+    .sc-year-end-spend-modal {
+      display: flex;
+      background: $color-black-translucent-80;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      padding: 12px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 100;
+
+      &__wrapper {
+        width: 100%;
+        height: 100%;
+        border-radius: 24px;
+        background-color: $color-white;
+        display: flex;
+        flex-direction: column;
+
+        .sc-year-end-spend-modal {
+          &__header {
+            width: 100%;
+            height: 45px;
+            border-bottom: 1px solid $color-white-smoke-7;
+            padding: 5px;
+            position: relative;
+            text-align: left;
+
+            &-close {
+              background-image: url('data:image/svg+xml,<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 21.5C16.799 21.5 21.5 16.799 21.5 11C21.5 5.20101 16.799 0.5 11 0.5C5.20101 0.5 0.5 5.20101 0.5 11C0.5 16.799 5.20101 21.5 11 21.5ZM6.4871 8.09971C6.04776 7.66037 6.04776 6.94806 6.4871 6.50872C6.92644 6.06938 7.63875 6.06938 8.07809 6.50872L11.0172 9.44782L13.9563 6.50872C14.3956 6.06938 15.1079 6.06938 15.5473 6.50872C15.9866 6.94806 15.9866 7.66037 15.5473 8.09971L12.6082 11.0388L15.5473 13.9779C15.9866 14.4173 15.9866 15.1296 15.5473 15.5689C15.1079 16.0082 14.3956 16.0082 13.9563 15.5689L11.0172 12.6298L8.07809 15.5689C7.63875 16.0082 6.92644 16.0082 6.4871 15.5689C6.04776 15.1296 6.04776 14.4173 6.4871 13.9779L9.4262 11.0388L6.4871 8.09971Z" fill="%23939393"/></svg>');
+              width: 35px;
+              height: 35px;
+              background-size: 100%;
+              right: 10px;
+              border: 5px solid $color-white;
+              position: absolute;
+            }
+
+          }
+
+          &__content {
+            width: 100%;
+            height: calc(100% - 65px);
+
+            iframe.modal-frame {
+              border: none;
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+
+      &--hide {
+        display: none;
+      }
+    }
+
+    /* Polaroid game page styles */
+    .sc-year-end-spend-polaroid-game {
+      width: 100%;
+      max-width: $maxwidth-container;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      scroll-behavior: smooth;
+      margin: 0 auto;
+      touch-action: none;
+
+      // always visible purpose
+      -webkit-overflow-scrolling: touch;
+
+      &::-webkit-scrollbar {
+        width: calc(min(4px, #{responsive-font(4px)}));
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $color-white-smoke-12;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $color-black-translucent-3;
+        border-radius: 4px;
+      }
+
+      &.active-scroll {
+        touch-action: auto;
+        overflow-y: auto;
+
+        .sc-year-end-spend-polaroid-game__wrapper {
+          height: auto;
+          background-position: top left;
+          background-size: 100%;
+          background-repeat: repeat;
+          background-image: url(../images/game/game/sc-year-end-spend-bg-light-blue.png);
+          width: calc(100% + calc(min(4px, #{responsive-font(4px)})));
+        }
+
+        .sc-year-end-spend-polaroid-game__pocket .sc-year-end-spend-polaroid-game__pocket-camera img {
+          margin-left: calc(min(4px, #{responsive-font(4px)}));
+        }
+      }
+
+      &__wrapper {
+        flex-direction: column;
+        display: flex;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 5;
+      }
+
+      &__bg-dark-blue,
+      &__bg-light-blue {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-position: top left;
+      }
+
+      &__bg-dark-blue {
+        z-index: 3;
+        background-image: url(../images/game/sc-year-end-spend-bg-dark-blue.png);
+        opacity: 1;
+        background-size: cover;
+
+        &.dismiss {
+          opacity: 0;
+          transition: opacity 0.5s;
+        }
+      }
+
+      &__bg-light-blue {
+        z-index: 2;
+        background-image: url(../images/game/sc-year-end-spend-bg-light-blue.png);
+        background-size: 100%;
+        background-repeat: repeat;
+      }
+
+      &__header {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-top: calc(min(55px, #{responsive-height(55px)}));
+        padding-bottom: calc(min(40px, #{responsive-height(40px)}));
+
+        &-title {
+          width: calc(min(344px, #{responsive-font(344px)}));
+          height: auto;
+
+          img {
+            width: 100%;
+          }
+        }
+      }
+
+      &__slider {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 12;
+
+        &-img {
+          position: absolute;
+          z-index: 13;
+          width: calc(min(138px, #{responsive-font(138px)}));
+          height: auto; //185px 
+          overflow: hidden;
+          transform-origin: center center;
+          touch-action: none;
+          user-select: none;
+          -webkit-user-drag: none;
+
+          img {
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: block;
+          }
+        }
+      }
+
+      &__pocket {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 50%) scale(1);
+        z-index: 14;
+        bottom: -65px;
+        pointer-events: none;
+
+        &-camera {
+          width: calc(min(488px, #{responsive-font(488px)}));
+        }
+
+        img {
+          display: block;
+          width: 100%;
+        }
+
+        .sc-year-end-spend-polaroid-game__dispense-polaroid img {
+          position: absolute;
+          z-index: 14;
+          left: 50%;
+          top: 5%;
+          transform: translate(-50%, 50%) scale(1);
+          width: calc(min(340px, #{responsive-font(340px)}));
+        }
+
+        &.active {
+          bottom: 50%;
+          transform: translate(-50%, 50%) scale(0.6);
+          transition: left, bottom, transform, 0.7s ease-in-out 0.5s;
+
+          .sc-year-end-spend-polaroid-game__dispense-polaroid img {
+            top: 1300px;
+            transform: translate(-50%, 50%) scale(2);
+          }
+
+          .sc-year-end-spend-polaroid-game__dispense-polaroid {
+            img:nth-child(1) {
+              transition: top, transform, 0.5s ease-in-out 2s;
+            }
+
+            img:nth-child(2) {
+              transition: top, transform, 0.5s ease-in-out 2.2s;
+            }
+
+            img:nth-child(3) {
+              transition: top, transform, 0.5s ease-in-out 2.4s;
+            }
+          }
+
+          &.dismiss-card {
+
+            .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(1),
+            .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(2),
+            .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(3) {
+              display: none;
+            }
+          }
+        }
+
+        &-camera-top,
+        &-camera-bottom {
+          position: relative;
+        }
+
+        &-camera-top {
+          z-index: 15;
+        }
+
+        &-camera-bottom {
+          z-index: 13;
+          top: -1px;
+        }
+      }
+
+      &__dispense-polaroid-result {
+        position: relative;
+        z-index: 3;
+        opacity: 0;
+        pointer-events: none;
+        color: $color-white;
+        text-align: center;
+        padding: 0 calc(min(18px, #{responsive-font(18px)}));
+
+        &.result-show {
+          .sc-year-end-spend-polaroid-game__polaroid-card {
+            top: 0;
+            opacity: 1;
+            transition: top, opacity, 0.5s ease-in-out 2s;
+
+            &:nth-child(2) {
+              left: 22%;
+              top: -10px;
+              transform: translateX(-50%) rotate(-7deg);
+              transition: top, transform, 0.5s ease-in-out 3s;
+            }
+
+            &:nth-child(3) {
+              left: 78%;
+              top: -10px;
+              transform: translateX(-50%) rotate(7deg);
+              transition: top, transform, 0.5s ease-in-out 3s;
+            }
+          }
+
+          .sc-year-end-spend-polaroid-game__polaroid-card-img::before {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out 4s;
+          }
+
+          .sc-year-end-spend-polaroid-game__prize-detail {
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out 4s;
+          }
+        }
+      }
+
+      &__polaroid-card-result {
+        position: relative;
+        width: 100%;
+        top: 30px;
+        z-index: 2;
+      }
+
+      &__result-title {
+        font-size: calc(min(26px, #{responsive-font(26px)}));
+        line-height: 1.3;
+        font-weight: 500;
+        padding-bottom: calc(min(15px, #{responsive-height(15px)}));
+      }
+
+      &__polaroid-card {
+        background-color: $color-white;
+        border-radius: 3px;
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+        padding: calc(min(7px, #{responsive-height(7px)})) calc(min(7px, #{responsive-font(7px)})) calc(min(40px, #{responsive-height(40px)}));
+        width: calc(min(156px, #{responsive-font(156px)}));
+        top: 40px;
+        opacity: 0;
+
+        &-img {
+          position: relative;
+          width: 100%;
+
+          &::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            background-color: $color-blue-dark-16;
+            top: 0;
+            left: 0;
+            opacity: 1;
+          }
+
+          img {
+            width: 100%;
+            position: relative;
+            z-index: 1;
+          }
+        }
+
+        &:nth-child(1) {
+          position: relative;
+          z-index: 2;
+          margin: 0 auto;
+        }
+
+        &:nth-child(2),
+        &:nth-child(3) {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%) rotate(0);
+        }
+      }
+
+      &__prize-detail {
+        background-color: $color-grey-light-2;
+        padding: calc(min(65px, #{responsive-height(65px)})) calc(min(18px, #{responsive-font(18px)})) calc(min(25px, #{responsive-height(25px)}));
+        width: 100%;
+        border-radius: 10px;
+        opacity: 0;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: calc(min(25px, #{responsive-height(25px)}));
+      }
+
+      &__prize-info {
+        font-size: calc(min(18px, #{responsive-font(18px)}));
+        color: $color-grey-dark-9;
+        line-height: 1.3;
+      }
+
+      &__line {
+        align-self: center;
+        width: 100%;
+        position: relative;
+        border-top: 1px solid $color-grey-dark-9;
+      }
+
+      &__action {
+        padding: calc(min(20px, #{responsive-height(20px)})) 0 calc(min(40px, #{responsive-height(40px)}));
+
+        &-title {
+          font-size: calc(min(20px, #{responsive-font(20px)}));
+          line-height: 1.3;
+          font-weight: 400;
+          padding-bottom: calc(min(15px, #{responsive-height(15px)}));
+
+          .sc-year-end-spend-polaroid-game__card-left-no {
+            font-weight: 500;
+          }
+        }
+      }
+
+      &__btn-01 {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: calc(min(10px, #{responsive-height(10px)}));
+        border: 0;
+        border-radius: 100px;
+        background: $color-green-light-14;
+        padding: calc(min(20px, #{responsive-height(20px)})) calc(min(28px, #{responsive-font(28px)}));
+        font-size: calc(min(20px, #{responsive-font(20px)}));
+        line-height: 100%;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-align: center;
+        color: $color-white;
+      }
+
+      &__btn-02 {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: calc(min(10px, #{responsive-height(10px)}));
+        border: 0;
+        border-radius: 100px;
+        border: 2px solid $color-white;
+        background: transparent;
+        padding: calc(min(20px, #{responsive-height(20px)})) calc(min(28px, #{responsive-font(28px)}));
+        font-size: calc(min(20px, #{responsive-font(20px)}));
+        line-height: 100%;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-align: center;
+        color: $color-white;
+      }
+
+      &__2-btn-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: calc(min(10px, #{responsive-height(10px)}));
+        padding-bottom: calc(min(15px, #{responsive-height(15px)}));
+      }
+
+      #polaroid-game-slider {
+        display: none;
+      }
+
+      &--hide {
+        display: none !important;
+      }
+    }
+  }

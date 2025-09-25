@@ -1,0 +1,261 @@
+{
+    "Status": "OK",
+    "ContainerList": [
+        {
+            "Status": "OK",
+            "ContainerName": "NextBestAction",
+            "RankedResults": [
+                {
+                    "Issue": "Engagement",
+                    "InteractionID": "3796524614745755445",
+                    "ProductName": "",
+                    "CustomerCost": 0.0,
+                    "ContentFormat": "",
+                    "SellableEndDate": "19700101T000000.000 GMT",
+                    "Label": "EGCCYESLanding",
+                    "PaidLookalikeValue": "",
+                    "Benefits": "",
+                    "WhyRelevant": "",
+                    "Sellable": false,
+                    "ProductSearchCriteria": "",
+                    "urlParam": "",
+                    "Name": "EGCCYESLanding",
+                    "ShortDescription": "EGCCYESLanding",
+                    "GroupID": "CreditCard",
+                    "GuidedJourney": false,
+                    "PaidAudienceName": "",
+                    "Identifier": "/Engagement/CreditCard/EGCCYESLanding",
+                    "BundleType": "",
+                    "Placement": "gamification_offers",
+                    "SellableStartDate": "19700101T000000.000 GMT",
+                    "JourneyStep": "",
+                    "Propensity": 0.0,
+                    "AgentCompensation": 0,
+                    "ClassIdentifier": "Offer",
+                    "Priority": 4.99999999E8,
+                    "Channel": "Mobile",
+                    "BundleName": "",
+                    "ImageURL": "",
+                    "Variant": "EGCCYearEndSpend",
+                    "Fields": [
+                        {
+                            "Value": "",
+                            "Name": "TemplateMessage"
+                        },
+                        {
+                            "Value": "0.",
+                            "Name": "Rate"
+                        },
+                        {
+                            "Value": "",
+                            "Name": "assetclassname"
+                        },
+                        {
+                            "Value": "",
+                            "Name": "currenthouseview"
+                        },
+                        {
+                            "Value": "",
+                            "Name": "houseviewchangetype"
+                        },
+                        {
+                            "Value": "0.",
+                            "Name": "Tenure"
+                        },
+                        {
+                            "Value": "",
+                            "Name": "Promo_cd"
+                        },
+                        {
+                            "Value": "",
+                            "Name": "AccType"
+                        },
+                        {
+                            "Value": "",
+                            "Name": "AccountCode"
+                        },
+                        {
+                            "Value": "Y",
+                            "Name": "Registered"
+                        },
+                        {
+                            "Value": "22 September 2025",
+                            "Name": "CampaignStartDate"
+                        },
+                        {
+                            "Value": "31 December 2025",
+                            "Name": "CampaignEndDate"
+                        },
+                        {
+                            "Value": "7",
+                            "Name": "Chances"
+                        },
+                        {
+                            "Value": "[{\"pxObjClass\":\"\",\"RewardAmount\":\"78\",\"RewardProvider\":\"Burnt\",\"RedeemStartDate\":\"17 August 2032\",\"RewardType\":\"DineIn\",\"RewardAcquiredDate\":\"\",\"RewardIssueType\":\"Gift\",\"RewardStatus\":\"Issued\",\"Reward\":\"Reward078\",\"RedeemEndDate\":\"17 August 2032\"},{\"pxObjClass\":\"\",\"RewardAmount\":\"5\",\"RewardProvider\":\"FairPrice\",\"RedeemStartDate\":\"27 February 2025\",\"RewardType\":\"Voucher\",\"RewardAcquiredDate\":\"\",\"RewardIssueType\":\"Coupon\",\"RewardStatus\":\"Issued\",\"Reward\":\"123123\",\"RedeemEndDate\":\"15 March 2025\"},{\"pxObjClass\":\"\",\"RewardAmount\":\"5\",\"RewardProvider\":\"FairPrice\",\"RedeemStartDate\":\"27 February 2025\",\"RewardType\":\"Voucher\",\"RewardAcquiredDate\":\"\",\"RewardIssueType\":\"Coupon\",\"RewardStatus\":\"Issued\",\"Reward\":\"123124\",\"RedeemEndDate\":\"15 March 2025\"}]",
+                            "Name": "AllCards"
+                        },
+                        {
+                            "Value": "[]",
+                            "Name": "AllRewards"
+                        }
+                    ],
+                    "InternalCost": 0,
+                    "ProductCategory": "",
+                    "Journey": "",
+                    "Group": "CreditCard",
+                    "Category": "",
+                    "SubjectName": "14092009",
+                    "ButtonName2": "",
+                    "Direction": "Inbound",
+                    "ExpectedRevenue": 0.0,
+                    "ButtonName": "",
+                    "Pricing": "",
+                    "JourneyStage": "",
+                    "offerID": "",
+                    "EligibilityDescription": "",
+                    "ImageURL2": "",
+                    "Title": "",
+                    "Rank": 2,
+                    "ProductID": "",
+                    "BundleParent": "false",
+                    "Treatment": "EGCCYESLanding_GamificationOffers",
+                    "ProductsCompatible": "",
+                    "AssociatedProductIDs": "",
+                    "CampaignID": "NBA",
+                    "OfferValue": 0,
+                    "SubCategory": "",
+                    "ClickThroughURL": "",
+                    "ProductDescription": "",
+                    "ClickThroughURL2": "",
+                    "SubjectID": "14092009",
+                    "ProductsIncompatible": "",
+                    "DecisionTime": "20250922T123650.299 GMT",
+                    "ContextName": "Customer"
+                },
+                {
+                    "Issue": "Engagement",
+                    "InteractionID": "3796524614745755445",
+                    "ProductName": "",
+                    "CustomerCost": 0.0,
+                    "ContentFormat": "",
+                    "SellableEndDate": "19700101T000000.000 GMT",
+                    "Label": "EGCCYESSummary",
+                    "PaidLookalikeValue": "",
+                    "Benefits": "",
+                    "WhyRelevant": "",
+                    "Sellable": false,
+                    "ProductSearchCriteria": "",
+                    "urlParam": "",
+                    "Name": "EGCCYESSummary",
+                    "ShortDescription": "EGCC Year End Spend Summary",
+                    "GroupID": "CreditCard",
+                    "GuidedJourney": false,
+                    "PaidAudienceName": "",
+                    "Identifier": "/Engagement/CreditCard/EGCCYESSummary",
+                    "BundleType": "",
+                    "Placement": "gamification_offers",
+                    "SellableStartDate": "19700101T000000.000 GMT",
+                    "JourneyStep": "",
+                    "Propensity": 0.0,
+                    "AgentCompensation": 0,
+                    "ClassIdentifier": "Offer",
+                    "Priority": 4.99999999E8,
+                    "Channel": "Mobile",
+                    "BundleName": "",
+                    "ImageURL": "",
+                    "Variant": "EGCCYearEndSpend",
+                    "Fields": [
+                        {
+                            "Value": "",
+                            "Name": "TemplateMessage"
+                        },
+                        {
+                            "Value": "0.",
+                            "Name": "Rate"
+                        },
+                        {
+                            "Value": "",
+                            "Name": "assetclassname"
+                        },
+                        {
+                            "Value": "",
+                            "Name": "currenthouseview"
+                        },
+                        {
+                            "Value": "",
+                            "Name": "houseviewchangetype"
+                        },
+                        {
+                            "Value": "0.",
+                            "Name": "Tenure"
+                        },
+                        {
+                            "Value": "",
+                            "Name": "Promo_cd"
+                        },
+                        {
+                            "Value": "",
+                            "Name": "AccType"
+                        },
+                        {
+                            "Value": "",
+                            "Name": "AccountCode"
+                        },
+                        {
+                            "Value": "Y",
+                            "Name": "Registered"
+                        },
+                        {
+                            "Value": "22 September 2025",
+                            "Name": "CampaignStartDate"
+                        },
+                        {
+                            "Value": "31 December 2025",
+                            "Name": "CampaignEndDate"
+                        },
+                        {
+                            "Value": "[{\"pxObjClass\":\"\",\"RewardAmount\":\"116\",\"RewardProvider\":\"Taipei\",\"RedeemStartDate\":\"17 August 2062\",\"RewardType\":\"Travel\",\"RewardAcquiredDate\":\"\",\"RewardIssueType\":\"Gift\",\"RewardStatus\":\"Acquired\",\"Reward\":\"Reward116\",\"RedeemEndDate\":\"17 August 2062\"},{\"pxObjClass\":\"\",\"RewardAmount\":\"33\",\"RewardProvider\":\"MichelinStar\",\"RedeemStartDate\":\"17 August 2038\",\"RewardType\":\"DineIn\",\"RewardAcquiredDate\":\"\",\"RewardIssueType\":\"Cards\",\"RewardStatus\":\"Acquired\",\"Reward\":\"Reward033\",\"RedeemEndDate\":\"17 August 2038\"},{\"pxObjClass\":\"\",\"RewardAmount\":\"52\",\"RewardProvider\":\"MichelinStar\",\"RedeemStartDate\":\"17 August 2036\",\"RewardType\":\"DineIn\",\"RewardAcquiredDate\":\"\",\"RewardIssueType\":\"Cards\",\"RewardStatus\":\"Acquired\",\"Reward\":\"Reward052\",\"RedeemEndDate\":\"17 August 2036\"}]",
+                            "Name": "AllCards"
+                        },
+                        {
+                            "Value": "[]",
+                            "Name": "AllRewards"
+                        }
+                    ],
+                    "InternalCost": 0,
+                    "ProductCategory": "",
+                    "Journey": "",
+                    "Group": "CreditCard",
+                    "Category": "",
+                    "SubjectName": "14092009",
+                    "ButtonName2": "",
+                    "Direction": "Inbound",
+                    "ExpectedRevenue": 0.0,
+                    "ButtonName": "",
+                    "Pricing": "",
+                    "JourneyStage": "",
+                    "offerID": "",
+                    "EligibilityDescription": "",
+                    "ImageURL2": "",
+                    "Title": "",
+                    "Rank": 3,
+                    "ProductID": "",
+                    "BundleParent": "false",
+                    "Treatment": "EGCCYESSummary_GamificationOffers",
+                    "ProductsCompatible": "",
+                    "AssociatedProductIDs": "",
+                    "CampaignID": "NBA",
+                    "OfferValue": 0,
+                    "SubCategory": "",
+                    "ClickThroughURL": "",
+                    "ProductDescription": "",
+                    "ClickThroughURL2": "",
+                    "SubjectID": "14092009",
+                    "ProductsIncompatible": "",
+                    "DecisionTime": "20250922T123650.299 GMT",
+                    "ContextName": "Customer"
+                }
+            ]
+        }
+    ]
+}

@@ -1,17 +1,13 @@
-<!doctype html>
-<html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>Polaroid Game</title>
-
-  <!-- mid year spend AA script -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>SC Year End Spend - Campaign</title>
   <link rel="stylesheet" href="https://av.sc.com/assets/global/css/style-base.min.css?ver=aad39ed">
-  <link rel="stylesheet" href="./css/sc-year-end-spend-game.css">
-  <!-- mid year spend campaign utils -->
+  <!-- year end spend campaign style -->
+  <link rel="stylesheet" href="./css/sc-year-end-spend-campaign.css">
+  <!-- year end spend campaign utils  -->
   <script src="https://av.sc.com/assets/global/js/utils.min.js?ver=b3210ad" id="utility-js"></script>
-  <!-- GSAP & Lottie -->
+  <!-- year end spend campaign GSAP & Lottie for animation -->
   <script src="https://av.sc.com/sg/assets/parallax/gsap.min.js"></script>
   <script src="https://av.sc.com/global/assets/js/gsap/motionpath.min.js"></script>
   <script src="https://av.sc.com/sg/lottie.min.js"></script>
@@ -37,27 +33,1001 @@
       deviceType: 'primary',
       environment: 'dev',
       getDataFromRTIM: false,
-      mockDataUrl: './json/mockdata/sc-mid-year-spend-campaign-mockdata.json',
-      tcUrl: 'https://www.sc.com/sg/terms-and-conditions/pinballsurewin/',
       scrollTolerance: Math.max(50, window.innerHeight * 0.02),
-      shareObject: {
-        message: 'I’ve just won {{reward}} from Standard Chartered’s Pinball Sure-Win Promotion!\n\nJoin the fun today! Spend, play and win with SC Credit Card to unlock sure-win prizes including a Paris Getaway for Two (flights, hotels, and iconic experiences), Samsonite luggage, cashback and more!\n\n1. Already a SC Cardholder? Log in to SC Mobile, go to the Discover tab and register for ‘Pinball Sure-Win’ Promotion\n2. Don’t have a card ? Apply now via SC Singapore (SG) Website.'
-      }
-    };
-
-    window.gamePlayAnimation = {
-      
+      configJsonUrl: './json/mockdata/sc-year-end-spend-campaign-config.json',
+      mockDataUrl: './json/mockdata/sc-year-end-spend-campaign-mockdata.json'
     };
   </script>
 </head>
 
 <body>
+  <!-- year end spend campaign -->
   <div class="sc-year-end-spend-campaign">
-    <div class="sc-year-end-spend-polaroid-game" id="sc-year-end-spend-polaroid-game-section">
+    <!-- year end spend loader page -->
+    <div class="sc-year-end-spend-loader sc-year-end-spend-loader--hide1">
+      <lottie-player src="./json/lottie/sc-logo-loader.json" background="transparent" speed="1" loop="loop"
+        autoplay="autoplay"></lottie-player>
+    </div>
+    <!-- year end spend registration page -->
+    <div class="sc-year-end-spend-registration sc-year-end-spend-registration--hide">
+      <div class="sc-year-end-spend-registration__wrapper">
+        <div class="sc-year-end-spend-registration__top">
+          <div class="sc-year-end-spend-registration__header">
+            <div class="sc-year-end-spend-registration__header-close" data-title="close" data-type="button">
+              <img src="./images/sc-year-end-spend-close-gray.svg" alt="registration-close">
+            </div>
+            <div class="sc-year-end-spend-registration__header-masthead">
+              <img src="./images/sc-year-end-spend-masthead-blue.png" alt="registration-masthead"
+                class="sc-year-end-spend-registration__header-masthead-image">
+            </div>
+          </div>
+        </div>
+        <div class="sc-year-end-spend-registration__middle">
+          <div class="sc-year-end-spend-registration__intro">
+            <h1 class="sc-year-end-spend-registration__intro-head">Win a luxury private jet for <br>two to the Maldives
+              <br>and more!
+            </h1>
+            <p class="sc-year-end-spend-registration__intro-description">From <span
+                class="sc-year-end-spend-registration__start-date">now</span> till <span
+                class="sc-year-end-spend-registration__expiry-date">28 February 2026</span>, get rewarded when you
+              spend, bank and grow your wealth with Standard Chartered. Each eligible action unlocks one pack of three
+              instant photo cards.</p>
+            <p class="sc-year-end-spend-registration__intro-description">Collect and complete instant photo card sets to
+              win monthly prizes and boost your chances in the Grand Draw. Here's to a million reasons for magnificently
+              memorable moments. Good luck!</p>
+          </div>
+          <div class="sc-year-end-spend-registration__grand-prize">
+            <div class="sc-year-end-spend-registration__grand-prize-card-stack">
+              <img src="./images/sc-year-end-spend-grand-prize-card1.png" alt="grand-prize-card"
+                class="sc-year-end-spend-registration__grand-prize-card sc-year-end-spend-registration__grand-prize-card1">
+              <img src="./images/sc-year-end-spend-grand-prize-card2.png" alt="grand-prize-card"
+                class="sc-year-end-spend-registration__grand-prize-card sc-year-end-spend-registration__grand-prize-card2">
+            </div>
+            <div class="sc-year-end-spend-registration__grand-prize-contents">
+              <h2 class="sc-year-end-spend-registration__grand-prize-head">Grand Draw Prize</h2>
+              <h3 class="sc-year-end-spend-registration__grand-prize__list-head">The ultimate luxury package comprising:
+              </h3>
+              <ul class="sc-year-end-spend-registration__grand-prize__list">
+                <li class="sc-year-end-spend-registration__grand-prize__list-item">Return trip to the Maldives on a
+                  private jet for 2</li>
+                <li class="sc-year-end-spend-registration__grand-prize__list-item">Exceptional 4D3N stay at XXX, the
+                  Maldives</li>
+              </ul>
+            </div>
+          </div>
+          <div class="sc-year-end-spend-registration__prize">
+            <div class="sc-year-end-spend-registration__prize-head-wrapper">
+              <h2 class="sc-year-end-spend-registration__prize-head sc-year-end-spend-registration__prize-head-name">
+                More prizes up for grabs</h2>
+              <!-- <h2 class="sc-year-end-spend-registration__prize-head sc-year-end-spend-registration__prize-head-count">
+                Prizes <br>available</h2> -->
+            </div>
+            <div class="sc-year-end-spend-registration__prize-tile-wrapper">
+              <div class="sc-year-end-spend-registration__prize-tile">
+                <div class="sc-year-end-spend-registration__prize-tile-col">
+                  <img src="./images/sc-year-end-spend-prize-card-stack-dining.png" alt="dining-prize-card"
+                    class="sc-year-end-spend-registration__prize-image">
+                  <h3 class="sc-year-end-spend-registration__prize-name">Michelin-starred <br>dining experience <br>(for
+                    two)</h3>
+                </div>
+                <div class="sc-year-end-spend-registration__prize-tile-col">
+                  <!-- <div class="sc-year-end-spend-registration__prize-count">x40</div> -->
+                </div>
+              </div>
+              <div class="sc-year-end-spend-registration__prize-tile">
+                <div class="sc-year-end-spend-registration__prize-tile-col">
+                  <img src="./images/sc-year-end-spend-prize-card-stack-travel.png" alt="travel-prize-card"
+                    class="sc-year-end-spend-registration__prize-image">
+                  <h3 class="sc-year-end-spend-registration__prize-name">Pair of flight tickets*</h3>
+                </div>
+                <div class="sc-year-end-spend-registration__prize-tile-col">
+                  <!-- <div class="sc-year-end-spend-registration__prize-count">x128</div> -->
+                </div>
+              </div>
+              <div class="sc-year-end-spend-registration__prize-tile">
+                <div class="sc-year-end-spend-registration__prize-tile-col">
+                  <img src="./images/sc-year-end-spend-prize-card-stack-luggage.png" alt="luggage-prize-card"
+                    class="sc-year-end-spend-registration__prize-image">
+                  <h3 class="sc-year-end-spend-registration__prize-name">Designer travel <br>luggage</h3>
+                </div>
+                <div class="sc-year-end-spend-registration__prize-tile-col">
+                  <!-- <div class="sc-year-end-spend-registration__prize-count">x200</div> -->
+                </div>
+              </div>
+              <div class="sc-year-end-spend-registration__prize-tile">
+                <div class="sc-year-end-spend-registration__prize-tile-col">
+                  <img src="./images/sc-year-end-spend-prize-card-stack-bonus.png" alt="bonus-prize-card"
+                    class="sc-year-end-spend-registration__prize-image">
+                  <h3 class="sc-year-end-spend-registration__prize-name">Mystery bonus prizes</h3>
+                </div>
+                <div class="sc-year-end-spend-registration__prize-tile-col">
+                  <!-- <div class="sc-year-end-spend-registration__prize-count">?</div> -->
+                </div>
+              </div>
+            </div>
+            <div class="sc-year-end-spend-registration__prize-footnote">* Pair of Economy Class tickets to destinations
+              in Asia, like Bali, Hong Kong, Taipei, and Shanghai.</div>
+          </div>
+          <div class="sc-year-end-spend-registration__how-it-works">
+            <h2 class="sc-year-end-spend-registration__how-it-works-head">How it works</h2>
+            <div class="sc-year-end-spend-registration__how-it-works-body">
+              <ul class="sc-year-end-spend-registration__how-it-works-steps">
+                <li class="sc-year-end-spend-registration__how-it-works-step">
+                  <strong class="sc-year-end-spend-registration__how-it-works-step-label">Step 1:</strong> Perform an
+                  <span class="sc-year-end-spend-registration__how-to-unlock-link">eligible action</span> to unlock a
+                  pack of instant photo cards. Each card pack contains 3 instant photo cards.
+                </li>
+                <li class="sc-year-end-spend-registration__how-it-works-step">Collect the required number of instant
+                  photo cards to complete a set and secure your win!</li>
+              </ul>
+              <p class="sc-year-end-spend-registration__how-it-works-note">Prizes are given on a first-come,
+                first-served basis, while stocks last.</p>
+            </div>
+            <div class="sc-year-end-spend-registration__prize-sets">
+              <div class="sc-year-end-spend-registration__prize-set">
+                <h2 class="sc-year-end-spend-registration__prize-set-head">Michelin-starred dining experience <br>(for
+                  two)</h2>
+                <div class="sc-year-end-spend-registration__prize-set-cards">
+                  <img src="./images/sc-year-end-spend-prize-card-dining.png" alt="dining-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                  <img src="./images/sc-year-end-spend-prize-card-dining.png" alt="dining-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                  <img src="./images/sc-year-end-spend-prize-card-dining.png" alt="dining-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                </div>
+              </div>
+              <div class="sc-year-end-spend-registration__prize-set">
+                <h2 class="sc-year-end-spend-registration__prize-set-head">Pair of flight tickets*</h2>
+                <div class="sc-year-end-spend-registration__prize-set-cards">
+                  <img src="./images/sc-year-end-spend-prize-card-travel.png" alt="travel-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                  <img src="./images/sc-year-end-spend-prize-card-travel.png" alt="travel-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                  <img src="./images/sc-year-end-spend-prize-card-travel.png" alt="travel-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                  <img src="./images/sc-year-end-spend-prize-card-travel.png" alt="travel-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                </div>
+              </div>
+              <div class="sc-year-end-spend-registration__prize-set">
+                <h2 class="sc-year-end-spend-registration__prize-set-head">Designer travel luggage</h2>
+                <div class="sc-year-end-spend-registration__prize-set-cards">
+                  <img src="./images/sc-year-end-spend-prize-card-luggage.png" alt="luggage-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                  <img src="./images/sc-year-end-spend-prize-card-luggage.png" alt="luggage-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                  <img src="./images/sc-year-end-spend-prize-card-luggage.png" alt="luggage-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                  <img src="./images/sc-year-end-spend-prize-card-luggage.png" alt="luggage-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                  <img src="./images/sc-year-end-spend-prize-card-luggage.png" alt="luggage-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                </div>
+              </div>
+              <div class="sc-year-end-spend-registration__prize-set">
+                <h2 class="sc-year-end-spend-registration__prize-set-head">Bonus mystery prize</h2>
+                <div class="sc-year-end-spend-registration__prize-set-cards">
+                  <img src="./images/sc-year-end-spend-prize-card-bonus.png" alt="bonus-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                  <img src="./images/sc-year-end-spend-prize-card-bonus.png" alt="bonus-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                  <img src="./images/sc-year-end-spend-prize-card-bonus.png" alt="bonus-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                  <img src="./images/sc-year-end-spend-prize-card-bonus.png" alt="bonus-prize-card"
+                    class="sc-year-end-spend-registration__prize-set-card">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-year-end-spend-registration__bottom">
+          <div class="sc-year-end-spend-registration__footer">
+            <div class="sc-year-end-spend-registration__footer-top">
+              <h2 class="sc-year-end-spend-registration__footer-head">Start banking with us to create magnificently
+                memorable moments today!</h2>
+              <button class="sc-year-end-spend-registration__button-register" data-title="Register now"
+                data-type="button">Register now</button>
+            </div>
+            <div class="sc-year-end-spend-registration__footer-bottom">
+              <p class="sc-year-end-spend-registration__disclaimer"><span
+                  class="sc-year-end-spend-registration__disclaimer-label">Disclaimer: </span>By registering, you accept
+                the <a class="sc-year-end-spend-registration__terms-link sc-year-end-spend-campaign__terms-link"
+                  data-link="" target="_blank" href="" data-type="link" data-title="Terms and Conditions">Terms and
+                  Conditions</a> <br>for the Million Reasons to be Happier promotion.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- year end spend registration confirmation page -->
+    <div class="sc-year-end-spend-reg-confirmation sc-year-end-spend-reg-confirmation--hide">
+      <div class="sc-year-end-spend-reg-confirmation__wrapper">
+        <div class="sc-year-end-spend-reg-confirmation__top">
+          <img src="./images/sc-year-end-spend-card-pack-blue.png" alt="card-pack-image"
+            class="sc-year-end-spend-reg-confirmation__image">
+          <div class="sc-year-end-spend-reg-confirmation__content">
+            <h1 class="sc-year-end-spend-reg-confirmation__title">You’ve successfully registered!</h1>
+            <p class="sc-year-end-spend-reg-confirmation__message">Here’s a free welcome card pack to unlock your first
+              magnificently memorable moment</p>
+          </div>
+          <button class="sc-year-end-spend-reg-confirmation__button-get-started" data-title="Get started"
+            data-type="button">Get started</button>
+        </div>
+        <div class="sc-year-end-spend-reg-confirmation__bottom">
+          <div class="sc-year-end-spend-reg-confirmation__button-close" data-title="Close" data-type="button">
+            <img src="./images/sc-year-end-spend-modal-close-white.png" alt="reg-confirmation-close">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- year end spend landing page -->
+    <div class="sc-year-end-spend-landing sc-year-end-spend-landing--hide">
+      <div class="sc-year-end-spend-landing__wrapper">
+        <div class="sc-year-end-spend-landing__top">
+          <div class="sc-year-end-spend-landing__header">
+            <div class="sc-year-end-spend-landing__header-close" data-title="close" data-type="button">
+              <img src="./images/sc-year-end-spend-close-white.png" alt="landing-close">
+            </div>
+            <div class="sc-year-end-spend-landing__header-masthead">
+              <img src="./images/sc-year-end-spend-masthead-white.png" alt="landing-masthead"
+                class="sc-year-end-spend-landing__header-masthead-image">
+            </div>
+          </div>
+        </div>
+        <div class="sc-year-end-spend-landing__middle">
+          <div class="sc-year-end-spend-landing__intro">
+            <h1 class="sc-year-end-spend-landing__intro-head">Win a luxury private jet trip for <br>two to the Maldives
+              and more!</h1>
+            <p class="sc-year-end-spend-landing__intro-description">Play and win from <span
+                class="sc-year-end-spend-landing__start-date">now</span> till <span
+                class="sc-year-end-spend-landing__expiry-date">28 February 2026</span>. <br>Good luck!
+            </p>
+          </div>
+          <img src="./images/sc-year-end-spend-prize-hand-festive-fun.png" alt="landing-background"
+            class="sc-year-end-spend-landing__background-image">
+        </div>
+        <div class="sc-year-end-spend-landing__bottom">
+          <h3 class="sc-year-end-spend-landing__packs-title">You have<span
+              class="sc-year-end-spend-landing__packs-count">7</span>pack(s)</h3>
+          <div class="sc-year-end-spend-landing__button-wrapper">
+            <button class="sc-year-end-spend-landing__button sc-year-end-spend-landing__button-play-now"
+              data-title="Play now" data-type="button">Play now</button>
+            <button
+              class="sc-year-end-spend-landing__button sc-year-end-spend-landing__button-unlock-packs sc-year-end-spend-landing__button-unlock-packs--hide"
+              data-title="Unlock more packs" data-type="button">Unlock more packs</button>
+            <div class="sc-year-end-spend-landing__button-horizontal">
+              <button class="sc-year-end-spend-landing__button sc-year-end-spend-landing__button-view-prizes"
+                data-title="View cards & prizes" data-type="button">View cards & prizes</button>
+              <button class="sc-year-end-spend-landing__button sc-year-end-spend-landing__button-check-in"
+                data-title="Check-in" data-type="button">Check-in</button>
+            </div>
+          </div>
+          <div class="sc-year-end-spend-landing__link-wrapper">
+            <a href="#" class="sc-year-end-spend-landing__link sc-year-end-spend-landing__how-to-play-link"
+              data-type="link" data-title="How to play">How to play</a>
+            <a href="#"
+              class="sc-year-end-spend-landing__link sc-year-end-spend-landing__terms-link sc-year-end-spend-campaign__terms-link"
+              data-type="link" data-title="Terms & Conditions">Terms & Conditions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- year end spend profile customisation page -->
+    <div class="sc-year-end-spend-profile-customisation sc-year-end-spend-profile-customisation--hide">
+      <div class="sc-year-end-spend-profile-customisation__wrapper">
+        <div class="sc-year-end-spend-profile-customisation__top">
+          <div class="sc-year-end-spend-profile-customisation__header">
+            <div class="sc-year-end-spend-profile-customisation__header-back" data-title="back" data-type="button">
+              <img src="./images/sc-year-end-spend-back-arrow-blue.svg" alt="profile-customisation-back">
+            </div>
+          </div>
+        </div>
+        <div class="sc-year-end-spend-profile-customisation__middle">
+          <div class="sc-year-end-spend-profile-customisation__content">
+            <p class="sc-year-end-spend-profile-customisation__title">Customise your look! Select one:</p>
+            <p class="sc-year-end-spend-profile-customisation__message">customisation options</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- year end spend instruction modal -->
+    <div class="sc-year-end-spend-instruction-modal sc-year-end-spend-instruction-modal--hide">
+      <div class="sc-year-end-spend-instruction-modal__wrapper">
+        <div class="sc-year-end-spend-instruction-modal__top">
+          <div class="sc-year-end-spend-instruction-modal__content">
+            <h1 class="sc-year-end-spend-instruction-modal__content-head">How to unlock card packs?</h1>
+            <div class="sc-year-end-spend-instruction-modal__content-body">
+              <div class="sc-year-end-spend-instruction-modal__tab-wrapper">
+                <button class="sc-year-end-spend-instruction-modal__tab sc-year-end-spend-instruction-modal__tab-spend"
+                  data-tabid="instruction-modal-tab-spend" data-title="Spend with us" data-type="button">Spend with
+                  us</button>
+                <button class="sc-year-end-spend-instruction-modal__tab sc-year-end-spend-instruction-modal__tab-bank"
+                  data-tabid="instruction-modal-tab-bank" data-title="Bank with us" data-type="button">Bank with
+                  us</button>
+              </div>
+              <div id="instruction-modal-tab-spend" class="sc-year-end-spend-instruction-modal__tab-body">
+                <ul class="sc-year-end-spend-instruction-modal__tab-list">
+                  <li class="sc-year-end-spend-instruction-modal__tab-item">
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-icon">
+                      <img src="./images/sc-year-end-spend-x3-packs-blue.png" alt="x3-packs-image">
+                    </div>
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-content">
+                      <h3 class="sc-year-end-spend-instruction-modal__tab-item-head">S$150 credit card spend</h3>
+                      <p class="sc-year-end-spend-instruction-modal__tab-item-para">Reach S$150 in cumulative spends
+                        with your SC Credit Card </p>
+                    </div>
+                  </li>
+                  <li class="sc-year-end-spend-instruction-modal__tab-item">
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-icon">
+                      <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                    </div>
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-content">
+                      <h3 class="sc-year-end-spend-instruction-modal__tab-item-head">SC EasyPay on Transaction for
+                        Priority and above customers</h3>
+                      <p class="sc-year-end-spend-instruction-modal__tab-item-para">Split payments into interest-free
+                        instalments</p>
+                    </div>
+                  </li>
+                  <li class="sc-year-end-spend-instruction-modal__tab-item">
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-icon">
+                      <img src="./images/sc-year-end-spend-x1-packs-blue.png" alt="x1-packs-image">
+                    </div>
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-content">
+                      <h3 class="sc-year-end-spend-instruction-modal__tab-item-head">SC EasyPay on Transaction</h3>
+                      <p class="sc-year-end-spend-instruction-modal__tab-item-para">Split payments into interest-free
+                        instalments</p>
+                    </div>
+                  </li>
+                  <li class="sc-year-end-spend-instruction-modal__tab-item">
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-icon">
+                      <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                    </div>
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-content">
+                      <h3 class="sc-year-end-spend-instruction-modal__tab-item-head">SC EasyPay on Balance</h3>
+                      <p class="sc-year-end-spend-instruction-modal__tab-item-para">Convert the outstanding balance of
+                        your next SC Credit Card statement into monthly instalments</p>
+                    </div>
+                  </li>
+                  <li class="sc-year-end-spend-instruction-modal__tab-item">
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-icon">
+                      <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                    </div>
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-content">
+                      <h3 class="sc-year-end-spend-instruction-modal__tab-item-head">Instalment Payment Plan</h3>
+                      <p class="sc-year-end-spend-instruction-modal__tab-item-para">Convert your transactions across
+                        1,000 merchants into interest-free instalments</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div id="instruction-modal-tab-bank" class="sc-year-end-spend-instruction-modal__tab-body">
+                <ul class="sc-year-end-spend-instruction-modal__tab-list">
+                  <li class="sc-year-end-spend-instruction-modal__tab-item">
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-icon">
+                      <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                    </div>
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-content">
+                      <h3 class="sc-year-end-spend-instruction-modal__tab-item-head">Credit your salary</h3>
+                      <p class="sc-year-end-spend-instruction-modal__tab-item-para">Sync your payday with your
+                        Bonus$aver Account</p>
+                    </div>
+                  </li>
+                  <li class="sc-year-end-spend-instruction-modal__tab-item">
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-icon">
+                      <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                    </div>
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-content">
+                      <h3 class="sc-year-end-spend-instruction-modal__tab-item-head">Deposit fresh funds</h3>
+                      <p class="sc-year-end-spend-instruction-modal__tab-item-para">Deposit S$15k in fresh funds to your
+                        SGD deposit account</p>
+                    </div>
+                  </li>
+                  <li class="sc-year-end-spend-instruction-modal__tab-item">
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-icon">
+                      <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                    </div>
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-content">
+                      <h3 class="sc-year-end-spend-instruction-modal__tab-item-head">Apply for a credit card</h3>
+                      <p class="sc-year-end-spend-instruction-modal__tab-item-para">Apply for any SC Credit Card and
+                        receive approval during the campaign period</p>
+                    </div>
+                  </li>
+                  <li class="sc-year-end-spend-instruction-modal__tab-item">
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-icon">
+                      <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                    </div>
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-content">
+                      <h3 class="sc-year-end-spend-instruction-modal__tab-item-head">Apply for CashOne Personal Loan
+                      </h3>
+                      <p class="sc-year-end-spend-instruction-modal__tab-item-para">Take up a loan of S$15,000 or more
+                        with a tenure of 3 years</p>
+                    </div>
+                  </li>
+                  <li class="sc-year-end-spend-instruction-modal__tab-item">
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-icon">
+                      <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                    </div>
+                    <div class="sc-year-end-spend-instruction-modal__tab-item-content">
+                      <h3 class="sc-year-end-spend-instruction-modal__tab-item-head">Apply for Credit Card Funds
+                        Transfer</h3>
+                      <p class="sc-year-end-spend-instruction-modal__tab-item-para">Consolidate your other banks’ credit
+                        card balances at 0% interest</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-year-end-spend-instruction-modal__bottom">
+          <div class="sc-year-end-spend-instruction-modal__button-close" data-title="Close" data-type="button">
+            <img src="./images/sc-year-end-spend-modal-close-white.png" alt="instruction-modal-close">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- year end spend instruction page -->
+    <div class="sc-year-end-spend-instruction sc-year-end-spend-instruction--hide">
+      <div class="sc-year-end-spend-instruction__wrapper">
+        <div class="sc-year-end-spend-instruction__top">
+          <div class="sc-year-end-spend-instruction__header">
+            <div class="sc-year-end-spend-instruction__header-back" data-title="back" data-type="button">
+              <img src="./images/sc-year-end-spend-back-arrow-blue.svg" alt="instruction-back">
+            </div>
+            <h3 class="sc-year-end-spend-instruction__header-title">How to play</h3>
+          </div>
+        </div>
+        <div class="sc-year-end-spend-instruction__middle">
+          <div class="sc-year-end-spend-instruction__tabs">
+            <button class="sc-year-end-spend-instruction__tabs-button"
+              data-tabid="instruction-tab">Instructions</button>
+            <button class="sc-year-end-spend-instruction__tabs-button" data-tabid="unlock-packs-tab">Unlock card
+              packs</button>
+          </div>
+          <div class="sc-year-end-spend-instruction__tabs-content" id="instruction-tab">
+            <div class="sc-year-end-spend-instruction__tabs-tile">
+              <h4 class="sc-year-end-spend-instruction__tabs-tile-title">Here's how the game works
+              </h4>
+              <div class="sc-year-end-spend-instruction__tabs-tile-wrapper">
+                <div class="sc-year-end-spend-instruction__tabs-tile-content">
+                  <div class="sc-year-end-spend-instruction__tabs-tile-steps">
+                    <span>Step 1</span>
+                    <p>Perform an <span>eligible action</span> to unlock a pack of instant photo cards. Each card pack
+                      contains 3
+                      instant photo cards.</p>
+                  </div>
+                  <div class="sc-year-end-spend-instruction__tabs-tile-steps">
+                    <span>Step 2</span>
+                    <p>Collect the required number of instant photo cards to complete a set and secure your win!</p>
+                  </div>
+                  <div class="sc-year-end-spend-instruction__tabs-tile-images">
+                    <img src="./images/sc-year-end-spend-prize-card-dining-lerouy.png" alt="dining-prize-card" />
+                    <img src="./images/sc-year-end-spend-prize-card-dining-lerouy.png" alt="dining-prize-card" />
+                    <img src="./images/sc-year-end-spend-prize-card-dining-lerouy.png" alt="dining-prize-card" />
+                  </div>
+                  <p class="sc-year-end-spend-instruction__tabs-tile-footer">Prizes are given on a first-come,
+                    first-served basis, while stocks last.</p>
+                </div>
+              </div>
+              <div class="sc-year-end-spend-instruction__tabs-tile-view-more">
+                <img src="./images/sc-year-end-spend-view-more.png">
+                <span>View more</span>
+              </div>
+              <div class="sc-year-end-spend-instruction__tabs-tile-view-less" style="display:none;">
+                <img src="./images/sc-year-end-spend-view-less.png">
+                <span>View less</span>
+              </div>
+            </div>
+          </div>
+          <div class="sc-year-end-spend-instruction__tabs-content" id="unlock-packs-tab">
+            <div class="sc-year-end-spend-instruction__tabs-tile">
+              <h4 class="sc-year-end-spend-instruction__tabs-tile-title">Spend with us
+              </h4>
+              <div class="sc-year-end-spend-instruction__tabs-tile-wrapper">
+                <div class="sc-year-end-spend-instruction__tabs-tile-content">
+
+                </div>
+              </div>
+              <div class="sc-year-end-spend-instruction__tabs-tile-view-more">
+                <img src="./images/sc-year-end-spend-view-more.png">
+                <span>View more</span>
+              </div>
+              <div class="sc-year-end-spend-instruction__tabs-tile-view-less" style="display:none;">
+                <img src="./images/sc-year-end-spend-view-less.png">
+                <span>View less</span>
+              </div>
+            </div>
+            <div class="sc-year-end-spend-instruction__tabs-tile">
+              <h4 class="sc-year-end-spend-instruction__tabs-tile-title">Bank with us
+              </h4>
+              <div class="sc-year-end-spend-instruction__tabs-tile-wrapper">
+                <div class="sc-year-end-spend-instruction__tabs-tile-content">
+
+                </div>
+              </div>
+              <div class="sc-year-end-spend-instruction__tabs-tile-view-more">
+                <img src="./images/sc-year-end-spend-view-more.png">
+                <span>View more</span>
+              </div>
+              <div class="sc-year-end-spend-instruction__tabs-tile-view-less" style="display:none;">
+                <img src="./images/sc-year-end-spend-view-less.png">
+                <span>View less</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-year-end-spend-instruction__bottom">
+          <div class="sc-year-end-spend-instruction__bottom-title">
+            <span>You have</span>
+            <span class="sc-year-end-spend-instruction__bottom-packs">0</span>
+            <span>pack(s)</span>
+          </div>
+          <p class="sc-year-end-spend-instruction__bottom-content">Perform your first action to unlock a card pack and
+            complete the set!</p>
+          <button class="sc-year-end-spend-instruction__bottom-back" data-title="Back to Home" data-type="button">Back
+            to Home</button>
+          <a class="sc-year-end-spend-instruction__bottom-tc sc-year-end-spend-campaign__terms-link"
+            data-title="Terms & Conditions" data-type="link">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+    <!-- year end spend checkin modal -->
+    <div class="sc-year-end-spend-checkin-modal sc-year-end-spend-checkin-modal--hide">
+      <div class="sc-year-end-spend-checkin-modal__wrapper">
+        <div class="sc-year-end-spend-checkin-modal__top">
+          <div class="sc-year-end-spend-checkin-modal__content">
+            <h1 class="sc-year-end-spend-checkin-modal__title">Check-in Modal</h1>
+            <p class="sc-year-end-spend-checkin-modal__message">Unlock 1x card pack*</p>
+            <p class="sc-year-end-spend-checkin-modal__message">when you log in to SC Mobile and check-in at least 5
+              times within a 10 day period</p>
+          </div>
+        </div>
+        <div class="sc-year-end-spend-checkin-modal__bottom">
+          <div class="sc-year-end-spend-checkin-modal__button-close" data-title="Close" data-type="button">
+            <img src="./images/sc-year-end-spend-modal-close-white.png" alt="checkin-modal-close">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- year end spend card collection page -->
+    <div class="sc-year-end-spend-card-collection sc-year-end-spend-card-collection--hide">
+      <div class="sc-year-end-spend-card-collection__header">
+        <div class="sc-year-end-spend-card-collection__header-back" data-title="back" data-type="button">
+          <img class="sc-year-end-spend-card-collection__header-back-image"
+            src="./images/sc-year-end-spend-back-arrow-gray.svg" alt="card-collection-back" />
+        </div>
+        <h4 class="sc-year-end-spend-card-collection__header-title">Collections and Prizes</h4>
+        <div class="sc-year-end-spend-card-collection__header-close" data-title="close" data-type="button">
+          <img class="sc-year-end-spend-card-collection__header-close-image"
+            src="./images/sc-year-end-spend-close-gray.svg" alt="card-collection-close" />
+        </div>
+      </div>
+      <div class="sc-year-end-spend-card-collection__body">
+        <div class="sc-year-end-spend-card-collection__tabs">
+          <button
+            class="sc-year-end-spend-card-collection__tabs-button sc-year-end-spend-card-collection__tabs-button-card"
+            data-tabid="my-cards">My Cards</button>
+          <button
+            class="sc-year-end-spend-card-collection__tabs-button sc-year-end-spend-card-collection__tabs-button-prize"
+            data-tabid="my-prizes">My Prizes</button>
+        </div>
+        <div id="my-cards" class="sc-year-end-spend-card-collection__tabs-content">
+          <div class="sc-year-end-spend-card-collection__tabs-jet">
+            <h4 class="sc-year-end-spend-card-collection__tabs-jet-title">Grand Prize Draw: Private jet to the Maldives
+            </h4>
+            <div class="sc-year-end-spend-card-collection__tabs-jet-wrapper">
+              <img src="./images/sc-year-end-spend-prize-card-private-jet.png"
+                class="sc-year-end-spend-card-collection__tabs-jet-image" alt="grand-prize-card" />
+              <button class="sc-year-end-spend-card-collection__tabs-jet-chances" data-title="300 extra chances"
+                data-type="button">300 extra chances</button>
+            </div>
+          </div>
+          <div class="sc-year-end-spend-card-collection__tabs-tile">
+            <h4 class="sc-year-end-spend-card-collection__tabs-tile-title">Michelin-starred dining experience
+              for two</h4>
+            <div class="sc-year-end-spend-card-collection__tabs-tile-wrapper">
+              <div class="sc-year-end-spend-card-collection__tabs-reward">
+                <div class="sc-year-end-spend-card-collection__tabs-reward-header">
+                  <h4 class="sc-year-end-spend-card-collection__tabs-reward-title">Restaurant Name</h4>
+                  <button class="sc-year-end-spend-card-collection__tabs-reward-prize">View details</button>
+                </div>
+                <div class="sc-year-end-spend-card-collection__tabs-reward-cards">
+                  <span class="sc-year-end-spend-card-collection__tabs-reward-cards-title">Cards to collect</span>
+                  <div class="sc-year-end-spend-card-collection__tabs-reward-cards-image">
+                    <img src="./images/sc-year-end-spend-prize-card-dining-labyrinth.png" alt="dining-prize-card" />
+                    <img src="./images/sc-year-end-spend-prize-card-dining-labyrinth.png" alt="dining-prize-card" />
+                    <img src="./images/sc-year-end-spend-prize-card-dining-labyrinth.png" alt="dining-prize-card" />
+                  </div>
+                </div>
+              </div>
+              <div class="sc-year-end-spend-card-collection__tabs-tile-line"></div>
+              <div
+                class="sc-year-end-spend-card-collection__tabs-reward sc-year-end-spend-card-collection__tabs-reward-gray">
+                <div class="sc-year-end-spend-card-collection__tabs-reward-header">
+                  <h4 class="sc-year-end-spend-card-collection__tabs-reward-title">Restaurant Name</h4>
+                  <button class="sc-year-end-spend-card-collection__tabs-reward-number">1/3</button>
+                </div>
+                <div class="sc-year-end-spend-card-collection__tabs-reward-cards">
+                  <span class="sc-year-end-spend-card-collection__tabs-reward-cards-title">Cards to collect</span>
+                  <div class="sc-year-end-spend-card-collection__tabs-reward-cards-image">
+                    <img src="./images/sc-year-end-spend-prize-card-dining-pangium.png" alt="dining-prize-card" />
+                    <img src="./images/sc-year-end-spend-prize-card-empty.png" alt="empty-prize-card" />
+                    <img src="./images/sc-year-end-spend-prize-card-empty.png" alt="empty-prize-card" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="sc-year-end-spend-card-collection__tabs-tile-view-more">
+              <img src="./images/sc-year-end-spend-view-more.png">
+              <span>View more</span>
+            </div>
+            <div class="sc-year-end-spend-card-collection__tabs-tile-view-less" style="display:none;">
+              <img src="./images/sc-year-end-spend-view-less.png">
+              <span>View less</span>
+            </div>
+          </div>
+          <div class="sc-year-end-spend-card-collection__tabs-tile">
+            <h4 class="sc-year-end-spend-card-collection__tabs-tile-title">Pair of flight tickets*</h4>
+            <div class="sc-year-end-spend-card-collection__tabs-tile-wrapper">
+              <div class="sc-year-end-spend-card-collection__tabs-reward">
+                <div class="sc-year-end-spend-card-collection__tabs-reward-header">
+                  <h4 class="sc-year-end-spend-card-collection__tabs-reward-title">Shanghai</h4>
+                  <button class="sc-year-end-spend-card-collection__tabs-reward-prize">View details</button>
+                </div>
+                <div class="sc-year-end-spend-card-collection__tabs-reward-cards">
+                  <span class="sc-year-end-spend-card-collection__tabs-reward-cards-title">Cards to collect</span>
+                  <div class="sc-year-end-spend-card-collection__tabs-reward-cards-image">
+                    <img src="./images/sc-year-end-spend-prize-card-travel-shanghai-cc.png" alt="travel-prize-card" />
+                    <img src="./images/sc-year-end-spend-prize-card-travel-shanghai-cc.png" alt="travel-prize-card" />
+                    <img src="./images/sc-year-end-spend-prize-card-travel-shanghai-cc.png" alt="travel-prize-card" />
+                    <img src="./images/sc-year-end-spend-prize-card-travel-shanghai-cc.png" alt="travel-prize-card" />
+                  </div>
+                </div>
+              </div>
+              <div class="sc-year-end-spend-card-collection__tabs-tile-line"></div>
+              <div
+                class="sc-year-end-spend-card-collection__tabs-reward sc-year-end-spend-card-collection__tabs-reward-gray">
+                <div class="sc-year-end-spend-card-collection__tabs-reward-header">
+                  <h4 class="sc-year-end-spend-card-collection__tabs-reward-title">Taipei</h4>
+                  <button class="sc-year-end-spend-card-collection__tabs-reward-number">3/4</button>
+                </div>
+                <div class="sc-year-end-spend-card-collection__tabs-reward-cards">
+                  <span class="sc-year-end-spend-card-collection__tabs-reward-cards-title">Cards to collect</span>
+                  <div class="sc-year-end-spend-card-collection__tabs-reward-cards-image">
+                    <img src="./images/sc-year-end-spend-prize-card-travel-taipei.png" alt="travel-prize-card" />
+                    <img src="./images/sc-year-end-spend-prize-card-travel-taipei.png" alt="travel-prize-card" />
+                    <img src="./images/sc-year-end-spend-prize-card-travel-taipei.png" alt="travel-prize-card" />
+                    <img src="./images/sc-year-end-spend-prize-card-travel-taipei.png" alt="travel-prize-card" />
+                    <img src="./images/sc-year-end-spend-prize-card-empty.png" alt="empty-prize-card" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="sc-year-end-spend-card-collection__tabs-tile-view-more">
+              <img src="./images/sc-year-end-spend-view-more.png" alt="view-more">
+              <span>View more</span>
+            </div>
+            <div class="sc-year-end-spend-card-collection__tabs-tile-view-less" style="display:none;">
+              <img src="./images/sc-year-end-spend-view-less.png" alt="view-less">
+              <span>View less</span>
+            </div>
+          </div>
+          <div class="sc-year-end-spend-card-collection__tabs-tile">
+            <h4 class="sc-year-end-spend-card-collection__tabs-tile-title">Designer travel luggage</h4>
+            <div class="sc-year-end-spend-card-collection__tabs-tile-wrapper">
+              <div
+                class="sc-year-end-spend-card-collection__tabs-travel sc-year-end-spend-card-collection__tabs-travel-gray">
+                <div class="sc-year-end-spend-card-collection__tabs-travel-header">
+                  <h4 class="sc-year-end-spend-card-collection__tabs-travel-title">Cards to collect</h4>
+                  <button class="sc-year-end-spend-card-collection__tabs-travel-number">2/5</button>
+                </div>
+                <div class="sc-year-end-spend-card-collection__tabs-travel-cards">
+                  <img src="./images/sc-year-end-spend-prize-card-luggage.png" alt="luggage-prize-card" />
+                  <img src="./images/sc-year-end-spend-prize-card-luggage.png" alt="luggage-prize-card" />
+                  <img src="./images/sc-year-end-spend-prize-card-empty.png" alt="empty-prize-card" />
+                  <img src="./images/sc-year-end-spend-prize-card-empty.png" alt="empty-prize-card" />
+                  <img src="./images/sc-year-end-spend-prize-card-empty.png" alt="empty-prize-card" />
+                </div>
+              </div>
+            </div>
+            <div class="sc-year-end-spend-card-collection__tabs-tile-view-more">
+              <img src="./images/sc-year-end-spend-view-more.png" alt="view-more">
+              <span>View more</span>
+            </div>
+            <div class="sc-year-end-spend-card-collection__tabs-tile-view-less" style="display:none;">
+              <img src="./images/sc-year-end-spend-view-less.png" alt="view-less">
+              <span>View less</span>
+            </div>
+          </div>
+          <div class="sc-year-end-spend-card-collection__tabs-tile">
+            <h4 class="sc-year-end-spend-card-collection__tabs-tile-title">Bonus mystery prize</h4>
+            <div class="sc-year-end-spend-card-collection__tabs-tile-wrapper">
+              <div class="sc-year-end-spend-card-collection__tabs-bonus-content">
+                <h4 class="sc-year-end-spend-card-collection__tabs-bonus-header">Tap each photo card to reveal the bonus
+                  mystery prize won</h4>
+                <div class="sc-year-end-spend-card-collection__tabs-bonus-cards">
+                  <img src="./images/sc-year-end-spend-prize-card-bonus.png" alt="bonus-prize-card" />
+                </div>
+              </div>
+            </div>
+            <div class="sc-year-end-spend-card-collection__tabs-tile-view-more">
+              <img src="./images/sc-year-end-spend-view-more.png" alt="view-more">
+              <span>View more</span>
+            </div>
+            <div class="sc-year-end-spend-card-collection__tabs-tile-view-less" style="display:none;">
+              <img src="./images/sc-year-end-spend-view-less.png" alt="view-less">
+              <span>View less</span>
+            </div>
+          </div>
+        </div>
+        <div id="my-prizes" class="sc-year-end-spend-card-collection__tabs-content">
+          <div class="sc-year-end-spend-card-collection__tabs-prize-header">
+            <h4 class="sc-year-end-spend-card-collection__tabs-prize-header-title">Here are the prizes you've won so
+              far:</h4>
+          </div>
+          <div class="sc-year-end-spend-card-collection__tabs-prize-wrapper">
+            <div class="sc-year-end-spend-card-collection__tabs-prize-tile">
+              <div class="sc-year-end-spend-card-collection__tabs-prize-tile-header">
+                <h4>Michelin-starred dining experiences for two</h4>
+                <span class="sc-year-end-spend-card-collection__tabs-prize-tile-oval"><span
+                    class="sc-year-end-spend-card-collection__tabs-prize-tile-number">3</span></span>
+              </div>
+              <div class="sc-year-end-spend-card-collection__tabs-prize-tile-wrapper">
+                <div class="sc-year-end-spend-card-collection__tabs-prize-tile-content">
+                  <span>Lerouy</span>
+                  <a class="sc-year-end-spend-card-collection__tabs-prize-tile-info" target="_blank" href=""
+                    data-type="link" data-title="View details">View details</a>
+                </div>
+                <div class="sc-year-end-spend-card-collection__tabs-prize-tile-line"></div>
+                <div class="sc-year-end-spend-card-collection__tabs-prize-tile-content">
+                  <span>Seroja</span>
+                  <a class="sc-year-end-spend-card-collection__tabs-prize-tile-info" target="_blank" href=""
+                    data-type="link" data-title="View details">View details</a>
+                </div>
+                <div class="sc-year-end-spend-card-collection__tabs-prize-tile-line"></div>
+                <div class="sc-year-end-spend-card-collection__tabs-prize-tile-content">
+                  <span>Pangium</span>
+                  <a class="sc-year-end-spend-card-collection__tabs-prize-tile-info" target="_blank" href=""
+                    data-type="link" data-title="View details">View details</a>
+                </div>
+                <div class="sc-year-end-spend-card-collection__tabs-prize-tile-line"></div>
+              </div>
+              <div class="sc-year-end-spend-card-collection__tabs-prize-tile-view-more">
+                <img src="./images/sc-year-end-spend-view-more.png" alt="view-more">
+                <span>View more</span>
+              </div>
+              <div class="sc-year-end-spend-card-collection__tabs-prize-tile-view-less" style="display:none;">
+                <img src="./images/sc-year-end-spend-view-less.png" alt="view-less">
+                <span>View less</span>
+              </div>
+            </div>
+            <div class="sc-year-end-spend-card-collection__tabs-prize-tile">
+              <div class="sc-year-end-spend-card-collection__tabs-prize-tile-header">
+                <h4>Pair of flight tickets</h4>
+                <span class="sc-year-end-spend-card-collection__tabs-prize-tile-oval"><span
+                    class="sc-year-end-spend-card-collection__tabs-prize-tile-number">2</span></span>
+              </div>
+              <div class="sc-year-end-spend-card-collection__tabs-prize-tile-wrapper">
+                <div class="sc-year-end-spend-card-collection__tabs-prize-tile-content">
+                  <span>Bali</span>
+                  <a class="sc-year-end-spend-card-collection__tabs-prize-tile-info" target="_blank" href=""
+                    data-type="link" data-title="View details">View details</a>
+                </div>
+                <div class="sc-year-end-spend-card-collection__tabs-prize-tile-line"></div>
+                <div class="sc-year-end-spend-card-collection__tabs-prize-tile-content">
+                  <span>Shanghai</span>
+                  <a class="sc-year-end-spend-card-collection__tabs-prize-tile-info" target="_blank" href=""
+                    data-type="link" data-title="View details">View details</a>
+                </div>
+                <div class="sc-year-end-spend-card-collection__tabs-prize-tile-line"></div>
+              </div>
+              <div class="sc-year-end-spend-card-collection__tabs-prize-tile-view-more">
+                <img src="./images/sc-year-end-spend-view-more.png" alt="view-more">
+                <span>View more</span>
+              </div>
+              <div class="sc-year-end-spend-card-collection__tabs-prize-tile-view-less" style="display:none;">
+                <img src="./images/sc-year-end-spend-view-less.png" alt="view-less">
+                <span>View less</span>
+              </div>
+            </div>
+            <div class="sc-year-end-spend-card-collection__tabs-prize-tile">
+              <div class="sc-year-end-spend-card-collection__tabs-prize-tile-header">
+                <h4>Designer travel luggage</h4>
+                <span class="sc-year-end-spend-card-collection__tabs-prize-tile-oval"><span
+                    class="sc-year-end-spend-card-collection__tabs-prize-tile-number">1</span></span>
+              </div>
+              <div class="sc-year-end-spend-card-collection__tabs-prize-tile-wrapper">
+                <div class="sc-year-end-spend-card-collection__tabs-prize-tile-content">
+                  <span>luggage</span>
+                  <a class="sc-year-end-spend-card-collection__tabs-prize-tile-info" target="_blank" href=""
+                    data-type="link" data-title="View details">View details</a>
+                </div>
+                <div class="sc-year-end-spend-card-collection__tabs-prize-tile-line"></div>
+              </div>
+              <div class="sc-year-end-spend-card-collection__tabs-prize-tile-view-more">
+                <img src="./images/sc-year-end-spend-view-more.png" alt="view-more">
+                <span>View more</span>
+              </div>
+              <div class="sc-year-end-spend-card-collection__tabs-prize-tile-view-less" style="display:none;">
+                <img src="./images/sc-year-end-spend-view-less.png" alt="view-less">
+                <span>View less</span>
+              </div>
+            </div>
+          </div>
+          <div class="sc-year-end-spend-card-collection__tabs-prize-button-wrapper">
+            <div class="sc-year-end-spend-card-collection__tabs-prize-button">Play now</div>
+            <div class="sc-year-end-spend-card-collection__tabs-prize-button" style="display: none;">Unlock more card
+              packs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- year end spend reward popup page -->
+    <div class="sc-year-end-spend-reward-popup sc-year-end-spend-reward-popup--hide">
+      <div class="sc-year-end-spend-reward-popup__container"
+        data-confetti-src="./json/lottie/sc-confetti-animation.json"></div>
+      <div class="sc-year-end-spend-reward-popup__body">
+        <div class="sc-year-end-spend-reward-popup__top">
+          <div class="sc-year-end-spend-reward-popup__card-stack">
+            <img src="./images/sc-year-end-spend-prize-popup-dining-lerouy.png" alt="grand-prize-card"
+              class="sc-year-end-spend-reward-popup__card sc-year-end-spend-reward-popup__card--1">
+            <img src="./images/sc-year-end-spend-prize-popup-dining-lerouy.png" alt="grand-prize-card"
+              class="sc-year-end-spend-reward-popup__card sc-year-end-spend-reward-popup__card--2">
+            <img src="./images/sc-year-end-spend-prize-popup-dining-lerouy.png" alt="grand-prize-card"
+              class="sc-year-end-spend-reward-popup__card sc-year-end-spend-reward-popup__card--3">
+          </div>
+          <div class="sc-year-end-spend-reward-popup__content">
+            <div class="sc-year-end-spend-reward-popup__content-top">
+              <h3 class="sc-year-end-spend-reward-popup__success">
+                <span class="sc-year-end-spend-reward-popup__success-title">Congratulations!</span>
+                <span class="sc-year-end-spend-reward-popup__success-message">You’ve collected all <span
+                    class="sc-year-end-spend-reward-popup__card-count">3</span> cards for</span>
+              </h3>
+              <div class="sc-year-end-spend-reward-popup__content-splitter">
+                <div class="sc-year-end-spend-reward-popup__content-splitter-line"></div>
+              </div>
+              <div class="sc-year-end-spend-reward-popup__reward">
+                <h3 class="sc-year-end-spend-reward-popup__reward-name">Michelin-starred dining experience <br>(for two)
+                  at Lurouy</h3>
+              </div>
+            </div>
+            <div class="sc-year-end-spend-reward-popup__content-bottom">
+              <button class="sc-year-end-spend-reward-popup__button sc-year-end-spend-reward-popup__button-view-details"
+                data-title="View details" data-type="button">View details</button>
+              <a class="sc-year-end-spend-reward-popup__share-link" data-type="link" data-title="Share"><img
+                  src="./images/sc-year-end-spend-share-icon.png" alt=""> Share</a>
+            </div>
+          </div>
+        </div>
+        <div class="sc-year-end-spend-reward-popup__bottom">
+          <div class="sc-year-end-spend-reward-popup__close" data-title="close" data-type="button">
+            <img src="./images/sc-year-end-spend-modal-close-white.png" alt="card-popup-close">
+          </div>
+        </div>
+        <div class="sc-year-end-spend-reward-popup__close-timer">Closes in <span
+            class="sc-year-end-spend-reward-popup__close-timer-value">5</span> seconds...
+        </div>
+      </div>
+    </div>
+    <!-- year end spend reward details page -->
+    <div class="sc-year-end-spend-reward-details sc-year-end-spend-reward-details--hide">
+      <div class="sc-year-end-spend-reward-details__container"
+        data-confetti-src="./json/lottie/sc-confetti-animation.json"></div>
+      <div class="sc-year-end-spend-reward-details__body">
+        <div class="sc-year-end-spend-reward-details__top">
+          <div class="sc-year-end-spend-reward-details__card-stack">
+            <img src="./images/sc-year-end-spend-prize-popup-dining-lerouy.png" alt="grand-prize-card"
+              class="sc-year-end-spend-reward-details__card sc-year-end-spend-reward-details__card--1">
+            <img src="./images/sc-year-end-spend-prize-popup-dining-lerouy.png" alt="grand-prize-card"
+              class="sc-year-end-spend-reward-details__card sc-year-end-spend-reward-details__card--2">
+            <img src="./images/sc-year-end-spend-prize-popup-dining-lerouy.png" alt="grand-prize-card"
+              class="sc-year-end-spend-reward-details__card sc-year-end-spend-reward-details__card--3">
+          </div>
+          <div class="sc-year-end-spend-reward-details__content">
+            <div class="sc-year-end-spend-reward-details__reward">
+              <h3 class="sc-year-end-spend-reward-details__reward-head">
+                <span class="sc-year-end-spend-reward-details__reward-title">Michelin-starred dining
+                  experience</span>
+
+                <span class="sc-year-end-spend-reward-details__reward-name">(for two) at Lerouy</span>
+              </h3>
+            </div>
+            <div class="sc-year-end-spend-reward-details__content-middle">
+              <div class="sc-year-end-spend-reward-details__expiry-details">
+                <p class="sc-year-end-spend-reward-details__label">Expiry date:</p>
+                <p class="sc-year-end-spend-reward-details__expiry">6 months from redemption</p>
+              </div>
+              <div class="sc-year-end-spend-reward-details__content-splitter">
+                <div class="sc-year-end-spend-reward-details__content-splitter-line"></div>
+              </div>
+              <div class="sc-year-end-spend-reward-details__redeem-details">
+                <p class="sc-year-end-spend-reward-details__label">How to redeem:</p>
+                <p class="sc-year-end-spend-reward-details__redeem-message">You will receive a Redemption Notification
+                  from the Bank.</p>
+              </div>
+            </div>
+            <div class="sc-year-end-spend-reward-details__content-actions">
+              <a class="sc-year-end-spend-reward-details__terms-link sc-year-end-spend-campaign__terms-link"
+                data-link="" target="_blank" data-page="reward-modal" data-type="link"
+                data-title="Terms & Conditions">Terms & Conditions</a>
+              <a class="sc-year-end-spend-reward-details__share-link" data-type="link" data-title="Share"><img
+                  src="./images/sc-year-end-spend-share-icon.png" alt=""> Share</a>
+            </div>
+          </div>
+        </div>
+        <div class="sc-year-end-spend-reward-details__bottom">
+          <div class="sc-year-end-spend-reward-details__close" data-title="close" data-type="button">
+            <img src="./images/sc-year-end-spend-modal-close-white.png" alt="card-popup-close">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- year end spend campaign end page -->
+    <div class="sc-year-end-spend-campaign-end sc-year-end-spend-campaign-end--hide">
+      <div class="sc-year-end-spend-campaign-end__wrapper">
+        <div class="sc-year-end-spend-campaign-end__top">
+          <div class="sc-year-end-spend-campaign-end__content">
+            <h1 class="sc-year-end-spend-campaign-end__title">Thank you for your interest!</h1>
+            <p class="sc-year-end-spend-campaign-end__message">Year end spend campaign ended..!</p>
+          </div>
+        </div>
+        <div class="sc-year-end-spend-campaign-end__bottom">
+          <button class="sc-year-end-spend-campaign-end__button-back" data-title="Back to SC Mobile"
+            data-type="button">Back to SC Mobile</button>
+        </div>
+      </div>
+    </div>
+    <!-- year end spend error page -->
+    <div class="sc-year-end-spend-error sc-year-end-spend-error--hide">
+      <div class="sc-year-end-spend-error__wrapper">
+        <div class="sc-year-end-spend-error__top">
+          <div class="sc-year-end-spend-error__header">
+            <div class="sc-year-end-spend-error__header-masthead">
+              <img src="./images/sc-year-end-spend-masthead-white.png" alt="landing-masthead"
+                class="sc-year-end-spend-error__header-masthead-image">
+            </div>
+          </div>
+        </div>
+        <div class="sc-year-end-spend-error__middle">
+          <div class="sc-year-end-spend-error__background-image">
+            <img src="./images/sc-year-end-spend-error.png" alt="error-background">
+          </div>
+          <div class="sc-year-end-spend-error__content">
+            <h2 class="sc-year-end-spend-error__content-title">Refresh your network</h2>
+            <p class="sc-year-end-spend-error__content-description">Quit and restart your SC Mobile app to resolve the
+              network issue</p>
+          </div>
+        </div>
+        <div class="sc-year-end-spend-error__bottom">
+          <div class="sc-year-end-spend-error__button-wrapper">
+            <a class="sc-year-end-spend-error__button sc-year-end-spend-error__button-apply-card"
+              href="https://retail.sc.com/scmobile/sg?ngroute=discover?subType=Cards" target="_blank"
+              data-title="Apply for a credit card" data-type="button">Apply for a credit card</a>
+            <button class="sc-year-end-spend-error__button sc-year-end-spend-error__button-go-back" data-title="Go back"
+              data-type="button">Go back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- year end spend modal page -->
+    <div class="sc-year-end-spend-modal sc-year-end-spend-modal--hide">
+      <div class="sc-year-end-spend-modal__wrapper">
+        <div class="sc-year-end-spend-modal__header">
+          <div class="sc-year-end-spend-modal__header-close"></div>
+        </div>
+        <div class="sc-year-end-spend-modal__content">
+          <iframe src="" frameborder="0" class="modal-frame"></iframe>
+        </div>
+      </div>
+    </div>
+    <!-- year end spend polaroid game play page -->
+    <div class="sc-year-end-spend-polaroid-game sc-year-end-spend-polaroid-game--hide"
+      id="sc-year-end-spend-polaroid-game-section">
       <div class="sc-year-end-spend-polaroid-game__wrapper">
         <div class="sc-year-end-spend-polaroid-game__header">
           <div class="sc-year-end-spend-polaroid-game__header-title">
-            <img src="images/sc-year-end-spend-header.png">
+            <img src="./images/game/sc-year-end-spend-header.png">
           </div>
         </div>
 
@@ -66,17 +1036,17 @@
           <div class="sc-year-end-spend-polaroid-game__polaroid-card-result">
             <div class="sc-year-end-spend-polaroid-game__polaroid-card">
               <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
-                <img src="images/sc-year-end-spend-photo-card-1.png">
+                <img src="./images/game/sc-year-end-spend-photo-card-1.png">
               </div>
             </div>
             <div class="sc-year-end-spend-polaroid-game__polaroid-card">
               <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
-                <img src="images/sc-year-end-spend-photo-card-2.png">
+                <img src="./images/game/sc-year-end-spend-photo-card-2.png">
               </div>
             </div>
             <div class="sc-year-end-spend-polaroid-game__polaroid-card">
               <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
-                <img src="images/sc-year-end-spend-photo-card-3.png">
+                <img src="./images/game/sc-year-end-spend-photo-card-3.png">
               </div>
             </div>
           </div>
@@ -97,9 +1067,9 @@
             <div class="sc-year-end-spend-polaroid-game__action-title">You have <span
                 class="sc-year-end-spend-polaroid-game__card-left-no">9</span> pack(s) left</div>
             <div class="sc-year-end-spend-polaroid-game__2-btn-row">
-              <button class="sc-year-end-spend-polaroid-game__btn-01" type="button" data-type="button"
+              <button class="sc-year-end-spend-polaroid-game__btn-01 sc-year-end-spend-polaroid-game__open-another" type="button" data-type="button"
                 data-title="Open another">Open another</button>
-              <button class="sc-year-end-spend-polaroid-game__btn-01" type="button" data-type="button"
+              <button class="sc-year-end-spend-polaroid-game__btn-01 sc-year-end-spend-polaroid-game__open-all" type="button" data-type="button"
                 data-title="Open all">Open all</button>
             </div>
             <button class="sc-year-end-spend-polaroid-game__btn-02" type="button" data-type="button"
@@ -114,56 +1084,59 @@
         data-item-height="185" data-spacing-x="190" data-curve-intensity="40" data-angles="0,-20,-40,-65,-90"
         data-swipe-threshold="30" data-vertical-threshold="60">
         <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="1">
-          <img src="images/sc-year-end-spend-pack-alpine.png" alt="1">
+          <img src="./images/game/sc-year-end-spend-pack-alpine.png" alt="1">
         </div>
         <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="2">
-          <img src="images/sc-year-end-spend-pack-beach.png" alt="2">
+          <img src="./images/game/sc-year-end-spend-pack-beach.png" alt="2">
         </div>
         <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="3">
-          <img src="images/sc-year-end-spend-pack-bluedove.png" alt="3">
+          <img src="./images/game/sc-year-end-spend-pack-bluedove.png" alt="3">
         </div>
         <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="4">
-          <img src="images/sc-year-end-spend-pack-fresh.png" alt="4">
+          <img src="./images/game/sc-year-end-spend-pack-fresh.png" alt="4">
         </div>
         <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="5">
-          <img src="images/sc-year-end-spend-pack-greendove.png" alt="5">
+          <img src="./images/game/sc-year-end-spend-pack-greendove.png" alt="5">
         </div>
         <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="6">
-          <img src="images/sc-year-end-spend-pack-meal.png" alt="6">
+          <img src="./images/game/sc-year-end-spend-pack-meal.png" alt="6">
         </div>
         <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="7">
-          <img src="images/sc-year-end-spend-pack-moon.png" alt="7">
+          <img src="./images/game/sc-year-end-spend-pack-moon.png" alt="7">
         </div>
         <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="8">
-          <img src="images/sc-year-end-spend-pack-sky.png" alt="8">
+          <img src="./images/game/sc-year-end-spend-pack-sky.png" alt="8">
         </div>
         <div class="sc-year-end-spend-polaroid-game__slider-img" data-id="9">
-          <img src="images/sc-year-end-spend-pack-village.png" alt="9">
+          <img src="./images/game/sc-year-end-spend-pack-village.png" alt="9">
         </div>
       </div>
 
       <div id="polaroid-game-pocket" class="sc-year-end-spend-polaroid-game__pocket">
         <div class="sc-year-end-spend-polaroid-game__pocket-camera sc-year-end-spend-polaroid-game__pocket-camera-top">
-          <img src="images/sc-year-end-spend-pocket-camera-top.png">
+          <img src="./images/game/sc-year-end-spend-pocket-camera-top.png">
         </div>
         <div
           class="sc-year-end-spend-polaroid-game__pocket-camera sc-year-end-spend-polaroid-game__pocket-camera-bottom">
-          <img src="images/sc-year-end-spend-pocket-camera-bottom.png">
+          <img src="./images/game/sc-year-end-spend-pocket-camera-bottom.png">
         </div>
         <div class="sc-year-end-spend-polaroid-game__dispense-polaroid">
-          <img src="images/sc-year-end-spend-dispensing.png">
-          <img src="images/sc-year-end-spend-dispensing.png">
-          <img src="images/sc-year-end-spend-dispensing.png">
+          <img src="./images/game/sc-year-end-spend-dispensing.png">
+          <img src="./images/game/sc-year-end-spend-dispensing.png">
+          <img src="./images/game/sc-year-end-spend-dispensing.png">
         </div>
       </div>
-
       <div class="sc-year-end-spend-polaroid-game__bg-dark-blue" id="polaroid-game-bg-dark"></div>
       <div class="sc-year-end-spend-polaroid-game__bg-light-blue" id="polaroid-game-bg-light"></div>
     </div>
   </div>
-
- <script type="module" src="./js/sc-year-end-spend-main.js"></script>
-
+  <!-- year end spend campaign script -->
+  <script type="module" src="./js/sc-year-end-spend-main.js"></script>
+  <script>  document.body.addEventListener("click", function(e) {
+  if (e.target.classList.contains("sc-year-end-spend-polaroid-game__open-another")) {
+    // Your click handler code
+    console.log("Open another clicked");
+  }
+});
+  </script>
 </body>
-
-</html>

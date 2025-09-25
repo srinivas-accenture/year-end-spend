@@ -1,5 +1,7 @@
 class ScYESGameScreen {
   constructor() {
+    this.generalInstance = null;
+
     // Configuration Constants
     this.CONFIG = {
       DOM_IDS: {
@@ -90,6 +92,16 @@ class ScYESGameScreen {
     this.activeAnimations = new Set();
     this.isInitialized = false;
     this.debugMode = true; // Set to true to enable debug logging
+    this.restartButton = null; // Track the restart button
+  }
+
+  // set the general instance
+  setGeneralInstance(instance) {
+    console.log(
+      "🚀 ~ ScYESGameScreen ~ setGeneralInstance ~ instance:",
+      instance
+    );
+    this.generalInstance = instance;
   }
 
   /**
@@ -104,6 +116,7 @@ class ScYESGameScreen {
       this.updateLayoutDimensions();
       this.renderCarousel();
       this.isInitialized = true;
+      this.bindEventListeners();
 
       console.log("ScYESGameScreen: Initialized successfully");
     } catch (error) {
@@ -245,6 +258,20 @@ class ScYESGameScreen {
     this.addEventListenerWithCleanup(document, "mouseup", () => {
       this.handleGestureEnd();
     });
+    try {
+      this.restartButton = document.querySelector(
+        '.sc-year-end-spend-polaroid-game__btn-01[data-title="Open another"]'
+      );
+      console.log(this.res);
+
+      if (this.restartButton) {
+        this.addEventListenerWithCleanup(this.restartButton, "click", (e) => {
+          this.restart(e);
+        });
+      }
+    } catch (error) {
+      console.warn("Error binding restart button:", error.message);
+    }
   }
 
   /**

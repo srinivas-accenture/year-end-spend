@@ -3358,7 +3358,7 @@ $height-breakpoints-basewidth: (
           margin-left: calc(min(4px, #{responsive-font(4px)}));
         }
 
-        .sc-year-end-spend-polaroid-game__slider{
+        .sc-year-end-spend-polaroid-game__slider {
           z-index: 0;
         }
       }
@@ -3442,6 +3442,25 @@ $height-breakpoints-basewidth: (
             height: 100%;
             pointer-events: none;
             display: block;
+          }
+        }
+
+        &-frame {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: calc(min(200px, #{responsive-font(200px)}));
+          height: auto;
+          transform: translate(-50%, -50%);
+          z-index: 10;
+          /* above cards */
+          pointer-events: none;
+          /* don’t block swipes */
+
+          img {
+            display: block;
+            width: 100%;
+            height: auto;
           }
         }
       }

@@ -3350,12 +3350,16 @@ $height-breakpoints-basewidth: (
           background-position: top left;
           background-size: 100%;
           background-repeat: repeat;
-          background-image: url(../images/game/game/sc-year-end-spend-bg-light-blue.png);
+          background-image: url(../images/game/sc-year-end-spend-bg-light-blue.png);
           width: calc(100% + calc(min(4px, #{responsive-font(4px)})));
         }
 
         .sc-year-end-spend-polaroid-game__pocket .sc-year-end-spend-polaroid-game__pocket-camera img {
           margin-left: calc(min(4px, #{responsive-font(4px)}));
+        }
+
+        .sc-year-end-spend-polaroid-game__slider{
+          z-index: 0;
         }
       }
 
@@ -3519,12 +3523,13 @@ $height-breakpoints-basewidth: (
 
       &__dispense-polaroid-result {
         position: relative;
-        z-index: 3;
+        z-index: 10;
         opacity: 0;
         pointer-events: none;
         color: $color-white;
         text-align: center;
         padding: 0 calc(min(18px, #{responsive-font(18px)}));
+        pointer-events: auto;
 
         &.result-show {
           .sc-year-end-spend-polaroid-game__polaroid-card {

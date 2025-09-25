@@ -3462,6 +3462,49 @@ $height-breakpoints-basewidth: (
             width: 100%;
             height: auto;
           }
+
+          &-base{
+            position: relative;
+
+            &::after{
+              content:'';
+              position: absolute;
+              right:0;
+              bottom: 0;
+              width: 100%;
+              z-index: 10;
+              background-image: url(../images/game/sc-year-end-spend-arrow-right.png);
+              background-size: 100%;
+              background-position: top left;
+              width: 30px;
+              height: 20px;
+            }
+
+            &-img::after{
+              content:'';
+              position: absolute;
+              right:-30px;
+              bottom: 20%;
+              z-index: 10;
+              background-image: url(../images/game/sc-year-end-spend-arrow-right.png);
+              background-size: 100%;
+              background-position: top left;
+              width: 30px;
+              height: 20px;
+            }
+            &-img::before{
+              content:'';
+              position: absolute;
+              left:-30px;
+              bottom: 20%;
+              z-index: 10;
+              background-image: url(../images/game/sc-year-end-spend-arrow-left.png);
+              background-size: 100%;
+              background-position: top left;
+              width: 30px;
+              height: 20px;
+            }
+          }
         }
       }
 

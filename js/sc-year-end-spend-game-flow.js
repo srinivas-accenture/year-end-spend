@@ -56,6 +56,15 @@ class ScYESGameScreen {
       },
     };
 
+    // Section Management - NEW
+    this.sections = {
+      result: "polaroid-result",
+      slider: "polaroid-game-slider",
+      pocket: "polaroid-game-pocket",
+      bgDark: "polaroid-game-bg-dark",
+      bgLight: "polaroid-game-bg-light",
+    };
+
     // DOM Elements
     this.elements = {};
     this.items = [];
@@ -206,6 +215,215 @@ class ScYESGameScreen {
     this.isDragging = false;
   }
 
+  // NEW SECTION MANAGEMENT METHODS
+
+  /**
+   * Simple show section method
+   * @param {string} sectionName - Name from this.sections
+   */
+  showSection(sectionName) {
+    const elementId = this.sections[sectionName];
+    if (elementId) {
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.style.display = "block";
+        element.style.visibility = "visible";
+        element.style.opacity = "1";
+
+        // Special handling for slider positioning
+        if (sectionName === "slider") {
+          element.style.position = "absolute";
+          element.style.zIndex = "10";
+        }
+      }
+    }
+  }
+
+  /**
+   * Simple hide section method
+   * @param {string} sectionName - Name from this.sections
+   */
+  hideSection(sectionName) {
+    const elementId = this.sections[sectionName];
+    if (elementId) {
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.style.display = "none";
+      }
+    }
+  }
+
+  /**
+   * Show multiple sections at once
+   * @param {string[]} sectionNames - Array of section names
+   */
+  showSections(sectionNames) {
+    sectionNames.forEach((section) => this.showSection(section));
+  }
+
+  /**
+   * Hide multiple sections at once
+   * @param {string[]} sectionNames - Array of section names
+   */
+  hideSections(sectionNames) {
+    sectionNames.forEach((section) => this.hideSection(section));
+  }
+
+  /**
+   * Switch between sections - hide some, show others
+   * @param {string[]} hideList - Sections to hide
+   * @param {string[]} showList - Sections to show
+   */
+  switchSections(hideList = [], showList = []) {
+    this.hideSections(hideList);
+    this.showSections(showList);
+  }
+
+  /**
+   * Reset game to initial playing state
+   */
+  resetToGameState() {
+    console.log("=== RESET TO GAME STATE START ===");
+
+    // Kill any active animations first
+    this.activeAnimations.forEach((animation) => {
+      if (animation && animation.kill) {
+        animation.kill();
+      }
+    });
+    this.activeAnimations.clear();
+
+    // Hide result page
+    this.hideSection("result");
+
+    // Show game elements
+    this.showSections(["slider", "pocket", "bgDark"]);
+
+    // Reset all slider items (packs) - restore any that were hidden
+    this.items.forEach((item, index) => {
+      item.style.display = "block";
+      item.style.opacity = "1";
+      item.style.visibility = "visible";
+      item.classList.remove("active");
+
+      // Clear any GSAP transforms that might position them off-screen
+      gsap.set(item, { clearProps: "all" });
+    });
+
+    // Reset pocket to initial animation state
+    const pocket = document.getElementById(this.sections.pocket);
+    if (pocket) {
+      console.log(
+        "Resetting pocket - removing classes:",
+        pocket.classList.toString()
+      );
+      // Remove all classes that affect animation sequence
+      pocket.classList.remove("active", "dismiss-card");
+      // Reset to initial opacity and clear GSAP properties
+      gsap.set(pocket, { opacity: 1, clearProps: "transform,scale,x,y" });
+      pocket.style.opacity = "1";
+      pocket.style.visibility = "visible";
+
+      // COMPREHENSIVE RESET: Reset dispensing elements completely
+      const dispensingElements = pocket.querySelectorAll(
+        ".sc-year-end-spend-polaroid-game__dispense-polaroid img"
+      );
+      console.log("Found dispensing elements:", dispensingElements.length);
+
+      dispensingElements.forEach((img, index) => {
+        // First, disable ALL transitions to prevent interference during reset
+        img.style.transition = "none";
+        img.style.webkitTransition = "none";
+
+        // Reset to initial CSS state from your stylesheet
+        img.style.position = "absolute";
+        img.style.zIndex = "14";
+        img.style.left = "50%";
+        img.style.top = "5%"; // Initial position
+        img.style.transform = "translate(-50%, 50%) scale(1)"; // Initial transform
+        img.style.width = "calc(min(340px, 79.07vw))"; // From your CSS
+        img.style.opacity = "1";
+        img.style.display = "block";
+        img.style.visibility = "visible";
+
+        // Force style computation to ensure reset is applied
+        const computedStyle = window.getComputedStyle(img);
+        console.log(
+          `Image ${index + 1} reset - top:`,
+          computedStyle.top,
+          "transform:",
+          computedStyle.transform
+        );
+
+        // Force reflow
+        img.offsetHeight;
+
+        // Re-enable transitions after a brief delay to ensure clean state
+        setTimeout(() => {
+          img.style.transition = "";
+          img.style.webkitTransition = "";
+        }, 10);
+      });
+
+      console.log("Pocket after reset - classes:", pocket.classList.toString());
+    }
+
+    // Reset background to initial state for animations
+    const bgDark = document.getElementById(this.sections.bgDark);
+    if (bgDark) {
+      console.log("Resetting bgDark - removing dismiss class");
+      bgDark.classList.remove("dismiss");
+      gsap.set(bgDark, { clearProps: "all" });
+    }
+
+    // Reset section classes that affect the final result state
+    if (this.elements.section) {
+      this.elements.section.classList.remove("active-scroll");
+    }
+
+    // Reset result element to initial state
+    if (this.elements.result) {
+      this.elements.result.classList.remove("result-show");
+      gsap.set(this.elements.result, {
+        opacity: 0,
+        clearProps: "transform,scale,x,y",
+      });
+      this.elements.result.style.opacity = "0";
+    }
+
+    // Reset slider to initial state
+    if (this.elements.slider) {
+      gsap.set(this.elements.slider, {
+        opacity: 1,
+        clearProps: "transform,scale,x,y",
+      });
+      this.elements.slider.style.opacity = "1";
+      this.elements.slider.style.visibility = "visible";
+    }
+
+    // Completely reset game state
+    if (this.isInitialized) {
+      this.resetGestureState();
+      this.setupGameState();
+      this.updateLayoutDimensions();
+      this.renderCarousel();
+    }
+
+    console.log("=== RESET TO GAME STATE END ===");
+  }
+
+  /**
+   * Show result page
+   */
+  showResultState() {
+    this.switchSections(
+      ["slider", "pocket"], // hide
+      ["result"] // show
+    );
+  }
+
+  // END NEW SECTION MANAGEMENT METHODS
+
   /**
    * Bind all event listeners with proper cleanup tracking
    */
@@ -258,15 +476,17 @@ class ScYESGameScreen {
     this.addEventListenerWithCleanup(document, "mouseup", () => {
       this.handleGestureEnd();
     });
+
+    // UPDATED RESTART BUTTON HANDLER
     try {
       this.restartButton = document.querySelector(
-        '.sc-year-end-spend-polaroid-game__btn-01[data-title="Open another"]'
+        ".sc-year-end-spend-polaroid-game__open-another"
       );
-      console.log(this.res);
 
       if (this.restartButton) {
         this.addEventListenerWithCleanup(this.restartButton, "click", (e) => {
-          this.restart(e);
+          // Use the new simplified section management
+          this.resetToGameState();
         });
       }
     } catch (error) {
@@ -676,16 +896,59 @@ class ScYESGameScreen {
       onComplete: () => {
         this.activeAnimations.delete(fadeAnimation);
         this.elements.slider.style.display = "none";
-        this.elements.pocket.classList.add(this.CONFIG.CSS_CLASSES.ACTIVE);
-        this.elements.bgDark.classList.add(this.CONFIG.CSS_CLASSES.DISMISS);
 
-        setTimeout(() => {
-          this.executePocketFadeOut();
-        }, this.CONFIG.TIMING.POCKET_DELAY);
+        console.log("Starting dispensing animation with GSAP");
+        this.executeDispensingAnimation();
       },
     });
 
     this.activeAnimations.add(fadeAnimation);
+  }
+
+  /**
+   * Execute dispensing animation using GSAP (more reliable than CSS transitions)
+   */
+  executeDispensingAnimation() {
+    // Add the active class for styling, but handle animation with GSAP
+    this.elements.pocket.classList.add(this.CONFIG.CSS_CLASSES.ACTIVE);
+    this.elements.bgDark.classList.add(this.CONFIG.CSS_CLASSES.DISMISS);
+
+    // Get dispensing elements
+    const dispensingElements = this.elements.pocket.querySelectorAll(
+      ".sc-year-end-spend-polaroid-game__dispense-polaroid img"
+    );
+    console.log(
+      "Found dispensing elements for GSAP animation:",
+      dispensingElements.length
+    );
+
+    // Animate each dispensing card with staggered delays
+    dispensingElements.forEach((img, index) => {
+      const delay = 2 + index * 0.2; // 2s, 2.2s, 2.4s delays
+
+      const dispensingAnimation = gsap.to(img, {
+        top: "1300px",
+        scale: 2,
+        duration: 0.5,
+        delay: delay,
+        ease: "ease-in-out",
+        onStart: () => {
+          console.log(`Dispensing animation started for image ${index + 1}`);
+        },
+        onComplete: () => {
+          console.log(`Dispensing animation completed for image ${index + 1}`);
+          this.activeAnimations.delete(dispensingAnimation);
+        },
+      });
+
+      this.activeAnimations.add(dispensingAnimation);
+    });
+
+    // Continue with pocket fade out after all dispensing animations
+    setTimeout(() => {
+      console.log("About to execute pocket fade out after dispensing");
+      this.executePocketFadeOut();
+    }, this.CONFIG.TIMING.POCKET_DELAY);
   }
 
   /**
@@ -705,9 +968,13 @@ class ScYESGameScreen {
   }
 
   /**
-   * Show final game result with animation
+   * Show final game result with animation - UPDATED to use section management
    */
   showGameResult() {
+    // Use the new section management for the basic show/hide
+    this.showResultState();
+
+    // Keep the existing result animation
     const resultAnimation = gsap.to(this.elements.result, {
       opacity: 1,
       ...this.CONFIG.ANIMATIONS.RESULT_SHOW,

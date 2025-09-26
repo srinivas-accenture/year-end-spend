@@ -6,12 +6,14 @@ let campaignConfigData = null;
 class ScYESGeneralScreen {
   constructor() {
     this.gameInstance = null;
+    this.isRequireOfferUpdate = false;
     this.isRegistered = false;
-    this.isNewUser = false;
     this.campaignExpiryDate = "";
     this.isCampaignExpired = false;
     this.packsCount = 0;
     this.issuedCards = [];
+    this.currentCardGroupId = "";
+    this.currentCardGroup = [];
     this.issuedCardGroups = [];
     this.issuedRewards = [];
     this.acquiredRewards = [];
@@ -32,9 +34,7 @@ class ScYESGeneralScreen {
     this.checkinPopupModal = document.querySelector(
       ".sc-year-end-spend-checkin-modal"
     );
-    this.profileCustomisePage = document.querySelector(
-      ".sc-year-end-spend-profile-customisation"
-    );
+    this.profilePage = document.querySelector(".sc-year-end-spend-profile");
     this.instructionModalPage = document.querySelector(
       ".sc-year-end-spend-instruction-modal"
     );
@@ -100,6 +100,10 @@ class ScYESGeneralScreen {
         JSON.stringify(that.issuedCardGroups)
       );
       window.sessionStorage.setItem(
+        "currentCardGroup",
+        JSON.stringify(that.currentCardGroup)
+      );
+      window.sessionStorage.setItem(
         "issuedRewards",
         JSON.stringify(that.issuedRewards)
       );
@@ -134,7 +138,7 @@ class ScYESGeneralScreen {
       that.initiateRegConfirmationPageEvents();
       that.initiateLandingPageEvents();
       that.initiateCheckinPageEvents();
-      that.initiateProfileCustomisationPageEvents();
+      that.initiateProfilePageEvents();
       that.initiateInstructionModalEvents();
       that.initiateInstructionPageEvents();
       that.initiateCardCollectionPageEvents();
@@ -215,6 +219,8 @@ class ScYESGeneralScreen {
         event.preventDefault();
         event.stopPropagation();
         that.showInstructionModal("registration");
+        // that.registrationPage.classList.add('sc-year-end-spend-registration--hide');
+        // that.showInstructionPage('registration');
       });
 
       // Get the register button and add a click event listener
@@ -283,8 +289,8 @@ class ScYESGeneralScreen {
       unlockPackButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        that.showInstructionPage();
         that.landingPage.classList.add("sc-year-end-spend-landing--hide");
+        that.showInstructionPage("landing");
       });
 
       // Get the play now button and add a click event listener
@@ -310,8 +316,8 @@ class ScYESGeneralScreen {
       viewPrizesButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        that.showCardCollectionPage();
         that.landingPage.classList.add("sc-year-end-spend-landing--hide");
+        that.showCardCollectionPage();
       });
 
       // Get the check in button and add a click event listener
@@ -333,9 +339,8 @@ class ScYESGeneralScreen {
       howToPlayLink.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        // that.showInstructionModal('landing');
-        that.showInstructionPage();
         that.landingPage.classList.add("sc-year-end-spend-landing--hide");
+        that.showInstructionPage("landing");
       });
 
       // Get the profile customise button and add a click event listener
@@ -346,9 +351,7 @@ class ScYESGeneralScreen {
         event.preventDefault();
         event.stopPropagation();
         this.landingPage.classList.add("sc-year-end-spend-landing--hide");
-        this.profileCustomisePage.classList.remove(
-          "sc-year-end-spend-profile-customisation--hide"
-        );
+        this.profilePage.classList.remove("sc-year-end-spend-profile--hide");
       });
     } catch (error) {
       throw new Error(
@@ -401,6 +404,8 @@ class ScYESGeneralScreen {
           ".sc-year-end-spend-instruction-modal__button-close"
         );
       instructionModalCloseButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
         that.closeInstructionModal();
       });
 
@@ -447,7 +452,6 @@ class ScYESGeneralScreen {
         event.stopPropagation();
         that.closeInstructionPage();
         that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
-        // that.instructionPage.classList.add('sc-year-end-spend-instruction--hide');
       });
 
       // Get the instruction back button and add a click event listener
@@ -459,7 +463,6 @@ class ScYESGeneralScreen {
         event.stopPropagation();
         that.closeInstructionPage();
         that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
-        // that.instructionPage.classList.add('sc-year-end-spend-instruction--hide');
       });
 
       // Get the unlock packs link and add a click event listener
@@ -539,27 +542,24 @@ class ScYESGeneralScreen {
   }
 
   /**
-   * Initializes event listeners for the profile customisation page.
-   * Specifically, adds a click event listener to the back button in the profile customisation header.
-   * When the back button is clicked, it navigates back to the landing page and hides the profile customisation page.
+   * Initializes event listeners for the profile page.
+   * Specifically, adds a click event listener to the back button in the profile header.
+   * When the back button is clicked, it navigates back to the landing page and hides the profile page.
    *
    * @throws {Error} Throws an error if event listener initialization fails.
    */
-  initiateProfileCustomisationPageEvents() {
+  initiateProfilePageEvents() {
     const that = this;
     try {
       // Get the profile customise back button and add a click event listener
-      const profileCustomiseBackButton =
-        that.profileCustomisePage.querySelector(
-          ".sc-year-end-spend-profile-customisation__header-back"
-        );
-      profileCustomiseBackButton.addEventListener("click", (event) => {
+      const profilePageBackButton = that.profilePage.querySelector(
+        ".sc-year-end-spend-profile__header-back"
+      );
+      profilePageBackButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
         that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
-        that.profileCustomisePage.classList.add(
-          "sc-year-end-spend-profile-customisation--hide"
-        );
+        that.profilePage.classList.add("sc-year-end-spend-profile--hide");
       });
     } catch (error) {
       throw new Error(
@@ -586,7 +586,6 @@ class ScYESGeneralScreen {
         event.preventDefault();
         event.stopPropagation();
         that.closeCardCollectionPage();
-        // that.cardsCollectionPage.classList.add('sc-year-end-spend-card-collection--hide');
         that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
       });
 
@@ -598,7 +597,6 @@ class ScYESGeneralScreen {
         event.preventDefault();
         event.stopPropagation();
         that.closeCardCollectionPage();
-        // that.cardsCollectionPage.classList.add('sc-year-end-spend-card-collection--hide');
         that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
       });
 
@@ -681,24 +679,44 @@ class ScYESGeneralScreen {
         });
       });
 
-      // Get the view prize buttons and add click event listeners
-      const viewPrizeButtons = that.cardsCollectionPage.querySelectorAll(
-        ".sc-year-end-spend-card-collection__tabs-reward-prize"
-      );
-      viewPrizeButtons.forEach((viewPrizeButton) => {
-        viewPrizeButton.addEventListener("click", (event) => {
+      // Get the view details buttons from card tab and add click event listeners
+      const viewCardTabDetailsButtons =
+        that.cardsCollectionPage.querySelectorAll(
+          ".sc-year-end-spend-card-collection__tabs-reward-prize"
+        );
+      viewCardTabDetailsButtons.forEach((viewCardTabDetailsButton) => {
+        viewCardTabDetailsButton.addEventListener("click", (event) => {
           event.preventDefault();
           event.stopPropagation();
-          that.isRewardPopupClosed = false;
           that.rewardPopupModal.classList.remove(
             "sc-year-end-spend-reward-popup--hide"
           );
 
-          setTimeout(() => {
-            if (that.isRewardPopupClosed === false)
-              that.rewardPopupModal.classList.add(
-                "sc-year-end-spend-reward-popup--hide"
-              );
+          that.timeoutId = setTimeout(() => {
+            that.rewardPopupModal.classList.add(
+              "sc-year-end-spend-reward-popup--hide"
+            );
+          }, 5000);
+        });
+      });
+
+      // Get the view details buttons from prize tab and add click event listeners
+      const viewPrizeTabDetailsButtons =
+        that.cardsCollectionPage.querySelectorAll(
+          ".sc-year-end-spend-card-collection__tabs-prize-tile-info"
+        );
+      viewPrizeTabDetailsButtons.forEach((viewPrizeTabDetailsButton) => {
+        viewPrizeTabDetailsButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          that.rewardPopupModal.classList.remove(
+            "sc-year-end-spend-reward-popup--hide"
+          );
+
+          that.timeoutId = setTimeout(() => {
+            that.rewardPopupModal.classList.add(
+              "sc-year-end-spend-reward-popup--hide"
+            );
           }, 5000);
         });
       });
@@ -728,7 +746,7 @@ class ScYESGeneralScreen {
       rewardPopupCloseButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        that.isRewardPopupClosed = true;
+        clearTimeout(that.timeoutId);
         that.rewardPopupModal.classList.add(
           "sc-year-end-spend-reward-popup--hide"
         );
@@ -741,7 +759,7 @@ class ScYESGeneralScreen {
       viewRewardDetailsButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        that.isRewardPopupClosed = true;
+        clearTimeout(that.timeoutId);
         that.rewardPopupModal.classList.add(
           "sc-year-end-spend-reward-popup--hide"
         );
@@ -757,9 +775,7 @@ class ScYESGeneralScreen {
       rewardPopupShareLink.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        console.log(
-          "Year End Spend - Share functionality will be updated soon!"
-        );
+        that.handleShareClick("YES-Reward");
       });
     } catch (error) {
       throw new Error(
@@ -798,9 +814,7 @@ class ScYESGeneralScreen {
       rewardDetailsShareLink.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        console.log(
-          "Year End Spend - Share functionality will be updated soon!"
-        );
+        that.handleShareClick("YES-RewardDetails");
       });
     } catch (error) {
       throw new Error(
@@ -879,6 +893,54 @@ class ScYESGeneralScreen {
       });
     } catch (error) {
       throw new Error(`Failed to initiate error page events: ${error.message}`);
+    }
+  }
+
+  handleShareClick(rewardName) {
+    try {
+      let shareMessage = window?.general?.shareObject?.message || "";
+
+      if (!shareMessage) return;
+
+      shareMessage = shareMessage.split("{{reward}}").join(rewardName);
+
+      let inputObj = {
+        shareTitle: "",
+        shareSubject: "",
+        shareMessage: shareMessage,
+      };
+
+      if (window.cordova) {
+        inputObj = {
+          title: "",
+          subject: "",
+          message: shareMessage,
+          url: "",
+        };
+
+        window.cordova.exec(
+          function () {
+            return console.log("Social sharing - success callback");
+          },
+          function (error) {
+            return console.error("Social sharing", error);
+          },
+          "SocialSharing",
+          "shareWithOptions",
+          [inputObj]
+        );
+      } else {
+        console.error("Running function  => cordova not found");
+        const deviceOs = Utils.getDeviceDetails().os;
+
+        if (deviceOs === "Android") {
+          window.Android.shareAction(JSON.stringify(inputObj));
+        } else if (deviceOs === "iOS") {
+          window.webkit.messageHandlers.shareAction.postMessage(inputObj);
+        }
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -1076,8 +1138,15 @@ class ScYESGeneralScreen {
     let impressionObj = that.getImpressionObject(sourceEle, "Clicked");
 
     if (onEvent === "game-play") {
+      const issuedCardGroups =
+        JSON.parse(window.sessionStorage.getItem("issuedCardGroups")) || [];
+      const currentCardGroup = issuedCardGroups.shift();
+      that.currentCardGroupId = Object.keys(currentCardGroup)[0];
       let contextValue =
-        rewardValue.toLowerCase() === "all" ? "AllCards" : "groupId";
+        rewardValue.toLowerCase() === "all"
+          ? "AllCards"
+          : that.currentCardGroupId;
+
       impressionObj.contexts = [
         {
           type: "StatusUpdate",
@@ -1088,6 +1157,10 @@ class ScYESGeneralScreen {
     }
 
     that.updateClickImpression(impressionObj, successCallback);
+
+    if (window.general.environment === "dev") {
+      that.handleGamePlayImpressionSuccess(rewardValue);
+    }
   }
 
   /**
@@ -1168,6 +1241,7 @@ class ScYESGeneralScreen {
     // eslint-disable-next-line no-useless-catch
     try {
       if (typeof offerData === "object" && offerData !== null) {
+        let issuedCardGroups = [];
         const {
           isRegistered,
           campaignExpiryDate,
@@ -1178,41 +1252,55 @@ class ScYESGeneralScreen {
         } = offerData.fields.reduce(
           (acc, field) => {
             if (
-              field.name === campaignConfigData.offer.fields.Registered &&
+              field.name ===
+                (campaignConfigData?.offer?.fields?.registered ||
+                  "Registered") &&
               field.value.toLowerCase() === "y"
             ) {
               acc.isRegistered = true;
             }
             if (
               field.name ===
-                campaignConfigData.offer.fields.CampaignExpiryDate &&
+                (campaignConfigData?.offer?.fields?.campaignExpiryDate ||
+                  "CampaignExpiryDate") &&
               field.value
             ) {
               acc.campaignExpiryDate = field.value;
             }
             if (
-              field.name === campaignConfigData.offer.fields.PacksCount &&
+              field.name ===
+                (campaignConfigData?.offer?.fields?.packsCount || "Chances") &&
               field.value
             ) {
               acc.packsCount = parseInt(field.value);
             }
             if (
-              field.name === campaignConfigData.offer.fields.AllCards &&
+              field.name ===
+                (campaignConfigData?.offer?.fields?.allCards || "AllCards") &&
               field.value
             ) {
               acc.issuedCards = JSON.parse(field.value);
+              issuedCardGroups = that.groupCardsByProperty(
+                acc.issuedCards,
+                campaignConfigData?.offer?.groupId || "groupId"
+              );
             }
             if (
-              field.name === campaignConfigData.offer.fields.AllRewards &&
+              field.name ===
+                (campaignConfigData?.offer?.fields?.allRewards ||
+                  "AllRewards") &&
               field.value &&
-              offerData.id === campaignConfigData.offer.landing
+              offerData.id ===
+                (campaignConfigData?.offer?.landing || "EGCCYESLanding")
             ) {
               acc.issuedRewards = JSON.parse(field.value);
             }
             if (
-              field.name === campaignConfigData.offer.fields.AllCards &&
+              field.name ===
+                (campaignConfigData?.offer?.fields?.allCards || "AllCards") &&
               field.value &&
-              offerData.id === campaignConfigData.offer.summary
+              offerData.id ===
+                (campaignConfigData?.offer?.summary || "EGCCYESSummary")
             ) {
               acc.acquiredRewards = JSON.parse(field.value);
             }
@@ -1228,10 +1316,6 @@ class ScYESGeneralScreen {
           }
         );
 
-        const issuedCardGroups = that.groupCardsByProperty(
-          issuedCards,
-          "groupId"
-        );
         that.isRegistered = isRegistered;
         that.campaignExpiryDate = campaignExpiryDate;
         that.packsCount = packsCount;
@@ -1263,6 +1347,25 @@ class ScYESGeneralScreen {
       }
     } catch (error) {
       throw error;
+    }
+  }
+
+  setGamePageAttributes(offerData) {
+    const that = this;
+    try {
+      if (parseInt(window.localStorage.getItem("turnsCount")) > 0) {
+        const gameContainer = that.gamePlayPage.querySelector(
+          ".sc-year-end-spend-polaroid-game__wrapper"
+        );
+
+        that.addImpressionAttributes(offerData, [gameContainer]);
+      }
+    } catch (error) {
+      this.handleErrorPage(
+        `Failed to set game page attributes: ${error.message}`,
+        "loader"
+      );
+      console.error("setGamePageAttributes error:", error);
     }
   }
 
@@ -1322,6 +1425,53 @@ class ScYESGeneralScreen {
     }
   }
 
+  handleGamePlayImpressionSuccess(rewardValue) {
+    const that = this;
+    try {
+      let packsCount = parseInt(window.sessionStorage.getItem("packsCount"));
+      let issuedCardGroups = JSON.parse(
+        window.sessionStorage.getItem("issuedCardGroups")
+      );
+      let currentCardGroup = JSON.parse(
+        window.sessionStorage.getItem("currentCardGroup")
+      );
+
+      if (rewardValue === "all") {
+        packsCount = 0;
+        currentCardGroup = [...issuedCardGroups];
+        issuedCardGroups = [];
+      } else {
+        packsCount = packsCount - 1;
+        let earnedCardGroup = issuedCardGroups.filter(
+          (cardGroup) => cardGroup[that.currentCardGroupId]
+        );
+        issuedCardGroups = issuedCardGroups.filter(
+          (cardGroup) => !cardGroup[that.currentCardGroupId]
+        );
+        currentCardGroup = [...earnedCardGroup];
+      }
+
+      window.sessionStorage.setItem("packsCount", packsCount);
+      window.sessionStorage.setItem(
+        "issuedCardGroups",
+        JSON.stringify(issuedCardGroups)
+      );
+      window.sessionStorage.setItem(
+        "currentCardGroup",
+        JSON.stringify(currentCardGroup)
+      );
+
+      console.log("handleGamePlayImpressionSuccess is over");
+      // that.gameInstance.invokePrizePopup();
+    } catch (error) {
+      that.handleErrorPage(
+        `Failed to handle game play impression success: ${error.message}`,
+        "loader"
+      );
+      console.error("handleGamePlayImpressionSuccess error:", error);
+    }
+  }
+
   /**
    * Closes the card collection page by adding a CSS class to hide it.
    * Handles any errors that occur during the process and logs them.
@@ -1368,10 +1518,10 @@ class ScYESGeneralScreen {
       );
     } catch (error) {
       that.handleErrorPage(
-        `Failed to show instruction modal: ${error.message}`,
+        `Failed to show card collection page: ${error.message}`,
         "loader"
       );
-      console.error("showInstructionModal error:", error);
+      console.error("showCardCollectionPage error:", error);
     }
   }
 
@@ -1456,7 +1606,7 @@ class ScYESGeneralScreen {
    *
    * @param {string} [sourcePage=''] - The source page from which the instruction modal is invoked (e.g., 'game-screen').
    */
-  showInstructionPage(sourcePage = "") {
+  showInstructionPage(sourcePage = "landing") {
     const that = this;
     try {
       that.sourcePage = sourcePage;
@@ -1472,7 +1622,7 @@ class ScYESGeneralScreen {
         10
       );
 
-      if (sourcePage === "game-screen") {
+      if (sourcePage === "registration") {
         initialActiveTab = that.instructionPage.querySelector(
           '.sc-year-end-spend-instruction__tabs-button[data-tabid="unlock-packs-tab"]'
         );
@@ -1491,10 +1641,10 @@ class ScYESGeneralScreen {
       );
     } catch (error) {
       that.handleErrorPage(
-        `Failed to show instruction modal: ${error.message}`,
+        `Failed to show instruction page: ${error.message}`,
         "loader"
       );
-      console.error("showInstructionModal error:", error);
+      console.error("showInstructionPage error:", error);
     }
   }
 
@@ -1643,7 +1793,8 @@ class ScYESGeneralScreen {
         : null;
 
       if (typeof expectedOffer === "object" && expectedOffer !== null) {
-        that.setOfferValues(expectedOffer);
+        if (that.isRequireOfferUpdate === true)
+          that.setOfferValues(expectedOffer);
 
         const packsCount = parseInt(
           window.sessionStorage.getItem("packsCount"),
@@ -1673,13 +1824,14 @@ class ScYESGeneralScreen {
         );
         if (packsCountEle) packsCountEle.textContent = that.packsCount;
 
-        if (that.packsCount <= 0) {
+        if (that.packsCount === 0) {
           that.landingPage.classList.add("zero-packs");
         } else {
           that.landingPage.classList.remove("zero-packs");
         }
 
         that.addImpressionAttributes(expectedOffer, [that.landingPage]);
+        that.setGamePageAttributes(expectedOffer);
         that.updateViewImpression(that.landingPage);
         that.loader.classList.add("sc-year-end-spend-loader--hide");
         that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
@@ -1713,6 +1865,8 @@ class ScYESGeneralScreen {
       );
 
       getStartedButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
         that.loader.classList.remove("sc-year-end-spend-loader--hide");
         that.registrationPage.classList.add(
           "sc-year-end-spend-registration--hide"
@@ -1722,6 +1876,7 @@ class ScYESGeneralScreen {
         );
 
         setTimeout(() => {
+          that.isRequireOfferUpdate = true;
           that.fetchRTIMOfferData(that.handleLandingPage);
         }, 2000);
       });
@@ -1754,7 +1909,6 @@ class ScYESGeneralScreen {
       if (window?.general?.environment === "dev") {
         setTimeout(() => {
           that.handleRegConfirmationPage();
-          console.log("Registration simulated in dev environment");
         }, 1000);
       }
     } catch (error) {
@@ -1869,7 +2023,6 @@ class ScYESGeneralScreen {
    * @param {Function} that.handleEndCampaignPage - Handles the page shown when the campaign has ended.
    * @param {boolean} that.isRegistered - Indicates if the user is registered.
    * @param {Function} that.handleLandingPage - Handles the landing page for registered users.
-   * @param {boolean} that.isNewUser - Indicates if the user is new.
    * @param {Function} that.handleRegistrationPage - Handles the registration page for new users.
    * @param {Function} that.handleErrorPage - Handles displaying an error page.
    * @throws {Error} Throws an error if the expected offer is not available.
@@ -1895,7 +2048,6 @@ class ScYESGeneralScreen {
           if (that.isRegistered === true) {
             that.handleLandingPage(that);
           } else {
-            that.isNewUser = true;
             that.handleRegistrationPage(expectedOffer);
           }
         }
@@ -2023,7 +2175,7 @@ class ScYESGeneralScreen {
         window?.general?.environment === "prod" &&
         window?.general?.getDataFromRTIM === true
       ) {
-        that.fetchRTIMOfferData();
+        that.fetchRTIMOfferData(that.handleYearEndSpendPage);
       } else {
         const response = await fetch(window?.general?.mockDataUrl);
         const data = await response.json();
@@ -2091,7 +2243,6 @@ class ScYESGeneralScreen {
         });
       await this.handleYearEndSpendOffer();
     } catch (error) {
-      debugger;
       that.handleErrorPage(
         `Failed to fetch config and offer data: ${error.message}`,
         "loader"

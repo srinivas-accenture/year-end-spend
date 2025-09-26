@@ -1,6 +1,17 @@
+import screenManager from "./sc-year-end-spend-screen-manager.js";
+
 class ScYESGameScreen {
   constructor() {
     this.generalInstance = null;
+    this.screenManager = screenManager;
+
+    // API Configuration
+    this.API_CONFIG = {
+      PACK_OPEN_URL: "/api/open-pack",
+      TIMEOUT: 65000, // 65 seconds
+      USE_MOCK: true, // Set to false for production
+      MOCK_DELAY: 60000, // 60 seconds delay
+    };
 
     // Configuration Constants
     this.CONFIG = {
@@ -52,17 +63,9 @@ class ScYESGameScreen {
       },
 
       TIMING: {
-        POCKET_DELAY: 4600, // default 2600
+        POCKET_DELAY: 2600,
+        DISPENSING_INTERVAL: 2000, // Add new card every 2 seconds
       },
-    };
-
-    // Section Management
-    this.sections = {
-      result: "polaroid-result",
-      slider: "polaroid-game-slider",
-      pocket: "polaroid-game-pocket",
-      bgDark: "polaroid-game-bg-dark",
-      bgLight: "polaroid-game-bg-light",
     };
 
     // DOM Elements
@@ -96,20 +99,23 @@ class ScYESGameScreen {
     this.gesture = null;
     this.isDragging = false;
 
+    // Dispensing Animation State
+    this.dispensingInterval = null;
+    this.dispensingContainer = null;
+    this.dispensingStartTime = null;
+
     // Management
     this.eventListeners = [];
     this.activeAnimations = new Set();
     this.isInitialized = false;
-    this.debugMode = true;
     this.restartButton = null;
   }
 
-  // Set the general instance
   setGeneralInstance(instance) {
-    // console.log(
-    //   "🚀 ~ ScYESGameScreen ~ setGeneralInstance ~ instance:",
-    //   instance
-    // );
+    console.log(
+      "🚀 ~ ScYESGameScreen ~ setGeneralInstance ~ instance:",
+      instance
+    );
     this.generalInstance = instance;
   }
 
@@ -126,7 +132,7 @@ class ScYESGameScreen {
       this.renderCarousel();
       this.isInitialized = true;
 
-      // console.log("ScYESGameScreen: Initialized successfully");
+      console.log("ScYESGameScreen: Initialized successfully");
     } catch (error) {
       console.error("ScYESGameScreen: Initialization failed:", error.message);
       throw error;
@@ -134,7 +140,7 @@ class ScYESGameScreen {
   }
 
   /**
-   * Initialize DOM elements and validate their existence
+   * Initialize DOM elements
    */
   initializeElements() {
     const elementsToFind = {
@@ -153,10 +159,8 @@ class ScYESGameScreen {
       this.elements[key] = element;
     }
 
-    // Initialize slider visibility
     this.elements.slider.style.display = "block";
 
-    // Find slider items
     this.items = Array.from(
       this.elements.slider.querySelectorAll(
         this.CONFIG.CSS_SELECTORS.SLIDER_IMAGE
@@ -169,12 +173,11 @@ class ScYESGameScreen {
   }
 
   /**
-   * Parse configuration from HTML dataset attributes
+   * Parse configuration from dataset
    */
   parseDatasetConfiguration() {
     const dataset = this.elements.slider.dataset;
 
-    // Override defaults with dataset values if present
     this.itemWidth =
       parseInt(dataset.itemWidth) || this.CONFIG.DEFAULTS.ITEM_WIDTH;
     this.itemHeight =
@@ -194,7 +197,7 @@ class ScYESGameScreen {
   }
 
   /**
-   * Setup initial game state values
+   * Setup game state
    */
   setupGameState() {
     this.itemCount = this.items.length;
@@ -205,7 +208,7 @@ class ScYESGameScreen {
   }
 
   /**
-   * Reset gesture tracking state
+   * Reset gesture state
    */
   resetGestureState() {
     this.startX = this.startY = this.lastX = this.lastY = 0;
@@ -214,298 +217,167 @@ class ScYESGameScreen {
     this.isDragging = false;
   }
 
-  // SECTION MANAGEMENT METHODS
-
   /**
-   * Simple show section method
-   * @param {string} sectionName - Name from this.sections
+   * Reset game to initial state
    */
-  showSection(sectionName) {
-    const elementId = this.sections[sectionName];
-    if (elementId) {
-      const element = document.getElementById(elementId);
-      if (element) {
-        element.style.display = "block";
-        element.style.visibility = "visible";
-        element.style.opacity = "1";
+  async resetToGameState() {
+    console.log("=== RESET TO GAME STATE START ===");
 
-        // Special handling for slider positioning
-        if (sectionName === "slider") {
-          element.style.position = "absolute";
-          element.style.zIndex = "10";
-        }
-      }
-    }
-  }
+    // Stop any ongoing dispensing
+    this.stopContinuousDispensing();
 
-  /**
-   * Simple hide section method
-   * @param {string} sectionName - Name from this.sections
-   */
-  hideSection(sectionName) {
-    const elementId = this.sections[sectionName];
-    if (elementId) {
-      const element = document.getElementById(elementId);
-      if (element) {
-        element.style.display = "none";
-      }
-    }
-  }
-
-  /**
-   * Show multiple sections at once
-   * @param {string[]} sectionNames - Array of section names
-   */
-  showSections(sectionNames) {
-    sectionNames.forEach((section) => this.showSection(section));
-  }
-
-  /**
-   * Hide multiple sections at once
-   * @param {string[]} sectionNames - Array of section names
-   */
-  hideSections(sectionNames) {
-    sectionNames.forEach((section) => this.hideSection(section));
-  }
-
-  /**
-   * Switch between sections - hide some, show others
-   * @param {string[]} hideList - Sections to hide
-   * @param {string[]} showList - Sections to show
-   */
-  switchSections(hideList = [], showList = []) {
-    this.hideSections(hideList);
-    this.showSections(showList);
-  }
-
-  /**
-   * Reset game to initial playing state for "Open another" button
-   */
-  resetToGameState() {
-    // console.log("=== RESET TO GAME STATE START ===");
-
-    // Kill any active animations first
     this.activeAnimations.forEach((animation) => {
-      if (animation && animation.kill) {
-        animation.kill();
-      }
+      if (animation && animation.kill) animation.kill();
     });
     this.activeAnimations.clear();
 
-    // First fade out the result cards if they're visible
-    const resultElement = document.getElementById(this.sections.result);
-    if (resultElement && resultElement.classList.contains("result-show")) {
-      // console.log("Fading out result cards before reset");
-
-      const fadeOutAnimation = gsap.to(resultElement, {
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.out",
-        onComplete: () => {
-          this.activeAnimations.delete(fadeOutAnimation);
-          this.completeGameReset();
-        },
+    if (
+      this.elements.result &&
+      this.elements.result.classList.contains("result-show")
+    ) {
+      await new Promise((resolve) => {
+        gsap.to(this.elements.result, {
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.out",
+          onComplete: resolve,
+        });
       });
-
-      this.activeAnimations.add(fadeOutAnimation);
-    } else {
-      this.completeGameReset();
     }
+
+    this.resetGameElements();
+
+    this.elements.slider.style.display = "block";
+    this.elements.slider.style.opacity = "1";
+    this.elements.pocket.style.opacity = "1";
+    this.elements.pocket.style.visibility = "visible";
+
+    this.renderCarousel();
+
+    console.log("=== RESET TO GAME STATE END ===");
   }
 
   /**
-   * Complete the game reset after result fade out
+   * Reset game elements
    */
-  completeGameReset() {
-    // Hide result page
-    this.hideSection("result");
+  resetGameElements() {
+    // Stop dispensing and clean up
+    this.stopContinuousDispensing();
 
-    // Show game elements
-    this.showSections(["slider", "pocket", "bgDark"]);
+    // Reset dispensing container
+    if (this.dispensingContainer) {
+      const dynamicImages = this.dispensingContainer.querySelectorAll(
+        ".sc-year-end-spend-polaroid-game__dispense-img-dynamic"
+      );
+      dynamicImages.forEach((img) => img.remove());
+    }
 
-    // Reset all slider items (packs) - restore any that were hidden
-    this.items.forEach((item, index) => {
+    this.items.forEach((item) => {
       item.style.display = "block";
       item.style.opacity = "1";
       item.style.visibility = "visible";
       item.classList.remove("active");
-
-      // Clear any GSAP transforms that might position them off-screen
       gsap.set(item, { clearProps: "all" });
     });
 
-    // Reset pocket to initial animation state
-    const pocket = document.getElementById(this.sections.pocket);
-    if (pocket) {
-      // console.log(
-      //   "Resetting pocket - removing classes:",
-      //   pocket.classList.toString()
-      // );
-      pocket.classList.remove("active", "dismiss-card");
-      gsap.set(pocket, { opacity: 1, clearProps: "transform,scale,x,y" });
-      pocket.style.opacity = "1";
-      pocket.style.visibility = "visible";
-      // console.log("Pocket after reset - classes:", pocket.classList.toString());
+    if (this.elements.pocket) {
+      this.elements.pocket.classList.remove("active", "dismiss-card");
+      gsap.set(this.elements.pocket, {
+        opacity: 1,
+        clearProps: "transform,scale,x,y",
+      });
     }
 
-    // Reset background to initial state
-    const bgDark = document.getElementById(this.sections.bgDark);
-    if (bgDark) {
-      // console.log("Resetting bgDark - removing dismiss class");
-      bgDark.classList.remove("dismiss");
-      gsap.set(bgDark, { clearProps: "all" });
+    if (this.elements.bgDark) {
+      this.elements.bgDark.classList.remove("dismiss");
+      gsap.set(this.elements.bgDark, { clearProps: "all" });
     }
 
-    // Reset section classes
     if (this.elements.section) {
       this.elements.section.classList.remove("active-scroll");
     }
 
-    // CRITICAL: Reset result element properly for next animation cycle
     if (this.elements.result) {
-      // Remove the CSS class that triggers animations
       this.elements.result.classList.remove("result-show");
-
-      // Clear GSAP properties
       gsap.set(this.elements.result, {
         opacity: 0,
         clearProps: "transform,scale,x,y",
       });
       this.elements.result.style.opacity = "0";
 
-      // IMPORTANT: Clear all inline styles from result cards so CSS can take over naturally
       const resultCards = this.elements.result.querySelectorAll(
         ".sc-year-end-spend-polaroid-game__polaroid-card"
       );
-      const prizeDetail = this.elements.result.querySelector(
-        ".sc-year-end-spend-polaroid-game__prize-detail"
-      );
-
-      resultCards.forEach((card, index) => {
-        // Remove inline styles to let CSS handle initial state
-        card.style.top = "";
-        card.style.opacity = "";
-        card.style.transform = "";
-        card.style.left = "";
-
+      resultCards.forEach((card) => {
+        card.style.cssText = "";
         const cardImg = card.querySelector(
           ".sc-year-end-spend-polaroid-game__polaroid-card-img"
         );
-        if (cardImg) {
-          // Clear any inline styles on card image
-          cardImg.style.opacity = "";
-        }
+        if (cardImg) cardImg.style.opacity = "";
       });
 
-      if (prizeDetail) {
-        // Clear inline styles to let CSS handle initial state
-        prizeDetail.style.opacity = "";
-      }
+      const prizeDetail = this.elements.result.querySelector(
+        ".sc-year-end-spend-polaroid-game__prize-detail"
+      );
+      if (prizeDetail) prizeDetail.style.opacity = "";
 
-      // FORCE REFLOW - Critical for CSS animations to work on next cycle
-      // This ensures browser recognizes the state change
       this.elements.result.offsetHeight;
-
-      // console.log(
-      //   "Result cards reset - inline styles cleared, reflow forced for next animation"
-      // );
     }
 
-    // Reset slider to initial state
-    if (this.elements.slider) {
-      gsap.set(this.elements.slider, {
-        opacity: 1,
-        clearProps: "transform,scale,x,y",
-      });
-      this.elements.slider.style.opacity = "1";
-      this.elements.slider.style.visibility = "visible";
-    }
+    gsap.set(this.elements.slider, {
+      opacity: 1,
+      clearProps: "transform,scale,x,y",
+    });
 
-    // Reset game state
-    if (this.isInitialized) {
-      this.resetGestureState();
-      this.setupGameState();
-      this.updateLayoutDimensions();
-      this.renderCarousel();
-    }
-
-    // console.log("=== RESET TO GAME STATE END ===");
+    this.resetGestureState();
+    this.setupGameState();
+    this.updateLayoutDimensions();
   }
 
   /**
-   * Show result page
-   */
-  showResultState() {
-    this.switchSections(
-      ["slider", "pocket"], // hide
-      ["result"] // show
-    );
-  }
-
-  // END SECTION MANAGEMENT METHODS
-
-  /**
-   * Bind all event listeners with proper cleanup tracking
+   * Bind event listeners
    */
   bindEventListeners() {
-    // Window resize
     this.addEventListenerWithCleanup(window, "resize", () => {
       this.updateLayoutDimensions();
       this.renderCarousel();
     });
 
-    // Touch events
     this.addEventListenerWithCleanup(
       document,
       "touchstart",
-      (e) => {
-        this.handleGestureStart(e);
-      },
+      (e) => this.handleGestureStart(e),
       { passive: true }
     );
-
     this.addEventListenerWithCleanup(
       document,
       "touchmove",
-      (e) => {
-        this.handleGestureMove(e);
-      },
+      (e) => this.handleGestureMove(e),
       { passive: false }
     );
-
     this.addEventListenerWithCleanup(
       document,
       "touchend",
-      () => {
-        this.handleGestureEnd();
-      },
+      () => this.handleGestureEnd(),
       { passive: true }
     );
 
-    // Mouse events
     this.addEventListenerWithCleanup(document, "mousedown", (e) => {
-      if (e.button === 0) {
-        this.handleGestureStart(e);
-      }
+      if (e.button === 0) this.handleGestureStart(e);
     });
+    this.addEventListenerWithCleanup(document, "mousemove", (e) =>
+      this.handleGestureMove(e)
+    );
+    this.addEventListenerWithCleanup(document, "mouseup", () =>
+      this.handleGestureEnd()
+    );
 
-    this.addEventListenerWithCleanup(document, "mousemove", (e) => {
-      this.handleGestureMove(e);
-    });
-
-    this.addEventListenerWithCleanup(document, "mouseup", () => {
-      this.handleGestureEnd();
-    });
-
-    // Restart button handler
     try {
       this.restartButton = document.querySelector(
         ".sc-year-end-spend-polaroid-game__open-another"
       );
-
       if (this.restartButton) {
-        this.addEventListenerWithCleanup(this.restartButton, "click", (e) => {
-          // Use the simplified section management
+        this.addEventListenerWithCleanup(this.restartButton, "click", () => {
           this.resetToGameState();
         });
       }
@@ -515,7 +387,7 @@ class ScYESGameScreen {
   }
 
   /**
-   * Add event listener with cleanup tracking
+   * Add event listener with cleanup
    */
   addEventListenerWithCleanup(element, event, handler, options = {}) {
     const wrappedHandler = (e) => {
@@ -532,7 +404,6 @@ class ScYESGameScreen {
     };
 
     element.addEventListener(event, wrappedHandler, options);
-
     this.eventListeners.push({
       element,
       event,
@@ -542,20 +413,18 @@ class ScYESGameScreen {
   }
 
   /**
-   * Update layout dimensions based on current element sizes
+   * Update layout dimensions
    */
   updateLayoutDimensions() {
     try {
       if (this.items.length === 0) return;
 
-      // Update item dimensions from actual DOM
       const firstItem = this.items[0];
       if (firstItem) {
         this.itemWidth = firstItem.offsetWidth || this.itemWidth;
         this.itemHeight = firstItem.offsetHeight || this.itemHeight;
       }
 
-      // Calculate base position for centering
       const sliderWidth = this.elements.slider.clientWidth;
       const sliderHeight = this.elements.slider.clientHeight;
 
@@ -570,7 +439,7 @@ class ScYESGameScreen {
   }
 
   /**
-   * Calculate angle for item at given position
+   * Calculate item angle
    */
   calculateItemAngle(position) {
     const sign = position < 0 ? -1 : 1;
@@ -591,7 +460,7 @@ class ScYESGameScreen {
   }
 
   /**
-   * Calculate scale for item at given position
+   * Calculate item scale
    */
   calculateItemScale(position) {
     const absPosition = Math.abs(position);
@@ -602,7 +471,7 @@ class ScYESGameScreen {
   }
 
   /**
-   * Calculate z-index for item at given position
+   * Calculate item z-index
    */
   calculateItemZIndex(position) {
     const absPosition = Math.abs(position);
@@ -613,7 +482,7 @@ class ScYESGameScreen {
   }
 
   /**
-   * Render the carousel with all items positioned
+   * Render carousel
    */
   renderCarousel() {
     if (!this.items || this.items.length === 0) return;
@@ -626,7 +495,6 @@ class ScYESGameScreen {
         const position = index - this.offset;
         const absPosition = Math.abs(position);
 
-        // Hide items that are too far from center
         if (absPosition > this.maxIndex + 0.5) {
           this.setElementTransform(element, {
             opacity: 0,
@@ -636,14 +504,12 @@ class ScYESGameScreen {
           return;
         }
 
-        // Calculate item properties
         const x = this.baseX + position * this.spacingX;
         const y = this.baseY - Math.pow(position, 2) * this.curveIntensity;
         const angle = this.calculateItemAngle(position);
         const scale = this.calculateItemScale(position);
         const zIndex = this.calculateItemZIndex(position);
 
-        // Apply transforms
         this.setElementTransform(element, {
           x,
           y,
@@ -654,7 +520,6 @@ class ScYESGameScreen {
           pointerEvents: "auto",
         });
 
-        // Manage active state
         element.classList.remove(this.CONFIG.CSS_CLASSES.ACTIVE);
 
         if (index === centerIndex) {
@@ -669,30 +534,24 @@ class ScYESGameScreen {
   }
 
   /**
-   * Set element transform using GSAP
+   * Set element transform
    */
   setElementTransform(element, properties) {
     gsap.set(element, properties);
   }
 
   /**
-   * Get pointer coordinates from mouse or touch event
+   * Get pointer coordinates
    */
   getPointerCoordinates(event) {
     if (event.touches && event.touches.length > 0) {
-      return {
-        x: event.touches[0].clientX,
-        y: event.touches[0].clientY,
-      };
+      return { x: event.touches[0].clientX, y: event.touches[0].clientY };
     }
-    return {
-      x: event.clientX,
-      y: event.clientY,
-    };
+    return { x: event.clientX, y: event.clientY };
   }
 
   /**
-   * Handle gesture start (touch/mouse down)
+   * Handle gesture start
    */
   handleGestureStart(event) {
     if (!this.isInitialized) return;
@@ -710,7 +569,7 @@ class ScYESGameScreen {
   }
 
   /**
-   * Handle gesture move (touch/mouse move)
+   * Handle gesture move
    */
   handleGestureMove(event) {
     if (!this.isInitialized || !this.isDragging) return;
@@ -726,7 +585,6 @@ class ScYESGameScreen {
       this.lastX = point.x;
       this.lastY = point.y;
 
-      // Determine gesture type if not already determined
       if (!this.gesture) {
         const absMovedX = Math.abs(this.movedX);
         const absMovedY = Math.abs(this.movedY);
@@ -748,22 +606,18 @@ class ScYESGameScreen {
               ? "vertical"
               : "horizontal";
 
-          if (this.gesture === "horizontal") {
-            event.preventDefault();
-          }
+          if (this.gesture === "horizontal") event.preventDefault();
         } else {
           return;
         }
       }
 
-      // Handle horizontal carousel movement
       if (this.gesture === "horizontal") {
         event.preventDefault();
         this.offset -= deltaX / this.CONFIG.DEFAULTS.DRAG_SENSITIVITY;
         this.renderCarousel();
       }
 
-      // Handle vertical item dragging
       if (this.gesture === "vertical" && this.activeItem && this.movedY > 20) {
         const baseY = parseFloat(this.activeItem.dataset.centerY || this.baseY);
         const newY =
@@ -776,7 +630,7 @@ class ScYESGameScreen {
   }
 
   /**
-   * Handle gesture end (touch/mouse up)
+   * Handle gesture end
    */
   handleGestureEnd() {
     if (!this.isInitialized || !this.isDragging) return;
@@ -795,37 +649,32 @@ class ScYESGameScreen {
   }
 
   /**
-   * Handle end of horizontal carousel gesture
+   * Handle horizontal gesture end
    */
   handleHorizontalGestureEnd() {
     const currentIndex = Math.round(this.offset);
     let targetIndex = currentIndex;
 
-    // Determine swipe direction
     if (this.movedX < -this.swipeThreshold) {
       targetIndex = currentIndex + 1;
     } else if (this.movedX > this.swipeThreshold) {
       targetIndex = currentIndex - 1;
     }
 
-    // Clamp to valid range
     targetIndex = Math.max(0, Math.min(this.itemCount - 1, targetIndex));
 
-    // Animate to target
     const animation = gsap.to(this, {
       offset: targetIndex,
       ...this.CONFIG.ANIMATIONS.CAROUSEL_TRANSITION,
       onUpdate: () => this.renderCarousel(),
-      onComplete: () => {
-        this.activeAnimations.delete(animation);
-      },
+      onComplete: () => this.activeAnimations.delete(animation),
     });
 
     this.activeAnimations.add(animation);
   }
 
   /**
-   * Handle end of vertical drag gesture
+   * Handle vertical gesture end
    */
   handleVerticalGestureEnd() {
     if (Math.abs(this.movedY) < this.verticalThreshold) {
@@ -833,7 +682,6 @@ class ScYESGameScreen {
       return;
     }
 
-    // Check if item overlaps with pocket
     if (this.checkItemPocketOverlap()) {
       this.executeCardDropSequence();
     } else {
@@ -842,7 +690,7 @@ class ScYESGameScreen {
   }
 
   /**
-   * Check if active item overlaps with pocket
+   * Check item-pocket overlap
    */
   checkItemPocketOverlap() {
     if (!this.activeItem) return false;
@@ -863,7 +711,7 @@ class ScYESGameScreen {
   }
 
   /**
-   * Snap active item back to original position
+   * Snap item back
    */
   snapActiveItemBack(extended = false) {
     if (!this.activeItem) return;
@@ -876,21 +724,18 @@ class ScYESGameScreen {
     const animation = gsap.to(this.activeItem, {
       y: baseY,
       ...animConfig,
-      onComplete: () => {
-        this.activeAnimations.delete(animation);
-      },
+      onComplete: () => this.activeAnimations.delete(animation),
     });
 
     this.activeAnimations.add(animation);
   }
 
   /**
-   * Execute complete card drop animation sequence
+   * Execute card drop sequence
    */
   executeCardDropSequence() {
     if (!this.activeItem) return;
 
-    // Phase 1: Drop the card
     const dropAnimation = gsap.to(this.activeItem, {
       y: window.innerHeight + 200,
       scale: 0.45,
@@ -907,9 +752,11 @@ class ScYESGameScreen {
   }
 
   /**
-   * Execute slider fade out animation
+   * Execute slider fade out and start dispensing + API
    */
   executeSliderFadeOut() {
+    this.dispensingStartTime = Date.now();
+
     const fadeAnimation = gsap.to(this.elements.slider, {
       opacity: 0,
       ...this.CONFIG.ANIMATIONS.SLIDER_FADE,
@@ -917,19 +764,15 @@ class ScYESGameScreen {
         this.activeAnimations.delete(fadeAnimation);
         this.elements.slider.style.display = "none";
 
-        // console.log("Adding active class to pocket for dispensing animation");
+        console.log("Starting dispensing animation + API call");
         this.elements.pocket.classList.add(this.CONFIG.CSS_CLASSES.ACTIVE);
         this.elements.bgDark.classList.add(this.CONFIG.CSS_CLASSES.DISMISS);
-        // impression call for pack dispense
-        // this.generalInstance.handleClickImpressionOnEvent(
-        //   "pack_image",
-        //   "game-play",
-        //   "one"
-        // );
-        setTimeout(() => {
-          // console.log("About to execute pocket fade out after delay");
-          this.executePocketFadeOut();
-        }, this.CONFIG.TIMING.POCKET_DELAY);
+
+        // Start continuous dispensing
+        this.startContinuousDispensing();
+
+        // Call API
+        this.callPackOpenAPI();
       },
     });
 
@@ -937,7 +780,337 @@ class ScYESGameScreen {
   }
 
   /**
-   * Execute pocket fade out animation
+   * Start continuous dispensing animation
+   */
+  startContinuousDispensing() {
+    this.dispensingContainer = document.querySelector(
+      ".sc-year-end-spend-polaroid-game__dispense-polaroid"
+    );
+
+    if (!this.dispensingContainer) {
+      console.warn("Dispensing container not found");
+      return;
+    }
+
+    // Clear any existing interval
+    if (this.dispensingInterval) {
+      clearInterval(this.dispensingInterval);
+    }
+
+    // IMPORTANT: Make container visible and override any CSS hiding it
+    this.dispensingContainer.style.display = "flex";
+    this.dispensingContainer.style.flexDirection = "column";
+    this.dispensingContainer.style.gap = "10px";
+    this.dispensingContainer.style.visibility = "visible";
+    this.dispensingContainer.style.opacity = "1";
+    this.dispensingContainer.style.pointerEvents = "auto";
+
+    const initialImages = this.dispensingContainer.querySelectorAll("img");
+    console.log(
+      `Starting continuous dispensing - Initial images: ${initialImages.length}`
+    );
+
+    // Make sure initial images are visible
+    initialImages.forEach((img) => {
+      img.style.display = "block";
+      img.style.visibility = "visible";
+      img.style.opacity = "1";
+    });
+
+    // Start adding images after initial animation
+    this.dispensingInterval = setInterval(() => {
+      this.addDispensingImage();
+    }, this.CONFIG.TIMING.DISPENSING_INTERVAL);
+
+    console.log(
+      "Continuous dispensing started with interval:",
+      this.dispensingInterval
+    );
+  }
+
+  /**
+   * Add a dispensing image dynamically
+   */
+  addDispensingImage() {
+    if (!this.dispensingContainer) {
+      console.error("Dispensing container is null");
+      return;
+    }
+
+    // Create new image element
+    const img = document.createElement("img");
+    img.src = "./images/game/sc-year-end-spend-dispensing.png";
+    img.alt = "dispensing-card";
+
+    // Force visibility with inline styles to override any CSS
+    img.style.cssText = `
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100%;
+    height: auto;
+    animation: dispensingCardAppear 0.5s ease-out;
+  `;
+
+    // Append to container
+    this.dispensingContainer.appendChild(img);
+
+    // Force browser reflow
+    void img.offsetHeight;
+
+    const allImages = this.dispensingContainer.querySelectorAll("img");
+    console.log(`Added dispensing image - Total: ${allImages.length}`, {
+      containerDisplay: this.dispensingContainer.style.display,
+      imageDisplay: img.style.display,
+      imageInDOM: document.body.contains(img),
+    });
+
+    // Keep only last 8 images maximum
+    if (allImages.length > 8) {
+      const oldestDynamic = allImages[3]; // 4th image (first dynamic one)
+      if (oldestDynamic) {
+        oldestDynamic.remove();
+        console.log("Removed oldest dynamic image");
+      }
+    }
+  }
+
+  /**
+   * Stop continuous dispensing animation
+   */
+  stopContinuousDispensing() {
+    console.log("Stopping continuous dispensing animation");
+
+    if (this.dispensingInterval) {
+      clearInterval(this.dispensingInterval);
+      this.dispensingInterval = null;
+      console.log("Interval cleared");
+    }
+
+    // Clean up dynamic images (keep first 3 originals)
+    if (this.dispensingContainer) {
+      const allImages = this.dispensingContainer.querySelectorAll("img");
+      console.log(`Cleaning up - Current images: ${allImages.length}`);
+
+      allImages.forEach((img, index) => {
+        if (index >= 3) {
+          img.remove();
+        }
+      });
+
+      const remaining = this.dispensingContainer.querySelectorAll("img").length;
+      console.log(`Cleanup complete - Remaining images: ${remaining}`);
+    }
+  }
+  /**
+   * Call API to open pack
+   */
+  async callPackOpenAPI() {
+    try {
+      console.log("API call started - dispensing animation running");
+      this.screenManager.showLoader();
+
+      let data;
+
+      if (this.API_CONFIG.USE_MOCK) {
+        console.log(
+          `Mock API: Waiting ${this.API_CONFIG.MOCK_DELAY / 1000} seconds...`
+        );
+        await new Promise((resolve) =>
+          setTimeout(resolve, this.API_CONFIG.MOCK_DELAY)
+        );
+        data = this.getMockData();
+        console.log("Mock API response:", data);
+      } else {
+        const response = await this.fetchWithTimeout(
+          this.API_CONFIG.PACK_OPEN_URL,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              packId: this.activeItem?.dataset.id || null,
+              timestamp: Date.now(),
+            }),
+          },
+          this.API_CONFIG.TIMEOUT
+        );
+
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status}`);
+        }
+
+        data = await response.json();
+        console.log("API response received:", data);
+      }
+
+      this.screenManager.hideLoader();
+
+      // Stop the continuous dispensing
+      this.stopContinuousDispensing();
+
+      this.updateResultCards(data);
+      await this.ensureMinimumDispensingTime();
+      this.executePocketFadeOut();
+    } catch (error) {
+      console.error("API call failed:", error);
+      this.screenManager.hideLoader();
+
+      // Stop dispensing on error too
+      this.stopContinuousDispensing();
+
+      this.handleAPIError(error);
+    }
+  }
+
+  /**
+   * Fetch with timeout
+   */
+  fetchWithTimeout(url, options = {}, timeout = 65000) {
+    return Promise.race([
+      fetch(url, options),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Request timeout")), timeout)
+      ),
+    ]);
+  }
+
+  /**
+   * Ensure minimum dispensing time
+   */
+  async ensureMinimumDispensingTime() {
+    const minDispensingTime = this.CONFIG.TIMING.POCKET_DELAY;
+
+    if (!this.dispensingStartTime) {
+      this.dispensingStartTime = Date.now();
+    }
+
+    const elapsed = Date.now() - this.dispensingStartTime;
+
+    if (elapsed < minDispensingTime) {
+      console.log(
+        `Waiting ${
+          minDispensingTime - elapsed
+        }ms to meet minimum animation time`
+      );
+      await new Promise((resolve) =>
+        setTimeout(resolve, minDispensingTime - elapsed)
+      );
+    } else {
+      console.log(`API took ${elapsed}ms - proceeding immediately`);
+    }
+
+    this.dispensingStartTime = null;
+  }
+
+  /**
+   * Update result cards with API data
+   */
+  updateResultCards(apiData) {
+    try {
+      const resultContainer = this.elements.result;
+
+      // Update card images
+      const cardElements = resultContainer.querySelectorAll(
+        ".sc-year-end-spend-polaroid-game__polaroid-card-img img"
+      );
+
+      if (apiData.cards && apiData.cards.length > 0) {
+        apiData.cards.forEach((card, index) => {
+          if (cardElements[index]) {
+            cardElements[index].src = card.imageUrl || card.image;
+            cardElements[index].alt = card.name || `card-${index + 1}`;
+          }
+        });
+      }
+
+      // Update prize details
+      const prizeDetailContainer = resultContainer.querySelector(
+        ".sc-year-end-spend-polaroid-game__prize-detail"
+      );
+
+      if (prizeDetailContainer && apiData.prizes) {
+        let prizeHTML = "";
+        apiData.prizes.forEach((prize, index) => {
+          if (index > 0) {
+            prizeHTML +=
+              '<div class="sc-year-end-spend-polaroid-game__line"></div>';
+          }
+          prizeHTML += `
+            <div class="sc-year-end-spend-polaroid-game__prize-info">
+              ${prize.description || prize.text}
+            </div>
+          `;
+        });
+        prizeDetailContainer.innerHTML = prizeHTML;
+      }
+
+      // Update packs left
+      if (apiData.packsLeft !== undefined) {
+        const packsLeftElement = document.querySelector(
+          ".sc-year-end-spend-polaroid-game__card-left-no"
+        );
+        if (packsLeftElement) {
+          packsLeftElement.textContent = apiData.packsLeft;
+        }
+      }
+
+      console.log("Result cards updated with API data");
+    } catch (error) {
+      console.error("Error updating result cards:", error);
+    }
+  }
+
+  /**
+   * Handle API error
+   */
+  handleAPIError(error) {
+    console.error("Handling API error:", error.message);
+
+    this.screenManager.show("error", {
+      onComplete: () => {
+        this.resetToGameState();
+      },
+    });
+  }
+
+  /**
+   * Get mock data for testing
+   */
+  getMockData() {
+    return {
+      success: true,
+      cards: [
+        {
+          imageUrl: "./images/game/sc-year-end-spend-photo-card-1.png",
+          name: "Dining Card",
+          type: "dining",
+        },
+        {
+          imageUrl: "./images/game/sc-year-end-spend-photo-card-2.png",
+          name: "Travel Card",
+          type: "travel",
+        },
+        {
+          imageUrl: "./images/game/sc-year-end-spend-photo-card-3.png",
+          name: "Luggage Card",
+          type: "luggage",
+        },
+      ],
+      prizes: [
+        { description: "1 additional chance(s)<br>in the Grand Draw" },
+        { description: "1 pair of flight tickets to Bali card" },
+        {
+          description:
+            "1 Lerouy Michelin-starred dining<br>experience (for two) card",
+        },
+      ],
+      packsLeft: 8,
+      totalChances: 301,
+    };
+  }
+
+  /**
+   * Execute pocket fade out
    */
   executePocketFadeOut() {
     const pocketAnimation = gsap.to(this.elements.pocket, {
@@ -953,37 +1126,36 @@ class ScYESGameScreen {
   }
 
   /**
-   * Show final game result with animation - ORIGINAL behavior for first completion
+   * Show game result
    */
-  showGameResult() {
-    // Use the section management for basic show/hide
-    this.showResultState();
+  async showGameResult() {
+    this.elements.slider.style.display = "none";
+    this.elements.pocket.style.opacity = "0";
+    this.elements.result.style.display = "block";
 
-    // CRITICAL: Use requestAnimationFrame to ensure class is added in next render cycle
-    // This allows the browser to properly recognize the state change and trigger CSS animations
-    requestAnimationFrame(() => {
-      // Original result animation - no card reset needed on first play
-      const resultAnimation = gsap.to(this.elements.result, {
-        opacity: 1,
-        ...this.CONFIG.ANIMATIONS.RESULT_SHOW,
-        onComplete: () => {
-          this.activeAnimations.delete(resultAnimation);
-        },
-      });
+    await new Promise((resolve) => requestAnimationFrame(resolve));
 
-      this.activeAnimations.add(resultAnimation);
+    this.elements.result.classList.add(this.CONFIG.CSS_CLASSES.RESULT_SHOW);
 
-      // Add CSS classes for final state - this triggers the CSS animations naturally
-      this.elements.result.classList.add(this.CONFIG.CSS_CLASSES.RESULT_SHOW);
-      this.elements.section.classList.add(
-        this.CONFIG.CSS_CLASSES.ACTIVE_SCROLL
-      );
-      this.elements.pocket.classList.add(this.CONFIG.CSS_CLASSES.DISMISS_CARD);
+    const resultAnimation = gsap.to(this.elements.result, {
+      opacity: 1,
+      ...this.CONFIG.ANIMATIONS.RESULT_SHOW,
+      onComplete: () => {
+        this.activeAnimations.delete(resultAnimation);
+        this.elements.section.classList.add(
+          this.CONFIG.CSS_CLASSES.ACTIVE_SCROLL
+        );
+        this.elements.pocket.classList.add(
+          this.CONFIG.CSS_CLASSES.DISMISS_CARD
+        );
+      },
     });
+
+    this.activeAnimations.add(resultAnimation);
   }
 
   /**
-   * Get current game state
+   * Get state
    */
   getState() {
     return {
@@ -995,60 +1167,38 @@ class ScYESGameScreen {
       isInitialized: this.isInitialized,
       gesture: this.gesture,
       isDragging: this.isDragging,
+      isDispensing: !!this.dispensingInterval,
     };
   }
 
   /**
-   * Log current game state
-   */
-  logCurrentState() {
-    if (this.debugMode) {
-      // console.log("Current state:", this.getState());
-    }
-  }
-
-  /**
-   * Clean up all resources and remove event listeners
+   * Destroy
    */
   destroy() {
     try {
-      // Kill all active animations
+      // Stop dispensing animation
+      this.stopContinuousDispensing();
+
       this.activeAnimations.forEach((animation) => {
-        if (animation && animation.kill) {
-          animation.kill();
-        }
+        if (animation && animation.kill) animation.kill();
       });
       this.activeAnimations.clear();
 
-      // Remove all event listeners
       this.eventListeners.forEach(({ element, event, handler, options }) => {
         element.removeEventListener(event, handler, options);
       });
       this.eventListeners = [];
 
-      // Reset state
       this.isInitialized = false;
       this.activeItem = null;
       this.resetGestureState();
 
-      // console.log("ScYESGameScreen: Destroyed successfully");
+      console.log("ScYESGameScreen: Destroyed successfully");
     } catch (error) {
       console.warn("ScYESGameScreen: Error during destruction:", error.message);
     }
   }
-
-  /**
-   * Restart the game (clean destroy and reinitialize)
-   */
-  restart() {
-    this.destroy();
-    setTimeout(() => {
-      this.init();
-    }, 100);
-  }
 }
 
-// Create and export instance
 const instance = new ScYESGameScreen();
-
 export default instance;

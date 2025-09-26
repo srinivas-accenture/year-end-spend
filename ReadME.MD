@@ -63,12 +63,20 @@ Landing page:
 Game landing Page:
 -------------------
 1. read the packs count and issuedCardGroups from session storage
-2. on close, navigate to landing page
-4. invoke the update click impression on successful play
-    -> one play, on completion of 'pack load into camera' and 'open all' play
-        -> invoke this function (updateClickImpressionOnEvents)
-        -> if oneplay, will take the first issued cardgroup and assign in currentCardGroup Array in session storage
-        -> if 'open all' play, will take all  issued cardgroup and assign in currentCardGroup Array in session storage
+2. on close, to navigate to landing page
+    -> invoke this function showLandingPage()
+3. on 'Unlock more packs' click, to navigate to instruction page
+    -> showInstructionPage('game-screen')
+4. on 'View cards & prizes' click, to navigate to card collection page
+5. on game play,
+  -> invoke the update click impression on successful play
+    -> on completion of 'pack load into camera' and 'open all' play
+        -> invoke this function (handleClickImpressionOnEvent)
+            -> handleClickImpressionOnEvent(eventButton, 'game-play', 'all / one' )
+        -> if oneplay, 
+          -> will take the first issued cardgroup and assign in currentCardGroup Array in session storage
+        -> if 'open all' play, 
+          -> will take all issued cardgroup and assign in currentCardGroup Array in session storage
 5. navigate to respective page with respective reward details
     -> succussful click impression
         -> general script
@@ -104,6 +112,7 @@ Game popup screen
   -> will show more than 5 paks Reward page 
 -> packs === 0
   -> will show no packs left page
+
 
 ===============================================================================
 error page:
@@ -196,3 +205,14 @@ end-campaign page:
 4. navigate to the Prize-listing page on click of 'view all prizes' button
 
 ===============================================================================
+
+
+
+
+[
+  {
+    "type": "StatusUpdate",
+    "value": "123",
+    "key": "RewardGroupID"
+  }
+]

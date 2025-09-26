@@ -339,11 +339,11 @@
             <h1 class="sc-year-end-spend-instruction-modal__content-head">How to unlock card packs?</h1>
             <div class="sc-year-end-spend-instruction-modal__content-body">
               <div class="sc-year-end-spend-instruction-modal__tab-wrapper">
-                <button class="sc-year-end-spend-instruction-modal__tab sc-year-end-spend-instruction-modal__tab-spend"
-                  data-tabid="instruction-modal-tab-spend" data-title="Spend with us" data-type="button">Spend with
+                <button class="sc-year-end-spend-instruction-modal__tab" data-tabid="instruction-modal-tab-spend"
+                  data-title="Spend with us" data-type="button">Spend with
                   us</button>
-                <button class="sc-year-end-spend-instruction-modal__tab sc-year-end-spend-instruction-modal__tab-bank"
-                  data-tabid="instruction-modal-tab-bank" data-title="Bank with us" data-type="button">Bank with
+                <button class="sc-year-end-spend-instruction-modal__tab" data-tabid="instruction-modal-tab-bank"
+                  data-title="Bank with us" data-type="button">Bank with
                   us</button>
               </div>
               <div id="instruction-modal-tab-spend" class="sc-year-end-spend-instruction-modal__tab-body">
@@ -493,9 +493,9 @@
                 <div class="sc-year-end-spend-instruction__tabs-tile-content">
                   <div class="sc-year-end-spend-instruction__tabs-tile-steps">
                     <span>Step 1</span>
-                    <p>Perform an <span>eligible action</span> to unlock a pack of instant photo cards. Each card pack
-                      contains 3
-                      instant photo cards.</p>
+                    <p>Perform an <span class="sc-year-end-spend-instruction__unlock-card-link">eligible action</span>
+                      to unlock a pack of instant photo cards. Each card pack
+                      contains 3 instant photo cards.</p>
                   </div>
                   <div class="sc-year-end-spend-instruction__tabs-tile-steps">
                     <span>Step 2</span>
@@ -522,11 +522,62 @@
           </div>
           <div class="sc-year-end-spend-instruction__tabs-content" id="unlock-packs-tab">
             <div class="sc-year-end-spend-instruction__tabs-tile">
-              <h4 class="sc-year-end-spend-instruction__tabs-tile-title">Spend with us
-              </h4>
+              <h4 class="sc-year-end-spend-instruction__tabs-tile-title">Spend with us</h4>
               <div class="sc-year-end-spend-instruction__tabs-tile-wrapper">
-                <div class="sc-year-end-spend-instruction__tabs-tile-content">
-
+                <div class="sc-year-end-spend-instruction__tabs-tile-body">
+                  <ul class="sc-year-end-spend-instruction__tab-list">
+                    <li class="sc-year-end-spend-instruction__tab-item">
+                      <div class="sc-year-end-spend-instruction__tab-item-icon">
+                        <img src="./images/sc-year-end-spend-x3-packs-blue.png" alt="x3-packs-image">
+                      </div>
+                      <div class="sc-year-end-spend-instruction__tab-item-content">
+                        <h3 class="sc-year-end-spend-instruction__tab-item-head">S$150 credit card spend</h3>
+                        <p class="sc-year-end-spend-instruction__tab-item-para">Reach S$150 in cumulative spends
+                          with your SC Credit Card </p>
+                      </div>
+                    </li>
+                    <li class="sc-year-end-spend-instruction__tab-item">
+                      <div class="sc-year-end-spend-instruction__tab-item-icon">
+                        <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                      </div>
+                      <div class="sc-year-end-spend-instruction__tab-item-content">
+                        <h3 class="sc-year-end-spend-instruction__tab-item-head">SC EasyPay on Transaction for
+                          Priority and above customers</h3>
+                        <p class="sc-year-end-spend-instruction__tab-item-para">Split payments into interest-free
+                          instalments</p>
+                      </div>
+                    </li>
+                    <li class="sc-year-end-spend-instruction__tab-item">
+                      <div class="sc-year-end-spend-instruction__tab-item-icon">
+                        <img src="./images/sc-year-end-spend-x1-packs-blue.png" alt="x1-packs-image">
+                      </div>
+                      <div class="sc-year-end-spend-instruction__tab-item-content">
+                        <h3 class="sc-year-end-spend-instruction__tab-item-head">SC EasyPay on Transaction</h3>
+                        <p class="sc-year-end-spend-instruction__tab-item-para">Split payments into interest-free
+                          instalments</p>
+                      </div>
+                    </li>
+                    <li class="sc-year-end-spend-instruction__tab-item">
+                      <div class="sc-year-end-spend-instruction__tab-item-icon">
+                        <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                      </div>
+                      <div class="sc-year-end-spend-instruction__tab-item-content">
+                        <h3 class="sc-year-end-spend-instruction__tab-item-head">SC EasyPay on Balance</h3>
+                        <p class="sc-year-end-spend-instruction__tab-item-para">Convert the outstanding balance of
+                          your next SC Credit Card statement into monthly instalments</p>
+                      </div>
+                    </li>
+                    <li class="sc-year-end-spend-instruction__tab-item">
+                      <div class="sc-year-end-spend-instruction__tab-item-icon">
+                        <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                      </div>
+                      <div class="sc-year-end-spend-instruction__tab-item-content">
+                        <h3 class="sc-year-end-spend-instruction__tab-item-head">Instalment Payment Plan</h3>
+                        <p class="sc-year-end-spend-instruction__tab-item-para">Convert your transactions across
+                          1,000 merchants into interest-free instalments</p>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
               </div>
               <div class="sc-year-end-spend-instruction__tabs-tile-view-more">
@@ -542,8 +593,61 @@
               <h4 class="sc-year-end-spend-instruction__tabs-tile-title">Bank with us
               </h4>
               <div class="sc-year-end-spend-instruction__tabs-tile-wrapper">
-                <div class="sc-year-end-spend-instruction__tabs-tile-content">
-
+                <div class="sc-year-end-spend-instruction__tabs-tile-body">
+                  <ul class="sc-year-end-spend-instruction__tab-list">
+                    <li class="sc-year-end-spend-instruction__tab-item">
+                      <div class="sc-year-end-spend-instruction__tab-item-icon">
+                        <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                      </div>
+                      <div class="sc-year-end-spend-instruction__tab-item-content">
+                        <h3 class="sc-year-end-spend-instruction__tab-item-head">Credit your salary</h3>
+                        <p class="sc-year-end-spend-instruction__tab-item-para">Sync your payday with your
+                          Bonus$aver Account</p>
+                      </div>
+                    </li>
+                    <li class="sc-year-end-spend-instruction__tab-item">
+                      <div class="sc-year-end-spend-instruction__tab-item-icon">
+                        <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                      </div>
+                      <div class="sc-year-end-spend-instruction__tab-item-content">
+                        <h3 class="sc-year-end-spend-instruction__tab-item-head">Deposit fresh funds</h3>
+                        <p class="sc-year-end-spend-instruction__tab-item-para">Deposit S$15k in fresh funds to your
+                          SGD deposit account</p>
+                      </div>
+                    </li>
+                    <li class="sc-year-end-spend-instruction__tab-item">
+                      <div class="sc-year-end-spend-instruction__tab-item-icon">
+                        <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                      </div>
+                      <div class="sc-year-end-spend-instruction__tab-item-content">
+                        <h3 class="sc-year-end-spend-instruction__tab-item-head">Apply for a credit card</h3>
+                        <p class="sc-year-end-spend-instruction__tab-item-para">Apply for any SC Credit Card and
+                          receive approval during the campaign period</p>
+                      </div>
+                    </li>
+                    <li class="sc-year-end-spend-instruction__tab-item">
+                      <div class="sc-year-end-spend-instruction__tab-item-icon">
+                        <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                      </div>
+                      <div class="sc-year-end-spend-instruction__tab-item-content">
+                        <h3 class="sc-year-end-spend-instruction__tab-item-head">Apply for CashOne Personal Loan
+                        </h3>
+                        <p class="sc-year-end-spend-instruction__tab-item-para">Take up a loan of S$15,000 or more
+                          with a tenure of 3 years</p>
+                      </div>
+                    </li>
+                    <li class="sc-year-end-spend-instruction__tab-item">
+                      <div class="sc-year-end-spend-instruction__tab-item-icon">
+                        <img src="./images/sc-year-end-spend-x2-packs-blue.png" alt="x2-packs-image">
+                      </div>
+                      <div class="sc-year-end-spend-instruction__tab-item-content">
+                        <h3 class="sc-year-end-spend-instruction__tab-item-head">Apply for Credit Card Funds
+                          Transfer</h3>
+                        <p class="sc-year-end-spend-instruction__tab-item-para">Consolidate your other banks’ credit
+                          card balances at 0% interest</p>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
               </div>
               <div class="sc-year-end-spend-instruction__tabs-tile-view-more">
@@ -567,7 +671,7 @@
             complete the set!</p>
           <button class="sc-year-end-spend-instruction__bottom-back" data-title="Back to Home" data-type="button">Back
             to Home</button>
-          <a class="sc-year-end-spend-instruction__bottom-tc sc-year-end-spend-campaign__terms-link"
+          <a class="sc-year-end-spend-instruction__bottom-terms-link sc-year-end-spend-campaign__terms-link"
             data-title="Terms & Conditions" data-type="link">Terms & Conditions</a>
         </div>
       </div>
@@ -605,12 +709,10 @@
       </div>
       <div class="sc-year-end-spend-card-collection__body">
         <div class="sc-year-end-spend-card-collection__tabs">
-          <button
-            class="sc-year-end-spend-card-collection__tabs-button sc-year-end-spend-card-collection__tabs-button-card"
-            data-tabid="my-cards">My Cards</button>
-          <button
-            class="sc-year-end-spend-card-collection__tabs-button sc-year-end-spend-card-collection__tabs-button-prize"
-            data-tabid="my-prizes">My Prizes</button>
+          <button class="sc-year-end-spend-card-collection__tabs-button" data-tabid="my-cards">Photo cards
+            collected</button>
+          <button class="sc-year-end-spend-card-collection__tabs-button" data-tabid="my-prizes">Total prizes
+            won</button>
         </div>
         <div id="my-cards" class="sc-year-end-spend-card-collection__tabs-content">
           <div class="sc-year-end-spend-card-collection__tabs-jet">
@@ -1142,11 +1244,4 @@
   </div>
   <!-- year end spend campaign script -->
   <script type="module" src="./js/sc-year-end-spend-main.js"></script>
-  <script>  document.body.addEventListener("click", function(e) {
-  if (e.target.classList.contains("sc-year-end-spend-polaroid-game__open-another")) {
-    // Your click handler code
-    console.log("Open another clicked");
-  }
-});
-  </script>
 </body>

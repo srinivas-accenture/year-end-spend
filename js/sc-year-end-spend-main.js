@@ -1,14 +1,16 @@
-import generalInstance from './sc-year-end-spend-general-flow.js';
-import gameInstance from './sc-year-end-spend-game-flow.js';
+import generalInstance from "./sc-year-end-spend-general-flow.js";
+import gameInstance from "./sc-year-end-spend-game-flow.js";
+//import screenManager from "./sc-year-end-spend-screen-manager.js";
 
-// Initialize the campaign when window is loaded
-window.addEventListener('load', function() {
-  // set the general screen instance
+window.addEventListener("load", function () {
   gameInstance.setGeneralInstance(generalInstance);
-  // set the game screen instance
   generalInstance.setGameInstance(gameInstance);
 
-  // Initialize the general and game screens
+  // window.screenManager = screenManager;
+
   generalInstance.init();
   gameInstance.init();
+
+  // Example usage
+  console.log("Campaign initialized");
 });

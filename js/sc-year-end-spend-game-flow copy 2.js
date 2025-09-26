@@ -52,7 +52,7 @@ class ScYESGameScreen {
       },
 
       TIMING: {
-        POCKET_DELAY: 4600, // default 2600
+        POCKET_DELAY: 2600,
       },
     };
 
@@ -106,10 +106,10 @@ class ScYESGameScreen {
 
   // Set the general instance
   setGeneralInstance(instance) {
-    // console.log(
-    //   "🚀 ~ ScYESGameScreen ~ setGeneralInstance ~ instance:",
-    //   instance
-    // );
+    console.log(
+      "🚀 ~ ScYESGameScreen ~ setGeneralInstance ~ instance:",
+      instance
+    );
     this.generalInstance = instance;
   }
 
@@ -126,7 +126,7 @@ class ScYESGameScreen {
       this.renderCarousel();
       this.isInitialized = true;
 
-      // console.log("ScYESGameScreen: Initialized successfully");
+      console.log("ScYESGameScreen: Initialized successfully");
     } catch (error) {
       console.error("ScYESGameScreen: Initialization failed:", error.message);
       throw error;
@@ -282,7 +282,7 @@ class ScYESGameScreen {
    * Reset game to initial playing state for "Open another" button
    */
   resetToGameState() {
-    // console.log("=== RESET TO GAME STATE START ===");
+    console.log("=== RESET TO GAME STATE START ===");
 
     // Kill any active animations first
     this.activeAnimations.forEach((animation) => {
@@ -295,7 +295,7 @@ class ScYESGameScreen {
     // First fade out the result cards if they're visible
     const resultElement = document.getElementById(this.sections.result);
     if (resultElement && resultElement.classList.contains("result-show")) {
-      // console.log("Fading out result cards before reset");
+      console.log("Fading out result cards before reset");
 
       const fadeOutAnimation = gsap.to(resultElement, {
         opacity: 0,
@@ -337,21 +337,21 @@ class ScYESGameScreen {
     // Reset pocket to initial animation state
     const pocket = document.getElementById(this.sections.pocket);
     if (pocket) {
-      // console.log(
-      //   "Resetting pocket - removing classes:",
-      //   pocket.classList.toString()
-      // );
+      console.log(
+        "Resetting pocket - removing classes:",
+        pocket.classList.toString()
+      );
       pocket.classList.remove("active", "dismiss-card");
       gsap.set(pocket, { opacity: 1, clearProps: "transform,scale,x,y" });
       pocket.style.opacity = "1";
       pocket.style.visibility = "visible";
-      // console.log("Pocket after reset - classes:", pocket.classList.toString());
+      console.log("Pocket after reset - classes:", pocket.classList.toString());
     }
 
     // Reset background to initial state
     const bgDark = document.getElementById(this.sections.bgDark);
     if (bgDark) {
-      // console.log("Resetting bgDark - removing dismiss class");
+      console.log("Resetting bgDark - removing dismiss class");
       bgDark.classList.remove("dismiss");
       gsap.set(bgDark, { clearProps: "all" });
     }
@@ -406,9 +406,9 @@ class ScYESGameScreen {
       // This ensures browser recognizes the state change
       this.elements.result.offsetHeight;
 
-      // console.log(
-      //   "Result cards reset - inline styles cleared, reflow forced for next animation"
-      // );
+      console.log(
+        "Result cards reset - inline styles cleared, reflow forced for next animation"
+      );
     }
 
     // Reset slider to initial state
@@ -429,7 +429,7 @@ class ScYESGameScreen {
       this.renderCarousel();
     }
 
-    // console.log("=== RESET TO GAME STATE END ===");
+    console.log("=== RESET TO GAME STATE END ===");
   }
 
   /**
@@ -917,17 +917,12 @@ class ScYESGameScreen {
         this.activeAnimations.delete(fadeAnimation);
         this.elements.slider.style.display = "none";
 
-        // console.log("Adding active class to pocket for dispensing animation");
+        console.log("Adding active class to pocket for dispensing animation");
         this.elements.pocket.classList.add(this.CONFIG.CSS_CLASSES.ACTIVE);
         this.elements.bgDark.classList.add(this.CONFIG.CSS_CLASSES.DISMISS);
-        // impression call for pack dispense
-        // this.generalInstance.handleClickImpressionOnEvent(
-        //   "pack_image",
-        //   "game-play",
-        //   "one"
-        // );
+
         setTimeout(() => {
-          // console.log("About to execute pocket fade out after delay");
+          console.log("About to execute pocket fade out after delay");
           this.executePocketFadeOut();
         }, this.CONFIG.TIMING.POCKET_DELAY);
       },
@@ -959,27 +954,21 @@ class ScYESGameScreen {
     // Use the section management for basic show/hide
     this.showResultState();
 
-    // CRITICAL: Use requestAnimationFrame to ensure class is added in next render cycle
-    // This allows the browser to properly recognize the state change and trigger CSS animations
-    requestAnimationFrame(() => {
-      // Original result animation - no card reset needed on first play
-      const resultAnimation = gsap.to(this.elements.result, {
-        opacity: 1,
-        ...this.CONFIG.ANIMATIONS.RESULT_SHOW,
-        onComplete: () => {
-          this.activeAnimations.delete(resultAnimation);
-        },
-      });
-
-      this.activeAnimations.add(resultAnimation);
-
-      // Add CSS classes for final state - this triggers the CSS animations naturally
-      this.elements.result.classList.add(this.CONFIG.CSS_CLASSES.RESULT_SHOW);
-      this.elements.section.classList.add(
-        this.CONFIG.CSS_CLASSES.ACTIVE_SCROLL
-      );
-      this.elements.pocket.classList.add(this.CONFIG.CSS_CLASSES.DISMISS_CARD);
+    // Original result animation - no card reset needed on first play
+    const resultAnimation = gsap.to(this.elements.result, {
+      opacity: 1,
+      ...this.CONFIG.ANIMATIONS.RESULT_SHOW,
+      onComplete: () => {
+        this.activeAnimations.delete(resultAnimation);
+      },
     });
+
+    this.activeAnimations.add(resultAnimation);
+
+    // Add CSS classes for final state - this triggers the CSS animations naturally
+    this.elements.result.classList.add(this.CONFIG.CSS_CLASSES.RESULT_SHOW);
+    this.elements.section.classList.add(this.CONFIG.CSS_CLASSES.ACTIVE_SCROLL);
+    this.elements.pocket.classList.add(this.CONFIG.CSS_CLASSES.DISMISS_CARD);
   }
 
   /**
@@ -1003,7 +992,7 @@ class ScYESGameScreen {
    */
   logCurrentState() {
     if (this.debugMode) {
-      // console.log("Current state:", this.getState());
+      console.log("Current state:", this.getState());
     }
   }
 
@@ -1031,7 +1020,7 @@ class ScYESGameScreen {
       this.activeItem = null;
       this.resetGestureState();
 
-      // console.log("ScYESGameScreen: Destroyed successfully");
+      console.log("ScYESGameScreen: Destroyed successfully");
     } catch (error) {
       console.warn("ScYESGameScreen: Error during destruction:", error.message);
     }

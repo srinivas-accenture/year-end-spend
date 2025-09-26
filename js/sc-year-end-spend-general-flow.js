@@ -66,10 +66,6 @@ class ScYESGeneralScreen {
    * @param {Object} instance - The game instance to set.
    */
   setGameInstance(instance) {
-    console.log(
-      "🚀 ~ ScYESGeneralScreen ~ setGameInstance ~ instance:",
-      instance
-    );
     this.gameInstance = instance;
   }
 
@@ -141,7 +137,6 @@ class ScYESGeneralScreen {
       that.initiateProfileCustomisationPageEvents();
       that.initiateInstructionModalEvents();
       that.initiateInstructionPageEvents();
-      // that.initiateGamePlayPageEvents();
       that.initiateCardCollectionPageEvents();
       that.initiateRewardPopupEvents();
       that.initiateRewardDetailPopupEvents();
@@ -288,21 +283,8 @@ class ScYESGeneralScreen {
       unlockPackButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-
-        const initialActiveTab = that.instructionPage.querySelector(
-          '.sc-year-end-spend-instruction__tabs-button[data-tabid="instruction-tab"]'
-        );
-        that.handleTabToggle(
-          initialActiveTab,
-          that.instructionPage,
-          ".sc-year-end-spend-instruction__tabs-button",
-          ".sc-year-end-spend-instruction__tabs-content"
-        );
-
+        that.showInstructionPage();
         that.landingPage.classList.add("sc-year-end-spend-landing--hide");
-        that.instructionPage.classList.remove(
-          "sc-year-end-spend-instruction--hide"
-        );
       });
 
       // Get the play now button and add a click event listener
@@ -312,20 +294,12 @@ class ScYESGeneralScreen {
       playButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        // that.showPolaroidGamePage();
         that.landingPage.classList.add("sc-year-end-spend-landing--hide");
         that.gamePlayPage.classList.remove(
           "sc-year-end-spend-polaroid-game--hide"
         );
-        console.log(
-          "🚀 ~ ScYESGeneralScreen ~ initiateLandingPageEvents ~ gameInstance:",
-          that.gameInstance
-        );
-        if (
-          that.gameInstance &&
-          typeof that.gameInstance.restart === "function"
-        ) {
-          that.gameInstance.restart();
+        if (that.gameInstance && typeof that.gameInstance.init === "function") {
+          that.gameInstance.init();
         }
       });
 
@@ -336,20 +310,8 @@ class ScYESGeneralScreen {
       viewPrizesButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-
-        const initialCardPageTabButton = that.cardsCollectionPage.querySelector(
-          ".sc-year-end-spend-card-collection__tabs-button-card"
-        );
-        that.handleTabToggle(
-          initialCardPageTabButton,
-          that.cardsCollectionPage,
-          ".sc-year-end-spend-card-collection__tabs-button",
-          ".sc-year-end-spend-card-collection__tabs-content"
-        );
+        that.showCardCollectionPage();
         that.landingPage.classList.add("sc-year-end-spend-landing--hide");
-        that.cardsCollectionPage.classList.remove(
-          "sc-year-end-spend-card-collection--hide"
-        );
       });
 
       // Get the check in button and add a click event listener
@@ -371,7 +333,9 @@ class ScYESGeneralScreen {
       howToPlayLink.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        that.showInstructionModal("landing");
+        // that.showInstructionModal('landing');
+        that.showInstructionPage();
+        that.landingPage.classList.add("sc-year-end-spend-landing--hide");
       });
 
       // Get the profile customise button and add a click event listener
@@ -479,10 +443,11 @@ class ScYESGeneralScreen {
         ".sc-year-end-spend-instruction__header-back"
       );
       instructionBackButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        that.closeInstructionPage();
         that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
-        that.instructionPage.classList.add(
-          "sc-year-end-spend-instruction--hide"
-        );
+        // that.instructionPage.classList.add('sc-year-end-spend-instruction--hide');
       });
 
       // Get the instruction back button and add a click event listener
@@ -490,10 +455,31 @@ class ScYESGeneralScreen {
         ".sc-year-end-spend-instruction__bottom-back"
       );
       instructionBackHomeButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        that.closeInstructionPage();
         that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
-        that.instructionPage.classList.add(
-          "sc-year-end-spend-instruction--hide"
+        // that.instructionPage.classList.add('sc-year-end-spend-instruction--hide');
+      });
+
+      // Get the unlock packs link and add a click event listener
+      const unlockPacksLink = that.instructionPage.querySelector(
+        ".sc-year-end-spend-instruction__unlock-card-link"
+      );
+      unlockPacksLink.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const unlockPacksTab = that.instructionPage.querySelector(
+          '.sc-year-end-spend-instruction__tabs-button[data-tabid="unlock-packs-tab"]'
         );
+        that.handleTabToggle(
+          unlockPacksTab,
+          that.instructionPage,
+          ".sc-year-end-spend-instruction__tabs-button",
+          ".sc-year-end-spend-instruction__tabs-content"
+        );
+        that.expandFirstAccordianInActiveTab();
       });
 
       // Get the tab buttons and add click event listeners
@@ -509,6 +495,39 @@ class ScYESGeneralScreen {
             that.instructionPage,
             ".sc-year-end-spend-instruction__tabs-button",
             ".sc-year-end-spend-instruction__tabs-content"
+          );
+          that.expandFirstAccordianInActiveTab("instruction");
+        });
+      });
+
+      // Get the view more buttons and add click event listeners
+      const viewMoreButtons = that.instructionPage.querySelectorAll(
+        ".sc-year-end-spend-instruction__tabs-tile-view-more"
+      );
+      viewMoreButtons.forEach((viewMoreButton) => {
+        viewMoreButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          that.handleAccordianToggle(
+            viewMoreButton,
+            "sc-year-end-spend-instruction__tabs-tile",
+            true
+          );
+        });
+      });
+
+      // Get the view less buttons and add click event listeners
+      const viewLessButtons = that.instructionPage.querySelectorAll(
+        ".sc-year-end-spend-instruction__tabs-tile-view-less"
+      );
+      viewLessButtons.forEach((viewLessButton) => {
+        viewLessButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          that.handleAccordianToggle(
+            viewLessButton,
+            "sc-year-end-spend-instruction__tabs-tile",
+            false
           );
         });
       });
@@ -550,30 +569,6 @@ class ScYESGeneralScreen {
   }
 
   /**
-   * Initializes event listeners for the game play page.
-   * Specifically, sets up the back button to hide the game play page and show the landing page.
-   * Throws an error if event initialization fails.
-   *
-   * @throws {Error} If event listener setup fails.
-   */
-  // initiateGamePlayPageEvents() {
-  //   const that = this;
-  //   try {
-  //     // Game play page back button and add a click event listener
-  //     const gamePlayBackButton = that.gamePlayPage.querySelector(
-  //       '.sc-year-end-spend-game-play__header-back');
-  //     gamePlayBackButton.addEventListener('click', event => {
-  //       event.preventDefault();
-  //       event.stopPropagation();
-  //       that.gamePlayPage.classList.add('sc-year-end-spend-game-play--hide');
-  //       that.landingPage.classList.remove('sc-year-end-spend-landing--hide');
-  //     });
-  //   } catch (error) {
-  //     throw new Error(`Failed to initiate game play page events: ${error.message}`);
-  //   }
-  // }
-
-  /**
    * Initializes event listeners for the card collection page UI elements.
    * Handles interactions such as navigating back/closing the collection page,
    * switching tabs, expanding/collapsing card and prize tiles, and displaying prize popups.
@@ -590,9 +585,8 @@ class ScYESGeneralScreen {
       collectionPageBackButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        that.cardsCollectionPage.classList.add(
-          "sc-year-end-spend-card-collection--hide"
-        );
+        that.closeCardCollectionPage();
+        // that.cardsCollectionPage.classList.add('sc-year-end-spend-card-collection--hide');
         that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
       });
 
@@ -603,9 +597,8 @@ class ScYESGeneralScreen {
       collectionPageCloseButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        that.cardsCollectionPage.classList.add(
-          "sc-year-end-spend-card-collection--hide"
-        );
+        that.closeCardCollectionPage();
+        // that.cardsCollectionPage.classList.add('sc-year-end-spend-card-collection--hide');
         that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
       });
 
@@ -623,6 +616,8 @@ class ScYESGeneralScreen {
             ".sc-year-end-spend-card-collection__tabs-button",
             ".sc-year-end-spend-card-collection__tabs-content"
           );
+
+          that.expandFirstAccordianInActiveTab("card-collection");
         });
       });
 
@@ -635,38 +630,22 @@ class ScYESGeneralScreen {
       );
       viewMoreCardButtons.forEach((viewMoreCardButton) => {
         viewMoreCardButton.addEventListener("click", (event) => {
-          const parentContainer = event.currentTarget.closest(
-            ".sc-year-end-spend-card-collection__tabs-tile"
-          );
-          const tileWrapper = parentContainer.querySelector(
-            ".sc-year-end-spend-card-collection__tabs-tile-wrapper"
-          );
-          const viewLessCardButton = parentContainer.querySelector(
-            ".sc-year-end-spend-card-collection__tabs-tile-view-less"
-          );
-          that.toggleCardsTile(
-            tileWrapper,
+          event.preventDefault();
+          event.stopPropagation();
+          that.handleAccordianToggle(
             viewMoreCardButton,
-            viewLessCardButton,
+            "sc-year-end-spend-card-collection__tabs-tile",
             true
           );
         });
       });
       viewLessCardButtons.forEach((viewLessCardButton) => {
         viewLessCardButton.addEventListener("click", (event) => {
-          const parentContainer = event.currentTarget.closest(
-            ".sc-year-end-spend-card-collection__tabs-tile"
-          );
-          const tileWrapper = parentContainer.querySelector(
-            ".sc-year-end-spend-card-collection__tabs-tile-wrapper"
-          );
-          const viewMoreCardButton = parentContainer.querySelector(
-            ".sc-year-end-spend-card-collection__tabs-tile-view-more"
-          );
-          that.toggleCardsTile(
-            tileWrapper,
-            viewMoreCardButton,
+          event.preventDefault();
+          event.stopPropagation();
+          that.handleAccordianToggle(
             viewLessCardButton,
+            "sc-year-end-spend-card-collection__tabs-tile",
             false
           );
         });
@@ -681,38 +660,22 @@ class ScYESGeneralScreen {
       );
       viewMorePrizeButtons.forEach((viewMorePrizeButton) => {
         viewMorePrizeButton.addEventListener("click", (event) => {
-          const parentContainer = event.currentTarget.closest(
-            ".sc-year-end-spend-card-collection__tabs-prize-tile"
-          );
-          const tileWrapper = parentContainer.querySelector(
-            ".sc-year-end-spend-card-collection__tabs-prize-tile-wrapper"
-          );
-          const viewLessPrizeButton = parentContainer.querySelector(
-            ".sc-year-end-spend-card-collection__tabs-prize-tile-view-less"
-          );
-          that.toggleCardsTile(
-            tileWrapper,
+          event.preventDefault();
+          event.stopPropagation();
+          that.handleAccordianToggle(
             viewMorePrizeButton,
-            viewLessPrizeButton,
+            "sc-year-end-spend-card-collection__tabs-prize-tile",
             true
           );
         });
       });
       viewLessPrizeButtons.forEach((viewLessPrizeButton) => {
         viewLessPrizeButton.addEventListener("click", (event) => {
-          const parentContainer = event.currentTarget.closest(
-            ".sc-year-end-spend-card-collection__tabs-prize-tile"
-          );
-          const tileWrapper = parentContainer.querySelector(
-            ".sc-year-end-spend-card-collection__tabs-prize-tile-wrapper"
-          );
-          const viewMorePrizeButton = parentContainer.querySelector(
-            ".sc-year-end-spend-card-collection__tabs-prize-tile-view-more"
-          );
-          that.toggleCardsTile(
-            tileWrapper,
-            viewMorePrizeButton,
+          event.preventDefault();
+          event.stopPropagation();
+          that.handleAccordianToggle(
             viewLessPrizeButton,
+            "sc-year-end-spend-card-collection__tabs-prize-tile",
             false
           );
         });
@@ -1100,6 +1063,9 @@ class ScYESGeneralScreen {
             that.handleRegConfirmationPage();
           }, 1000);
           break;
+        case "game-play":
+          that.handleGamePlayImpressionSuccess(rewardValue);
+          break;
         default:
           console.error(
             "Success on Click Impression: " + JSON.stringify(response)
@@ -1110,11 +1076,13 @@ class ScYESGeneralScreen {
     let impressionObj = that.getImpressionObject(sourceEle, "Clicked");
 
     if (onEvent === "game-play") {
+      let contextValue =
+        rewardValue.toLowerCase() === "all" ? "AllCards" : "groupId";
       impressionObj.contexts = [
         {
           type: "StatusUpdate",
-          value: rewardValue,
-          key: "Reward",
+          value: contextValue,
+          key: "RewardGroupID",
         },
       ];
     }
@@ -1163,6 +1131,13 @@ class ScYESGeneralScreen {
     }
   }
 
+  /**
+   * Groups an array of card objects by a specified property.
+   *
+   * @param {Object[]} cards - The array of card objects to group.
+   * @param {string} propertyName - The property name to group cards by.
+   * @returns {Object[]} An array of objects, each containing a group of cards keyed by the property value.
+   */
   groupCardsByProperty(cards, propertyName) {
     const cardGroups = cards.reduce((acc, card) => {
       const groupId = card[propertyName];
@@ -1348,6 +1323,59 @@ class ScYESGeneralScreen {
   }
 
   /**
+   * Closes the card collection page by adding a CSS class to hide it.
+   * Handles any errors that occur during the process and logs them.
+   *
+   * @returns {void}
+   */
+  closeCardCollectionPage() {
+    try {
+      this.cardsCollectionPage.classList.add(
+        "sc-year-end-spend-card-collection--hide"
+      );
+    } catch (error) {
+      this.handleErrorPage(
+        `Failed to close card collection page: ${error.message}`,
+        "loader"
+      );
+      console.error("closeCardCollectionPage error:", error);
+    }
+  }
+
+  /**
+   * Displays the card collection page, initializes the active tab, and sets up event handlers
+   * for tab toggling and accordion functionality. Handles errors by displaying an error page.
+   *
+   * @param {string} [sourcePage=''] - The source page identifier to track where the navigation originated from.
+   */
+  showCardCollectionPage(sourcePage = "") {
+    const that = this;
+    try {
+      that.sourcePage = sourcePage;
+      let initialActiveTab = that.cardsCollectionPage.querySelector(
+        '.sc-year-end-spend-card-collection__tabs-button[data-tabid="my-cards"]'
+      );
+
+      that.handleTabToggle(
+        initialActiveTab,
+        that.cardsCollectionPage,
+        ".sc-year-end-spend-card-collection__tabs-button",
+        ".sc-year-end-spend-card-collection__tabs-content"
+      );
+      that.expandFirstAccordianInActiveTab("card-collection");
+      that.cardsCollectionPage.classList.remove(
+        "sc-year-end-spend-card-collection--hide"
+      );
+    } catch (error) {
+      that.handleErrorPage(
+        `Failed to show instruction modal: ${error.message}`,
+        "loader"
+      );
+      console.error("showInstructionModal error:", error);
+    }
+  }
+
+  /**
    * Closes the instruction modal by adding a CSS class to hide it.
    * Handles any errors that occur during the process and logs them.
    *
@@ -1369,17 +1397,17 @@ class ScYESGeneralScreen {
 
   /**
    * Displays the instruction modal for the specified source page.
-   * Removes the hidden class from the modal to make it visible.
-   * Handles any errors by displaying an error page and logging the error.
+   * Initializes the modal by activating the default tab and making the modal visible.
+   * Handles errors by displaying an error page and logging the error to the console.
    *
-   * @param {string} sourcePage - The identifier of the page that triggered the instruction modal.
+   * @param {string} sourcePage - The identifier of the page from which the instruction modal is triggered.
    */
   showInstructionModal(sourcePage) {
     const that = this;
     try {
       that.sourcePage = sourcePage;
       const initialActiveTab = that.instructionModalPage.querySelector(
-        ".sc-year-end-spend-instruction-modal__tab-spend"
+        '.sc-year-end-spend-instruction-modal__tab[data-tabid="instruction-modal-tab-spend"]'
       );
       that.handleTabToggle(
         initialActiveTab,
@@ -1401,47 +1429,192 @@ class ScYESGeneralScreen {
   }
 
   /**
-   * Handles tab switching for instruction modal tabs.
-   * Activates the selected tab and its content.
+   * Closes the instruction page by adding a CSS class to hide it.
+   * Handles any errors that occur during the process and logs them.
    *
-   * @param {HTMLElement} eventTarget - The tab element that was clicked.
+   * @returns {void}
    */
-  handleTabToggle(eventTarget, parentPage, tabClass, tabContentClass) {
-    const allTabs = parentPage.querySelectorAll(tabClass);
-    const allTabContents = parentPage.querySelectorAll(tabContentClass);
-
-    allTabs.forEach((tab, index) => {
-      const isActive = tab === eventTarget;
-      tab.classList.toggle("active", isActive);
-      allTabContents[index].classList.toggle(
-        "active",
-        isActive &&
-          eventTarget.getAttribute("data-tabid") === allTabContents[index].id
+  closeInstructionPage() {
+    try {
+      this.instructionPage.classList.add("sc-year-end-spend-instruction--hide");
+    } catch (error) {
+      this.handleErrorPage(
+        `Failed to close instruction page: ${error.message}`,
+        "loader"
       );
-    });
+      console.error("closeInstructionPage error:", error);
+    }
   }
 
   /**
-   * Toggles the expanded state of a card tile and updates the visibility of "View More" and "View Less" buttons.
+   * Displays the instruction page modal and initializes its state based on the source page.
    *
-   * @param {HTMLElement} tileWrapper - The container element for the card tile.
-   * @param {HTMLElement} viewMoreButton - The "View More" button element.
-   * @param {HTMLElement} viewLessButton - The "View Less" button element.
-   * @param {boolean} expand - If true, expands the card tile; otherwise, collapses it.
+   * - Sets the active tab depending on the source page (defaults to "instruction-tab" or "unlock-packs-tab" for "game-screen").
+   * - Handles tab toggling and initializes the first tile's "view more" accordion in the active tab.
+   * - Makes the instruction page visible by removing the hide class.
+   * - Handles and logs errors if any step fails.
+   *
+   * @param {string} [sourcePage=''] - The source page from which the instruction modal is invoked (e.g., 'game-screen').
    */
-  toggleCardsTile(tileWrapper, viewMoreButton, viewLessButton, expand) {
-    if (tileWrapper && viewMoreButton && viewLessButton) {
-      if (expand) {
-        tileWrapper.classList.add("expanded");
-        viewMoreButton.style.display = "none";
-        viewLessButton.style.display = "block";
-        viewLessButton.style.textAlign = "center";
-      } else {
-        tileWrapper.classList.remove("expanded");
-        viewMoreButton.style.display = "block";
-        viewLessButton.style.display = "none";
-        viewMoreButton.style.textAlign = "center";
+  showInstructionPage(sourcePage = "") {
+    const that = this;
+    try {
+      that.sourcePage = sourcePage;
+      let initialActiveTab = that.instructionPage.querySelector(
+        '.sc-year-end-spend-instruction__tabs-button[data-tabid="instruction-tab"]'
+      );
+
+      const packsCountEle = that.instructionPage.querySelector(
+        ".sc-year-end-spend-instruction__bottom-packs"
+      );
+      packsCountEle.textContent = parseInt(
+        window.sessionStorage.getItem("packsCount"),
+        10
+      );
+
+      if (sourcePage === "game-screen") {
+        initialActiveTab = that.instructionPage.querySelector(
+          '.sc-year-end-spend-instruction__tabs-button[data-tabid="unlock-packs-tab"]'
+        );
       }
+
+      that.handleTabToggle(
+        initialActiveTab,
+        that.instructionPage,
+        ".sc-year-end-spend-instruction__tabs-button",
+        ".sc-year-end-spend-instruction__tabs-content"
+      );
+
+      that.expandFirstAccordianInActiveTab("instruction");
+      that.instructionPage.classList.remove(
+        "sc-year-end-spend-instruction--hide"
+      );
+    } catch (error) {
+      that.handleErrorPage(
+        `Failed to show instruction modal: ${error.message}`,
+        "loader"
+      );
+      console.error("showInstructionModal error:", error);
+    }
+  }
+
+  /**
+   * Displays the landing page by updating the packs count element and removing the hide class.
+   * Retrieves the packs count from sessionStorage and sets it in the landing page.
+   * Handles errors by showing an error page and logging the error to the console.
+   *
+   * @throws {Error} If there is an issue displaying the landing page.
+   */
+  showLandingPage() {
+    const that = this;
+    try {
+      const packsCountEle = that.landingPage.querySelector(
+        ".sc-year-end-spend-landing__packs-count"
+      );
+      if (packsCountEle)
+        packsCountEle.textContent = parseInt(
+          window.sessionStorage.getItem("packsCount"),
+          10
+        );
+
+      this.landingPage.classList.remove("sc-year-end-spend-landing--hide");
+    } catch (error) {
+      this.handleErrorPage(
+        `Failed to show landing page: ${error.message}`,
+        "loader"
+      );
+      console.error("showLandingPage error:", error);
+    }
+  }
+
+  /**
+   * Expands the first accordion in the currently active tab of the specified source page.
+   *
+   * Depending on the `sourcePageName`, it selects the appropriate tab content and tile element class.
+   * If the active tab is "my-prizes" within the "card-collection" page, it uses a different tile class.
+   * Then, it finds the "view more" button within the first tile and triggers the accordion toggle handler.
+   *
+   * @param {string} [sourcePageName='instruction'] - The name of the source page to operate on.
+   *        Valid values are 'instruction' or 'card-collection'.
+   * @throws {Error} Throws an error if the expansion process fails.
+   */
+  expandFirstAccordianInActiveTab(sourcePageName = "instruction") {
+    const that = this;
+    try {
+      let tileElementClass = "sc-year-end-spend-instruction__tabs-tile";
+      let activeTabContent = that.instructionPage.querySelector(
+        ".sc-year-end-spend-instruction__tabs-content.active"
+      );
+
+      if (sourcePageName === "card-collection") {
+        activeTabContent = that.cardsCollectionPage.querySelector(
+          ".sc-year-end-spend-card-collection__tabs-content.active"
+        );
+        tileElementClass = "sc-year-end-spend-card-collection__tabs-tile";
+
+        if (activeTabContent.id === "my-prizes") {
+          tileElementClass =
+            "sc-year-end-spend-card-collection__tabs-prize-tile";
+        }
+      }
+
+      const tileElement = activeTabContent.querySelector(
+        `.${tileElementClass}`
+      );
+      const viewMoreButton = tileElement.querySelector(
+        `.${tileElementClass}-view-more`
+      );
+
+      that.handleAccordianToggle(viewMoreButton, tileElementClass, true);
+    } catch (error) {
+      throw new Error(
+        `Failed to expand first accordion in active tab: ${error.message}`
+      );
+    }
+  }
+
+  /**
+   * Toggles the active state of tabs and their corresponding content panels.
+   *
+   * @param {HTMLElement} eventTarget - The tab element that was clicked or triggered.
+   * @param {HTMLElement} parentPage - The parent container element that holds the tabs and tab contents.
+   * @param {string} tabClass - The CSS selector for the tab elements within the parent container.
+   * @param {string} tabContentClass - The CSS selector for the tab content elements within the parent container.
+   * @throws {Error} Throws an error if tab toggling fails.
+   */
+  handleTabToggle(eventTarget, parentPage, tabClass, tabContentClass) {
+    try {
+      const allTabs = parentPage.querySelectorAll(tabClass);
+      const allTabContents = parentPage.querySelectorAll(tabContentClass);
+
+      allTabs.forEach((tab, index) => {
+        const isActive = tab === eventTarget;
+        tab.classList.toggle("active", isActive);
+        allTabContents[index].classList.toggle(
+          "active",
+          isActive &&
+            eventTarget.getAttribute("data-tabid") === allTabContents[index].id
+        );
+      });
+    } catch (error) {
+      throw new Error(`Failed to toggle tabs: ${error.message}`);
+    }
+  }
+
+  /**
+   * Toggles the 'expanded' class on the closest parent container with the specified class.
+   *
+   * @param {HTMLElement} eventTarget - The DOM element that triggered the event.
+   * @param {string} parentContainerClass - The class name of the parent container to search for.
+   * @param {boolean} [expand=true] - Whether to add ('true') or remove ('false') the 'expanded' class.
+   * @throws {Error} Throws an error if the toggle operation fails.
+   */
+  handleAccordianToggle(eventTarget, parentContainerClass, expand = true) {
+    try {
+      const parentContainer = eventTarget.closest(`.${parentContainerClass}`);
+      parentContainer.classList.toggle("expanded", expand);
+    } catch (error) {
+      throw new Error(`Failed to toggle accordion: ${error.message}`);
     }
   }
 
@@ -1471,6 +1644,24 @@ class ScYESGeneralScreen {
 
       if (typeof expectedOffer === "object" && expectedOffer !== null) {
         that.setOfferValues(expectedOffer);
+
+        const packsCount = parseInt(
+          window.sessionStorage.getItem("packsCount"),
+          10
+        );
+        const issuedCardGroups = JSON.parse(
+          window.sessionStorage.getItem("issuedCardGroups") || "[]"
+        );
+
+        if (packsCount < 0) {
+          throw new Error("Packs count should not be negative");
+        }
+
+        if (packsCount !== issuedCardGroups.length) {
+          throw new Error(
+            "Packs count should match with issued card group length"
+          );
+        }
 
         const expiryDateEle = that.landingPage.querySelector(
           ".sc-year-end-spend-landing__expiry-date"

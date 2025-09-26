@@ -3779,4 +3779,30 @@ $height-breakpoints-basewidth: (
         display: none !important;
       }
     }
+    /* Animation for dynamically added dispensing cards */
+    // @keyframes dispensingCardAppear {
+    //   0% {
+    //     opacity: 0;
+    //     transform: translateY(-30px) scale(0.8);
+    //   }
+    //   100% {
+    //     opacity: 1;
+    //     transform: translateY(0) scale(1);
+    //   }
+    // }
+
+    // /* Ensure dispensing container is always visible during animation */
+    // .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid {
+    //   display: flex !important;
+    //   flex-direction: column;
+    //   gap: 10px;
+    //   visibility: visible !important;
+    //   opacity: 1 !important;
+    // }
+
+    // .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img {
+    //   display: block !important;
+    //   visibility: visible !important;
+    //   opacity: 1 !important;
+    // }
   }

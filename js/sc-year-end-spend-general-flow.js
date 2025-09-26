@@ -301,11 +301,11 @@ class ScYESGeneralScreen {
         event.preventDefault();
         event.stopPropagation();
         that.landingPage.classList.add("sc-year-end-spend-landing--hide");
-        that.gamePlayPage.classList.remove(
-          "sc-year-end-spend-polaroid-game--hide"
-        );
-        if (that.gameInstance && typeof that.gameInstance.init === "function") {
-          that.gameInstance.init();
+        if (
+          that.gameInstance &&
+          typeof that.gameInstance.showGameSection === "function"
+        ) {
+          that.gameInstance.showGameSection();
         }
       });
 

@@ -214,6 +214,8 @@ class ScYESGameScreen {
     this.isDragging = false;
   }
 
+  // SECTION MANAGEMENT METHODS
+
   /**
    * Simple show section method
    * @param {string} sectionName - Name from this.sections
@@ -277,6 +279,160 @@ class ScYESGameScreen {
   }
 
   /**
+   * Reset game to initial playing state for "Open another" button
+   */
+  resetToGameState() {
+    // console.log("=== RESET TO GAME STATE START ===");
+
+    // Kill any active animations first
+    this.activeAnimations.forEach((animation) => {
+      if (animation && animation.kill) {
+        animation.kill();
+      }
+    });
+    this.activeAnimations.clear();
+
+    // First fade out the result cards if they're visible
+    const resultElement = document.getElementById(this.sections.result);
+    if (resultElement && resultElement.classList.contains("result-show")) {
+      // console.log("Fading out result cards before reset");
+
+      const fadeOutAnimation = gsap.to(resultElement, {
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.out",
+        onComplete: () => {
+          this.activeAnimations.delete(fadeOutAnimation);
+          this.completeGameReset();
+        },
+      });
+
+      this.activeAnimations.add(fadeOutAnimation);
+    } else {
+      this.completeGameReset();
+    }
+  }
+
+  /**
+   * Complete the game reset after result fade out
+   */
+  completeGameReset() {
+    // Hide result page
+    this.hideSection("result");
+
+    // Show game elements
+    this.showSections(["slider", "pocket", "bgDark"]);
+
+    // Reset all slider items (packs) - restore any that were hidden
+    this.items.forEach((item, index) => {
+      item.style.display = "block";
+      item.style.opacity = "1";
+      item.style.visibility = "visible";
+      item.classList.remove("active");
+
+      // Clear any GSAP transforms that might position them off-screen
+      gsap.set(item, { clearProps: "all" });
+    });
+
+    // Reset pocket to initial animation state
+    const pocket = document.getElementById(this.sections.pocket);
+    if (pocket) {
+      // console.log(
+      //   "Resetting pocket - removing classes:",
+      //   pocket.classList.toString()
+      // );
+      pocket.classList.remove("active", "dismiss-card");
+      gsap.set(pocket, { opacity: 1, clearProps: "transform,scale,x,y" });
+      pocket.style.opacity = "1";
+      pocket.style.visibility = "visible";
+      // console.log("Pocket after reset - classes:", pocket.classList.toString());
+    }
+
+    // Reset background to initial state
+    const bgDark = document.getElementById(this.sections.bgDark);
+    if (bgDark) {
+      // console.log("Resetting bgDark - removing dismiss class");
+      bgDark.classList.remove("dismiss");
+      gsap.set(bgDark, { clearProps: "all" });
+    }
+
+    // Reset section classes
+    if (this.elements.section) {
+      this.elements.section.classList.remove("active-scroll");
+    }
+
+    // CRITICAL: Reset result element properly for next animation cycle
+    if (this.elements.result) {
+      // Remove the CSS class that triggers animations
+      this.elements.result.classList.remove("result-show");
+
+      // Clear GSAP properties
+      gsap.set(this.elements.result, {
+        opacity: 0,
+        clearProps: "transform,scale,x,y",
+      });
+      this.elements.result.style.opacity = "0";
+
+      // IMPORTANT: Clear all inline styles from result cards so CSS can take over naturally
+      const resultCards = this.elements.result.querySelectorAll(
+        ".sc-year-end-spend-polaroid-game__polaroid-card"
+      );
+      const prizeDetail = this.elements.result.querySelector(
+        ".sc-year-end-spend-polaroid-game__prize-detail"
+      );
+
+      resultCards.forEach((card, index) => {
+        // Remove inline styles to let CSS handle initial state
+        card.style.top = "";
+        card.style.opacity = "";
+        card.style.transform = "";
+        card.style.left = "";
+
+        const cardImg = card.querySelector(
+          ".sc-year-end-spend-polaroid-game__polaroid-card-img"
+        );
+        if (cardImg) {
+          // Clear any inline styles on card image
+          cardImg.style.opacity = "";
+        }
+      });
+
+      if (prizeDetail) {
+        // Clear inline styles to let CSS handle initial state
+        prizeDetail.style.opacity = "";
+      }
+
+      // FORCE REFLOW - Critical for CSS animations to work on next cycle
+      // This ensures browser recognizes the state change
+      this.elements.result.offsetHeight;
+
+      // console.log(
+      //   "Result cards reset - inline styles cleared, reflow forced for next animation"
+      // );
+    }
+
+    // Reset slider to initial state
+    if (this.elements.slider) {
+      gsap.set(this.elements.slider, {
+        opacity: 1,
+        clearProps: "transform,scale,x,y",
+      });
+      this.elements.slider.style.opacity = "1";
+      this.elements.slider.style.visibility = "visible";
+    }
+
+    // Reset game state
+    if (this.isInitialized) {
+      this.resetGestureState();
+      this.setupGameState();
+      this.updateLayoutDimensions();
+      this.renderCarousel();
+    }
+
+    // console.log("=== RESET TO GAME STATE END ===");
+  }
+
+  /**
    * Show result page
    */
   showResultState() {
@@ -285,6 +441,8 @@ class ScYESGameScreen {
       ["result"] // show
     );
   }
+
+  // END SECTION MANAGEMENT METHODS
 
   /**
    * Bind all event listeners with proper cleanup tracking
@@ -347,7 +505,8 @@ class ScYESGameScreen {
 
       if (this.restartButton) {
         this.addEventListenerWithCleanup(this.restartButton, "click", (e) => {
-          this.showSliderScreen();
+          // Use the simplified section management
+          this.resetToGameState();
         });
       }
     } catch (error) {
@@ -767,13 +926,12 @@ class ScYESGameScreen {
           "game-play",
           "one"
         );
-        // Get a session item
-        const collectedCurrentCardGroup =
-          sessionStorage.getItem("currentCardGroup");
-        console.log(
-          "🚀 ~ ScYESGameScreen ~ executeSliderFadeOut ~ value:",
-          collectedCurrentCardGroup
-        );
+        // // Get a single item
+        // const value = sessionStorage.getItem("currentCardGroup");
+        // console.log(
+        //   "🚀 ~ ScYESGameScreen ~ executeSliderFadeOut ~ value:",
+        //   value
+        // );
 
         setTimeout(() => {
           // console.log("About to execute pocket fade out after delay");
@@ -894,112 +1052,6 @@ class ScYESGameScreen {
     setTimeout(() => {
       this.init();
     }, 100);
-  }
-
-  /**
-   * Show slider/game screen
-   */
-  resetToGameState() {
-    console.log("Resetting game to initial state");
-
-    // Kill all animations
-    this.activeAnimations.forEach((animation) => {
-      if (animation && animation.kill) animation.kill();
-    });
-    this.activeAnimations.clear();
-
-    // Show slider elements first
-    this.showSections(["slider", "pocket", "bgDark"]);
-
-    // Hide result elements
-    this.hideSection("result");
-
-    // Clear all transforms and classes from items
-    this.items.forEach((item) => {
-      item.classList.remove("active");
-      gsap.set(item, { clearProps: "all" });
-      item.style.display = "block";
-      item.style.opacity = "1";
-      item.style.visibility = "visible";
-    });
-
-    // Reset pocket
-    if (this.elements.pocket) {
-      this.elements.pocket.classList.remove("active", "dismiss-card");
-      gsap.set(this.elements.pocket, { clearProps: "all" });
-      this.elements.pocket.style.opacity = "1";
-      this.elements.pocket.style.visibility = "visible";
-    }
-
-    // Reset background
-    if (this.elements.bgDark) {
-      this.elements.bgDark.classList.remove("dismiss");
-      gsap.set(this.elements.bgDark, { clearProps: "all" });
-    }
-
-    // Reset result
-    if (this.elements.result) {
-      this.elements.result.classList.remove("result-show");
-      this.elements.result.style.opacity = "0";
-    }
-
-    // Reset section
-    if (this.elements.section) {
-      this.elements.section.classList.remove("active-scroll");
-    }
-
-    // CRITICAL: Reset game state BEFORE rendering
-    this.resetGestureState();
-    this.activeItem = null;
-    this.offset = Math.floor(this.itemCount / 2); // Force center
-
-    // Update dimensions and render
-    this.updateLayoutDimensions();
-    //this.renderCarousel();
-
-    console.log(
-      `Slider reset complete - Center index: ${Math.floor(
-        this.itemCount / 2
-      )}, Current offset: ${this.offset}`
-    );
-  }
-
-  showSliderScreen() {
-    console.log("Showing slider screen");
-    // Use existing reset
-    this.resetToGameState();
-    this.renderCarousel();
-    console.log(`Slider centered - offset: ${this.offset}`);
-  }
-
-  /**
-   * Show game section (parent container)
-   */
-  showGameSection() {
-    console.log("Showing game section");
-    if (this.elements.section) {
-      this.elements.section.classList.remove(
-        "sc-year-end-spend-polaroid-game--hide"
-      );
-    }
-    this.showSliderScreen();
-  }
-
-  /**
-   * Hide game section
-   */
-  hideGameSection() {
-    console.log("Hiding game section - cleaning up");
-
-    // Reset everything first
-    this.completeGameReset();
-
-    // Then hide
-    if (this.elements.section) {
-      this.elements.section.classList.add(
-        "sc-year-end-spend-polaroid-game--hide"
-      );
-    }
   }
 }
 

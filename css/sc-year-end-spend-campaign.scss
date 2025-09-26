@@ -3473,7 +3473,7 @@ $height-breakpoints-basewidth: (
               bottom: 0;
               width: 100%;
               z-index: 10;
-              background-image: url(../images/game/sc-year-end-spend-arrow-right.png);
+              //background-image: url(../images/game/sc-year-end-spend-arrow-right.png);
               background-size: 100%;
               background-position: top left;
               width: 30px;
@@ -3555,6 +3555,45 @@ $height-breakpoints-basewidth: (
 
             img:nth-child(3) {
               transition: top, transform, 0.5s ease-in-out 2.4s;
+            }
+
+            // next 3 images
+            img:nth-child(4) {
+              transition: top, transform, 0.5s ease-in-out 3.4s;// +1s on delay for next 3 images
+            }
+
+            img:nth-child(5) {
+              transition: top, transform, 0.5s ease-in-out 3.6s;
+            }
+
+            img:nth-child(6) {
+              transition: top, transform, 0.5s ease-in-out 3.8s;
+            }
+
+            // next 3 images
+            img:nth-child(7) {
+              transition: top, transform, 0.5s ease-in-out 4.8s;// +1s on delay for next 3 images
+            }
+
+            img:nth-child(8) {
+              transition: top, transform, 0.5s ease-in-out 5.0s;
+            }
+
+            img:nth-child(9) {
+              transition: top, transform, 0.5s ease-in-out 5.2s;
+            }
+
+            // next 3 images
+            img:nth-child(10) {
+              transition: top, transform, 0.5s ease-in-out 6.2s;// +1s on delay for next 3 images
+            }
+
+            img:nth-child(11) {
+              transition: top, transform, 0.5s ease-in-out 6.4s;
+            }
+
+            img:nth-child(12) {
+              transition: top, transform, 0.5s ease-in-out 6.6s;
             }
           }
 
@@ -3805,4 +3844,5 @@ $height-breakpoints-basewidth: (
     //   visibility: visible !important;
     //   opacity: 1 !important;
     // }
+    
   }

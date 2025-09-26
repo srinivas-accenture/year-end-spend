@@ -921,11 +921,18 @@ class ScYESGameScreen {
         this.elements.pocket.classList.add(this.CONFIG.CSS_CLASSES.ACTIVE);
         this.elements.bgDark.classList.add(this.CONFIG.CSS_CLASSES.DISMISS);
         // impression call for pack dispense
-        // this.generalInstance.handleClickImpressionOnEvent(
-        //   "pack_image",
-        //   "game-play",
-        //   "one"
+        this.generalInstance.handleClickImpressionOnEvent(
+          this.elements.slider,
+          "game-play",
+          "one"
+        );
+        // // Get a single item
+        // const value = sessionStorage.getItem("currentCardGroup");
+        // console.log(
+        //   "🚀 ~ ScYESGameScreen ~ executeSliderFadeOut ~ value:",
+        //   value
         // );
+
         setTimeout(() => {
           // console.log("About to execute pocket fade out after delay");
           this.executePocketFadeOut();

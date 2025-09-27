@@ -3670,8 +3670,8 @@ $height-breakpoints-basewidth: (
             transform: translate(-50%, 50%) scale(2);
           }
           .sc-year-end-spend-polaroid-game__pocket-sparkles{
-                opacity: 1;
-                transition: opacity 1.0s ease-in 1.0s;
+            opacity: 1;
+            transition: opacity 1.0s ease-in 1.0s;
           }
 
           .sc-year-end-spend-polaroid-game__dispense-polaroid {
@@ -3798,53 +3798,53 @@ $height-breakpoints-basewidth: (
               animation-delay: 1s
             }
             &-01{
-              width: 38px;
-              height: 38px;
+              width: calc(min(38px, #{responsive-font(38px)}));
+              height: calc(min(38px, #{responsive-font(38px)}));
               background-image: url(../images/game/sc-year-end-spend-sparkles-01.svg);
             } 
             &-02{
-              width: 52px;
-              height: 52px;
+              width: calc(min(52px, #{responsive-font(52px)}));
+              height: calc(min(52px, #{responsive-font(52px)}));
               background-image: url(../images/game/sc-year-end-spend-sparkles-02.svg);
             }
             &-03{
-              width: 36px;
-              height: 36px;
+              width: calc(min(36px, #{responsive-font(36px)}));
+              height: calc(min(36px, #{responsive-font(36px)}));
               background-image: url(../images/game/sc-year-end-spend-sparkles-03.svg);
             }
             &-04{
-              width: 54px;
-              height: 54px;
+              width: calc(min(54px, #{responsive-font(54px)}));
+              height: calc(min(54px, #{responsive-font(54px)}));
               background-image: url(../images/game/sc-year-end-spend-sparkles-04.svg);
             }
             &-05{
-              width: 25px;
-              height: 25px;
+              width: calc(min(25px, #{responsive-font(25px)}));
+              height: calc(min(25px, #{responsive-font(25px)}));
               background-image: url(../images/game/sc-year-end-spend-sparkles-05.svg);
             }
             &-06{
-              width: 56px;
-              height: 56px;
+              width: calc(min(56px, #{responsive-font(56px)}));
+              height: calc(min(56px, #{responsive-font(56px)}));
               background-image: url(../images/game/sc-year-end-spend-sparkles-06.svg);
             }
             &-07{
-              width: 49px;
-              height: 49px;
+              width: calc(min(49px, #{responsive-font(49px)}));
+              height: calc(min(49px, #{responsive-font(49px)}));
               background-image: url(../images/game/sc-year-end-spend-sparkles-07.svg);
             }
             &-08{
-              width: 10px;
-              height: 10px;
+              width: calc(min(10px, #{responsive-font(10px)}));
+              height: calc(min(10px, #{responsive-font(10px)}));
               background-image: url(../images/game/sc-year-end-spend-sparkles-08.svg);
             }
             &-09{
-              width: 11px;
-              height: 11px;
+              width: calc(min(11px, #{responsive-font(11px)}));
+              height: calc(min(11px, #{responsive-font(11px)}));
               background-image: url(../images/game/sc-year-end-spend-sparkles-09.svg);
             }
             &-10{
-              width: 46px;
-              height: 46px;
+              width: calc(min(46px, #{responsive-font(46px)}));
+              height: calc(min(46px, #{responsive-font(46px)}));
               background-image: url(../images/game/sc-year-end-spend-sparkles-10.svg);
             }
           }

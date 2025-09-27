@@ -3259,53 +3259,53 @@ body {
   animation-delay: 1s;
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-01 {
-  width: 38px;
-  height: 38px;
+  width: min(38px, calc(0.088372093 * 100vw));
+  height: min(38px, calc(0.088372093 * 100vw));
   background-image: url(../images/game/sc-year-end-spend-sparkles-01.svg);
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-02 {
-  width: 52px;
-  height: 52px;
+  width: min(52px, calc(0.1209302326 * 100vw));
+  height: min(52px, calc(0.1209302326 * 100vw));
   background-image: url(../images/game/sc-year-end-spend-sparkles-02.svg);
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-03 {
-  width: 36px;
-  height: 36px;
+  width: min(36px, calc(0.0837209302 * 100vw));
+  height: min(36px, calc(0.0837209302 * 100vw));
   background-image: url(../images/game/sc-year-end-spend-sparkles-03.svg);
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-04 {
-  width: 54px;
-  height: 54px;
+  width: min(54px, calc(0.1255813953 * 100vw));
+  height: min(54px, calc(0.1255813953 * 100vw));
   background-image: url(../images/game/sc-year-end-spend-sparkles-04.svg);
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-05 {
-  width: 25px;
-  height: 25px;
+  width: min(25px, calc(0.0581395349 * 100vw));
+  height: min(25px, calc(0.0581395349 * 100vw));
   background-image: url(../images/game/sc-year-end-spend-sparkles-05.svg);
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-06 {
-  width: 56px;
-  height: 56px;
+  width: min(56px, calc(0.1302325581 * 100vw));
+  height: min(56px, calc(0.1302325581 * 100vw));
   background-image: url(../images/game/sc-year-end-spend-sparkles-06.svg);
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-07 {
-  width: 49px;
-  height: 49px;
+  width: min(49px, calc(0.1139534884 * 100vw));
+  height: min(49px, calc(0.1139534884 * 100vw));
   background-image: url(../images/game/sc-year-end-spend-sparkles-07.svg);
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-08 {
-  width: 10px;
-  height: 10px;
+  width: min(10px, calc(0.023255814 * 100vw));
+  height: min(10px, calc(0.023255814 * 100vw));
   background-image: url(../images/game/sc-year-end-spend-sparkles-08.svg);
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-09 {
-  width: 11px;
-  height: 11px;
+  width: min(11px, calc(0.0255813953 * 100vw));
+  height: min(11px, calc(0.0255813953 * 100vw));
   background-image: url(../images/game/sc-year-end-spend-sparkles-09.svg);
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-10 {
-  width: 46px;
-  height: 46px;
+  width: min(46px, calc(0.1069767442 * 100vw));
+  height: min(46px, calc(0.1069767442 * 100vw));
   background-image: url(../images/game/sc-year-end-spend-sparkles-10.svg);
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-01 {

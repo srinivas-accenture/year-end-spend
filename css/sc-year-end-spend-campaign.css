@@ -2,32 +2,28 @@
 /* Common styles start */
 @font-face {
   font-family: "SC Prosper Sans";
-  src: url("https://av.sc.com/sg/YEC21/SCProsperSans-Regular.woff2")
-    format("woff2");
+  src: url("https://av.sc.com/sg/YEC21/SCProsperSans-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "SC Prosper Sans";
-  src: url("https://av.sc.com/sg/YEC21/SCProsperSans-Medium.woff2")
-    format("woff2");
+  src: url("https://av.sc.com/sg/YEC21/SCProsperSans-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "SC Prosper Sans";
-  src: url("https://av.sc.com/sg/YEC21/SCProsperSans-Bold.woff2")
-    format("woff2");
+  src: url("https://av.sc.com/sg/YEC21/SCProsperSans-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "SC Prosper Sans";
-  src: url("https://av.sc.com/sg/YEC21/SCProsperSans-Light.woff2")
-    format("woff2");
+  src: url("https://av.sc.com/sg/YEC21/SCProsperSans-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -57,6 +53,7 @@ body {
 }
 
 /* Common styles end */
+/* Common styles end */
 /* Variable start */
 /* Variable end */
 /* function & mixin start */
@@ -72,7 +69,7 @@ body {
   /* Registration page styles */
   /* Registration confirmation page styles */
   /* Landing page styles */
-  /* Profile Customisation page styles */
+  /* Profile page styles */
   /* Instruction modal styles */
   /* Instruction page styles */
   /* Check-in modal styles */
@@ -132,12 +129,10 @@ body {
 .sc-year-end-spend-campaign .sc-year-end-spend-registration::-webkit-scrollbar {
   width: min(4px, calc(0.0093023256 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration::-webkit-scrollbar-track {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration::-webkit-scrollbar-track {
   background: #f0f0f0;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration::-webkit-scrollbar-thumb {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 4px;
 }
@@ -155,20 +150,14 @@ body {
   width: 100%;
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__top {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__top {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: min(29px, calc(0.0311158798 * 100vh))
-    min(20px, calc(0.0465116279 * 100vw)) min(10px, calc(0.0107296137 * 100vh));
+  padding: min(29px, calc(0.0311158798 * 100vh)) min(20px, calc(0.0465116279 * 100vw)) min(10px, calc(0.0107296137 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__top
-  .sc-year-end-spend-registration__header {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__top .sc-year-end-spend-registration__header {
   width: 100%;
   height: 100%;
   display: flex;
@@ -176,34 +165,22 @@ body {
   align-items: center;
   gap: min(15px, calc(0.0160944206 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__top
-  .sc-year-end-spend-registration__header-close {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__top .sc-year-end-spend-registration__header-close {
   width: min(20px, calc(0.0465116279 * 100vw));
   align-self: flex-end;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__top
-  .sc-year-end-spend-registration__header-masthead {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__top .sc-year-end-spend-registration__header-masthead {
   width: 100%;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: min(30px, calc(0.0321888412 * 100vh))
-    min(25px, calc(0.0581395349 * 100vw));
+  padding: min(30px, calc(0.0321888412 * 100vh)) min(25px, calc(0.0581395349 * 100vw));
   gap: min(50px, calc(0.0536480687 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__intro {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__intro {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -216,26 +193,17 @@ body {
   text-align: center;
   color: #525355;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__intro-head {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__intro-head {
   font-size: min(26px, calc(0.0604651163 * 100vw));
   line-height: 120%;
   font-weight: 600;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__intro-description {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__intro-description {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 142%;
   font-weight: 400;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__grand-prize {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__grand-prize {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -245,53 +213,34 @@ body {
   margin-top: 100px;
 }
 @media screen and (width: 344px) and (height: 882px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-registration__wrapper
-    .sc-year-end-spend-registration__middle
-    .sc-year-end-spend-registration__grand-prize {
+  .sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__grand-prize {
     margin-top: 90px;
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__grand-prize-card {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__grand-prize-card {
   width: 50%;
   height: auto;
   position: absolute;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__grand-prize-card-stack {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__grand-prize-card-stack {
   width: 100%;
   display: flex;
   flex-direction: row;
   position: absolute;
   top: -120px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__grand-prize-card1 {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__grand-prize-card1 {
   left: 10%;
   z-index: 1;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__grand-prize-card2 {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__grand-prize-card2 {
   right: 10%;
   z-index: 2;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__grand-prize-contents {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__grand-prize-contents {
   width: 100%;
   background-color: #fff;
-  padding: min(15px, calc(0.0160944206 * 100vh))
-    min(15px, calc(0.0348837209 * 100vw));
+  padding: min(15px, calc(0.0160944206 * 100vh)) min(15px, calc(0.0348837209 * 100vw));
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 142.3%;
   font-weight: 400;
@@ -300,34 +249,21 @@ body {
   position: relative;
 }
 @media screen and (max-width: 344px) and (max-height: 882px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-registration__wrapper
-    .sc-year-end-spend-registration__middle
-    .sc-year-end-spend-registration__grand-prize-contents {
+  .sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__grand-prize-contents {
     padding-top: min(50px, calc(0.0536480687 * 100vh));
   }
 }
 @media screen and (width: 360px) and (height: 740px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-registration__wrapper
-    .sc-year-end-spend-registration__middle
-    .sc-year-end-spend-registration__grand-prize-contents {
+  .sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__grand-prize-contents {
     padding-top: min(70px, calc(0.0751072961 * 100vh));
   }
 }
 @media screen and (width: 414px) and (height: 736px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-registration__wrapper
-    .sc-year-end-spend-registration__middle
-    .sc-year-end-spend-registration__grand-prize-contents {
+  .sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__grand-prize-contents {
     padding-top: min(100px, calc(0.1072961373 * 100vh));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__grand-prize-contents
-  .sc-year-end-spend-registration__grand-prize-head {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__grand-prize-contents .sc-year-end-spend-registration__grand-prize-head {
   width: 100%;
   font-size: min(22px, calc(0.0511627907 * 100vw));
   line-height: 142.3%;
@@ -335,53 +271,34 @@ body {
   color: #0473ea;
   padding-bottom: min(10px, calc(0.0107296137 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__grand-prize-contents
-  .sc-year-end-spend-registration__grand-prize__list {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__grand-prize-contents .sc-year-end-spend-registration__grand-prize__list {
   width: 100%;
   padding-left: 1.5em;
   list-style: disc;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__grand-prize-contents
-  .sc-year-end-spend-registration__grand-prize__list-head {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__grand-prize-contents .sc-year-end-spend-registration__grand-prize__list-head {
   width: 100%;
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 142.3%;
   font-weight: 500;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__grand-prize-contents
-  .sc-year-end-spend-registration__grand-prize__list-item {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__grand-prize-contents .sc-year-end-spend-registration__grand-prize__list-item {
   width: 100%;
   display: list-item;
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 142.3%;
   font-weight: 400;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__prize {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__prize {
   width: 100%;
   background: rgba(255, 255, 255, 0.6);
-  padding: min(16px, calc(0.017167382 * 100vh))
-    min(16px, calc(0.0372093023 * 100vw));
+  padding: min(16px, calc(0.017167382 * 100vh)) min(16px, calc(0.0372093023 * 100vw));
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: min(15px, calc(0.0160944206 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__prize-head {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__prize-head {
   width: -moz-fit-content;
   width: fit-content;
   font-size: min(18px, calc(0.0418604651 * 100vw));
@@ -391,30 +308,21 @@ body {
   letter-spacing: 0;
   color: #0473ea;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__prize-head-wrapper {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__prize-head-wrapper {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding-bottom: min(10px, calc(0.0107296137 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__prize-head-name {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__prize-head-name {
   font-size: min(22px, calc(0.0511627907 * 100vw));
   line-height: 120%;
   font-weight: 600;
   font-style: normal;
   letter-spacing: 0;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__prize-head-count {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__prize-head-count {
   font-size: min(18px, calc(0.0418604651 * 100vw));
   line-height: 120%;
   font-weight: 600;
@@ -422,57 +330,31 @@ body {
   letter-spacing: 0;
   text-align: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__prize-tile {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__prize-tile {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background: rgba(4, 115, 234, 0.2);
-  padding: min(11px, calc(0.0118025751 * 100vh))
-    min(11px, calc(0.0255813953 * 100vw));
+  padding: min(11px, calc(0.0118025751 * 100vh)) min(11px, calc(0.0255813953 * 100vw));
   border-radius: 10px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__prize-tile-wrapper {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__prize-tile-wrapper {
   display: flex;
   flex-direction: column;
   gap: min(10px, calc(0.0107296137 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__prize-tile-col {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__prize-tile-col {
   display: flex;
   gap: min(10px, calc(0.023255814 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__prize-tile-col:last-child {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__prize-tile-col:last-child {
   padding-right: min(14px, calc(0.0325581395 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__prize-tile
-  .sc-year-end-spend-registration__prize-image {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__prize-tile .sc-year-end-spend-registration__prize-image {
   width: min(87px, calc(0.2023255814 * 100vw));
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__prize-tile
-  .sc-year-end-spend-registration__prize-name,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__prize-tile
-  .sc-year-end-spend-registration__prize-count {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__prize-tile .sc-year-end-spend-registration__prize-name, .sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__prize-tile .sc-year-end-spend-registration__prize-count {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 142%;
   font-weight: 400;
@@ -482,18 +364,11 @@ body {
   align-self: center;
   color: #5d5d5d;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__prize-tile
-  .sc-year-end-spend-registration__prize-count {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__prize-tile .sc-year-end-spend-registration__prize-count {
   font-weight: 600;
   text-align: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__prize-footnote {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__prize-footnote {
   font-size: min(10px, calc(0.023255814 * 100vw));
   line-height: 100%;
   font-weight: 400;
@@ -501,20 +376,14 @@ body {
   letter-spacing: 0;
   color: #5d5d5d;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__how-it-works {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__how-it-works {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: min(24px, calc(0.025751073 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__how-it-works-head {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__how-it-works-head {
   font-size: min(22px, calc(0.0511627907 * 100vw));
   line-height: 120%;
   font-weight: 600;
@@ -523,10 +392,7 @@ body {
   color: #0473ea;
   padding: 0px min(24px, calc(0.0558139535 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__how-it-works-body {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__how-it-works-body {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -539,10 +405,7 @@ body {
   letter-spacing: 0;
   text-align: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__how-it-works-steps {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__how-it-works-steps {
   width: 100%;
   list-style: none;
   display: flex;
@@ -550,10 +413,7 @@ body {
   align-items: center;
   gap: min(24px, calc(0.025751073 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__how-it-works-step {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__how-it-works-step {
   width: 100%;
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 142%;
@@ -563,16 +423,10 @@ body {
   text-align: center;
   color: #5d5d5d;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__how-it-works-step-label {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__how-it-works-step-label {
   font-weight: 600;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__how-it-works-note {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__how-it-works-note {
   width: 100%;
   font-size: min(10px, calc(0.023255814 * 100vw));
   line-height: 142%;
@@ -582,11 +436,7 @@ body {
   text-align: center;
   color: #5d5d5d;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__how-it-works
-  .sc-year-end-spend-registration__how-to-unlock-link {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__how-it-works .sc-year-end-spend-registration__how-to-unlock-link {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 142%;
   font-weight: 600;
@@ -597,38 +447,25 @@ body {
   text-decoration-style: solid;
   text-decoration-thickness: 0%;
   -webkit-text-decoration-skip: ink;
-  text-decoration-skip-ink: auto;
+          text-decoration-skip-ink: auto;
   color: #5d5d5d;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__how-it-works
-  .sc-year-end-spend-registration__prize-sets {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__how-it-works .sc-year-end-spend-registration__prize-sets {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: min(20px, calc(0.0214592275 * 100vh));
   background: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
-  padding: min(30px, calc(0.0321888412 * 100vh))
-    min(5px, calc(0.011627907 * 100vw));
+  padding: min(30px, calc(0.0321888412 * 100vh)) min(5px, calc(0.011627907 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__how-it-works
-  .sc-year-end-spend-registration__prize-set {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__how-it-works .sc-year-end-spend-registration__prize-set {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__how-it-works
-  .sc-year-end-spend-registration__prize-set-head {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__how-it-works .sc-year-end-spend-registration__prize-set-head {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 120%;
   font-weight: 600;
@@ -636,62 +473,40 @@ body {
   text-align: center;
   color: #525355;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__how-it-works
-  .sc-year-end-spend-registration__prize-set-cards {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__how-it-works .sc-year-end-spend-registration__prize-set-cards {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: min(8px, calc(0.0186046512 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__middle
-  .sc-year-end-spend-registration__how-it-works
-  .sc-year-end-spend-registration__prize-set-card {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__middle .sc-year-end-spend-registration__how-it-works .sc-year-end-spend-registration__prize-set-card {
   width: min(67px, calc(0.1558139535 * 100vw));
   height: auto;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3490196078);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__bottom {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__bottom {
   width: 100%;
   max-width: 460px;
   position: fixed;
   bottom: 0;
   z-index: 3;
   padding: 0px 0px min(24px, calc(0.025751073 * 100vh));
-  background: linear-gradient(
-    360deg,
-    #cde3fb 82.35%,
-    rgba(205, 227, 251, 0) 104.71%
-  );
+  background: linear-gradient(360deg, #cde3fb 82.35%, rgba(205, 227, 251, 0) 104.71%);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__bottom
-  .sc-year-end-spend-registration__footer {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__bottom .sc-year-end-spend-registration__footer {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: min(24px, calc(0.025751073 * 100vh));
   padding: 0px min(24px, calc(0.0558139535 * 100vw)) 0px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__bottom
-  .sc-year-end-spend-registration__footer-top {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__bottom .sc-year-end-spend-registration__footer-top {
   display: flex;
   flex-direction: column;
   gap: min(24px, calc(0.025751073 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__bottom
-  .sc-year-end-spend-registration__footer-head {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__bottom .sc-year-end-spend-registration__footer-head {
   font-weight: 500;
   font-style: normal;
   font-size: min(22px, calc(0.0511627907 * 100vw));
@@ -700,10 +515,7 @@ body {
   text-align: center;
   color: #5d5d5d;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__bottom
-  .sc-year-end-spend-registration__button-register {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__bottom .sc-year-end-spend-registration__button-register {
   width: 100%;
   font-size: min(20px, calc(0.0465116279 * 100vw));
   line-height: 100%;
@@ -713,15 +525,11 @@ body {
   text-align: center;
   color: #fff;
   border-radius: 100px;
-  padding: min(20px, calc(0.0214592275 * 100vh))
-    min(28px, calc(0.0651162791 * 100vw));
+  padding: min(20px, calc(0.0214592275 * 100vh)) min(28px, calc(0.0651162791 * 100vw));
   border: 0;
   background: #026dea;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__bottom
-  .sc-year-end-spend-registration__disclaimer {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__bottom .sc-year-end-spend-registration__disclaimer {
   font-size: min(12px, calc(0.0279069767 * 100vw));
   line-height: 154%;
   font-style: normal;
@@ -730,48 +538,27 @@ body {
   text-align: center;
   color: #5d5d5d;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__bottom
-  .sc-year-end-spend-registration__disclaimer-label {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__bottom .sc-year-end-spend-registration__disclaimer-label {
   font-weight: 600;
   font-style: normal;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__bottom
-  .sc-year-end-spend-registration__terms-link.sc-year-end-spend-campaign__terms-link {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__bottom .sc-year-end-spend-registration__terms-link.sc-year-end-spend-campaign__terms-link {
   text-align: center;
   white-space: nowrap;
   text-decoration: underline;
   text-decoration-style: solid;
   text-decoration-thickness: 10%;
   -webkit-text-decoration-skip: ink;
-  text-decoration-skip-ink: auto;
+          text-decoration-skip-ink: auto;
   color: #5d5d5d;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__bottom:not(
-    .sc-year-end-spend-registration__bottom--visible
-  )
-  .sc-year-end-spend-registration__footer {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__bottom:not(.sc-year-end-spend-registration__bottom--visible) .sc-year-end-spend-registration__footer {
   padding-top: min(43px, calc(0.0461373391 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__bottom:not(
-    .sc-year-end-spend-registration__bottom--visible
-  )
-  .sc-year-end-spend-registration__footer-bottom {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__bottom:not(.sc-year-end-spend-registration__bottom--visible) .sc-year-end-spend-registration__footer-bottom {
   display: none;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-registration__wrapper
-  .sc-year-end-spend-registration__bottom:not(
-    .sc-year-end-spend-registration__bottom--visible
-  )
-  .sc-year-end-spend-registration__footer-head {
+.sc-year-end-spend-campaign .sc-year-end-spend-registration__wrapper .sc-year-end-spend-registration__bottom:not(.sc-year-end-spend-registration__bottom--visible) .sc-year-end-spend-registration__footer-head {
   font-size: 16px;
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-registration--hide {
@@ -801,18 +588,14 @@ body {
   justify-content: center;
   align-items: center;
   gap: min(30px, calc(0.0321888412 * 100vh));
-  padding: min(24px, calc(0.025751073 * 100vh))
-    min(24px, calc(0.0558139535 * 100vw));
+  padding: min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100vw));
   position: relative;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reg-confirmation__wrapper
-  .sc-year-end-spend-reg-confirmation__top {
+.sc-year-end-spend-campaign .sc-year-end-spend-reg-confirmation__wrapper .sc-year-end-spend-reg-confirmation__top {
   width: 100%;
   height: -moz-fit-content;
   height: fit-content;
-  padding: min(24px, calc(0.025751073 * 100vh))
-    min(24px, calc(0.0558139535 * 100vw)) min(40px, calc(0.0429184549 * 100vh));
+  padding: min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100vw)) min(40px, calc(0.0429184549 * 100vh));
   border-radius: 16px;
   border: 4px solid #0473ea;
   background: #fff;
@@ -823,19 +606,13 @@ body {
   position: relative;
   padding-top: 21%;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reg-confirmation__wrapper
-  .sc-year-end-spend-reg-confirmation__top
-  .sc-year-end-spend-reg-confirmation__image {
+.sc-year-end-spend-campaign .sc-year-end-spend-reg-confirmation__wrapper .sc-year-end-spend-reg-confirmation__top .sc-year-end-spend-reg-confirmation__image {
   width: 50%;
   height: auto;
   position: absolute;
   top: -50%;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reg-confirmation__wrapper
-  .sc-year-end-spend-reg-confirmation__top
-  .sc-year-end-spend-reg-confirmation__title {
+.sc-year-end-spend-campaign .sc-year-end-spend-reg-confirmation__wrapper .sc-year-end-spend-reg-confirmation__top .sc-year-end-spend-reg-confirmation__title {
   font-size: min(20px, calc(0.0465116279 * 100vw));
   line-height: 150%;
   font-weight: 700;
@@ -844,10 +621,7 @@ body {
   text-align: center;
   color: #0473ea;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reg-confirmation__wrapper
-  .sc-year-end-spend-reg-confirmation__top
-  .sc-year-end-spend-reg-confirmation__message {
+.sc-year-end-spend-campaign .sc-year-end-spend-reg-confirmation__wrapper .sc-year-end-spend-reg-confirmation__top .sc-year-end-spend-reg-confirmation__message {
   font-size: min(20px, calc(0.0465116279 * 100vw));
   line-height: 150%;
   font-weight: 400;
@@ -856,10 +630,7 @@ body {
   text-align: center;
   color: rgba(82, 83, 85, 0.6980392157);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reg-confirmation__wrapper
-  .sc-year-end-spend-reg-confirmation__top
-  .sc-year-end-spend-reg-confirmation__button-get-started {
+.sc-year-end-spend-campaign .sc-year-end-spend-reg-confirmation__wrapper .sc-year-end-spend-reg-confirmation__top .sc-year-end-spend-reg-confirmation__button-get-started {
   width: 100%;
   font-size: min(20px, calc(0.0465116279 * 100vw));
   line-height: 100%;
@@ -869,23 +640,15 @@ body {
   text-align: center;
   color: #fff;
   border-radius: 100px;
-  padding: min(20px, calc(0.0214592275 * 100vh))
-    min(28px, calc(0.0651162791 * 100vw));
+  padding: min(20px, calc(0.0214592275 * 100vh)) min(28px, calc(0.0651162791 * 100vw));
   border: 0;
   background: #0473ea;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reg-confirmation__wrapper
-  .sc-year-end-spend-reg-confirmation__bottom
-  .sc-year-end-spend-reg-confirmation__button-close {
+.sc-year-end-spend-campaign .sc-year-end-spend-reg-confirmation__wrapper .sc-year-end-spend-reg-confirmation__bottom .sc-year-end-spend-reg-confirmation__button-close {
   width: min(60px, calc(0.1395348837 * 100vw));
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reg-confirmation__wrapper
-  .sc-year-end-spend-reg-confirmation__bottom
-  .sc-year-end-spend-reg-confirmation__button-close
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-reg-confirmation__wrapper .sc-year-end-spend-reg-confirmation__bottom .sc-year-end-spend-reg-confirmation__button-close img {
   width: 100%;
   height: auto;
 }
@@ -929,36 +692,24 @@ body {
   width: 100%;
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__top {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__top {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: min(30px, calc(0.0321888412 * 100vh))
-    min(24px, calc(0.0558139535 * 100vw)) 0px;
+  padding: min(30px, calc(0.0321888412 * 100vh)) min(24px, calc(0.0558139535 * 100vw)) 0px;
 }
 @media screen and (max-width: 414px) and (max-height: 736px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__top {
-    padding: min(25px, calc(0.0268240343 * 100vh))
-      min(20px, calc(0.0465116279 * 100vw)) 0px;
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__top {
+    padding: min(25px, calc(0.0268240343 * 100vh)) min(20px, calc(0.0465116279 * 100vw)) 0px;
   }
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__top {
-    padding: min(25px, calc(0.0268240343 * 100vh))
-      min(20px, calc(0.0465116279 * 100vw)) 0px;
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__top {
+    padding: min(25px, calc(0.0268240343 * 100vh)) min(20px, calc(0.0465116279 * 100vw)) 0px;
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__top
-  .sc-year-end-spend-landing__header {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__top .sc-year-end-spend-landing__header {
   width: 100%;
   height: 100%;
   display: flex;
@@ -966,39 +717,25 @@ body {
   align-items: center;
   gap: min(5px, calc(0.0053648069 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__top
-  .sc-year-end-spend-landing__header-close {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__top .sc-year-end-spend-landing__header-close {
   width: min(20px, calc(0.0465116279 * 100vw));
   align-self: flex-end;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__top
-  .sc-year-end-spend-landing__header-masthead {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__top .sc-year-end-spend-landing__header-masthead {
   width: 100%;
   height: auto;
 }
 @media screen and (max-width: 414px) and (max-height: 736px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__top
-    .sc-year-end-spend-landing__header-masthead {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__top .sc-year-end-spend-landing__header-masthead {
     width: 90%;
   }
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__top
-    .sc-year-end-spend-landing__header-masthead {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__top .sc-year-end-spend-landing__header-masthead {
     width: 90%;
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__middle {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__middle {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1007,16 +744,11 @@ body {
   gap: 5px;
 }
 @media screen and (width: 344px) and (height: 882px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__middle {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__middle {
     gap: min(30px, calc(0.0321888412 * 100vh));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__middle
-  .sc-year-end-spend-landing__intro {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__middle .sc-year-end-spend-landing__intro {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1032,65 +764,42 @@ body {
   padding: 0px min(24px, calc(0.0558139535 * 100vw));
 }
 @media screen and (max-width: 414px) and (max-height: 736px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__middle
-    .sc-year-end-spend-landing__intro {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__middle .sc-year-end-spend-landing__intro {
     font-size: min(14px, calc(0.0325581395 * 100vw));
     padding: 0px min(20px, calc(0.0465116279 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__middle
-  .sc-year-end-spend-landing__intro-head {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__middle .sc-year-end-spend-landing__intro-head {
   font-size: min(22px, calc(0.0511627907 * 100vw));
   line-height: 120%;
   font-weight: 600;
 }
 @media screen and (max-width: 414px) and (max-height: 736px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__middle
-    .sc-year-end-spend-landing__intro-head {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__middle .sc-year-end-spend-landing__intro-head {
     font-size: min(20px, calc(0.0465116279 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__middle
-  .sc-year-end-spend-landing__intro-description {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__middle .sc-year-end-spend-landing__intro-description {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 142%;
   font-weight: 400;
 }
 @media screen and (max-width: 414px) and (max-height: 736px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__middle
-    .sc-year-end-spend-landing__intro-description {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__middle .sc-year-end-spend-landing__intro-description {
     font-size: min(14px, calc(0.0325581395 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__middle
-  .sc-year-end-spend-landing__background-image {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__middle .sc-year-end-spend-landing__background-image {
   width: 100%;
   height: auto;
 }
 @media screen and (max-width: 414px) and (max-height: 736px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__middle
-    .sc-year-end-spend-landing__background-image {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__middle .sc-year-end-spend-landing__background-image {
     width: 90%;
     height: 72%;
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__bottom {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom {
   width: 100%;
   max-width: 460px;
   position: absolute;
@@ -1098,31 +807,21 @@ body {
   display: flex;
   flex-direction: column;
   gap: min(24px, calc(0.025751073 * 100vh));
-  padding: 0px min(24px, calc(0.0558139535 * 100vw))
-    min(30px, calc(0.0321888412 * 100vh));
+  padding: 0px min(24px, calc(0.0558139535 * 100vw)) min(30px, calc(0.0321888412 * 100vh));
 }
 @media screen and (max-width: 414px) and (max-height: 736px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__bottom {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom {
     gap: min(20px, calc(0.0214592275 * 100vh));
-    padding: 0px min(20px, calc(0.0465116279 * 100vw))
-      min(25px, calc(0.0268240343 * 100vh));
+    padding: 0px min(20px, calc(0.0465116279 * 100vw)) min(25px, calc(0.0268240343 * 100vh));
   }
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__bottom {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom {
     gap: min(20px, calc(0.0214592275 * 100vh));
-    padding: 0px min(20px, calc(0.0465116279 * 100vw))
-      min(25px, calc(0.0268240343 * 100vh));
+    padding: 0px min(20px, calc(0.0465116279 * 100vw)) min(25px, calc(0.0268240343 * 100vh));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__bottom
-  .sc-year-end-spend-landing__packs-title {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__packs-title {
   width: 100%;
   font-size: min(20px, calc(0.0465116279 * 100vw));
   line-height: 100%;
@@ -1138,18 +837,12 @@ body {
   gap: min(10px, calc(0.023255814 * 100vw));
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__bottom
-    .sc-year-end-spend-landing__packs-title {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__packs-title {
     font-size: min(18px, calc(0.0418604651 * 100vw));
     gap: min(8px, calc(0.0186046512 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__bottom
-  .sc-year-end-spend-landing__packs-count {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__packs-count {
   font-size: min(39.51px, calc(0.0918837209 * 100vw));
   line-height: 100%;
   font-weight: 600;
@@ -1157,17 +850,11 @@ body {
   letter-spacing: 0;
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__bottom
-    .sc-year-end-spend-landing__packs-count {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__packs-count {
     font-size: min(35px, calc(0.0813953488 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__bottom
-  .sc-year-end-spend-landing__button {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__button {
   width: 100%;
   font-size: min(20px, calc(0.0465116279 * 100vw));
   line-height: 100%;
@@ -1176,95 +863,54 @@ body {
   letter-spacing: 0;
   text-align: center;
   color: #fff;
-  padding: min(20px, calc(0.0214592275 * 100vh))
-    min(28px, calc(0.0651162791 * 100vw));
+  padding: min(20px, calc(0.0214592275 * 100vh)) min(28px, calc(0.0651162791 * 100vw));
   background: transparent;
   border-radius: 100px;
   border: 2px solid #fff;
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__bottom
-    .sc-year-end-spend-landing__button {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__button {
     font-size: min(18px, calc(0.0418604651 * 100vw));
-    padding: min(18px, calc(0.0193133047 * 100vh))
-      min(24px, calc(0.0558139535 * 100vw));
+    padding: min(18px, calc(0.0193133047 * 100vh)) min(24px, calc(0.0558139535 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__bottom
-  .sc-year-end-spend-landing__button-wrapper {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__button-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: min(16px, calc(0.017167382 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__bottom
-  .sc-year-end-spend-landing__button-horizontal {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__button-horizontal {
   width: 100%;
   display: flex;
   flex-direction: row;
   gap: min(12px, calc(0.0279069767 * 100vw));
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__bottom
-    .sc-year-end-spend-landing__button-horizontal {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__button-horizontal {
     gap: min(8px, calc(0.0186046512 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__bottom
-  .sc-year-end-spend-landing__button-play-now,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__bottom
-  .sc-year-end-spend-landing__button-unlock-packs {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__button-play-now, .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__button-unlock-packs {
   background: #026dea;
   border: 0;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__bottom
-  .sc-year-end-spend-landing__button-view-prizes,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__bottom
-  .sc-year-end-spend-landing__button-check-in {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__button-view-prizes, .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__button-check-in {
   width: 50%;
   min-width: -moz-fit-content;
   min-width: fit-content;
   font-size: min(17px, calc(0.0395348837 * 100vw));
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__bottom
-    .sc-year-end-spend-landing__button-view-prizes,
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__bottom
-    .sc-year-end-spend-landing__button-check-in {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__button-view-prizes, .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__button-check-in {
     font-size: min(15px, calc(0.0348837209 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__bottom
-  .sc-year-end-spend-landing__button-unlock-packs {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__button-unlock-packs {
   display: none;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__bottom
-  .sc-year-end-spend-landing__link {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__link {
   font-size: min(20px, calc(0.0465116279 * 100vw));
   line-height: 100%;
   font-weight: 600;
@@ -1275,29 +921,20 @@ body {
   text-decoration-style: solid;
   text-decoration-thickness: 0%;
   -webkit-text-decoration-skip: ink;
-  text-decoration-skip-ink: auto;
+          text-decoration-skip-ink: auto;
   color: #fff;
 }
 @media screen and (max-width: 414px) and (max-height: 736px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__bottom
-    .sc-year-end-spend-landing__link {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__link {
     font-size: min(18px, calc(0.0418604651 * 100vw));
   }
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__bottom
-    .sc-year-end-spend-landing__link {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__link {
     font-size: min(18px, calc(0.0418604651 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__bottom
-  .sc-year-end-spend-landing__link-wrapper {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__link-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1307,27 +944,18 @@ body {
   position: relative;
 }
 @media screen and (max-width: 414px) and (max-height: 736px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__bottom
-    .sc-year-end-spend-landing__link-wrapper {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__link-wrapper {
     gap: min(20px, calc(0.0214592275 * 100vh));
     padding-top: 0;
   }
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-landing__wrapper
-    .sc-year-end-spend-landing__bottom
-    .sc-year-end-spend-landing__link-wrapper {
+  .sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__link-wrapper {
     gap: min(20px, calc(0.0214592275 * 100vh));
     padding-top: 0;
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing__wrapper
-  .sc-year-end-spend-landing__bottom
-  .sc-year-end-spend-landing__terms-link {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing__wrapper .sc-year-end-spend-landing__bottom .sc-year-end-spend-landing__terms-link {
   font-size: min(15px, calc(0.0348837209 * 100vw));
   line-height: 100%;
   font-weight: 400;
@@ -1336,14 +964,10 @@ body {
   text-align: center;
   text-decoration-thickness: 6%;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing.zero-packs
-  .sc-year-end-spend-landing__button-unlock-packs {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing.zero-packs .sc-year-end-spend-landing__button-unlock-packs {
   display: block;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-landing.zero-packs
-  .sc-year-end-spend-landing__button-play-now {
+.sc-year-end-spend-campaign .sc-year-end-spend-landing.zero-packs .sc-year-end-spend-landing__button-play-now {
   display: none;
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-landing--hide {
@@ -1352,7 +976,7 @@ body {
   min-height: 0 !important;
   visibility: hidden !important;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-profile-customisation {
+.sc-year-end-spend-campaign .sc-year-end-spend-profile {
   width: 100%;
   height: 100%;
   min-height: 100dvh;
@@ -1367,7 +991,7 @@ body {
   position: relative;
   z-index: 1;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-profile-customisation__wrapper {
+.sc-year-end-spend-campaign .sc-year-end-spend-profile__wrapper {
   width: 100%;
   height: 100%;
   min-height: -moz-fit-content;
@@ -1376,28 +1000,19 @@ body {
   flex-direction: column;
   align-items: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-profile-customisation__wrapper
-  img,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-profile-customisation__wrapper
-  svg {
+.sc-year-end-spend-campaign .sc-year-end-spend-profile__wrapper img,
+.sc-year-end-spend-campaign .sc-year-end-spend-profile__wrapper svg {
   width: 100%;
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-profile-customisation__wrapper
-  .sc-year-end-spend-profile-customisation__top {
+.sc-year-end-spend-campaign .sc-year-end-spend-profile__wrapper .sc-year-end-spend-profile__top {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 30px 20px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-profile-customisation__wrapper
-  .sc-year-end-spend-profile-customisation__top
-  .sc-year-end-spend-profile-customisation__header {
+.sc-year-end-spend-campaign .sc-year-end-spend-profile__wrapper .sc-year-end-spend-profile__top .sc-year-end-spend-profile__header {
   width: 100%;
   height: 100%;
   display: flex;
@@ -1406,18 +1021,13 @@ body {
   gap: min(15px, calc(0.0160944206 * 100vh));
   position: relative;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-profile-customisation__wrapper
-  .sc-year-end-spend-profile-customisation__top
-  .sc-year-end-spend-profile-customisation__header-back {
+.sc-year-end-spend-campaign .sc-year-end-spend-profile__wrapper .sc-year-end-spend-profile__top .sc-year-end-spend-profile__header-back {
   width: min(15px, calc(0.0348837209 * 100vw));
   height: auto;
   position: absolute;
   left: 0;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-profile-customisation__wrapper
-  .sc-year-end-spend-profile-customisation__middle {
+.sc-year-end-spend-campaign .sc-year-end-spend-profile__wrapper .sc-year-end-spend-profile__middle {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1425,19 +1035,13 @@ body {
   padding: 30px 20px;
   gap: min(50px, calc(0.0536480687 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-profile-customisation__wrapper
-  .sc-year-end-spend-profile-customisation__middle
-  .sc-year-end-spend-profile-customisation__content {
+.sc-year-end-spend-campaign .sc-year-end-spend-profile__wrapper .sc-year-end-spend-profile__middle .sc-year-end-spend-profile__content {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-profile-customisation__wrapper
-  .sc-year-end-spend-profile-customisation__middle
-  .sc-year-end-spend-profile-customisation__title {
+.sc-year-end-spend-campaign .sc-year-end-spend-profile__wrapper .sc-year-end-spend-profile__middle .sc-year-end-spend-profile__title {
   font-size: min(22px, calc(0.0511627907 * 100vw));
   line-height: 100%;
   font-weight: 700;
@@ -1445,10 +1049,7 @@ body {
   letter-spacing: 0;
   text-align: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-profile-customisation__wrapper
-  .sc-year-end-spend-profile-customisation__middle
-  .sc-year-end-spend-profile-customisation__message {
+.sc-year-end-spend-campaign .sc-year-end-spend-profile__wrapper .sc-year-end-spend-profile__middle .sc-year-end-spend-profile__message {
   font-size: min(18px, calc(0.0418604651 * 100vw));
   line-height: 100%;
   font-weight: 400;
@@ -1456,7 +1057,7 @@ body {
   letter-spacing: 0;
   text-align: center;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-profile-customisation--hide {
+.sc-year-end-spend-campaign .sc-year-end-spend-profile--hide {
   opacity: 0 !important;
   height: 0 !important;
   min-height: 0 !important;
@@ -1472,8 +1073,7 @@ body {
   justify-content: center;
   align-items: center;
   background: rgba(45, 45, 45, 0.8980392157);
-  padding: min(24px, calc(0.025751073 * 100vh))
-    min(24px, calc(0.0558139535 * 100vw));
+  padding: min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100vw));
   z-index: 10;
   top: 0;
 }
@@ -1487,9 +1087,7 @@ body {
   gap: min(30px, calc(0.0321888412 * 100vh));
   position: relative;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top {
   width: 100%;
   height: 70%;
   border-radius: 16px;
@@ -1501,22 +1099,15 @@ body {
   padding: 0px;
   gap: 0px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: min(30px, calc(0.0321888412 * 100vh))
-    min(24px, calc(0.0558139535 * 100vw)) min(24px, calc(0.025751073 * 100vh));
+  padding: min(30px, calc(0.0321888412 * 100vh)) min(24px, calc(0.0558139535 * 100vw)) min(24px, calc(0.025751073 * 100vh));
   gap: min(20px, calc(0.0214592275 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-head {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-head {
   font-size: min(21px, calc(0.0488372093 * 100vw));
   line-height: 100%;
   font-weight: 700;
@@ -1524,10 +1115,7 @@ body {
   letter-spacing: 0;
   color: #0473ea;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -1535,11 +1123,7 @@ body {
   flex-direction: column;
   gap: min(20px, calc(0.0214592275 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab {
   width: 50%;
   border: 0;
   background-color: inherit;
@@ -1553,21 +1137,13 @@ body {
   color: #999999;
   padding: 8px 24px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab-wrapper {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab-wrapper {
   width: 100%;
   display: flex;
   flex-direction: row;
   gap: 0px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab-body {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab-body {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -1575,90 +1151,49 @@ body {
   display: none;
   -webkit-overflow-scrolling: touch;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab-body::-webkit-scrollbar {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab-body::-webkit-scrollbar {
   width: min(8px, calc(0.0186046512 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab-body::-webkit-scrollbar-track {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab-body::-webkit-scrollbar-track {
   background: #81b9f4;
   border-radius: 10px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab-body::-webkit-scrollbar-thumb {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab-body::-webkit-scrollbar-thumb {
   background-color: #4f9df0;
   border-radius: 10px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab-body.active {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab-body.active {
   display: block !important;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab-list {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab-list {
   list-style: none;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: min(20px, calc(0.0214592275 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab-item {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab-item {
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: min(25px, calc(0.0581395349 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab-item-icon {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab-item-icon {
   width: min(48px, calc(0.111627907 * 100vw));
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab-item-icon
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab-item-icon img {
   width: 100%;
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab-item-content {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab-item-content {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab-item-head {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab-item-head {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 1.3;
   font-weight: 700;
@@ -1666,11 +1201,7 @@ body {
   letter-spacing: 0;
   color: #525355;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab-item-para {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab-item-para {
   font-size: min(14px, calc(0.0325581395 * 100vw));
   line-height: 1.3;
   font-weight: 400;
@@ -1678,26 +1209,15 @@ body {
   letter-spacing: 0;
   color: #525355;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__top
-  .sc-year-end-spend-instruction-modal__content-body
-  .sc-year-end-spend-instruction-modal__tab.active {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__top .sc-year-end-spend-instruction-modal__content-body .sc-year-end-spend-instruction-modal__tab.active {
   border-bottom: 3px solid #0473ea;
   color: #0473ea;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__bottom
-  .sc-year-end-spend-instruction-modal__button-close {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__bottom .sc-year-end-spend-instruction-modal__button-close {
   width: min(60px, calc(0.1395348837 * 100vw));
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction-modal__wrapper
-  .sc-year-end-spend-instruction-modal__bottom
-  .sc-year-end-spend-instruction-modal__button-close
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction-modal__wrapper .sc-year-end-spend-instruction-modal__bottom .sc-year-end-spend-instruction-modal__button-close img {
   width: 100%;
   height: auto;
 }
@@ -1722,6 +1242,8 @@ body {
   background-blend-mode: overlay;
   position: relative;
   z-index: 1;
+  overflow: hidden;
+  overflow-y: auto;
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-instruction__wrapper {
   width: 100%;
@@ -1731,7 +1253,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 17px;
+  gap: min(17px, calc(0.0182403433 * 100vh));
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-instruction img,
 .sc-year-end-spend-campaign .sc-year-end-spend-instruction svg {
@@ -1743,9 +1265,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 19px 24px 0px;
+  padding: min(19px, calc(0.0203862661 * 100vh)) min(24px, calc(0.0558139535 * 100vw)) 0px;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__header {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__top .sc-year-end-spend-instruction__header {
   width: 100%;
   height: 100%;
   display: flex;
@@ -1755,13 +1277,13 @@ body {
   gap: min(15px, calc(0.0160944206 * 100vh));
   position: relative;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__header-back {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__top .sc-year-end-spend-instruction__header-back {
   width: min(15px, calc(0.0348837209 * 100vw));
   height: auto;
   position: absolute;
   left: 0;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__header-title {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__top .sc-year-end-spend-instruction__header-title {
   font-size: min(24px, calc(0.0558139535 * 100vw));
   line-height: 1.2;
   font-weight: 700;
@@ -1775,16 +1297,19 @@ body {
   display: flex;
   flex-direction: column;
   gap: min(21px, calc(0.0225321888 * 100vh));
+  padding: 0px min(24px, calc(0.0558139535 * 100vw));
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__tabs {
-  padding: 0px 43px;
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs {
+  width: 100%;
   display: flex;
-  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0px min(10px, calc(0.023255814 * 100vw));
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__tabs-button {
-  width: 100%;
-  padding: min(8px, calc(0.008583691 * 100vh))
-    min(24px, calc(0.0558139535 * 100vw));
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-button {
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: min(8px, calc(0.008583691 * 100vh)) min(24px, calc(0.0558139535 * 100vw));
   border: none;
   background: none;
   cursor: pointer;
@@ -1795,70 +1320,75 @@ body {
   color: #999999;
   border-bottom: 2px solid #a2a2a2;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__tabs-button.active {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-button.active {
   border-bottom: 3px solid #0473ea;
   color: #0473ea;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__tabs-content {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-content {
   width: 100%;
   display: none;
-  padding: 0px 27px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction__tabs-content.active {
-  display: block !important;
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-content.active {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: min(20px, calc(0.0214592275 * 100vh));
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__tabs-tile {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile {
   display: flex;
   flex-direction: column;
-  border: 1px solid #fff;
   border-radius: 10px;
   background: #fff;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__tabs-tile-title {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-title {
   font-weight: 700;
-  font-size: 16px;
+  font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 1.2;
   color: #0473ea;
   letter-spacing: 0%;
   vertical-align: middle;
-  padding: 16px 10px;
+  padding: min(16px, calc(0.017167382 * 100vh)) min(10px, calc(0.023255814 * 100vw));
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__tabs-tile-content {
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: min(20px, calc(0.0214592275 * 100vh));
   background: #e6f1fd;
-  padding: 16px 24px;
+  padding: min(16px, calc(0.017167382 * 100vh)) min(24px, calc(0.0558139535 * 100vw));
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__tabs-tile-steps {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-body {
+  width: 100%;
+  height: min(380px, calc(0.4077253219 * 100vh));
+  background: #e6f1fd;
+  padding: min(16px, calc(0.017167382 * 100vh)) min(4px, calc(0.0093023256 * 100vw)) min(16px, calc(0.017167382 * 100vh)) min(24px, calc(0.0558139535 * 100vw));
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-steps {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: min(8px, calc(0.008583691 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction__tabs-tile-steps
-  span {
-  font-size: 16px;
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-steps span {
+  font-size: min(16px, calc(0.0372093023 * 100vw));
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: 0%;
   color: #525355;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__tabs-tile-steps p {
-  font-size: 14px;
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-steps p {
+  font-size: min(14px, calc(0.0325581395 * 100vw));
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: 0%;
   color: #525355;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction__tabs-tile-steps
-  p
-  span {
-  font-size: 14px;
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-steps p span {
+  font-size: min(14px, calc(0.0325581395 * 100vw));
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: 0%;
@@ -1871,75 +1401,146 @@ body {
   text-decoration-thickness: 0%;
   text-underline-offset: 16%;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__tabs-tile-images {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-images {
   display: flex;
-  width: 67px;
+  width: min(67px, calc(0.1558139535 * 100vw));
   height: auto;
-  gap: 8px;
+  gap: min(8px, calc(0.0186046512 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction__tabs-tile-images
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-images img {
   width: 100%;
   height: auto;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3490196078);
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__tabs-tile-footer {
-  font-size: 10px;
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-footer {
+  font-size: min(10px, calc(0.023255814 * 100vw));
   font-weight: 400;
   line-height: 1.42;
   letter-spacing: 0%;
   color: #5d5d5d;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__tabs-tile-view-less,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction__tabs-tile-view-more {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-view-less, .sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-view-more {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: min(5px, calc(0.011627907 * 100vw));
-  padding: min(10px, calc(0.0107296137 * 100vh))
-    min(10px, calc(0.023255814 * 100vw));
+  padding: min(10px, calc(0.0107296137 * 100vh)) min(10px, calc(0.023255814 * 100vw));
   background: #e6f1fd;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-align: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction__tabs-tile-view-less
-  img,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction__tabs-tile-view-more
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-view-less img, .sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-view-more img {
   width: min(7.76px, calc(0.0180465116 * 100vw));
   height: min(7.66px, calc(0.0082188841 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction__tabs-tile-view-less
-  span,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-instruction__tabs-tile-view-more
-  span {
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-view-less span, .sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile-view-more span {
   font-weight: 400;
   font-size: min(10px, calc(0.023255814 * 100vw));
   line-height: 1.42;
   color: #5d5d5d;
 }
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile.expanded .sc-year-end-spend-instruction__tabs-tile-wrapper {
+  max-height: 1000px !important;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile.expanded .sc-year-end-spend-instruction__tabs-tile-view-less {
+  display: block !important;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tabs-tile.expanded .sc-year-end-spend-instruction__tabs-tile-view-more {
+  display: none !important;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tab {
+  width: 50%;
+  border: 0;
+  background-color: inherit;
+  border-bottom: 2px solid #a2a2a2;
+  font-size: min(16px, calc(0.0372093023 * 100vw));
+  line-height: 100%;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0;
+  text-align: center;
+  color: #999999;
+  padding: min(8px, calc(0.008583691 * 100vh)) min(24px, calc(0.0558139535 * 100vw));
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tab-list {
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: min(20px, calc(0.0214592275 * 100vh));
+  padding-right: min(20px, calc(0.0465116279 * 100vw));
+  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tab-list::-webkit-scrollbar {
+  width: min(8px, calc(0.0186046512 * 100vw));
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tab-list::-webkit-scrollbar-track {
+  background: #81b9f4;
+  border-radius: 10px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tab-list::-webkit-scrollbar-thumb {
+  background-color: #4f9df0;
+  border-radius: 10px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tab-item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: min(25px, calc(0.0581395349 * 100vw));
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tab-item-icon {
+  width: min(48px, calc(0.111627907 * 100vw));
+  height: auto;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tab-item-icon img {
+  width: 100%;
+  height: auto;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tab-item-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: min(4px, calc(0.0042918455 * 100vh));
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tab-item-head {
+  font-size: min(16px, calc(0.0372093023 * 100vw));
+  line-height: 1.3;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0;
+  color: #525355;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__middle .sc-year-end-spend-instruction__tab-item-para {
+  font-size: min(14px, calc(0.0325581395 * 100vw));
+  line-height: 1.3;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0;
+  color: #525355;
+}
 .sc-year-end-spend-campaign .sc-year-end-spend-instruction__bottom {
+  width: 100%;
+  max-width: 460px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  width: 100%;
-  max-width: 460px;
-  position: fixed;
-  bottom: 0;
+  gap: min(16px, calc(0.017167382 * 100vh));
   z-index: 3;
-  padding: 30px 29px;
+  padding: 0px min(24px, calc(0.0558139535 * 100vw)) min(30px, calc(0.0321888412 * 100vh));
+  margin-top: auto;
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-instruction__bottom-title {
   display: flex;
-  gap: 10px;
+  gap: min(10px, calc(0.023255814 * 100vw));
   align-items: center;
-  font-size: 20px;
+  font-size: min(20px, calc(0.0465116279 * 100vw));
   font-weight: 400;
   line-height: 100%;
   color: #0473ea;
@@ -1948,18 +1549,18 @@ body {
   line-height: 100%;
   letter-spacing: 0;
   font-weight: 700;
-  font-size: 39.51px;
+  font-size: min(39.51px, calc(0.0918837209 * 100vw));
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-instruction__bottom-content {
-  font-size: 14px;
+  font-size: min(14px, calc(0.0325581395 * 100vw));
   font-weight: 400;
   line-height: 1.3;
   color: #5d5d5d;
   vertical-align: bottom;
   text-align: center;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-instruction__bottom-tc {
-  font-size: 14px;
+.sc-year-end-spend-campaign .sc-year-end-spend-instruction__bottom-terms-link {
+  font-size: min(14px, calc(0.0325581395 * 100vw));
   font-weight: 400;
   line-height: 100%;
   color: #5d5d5d;
@@ -1981,7 +1582,7 @@ body {
   text-align: center;
   color: #fff;
   border-radius: 30px;
-  padding: 16px 24px;
+  padding: min(16px, calc(0.017167382 * 100vh)) min(24px, calc(0.0558139535 * 100vw));
   border: 0;
   background: #026dea;
 }
@@ -2001,8 +1602,7 @@ body {
   justify-content: center;
   align-items: center;
   background: rgba(45, 45, 45, 0.8980392157);
-  padding: min(24px, calc(0.025751073 * 100vh))
-    min(24px, calc(0.0558139535 * 100vw));
+  padding: min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100vw));
   z-index: 10;
   top: 0;
 }
@@ -2014,12 +1614,9 @@ body {
   gap: min(30px, calc(0.0321888412 * 100vh));
   position: relative;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-checkin-modal__wrapper
-  .sc-year-end-spend-checkin-modal__top {
+.sc-year-end-spend-campaign .sc-year-end-spend-checkin-modal__wrapper .sc-year-end-spend-checkin-modal__top {
   width: 100%;
-  padding: min(24px, calc(0.025751073 * 100vh))
-    min(24px, calc(0.0558139535 * 100vw));
+  padding: min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100vw));
   border-radius: 16px;
   background: #fff;
   display: flex;
@@ -2027,20 +1624,14 @@ body {
   align-items: center;
   gap: min(48px, calc(0.0515021459 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-checkin-modal__wrapper
-  .sc-year-end-spend-checkin-modal__top
-  .sc-year-end-spend-checkin-modal__content {
+.sc-year-end-spend-campaign .sc-year-end-spend-checkin-modal__wrapper .sc-year-end-spend-checkin-modal__top .sc-year-end-spend-checkin-modal__content {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 20px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-checkin-modal__wrapper
-  .sc-year-end-spend-checkin-modal__top
-  .sc-year-end-spend-checkin-modal__title {
+.sc-year-end-spend-campaign .sc-year-end-spend-checkin-modal__wrapper .sc-year-end-spend-checkin-modal__top .sc-year-end-spend-checkin-modal__title {
   font-size: min(18px, calc(0.0418604651 * 100vw));
   line-height: 100%;
   font-weight: 700;
@@ -2048,10 +1639,7 @@ body {
   letter-spacing: 0;
   text-align: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-checkin-modal__wrapper
-  .sc-year-end-spend-checkin-modal__top
-  .sc-year-end-spend-checkin-modal__message {
+.sc-year-end-spend-campaign .sc-year-end-spend-checkin-modal__wrapper .sc-year-end-spend-checkin-modal__top .sc-year-end-spend-checkin-modal__message {
   font-size: min(18px, calc(0.0418604651 * 100vw));
   line-height: 100%;
   font-weight: 400;
@@ -2059,18 +1647,11 @@ body {
   letter-spacing: 0;
   text-align: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-checkin-modal__wrapper
-  .sc-year-end-spend-checkin-modal__bottom
-  .sc-year-end-spend-checkin-modal__button-close {
+.sc-year-end-spend-campaign .sc-year-end-spend-checkin-modal__wrapper .sc-year-end-spend-checkin-modal__bottom .sc-year-end-spend-checkin-modal__button-close {
   width: min(60px, calc(0.1395348837 * 100vw));
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-checkin-modal__wrapper
-  .sc-year-end-spend-checkin-modal__bottom
-  .sc-year-end-spend-checkin-modal__button-close
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-checkin-modal__wrapper .sc-year-end-spend-checkin-modal__bottom .sc-year-end-spend-checkin-modal__button-close img {
   width: 100%;
   height: auto;
 }
@@ -2097,16 +1678,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: min(24px, calc(0.025751073 * 100vh))
-    min(19px, calc(0.0441860465 * 100vw)) 0px
-    min(19px, calc(0.0441860465 * 100vw));
+  padding: min(24px, calc(0.025751073 * 100vh)) min(19px, calc(0.0441860465 * 100vw)) 0px min(19px, calc(0.0441860465 * 100vw));
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-card-collection__header-back {
   width: min(15px, calc(0.0348837209 * 100vw));
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__header-back-image {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__header-back-image {
   width: 100%;
   height: 100%;
 }
@@ -2122,8 +1700,7 @@ body {
   width: min(20px, calc(0.0465116279 * 100vw));
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__header-close-image {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__header-close-image {
   width: 100%;
   height: auto;
 }
@@ -2137,18 +1714,13 @@ body {
   width: min(57px, calc(0.1325581395 * 100vw));
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs {
   width: 100%;
   display: flex;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-button {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-button {
   width: 100%;
-  padding: min(8px, calc(0.008583691 * 100vh))
-    min(24px, calc(0.0558139535 * 100vw));
+  padding: min(8px, calc(0.008583691 * 100vh)) min(24px, calc(0.0558139535 * 100vw));
   border: none;
   background: none;
   cursor: pointer;
@@ -2159,19 +1731,14 @@ body {
   color: #999999;
   border-bottom: 2px solid #a2a2a2;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-button.active {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-button.active {
   border-bottom: 3px solid #0473ea;
   color: #0473ea;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-content {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-content {
   width: 100%;
   height: 100%;
-  padding: min(30px, calc(0.0321888412 * 100vh))
-    min(24px, calc(0.0558139535 * 100vw));
+  padding: min(30px, calc(0.0321888412 * 100vh)) min(24px, calc(0.0558139535 * 100vw));
   display: none;
   flex-direction: column;
   gap: min(19px, calc(0.0203862661 * 100vh));
@@ -2184,39 +1751,29 @@ body {
   background-repeat: no-repeat;
   background-blend-mode: overlay;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-content.active {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-content.active {
   display: flex;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-jet {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-jet {
   display: flex;
   flex-direction: column;
   border: 1px solid #fff;
   border-radius: 10px;
   background: #fff;
-  padding: min(14px, calc(0.0150214592 * 100vh))
-    min(11px, calc(0.0255813953 * 100vw));
+  padding: min(14px, calc(0.0150214592 * 100vh)) min(11px, calc(0.0255813953 * 100vw));
   gap: min(12px, calc(0.0128755365 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-jet-title {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-jet-title {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   color: #0473ea;
   font-weight: 700;
   line-height: 1.2;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-jet-chances {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-jet-chances {
   height: min(24px, calc(0.025751073 * 100vh));
   align-self: center;
   border-radius: 26px;
-  padding: min(4px, calc(0.0042918455 * 100vh))
-    min(12px, calc(0.0279069767 * 100vw));
+  padding: min(4px, calc(0.0042918455 * 100vh)) min(12px, calc(0.0279069767 * 100vw));
   display: flex;
   justify-content: center;
   gap: min(10px, calc(0.023255814 * 100vw));
@@ -2229,122 +1786,91 @@ body {
   text-align: center;
   border: 1px solid rgba(82, 83, 85, 0.6980392157);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-jet-wrapper {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-jet-wrapper {
   display: flex;
   justify-content: space-between;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-tile {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-jet-wrapper img {
+  width: min(57px, calc(0.1325581395 * 100vw));
+  height: auto;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.3490196078);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-tile {
   display: flex;
   flex-direction: column;
-  border: 1px solid #fff;
   border-radius: 10px;
   background: #fff;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-tile-wrapper {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-tile-wrapper {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-tile-wrapper.expanded {
-  max-height: 1000px;
-}
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-tile-title {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-tile-title {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 1.2;
   font-weight: 700;
   vertical-align: middle;
   color: #0473ea;
-  padding: min(13px, calc(0.0139484979 * 100vh))
-    min(114px, calc(0.2651162791 * 100vw)) min(13px, calc(0.0139484979 * 100vh))
-    min(11px, calc(0.0255813953 * 100vw));
+  padding: min(13px, calc(0.0139484979 * 100vh)) min(114px, calc(0.2651162791 * 100vw)) min(13px, calc(0.0139484979 * 100vh)) min(11px, calc(0.0255813953 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-tile-line {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-tile-line {
   border: 1px solid #525355;
   opacity: 50%;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-tile-view-less,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-tile-view-more {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-tile-view-less, .sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-tile-view-more {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   gap: min(5px, calc(0.011627907 * 100vw));
-  padding: min(10px, calc(0.0107296137 * 100vh))
-    min(10px, calc(0.023255814 * 100vw));
+  padding: min(10px, calc(0.0107296137 * 100vh)) min(10px, calc(0.023255814 * 100vw));
   background: #e6f1fd;
+  text-align: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-tile-view-less
-  img,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-tile-view-more
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-tile-view-less img, .sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-tile-view-more img {
   width: min(7.76px, calc(0.0180465116 * 100vw));
   height: min(7.66px, calc(0.0082188841 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-tile-view-less
-  span,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-tile-view-more
-  span {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-tile-view-less span, .sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-tile-view-more span {
   font-weight: 400;
   font-size: min(10px, calc(0.023255814 * 100vw));
   line-height: 1.42;
   color: #5d5d5d;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-reward {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-tile.expanded .sc-year-end-spend-card-collection__tabs-tile-wrapper {
+  max-height: 1000px !important;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-tile.expanded .sc-year-end-spend-card-collection__tabs-tile-view-less {
+  display: block !important;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-tile.expanded .sc-year-end-spend-card-collection__tabs-tile-view-more {
+  display: none !important;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-reward {
   background: #dcffd0;
-  padding: min(17px, calc(0.0182403433 * 100vh))
-    min(11px, calc(0.0255813953 * 100vw));
+  padding: min(17px, calc(0.0182403433 * 100vh)) min(11px, calc(0.0255813953 * 100vw));
   display: flex;
   flex-direction: column;
   gap: min(16px, calc(0.017167382 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-reward-gray {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-reward-gray {
   background: #e6f1fd;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-reward-header {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-reward-header {
   display: flex;
   justify-content: space-between;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-reward-title {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-reward-title {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 1.42;
   font-weight: 700;
+  color: #5d5d5d;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-reward-prize {
-  padding: min(4px, calc(0.0042918455 * 100vh))
-    min(12px, calc(0.0279069767 * 100vw));
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-reward-prize {
+  padding: min(4px, calc(0.0042918455 * 100vh)) min(12px, calc(0.0279069767 * 100vw));
   border-radius: 26px;
   font-size: min(12px, calc(0.0279069767 * 100vw));
   font-weight: 700;
@@ -2354,11 +1880,8 @@ body {
   background: #38d200;
   border: 1px solid #38d200;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-reward-number {
-  padding: min(4px, calc(0.0042918455 * 100vh))
-    min(12px, calc(0.0279069767 * 100vw));
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-reward-number {
+  padding: min(4px, calc(0.0042918455 * 100vh)) min(12px, calc(0.0279069767 * 100vw));
   border-radius: 26px;
   font-size: min(12px, calc(0.0279069767 * 100vw));
   line-height: 100%;
@@ -2368,172 +1891,119 @@ body {
   background: #fff;
   border: 1px solid rgba(82, 83, 85, 0.6980392157);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-reward-cards {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-reward-cards {
   display: flex;
   flex-direction: column;
   gap: min(10px, calc(0.0107296137 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-reward-cards-title {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-reward-cards-title {
   font-size: min(12px, calc(0.0279069767 * 100vw));
   line-height: 1.42;
   font-weight: 600;
   color: #5d5d5d;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-reward-cards-image {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-reward-cards-image {
   display: flex;
   width: 100%;
   height: auto;
   gap: min(5px, calc(0.011627907 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-reward-cards-image
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-reward-cards-image img {
   width: min(57px, calc(0.1325581395 * 100vw));
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-travel {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-travel {
   display: flex;
   flex-direction: column;
   gap: min(16px, calc(0.017167382 * 100vh));
-  padding: min(17px, calc(0.0182403433 * 100vh))
-    min(11px, calc(0.0255813953 * 100vw));
+  padding: min(17px, calc(0.0182403433 * 100vh)) min(11px, calc(0.0255813953 * 100vw));
   background: #dcffd0;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-travel-gray {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-travel-gray {
   background: #e6f1fd;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-travel-header {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-travel-header {
   display: flex;
   justify-content: space-between;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-travel-title {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-travel-title {
   font-size: min(12px, calc(0.0279069767 * 100vw));
   line-height: 1.42;
   font-weight: 600;
   color: #5d5d5d;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-travel-number {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-travel-number {
   font-size: min(12px, calc(0.0279069767 * 100vw));
   font-weight: 600;
   line-height: 100%;
   text-align: center;
-  padding: min(4px, calc(0.0042918455 * 100vh))
-    min(12px, calc(0.0279069767 * 100vw));
+  padding: min(4px, calc(0.0042918455 * 100vh)) min(12px, calc(0.0279069767 * 100vw));
   color: rgba(82, 83, 85, 0.6980392157);
   background: #fff;
   border-radius: 26px;
   border: 1px solid rgba(82, 83, 85, 0.6980392157);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-travel-cards {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-travel-cards {
   display: flex;
   width: 100%;
   height: auto;
   gap: min(5px, calc(0.011627907 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-travel-cards
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-travel-cards img {
   width: min(57px, calc(0.1325581395 * 100vw));
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-bonus-content {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-bonus-content {
   display: flex;
   flex-direction: column;
   gap: min(10px, calc(0.0107296137 * 100vh));
   background: #e6f1fd;
-  padding: min(17px, calc(0.0182403433 * 100vh))
-    min(11px, calc(0.0255813953 * 100vw));
+  padding: min(17px, calc(0.0182403433 * 100vh)) min(11px, calc(0.0255813953 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-bonus-header {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-bonus-header {
   font-weight: 500;
   font-size: min(12px, calc(0.0279069767 * 100vw));
   line-height: 1.42;
   color: #5d5d5d;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-bonus-cards {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-bonus-cards {
   display: flex;
   width: 100%;
   height: auto;
   gap: min(5px, calc(0.011627907 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-bonus-cards
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-bonus-cards img {
   width: min(57px, calc(0.1325581395 * 100vw));
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-header {
-  padding: min(8px, calc(0.008583691 * 100vh))
-    min(55px, calc(0.1279069767 * 100vw)) 0px;
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-header {
+  padding: min(8px, calc(0.008583691 * 100vh)) min(55px, calc(0.1279069767 * 100vw)) 0px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-header-title {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-header-title {
   font-size: min(26px, calc(0.0604651163 * 100vw));
   line-height: 30px;
   font-weight: 700;
   text-align: center;
   color: #0473ea;
-  background: linear-gradient(
-    91.99deg,
-    #0473ea 16.6%,
-    #044c9a 38.9%,
-    #0473ea 62.99%,
-    #003e81 90.16%
-  );
+  background: linear-gradient(91.99deg, #0473ea 16.6%, #044c9a 38.9%, #0473ea 62.99%, #003e81 90.16%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-wrapper {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-wrapper {
   display: flex;
   flex-direction: column;
   gap: min(16px, calc(0.017167382 * 100vh));
   padding-top: min(11px, calc(0.0118025751 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile {
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(82, 83, 85, 0.2);
   border-radius: 10px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-header {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2541,60 +2011,41 @@ body {
   background: #525355;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  padding: min(10px, calc(0.0107296137 * 100vh))
-    min(20px, calc(0.0465116279 * 100vw));
+  padding: min(10px, calc(0.0107296137 * 100vh)) min(20px, calc(0.0465116279 * 100vw));
   background: linear-gradient(90.7deg, #0473ea -1.39%, #0e2d67 98.54%);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-header
-  h4 {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-header h4 {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 1.2;
   font-weight: 700;
   vertical-align: middle;
   color: #fff;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-oval {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-oval {
   width: min(37px, calc(0.0860465116 * 100vw));
   height: min(37px, calc(0.0396995708 * 100vh));
   border-radius: 60px;
   background: rgba(255, 255, 255, 0.1019607843);
-  padding: min(4px, calc(0.0042918455 * 100vh))
-    min(11px, calc(0.0255813953 * 100vw)) min(2px, calc(0.0021459227 * 100vh))
-    min(12px, calc(0.0279069767 * 100vw));
+  padding: min(4px, calc(0.0042918455 * 100vh)) min(11px, calc(0.0255813953 * 100vw)) min(2px, calc(0.0021459227 * 100vh)) min(12px, calc(0.0279069767 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-number {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-number {
   font-weight: 700;
   font-size: min(24px, calc(0.0558139535 * 100vw));
   line-height: 100%;
   color: #fff;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-content {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-content {
   display: flex;
   justify-content: space-between;
-  padding: min(10px, calc(0.0107296137 * 100vh))
-    min(20px, calc(0.0465116279 * 100vw)) 0px;
+  padding: min(10px, calc(0.0107296137 * 100vh)) min(20px, calc(0.0465116279 * 100vw)) 0px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-content
-  span {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-content span {
   font-weight: 400;
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 100%;
   color: #525355;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-content
-  a {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-content a {
   font-size: min(14px, calc(0.0325581395 * 100vw));
   line-height: 100%;
   font-weight: 700;
@@ -2603,18 +2054,14 @@ body {
   text-decoration-style: solid;
   letter-spacing: 0%;
   -webkit-text-decoration-skip: ink;
-  text-decoration-skip-ink: auto;
+          text-decoration-skip-ink: auto;
   text-decoration-thickness: 0%;
   text-underline-offset: 5%;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-line {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-line {
   border: 1px solid rgba(82, 83, 85, 0.2);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-wrapper {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-wrapper {
   display: flex;
   flex-direction: column;
   gap: min(10px, calc(0.0107296137 * 100vh));
@@ -2623,54 +2070,41 @@ body {
   overflow: hidden;
   transition: max-height 0.3s ease;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-wrapper.expanded {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-wrapper.expanded {
   max-height: 500px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-view-more,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-view-less {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-view-more, .sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-view-less {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: min(5px, calc(0.011627907 * 100vw));
-  padding: min(10px, calc(0.0107296137 * 100vh))
-    min(10px, calc(0.023255814 * 100vw));
+  padding: min(10px, calc(0.0107296137 * 100vh)) min(10px, calc(0.023255814 * 100vw));
   background: #fff;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  text-align: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-view-more
-  img,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-view-less
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-view-more img, .sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-view-less img {
   width: min(7.76px, calc(0.0180465116 * 100vw));
   height: min(7.66px, calc(0.0082188841 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-view-more
-  span,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-tile-view-less
-  span {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-view-more span, .sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile-view-less span {
   font-weight: 400;
   font-size: min(10px, calc(0.023255814 * 100vw));
   line-height: 1.42;
   color: #5d5d5d;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-button {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile.expanded .sc-year-end-spend-card-collection__tabs-prize-tile-wrapper {
+  max-height: 1000px !important;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile.expanded .sc-year-end-spend-card-collection__tabs-prize-tile-view-less {
+  display: block !important;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-tile.expanded .sc-year-end-spend-card-collection__tabs-prize-tile-view-more {
+  display: none !important;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-button {
   border: 1px solid #0473ea;
   border-radius: 25px;
   font-weight: 700;
@@ -2683,13 +2117,10 @@ body {
   height: min(50px, calc(0.0536480687 * 100vh));
   font-style: normal;
   letter-spacing: 0;
-  padding: min(13px, calc(0.0139484979 * 100vh))
-    min(13px, calc(0.0302325581 * 100vw));
+  padding: min(13px, calc(0.0139484979 * 100vh)) min(13px, calc(0.0302325581 * 100vw));
   align-self: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-card-collection__body
-  .sc-year-end-spend-card-collection__tabs-prize-button-wrapper {
+.sc-year-end-spend-campaign .sc-year-end-spend-card-collection__body .sc-year-end-spend-card-collection__tabs-prize-button-wrapper {
   padding-top: min(11px, calc(0.0118025751 * 100vh));
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-card-collection--hide {
@@ -2709,9 +2140,7 @@ body {
 .sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__container {
   pointer-events: none;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__container
-  lottie-player {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__container lottie-player {
   position: absolute;
   top: 0;
   left: 0;
@@ -2731,104 +2160,64 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 24px;
-  padding: 30% min(20px, calc(0.0465116279 * 100vw))
-    min(24px, calc(0.025751073 * 100vh)) min(20px, calc(0.0465116279 * 100vw));
+  padding: 30% min(20px, calc(0.0465116279 * 100vw)) min(24px, calc(0.025751073 * 100vh)) min(20px, calc(0.0465116279 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top {
   width: 100%;
   border-radius: 16px;
   border: 4px solid #0473ea;
   background: #fff;
   position: relative;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__card {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__card {
   height: auto;
   position: absolute;
   width: min(156px, calc(0.3627906977 * 100vw));
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3490196078);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__card-stack {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__card-stack {
   width: 100%;
   display: flex;
   flex-direction: row;
   position: absolute;
   top: -22%;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__card--1 {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__card--1 {
   left: 3%;
   z-index: 1;
   transform: rotate(-10.79deg);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__card--2 {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__card--2 {
   left: 28%;
   z-index: 3;
   top: min(18px, calc(0.0193133047 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__card--3 {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__card--3 {
   right: 4%;
   z-index: 2;
   transform: rotate(7.35deg);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__content {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content {
   width: 100%;
   border-radius: 0px 0px 24px 24px;
-  padding: min(120px, calc(0.1287553648 * 100vh))
-    min(20px, calc(0.0465116279 * 100%)) min(35px, calc(0.0375536481 * 100vh))
-    min(20px, calc(0.0465116279 * 100%));
+  padding: min(120px, calc(0.1287553648 * 100vh)) min(20px, calc(0.0465116279 * 100%)) min(35px, calc(0.0375536481 * 100vh)) min(20px, calc(0.0465116279 * 100%));
 }
 @media screen and (max-height: 481px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-popup__body
-    .sc-year-end-spend-reward-popup__top
-    .sc-year-end-spend-reward-popup__content {
-    padding: min(160px, calc(0.1716738197 * 100vh))
-      min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh))
-      min(24px, calc(0.0558139535 * 100%));
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content {
+    padding: min(160px, calc(0.1716738197 * 100vh)) min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100%));
   }
 }
 @media screen and (min-height: 482px) and (max-height: 732px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-popup__body
-    .sc-year-end-spend-reward-popup__top
-    .sc-year-end-spend-reward-popup__content {
-    padding: min(140px, calc(0.1502145923 * 100vh))
-      min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh))
-      min(24px, calc(0.0558139535 * 100%));
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content {
+    padding: min(140px, calc(0.1502145923 * 100vh)) min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100%));
   }
 }
 @media screen and (min-height: 732px) and (max-height: 812px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-popup__body
-    .sc-year-end-spend-reward-popup__top
-    .sc-year-end-spend-reward-popup__content {
-    padding: min(130px, calc(0.1394849785 * 100vh))
-      min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh))
-      min(24px, calc(0.0558139535 * 100%));
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content {
+    padding: min(130px, calc(0.1394849785 * 100vh)) min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100%));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__content-top {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content-top {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -2838,10 +2227,7 @@ body {
   padding-bottom: min(32px, calc(0.0343347639 * 100vh));
   gap: min(16px, calc(0.017167382 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__content-bottom {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content-bottom {
   width: 100%;
   position: relative;
   display: flex;
@@ -2851,11 +2237,7 @@ body {
   align-items: center;
   gap: min(16px, calc(0.017167382 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__content-bottom
-  .sc-year-end-spend-reward-popup__share-link {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content-bottom .sc-year-end-spend-reward-popup__share-link {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 100%;
   font-style: normal;
@@ -2866,29 +2248,16 @@ body {
   /* (iPhone SE, 6/7/8) */
 }
 @media screen and (max-height: 740px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-popup__body
-    .sc-year-end-spend-reward-popup__top
-    .sc-year-end-spend-reward-popup__content-bottom
-    .sc-year-end-spend-reward-popup__share-link {
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content-bottom .sc-year-end-spend-reward-popup__share-link {
     font-size: min(14px, calc(0.0325581395 * 100vw));
   }
 }
 @media screen and (max-height: 667px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-popup__body
-    .sc-year-end-spend-reward-popup__top
-    .sc-year-end-spend-reward-popup__content-bottom
-    .sc-year-end-spend-reward-popup__share-link {
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content-bottom .sc-year-end-spend-reward-popup__share-link {
     font-size: min(13px, calc(0.0302325581 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__content-bottom
-  .sc-year-end-spend-reward-popup__share-link
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content-bottom .sc-year-end-spend-reward-popup__share-link img {
   width: min(20px, calc(0.0465116279 * 100vw));
   height: auto;
   display: inline-block;
@@ -2896,65 +2265,37 @@ body {
   vertical-align: middle;
 }
 @media screen and (max-height: 740px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-popup__body
-    .sc-year-end-spend-reward-popup__top
-    .sc-year-end-spend-reward-popup__content-bottom
-    .sc-year-end-spend-reward-popup__share-link
-    img {
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content-bottom .sc-year-end-spend-reward-popup__share-link img {
     width: min(18px, calc(0.0418604651 * 100vw));
   }
 }
 @media screen and (max-height: 667px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-popup__body
-    .sc-year-end-spend-reward-popup__top
-    .sc-year-end-spend-reward-popup__content-bottom
-    .sc-year-end-spend-reward-popup__share-link
-    img {
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content-bottom .sc-year-end-spend-reward-popup__share-link img {
     width: min(17px, calc(0.0395348837 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__content-splitter {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content-splitter {
   align-self: center;
   width: 100%;
   position: relative;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__content-splitter-line {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content-splitter-line {
   border-top: 0.5px dashed #525355;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__content
-  .sc-year-end-spend-reward-popup__success {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content .sc-year-end-spend-reward-popup__success {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: min(8px, calc(0.008583691 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__content
-  .sc-year-end-spend-reward-popup__success-title {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content .sc-year-end-spend-reward-popup__success-title {
   font-size: min(24px, calc(0.0558139535 * 100vw));
   line-height: 1.5;
   font-weight: 700;
   color: #0473ea;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__content
-  .sc-year-end-spend-reward-popup__success-message {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content .sc-year-end-spend-reward-popup__success-message {
   font-size: min(18px, calc(0.0418604651 * 100vw));
   line-height: 1;
   font-weight: 500;
@@ -2963,29 +2304,18 @@ body {
   color: #525355;
   text-align: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__top
-  .sc-year-end-spend-reward-popup__content
-  .sc-year-end-spend-reward-popup__reward-name {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__top .sc-year-end-spend-reward-popup__content .sc-year-end-spend-reward-popup__reward-name {
   font-size: min(20px, calc(0.0465116279 * 100vw));
   line-height: 1.5;
   font-weight: 700;
   color: #0473ea;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__bottom
-  .sc-year-end-spend-reward-popup__close {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__bottom .sc-year-end-spend-reward-popup__close {
   width: min(60px, calc(0.1395348837 * 100vw));
   height: auto;
   margin-top: calc(0.0268240343 * 100vh);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-popup__body
-  .sc-year-end-spend-reward-popup__bottom
-  .sc-year-end-spend-reward-popup__close
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-popup__body .sc-year-end-spend-reward-popup__bottom .sc-year-end-spend-reward-popup__close img {
   width: 100%;
   height: auto;
 }
@@ -3038,9 +2368,7 @@ body {
 .sc-year-end-spend-campaign .sc-year-end-spend-reward-details__container {
   pointer-events: none;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__container
-  lottie-player {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__container lottie-player {
   position: absolute;
   top: 0;
   left: 0;
@@ -3061,12 +2389,9 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 24px;
-  padding: 24% min(20px, calc(0.0465116279 * 100vw))
-    min(24px, calc(0.025751073 * 100vh)) min(20px, calc(0.0465116279 * 100vw));
+  padding: 24% min(20px, calc(0.0465116279 * 100vw)) min(24px, calc(0.025751073 * 100vh)) min(20px, calc(0.0465116279 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top {
   width: 100%;
   border-radius: 16px;
   background: #fff;
@@ -3074,57 +2399,38 @@ body {
   gap: min(29px, calc(0.0311158798 * 100vh));
   position: relative;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__card {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__card {
   height: auto;
   position: absolute;
   width: min(156px, calc(0.3627906977 * 100vw));
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3490196078);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__card-stack {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__card-stack {
   width: 100%;
   display: flex;
   flex-direction: row;
   position: absolute;
   top: -22%;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__card--1 {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__card--1 {
   left: 3%;
   z-index: 1;
   transform: rotate(-10.79deg);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__card--2 {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__card--2 {
   left: 28%;
   z-index: 3;
   top: min(18px, calc(0.0193133047 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__card--3 {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__card--3 {
   right: 4%;
   z-index: 2;
   transform: rotate(7.35deg);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content {
   width: 100%;
   border-radius: 0px 0px 24px 24px;
-  padding: min(120px, calc(0.1287553648 * 100vh))
-    min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh))
-    min(24px, calc(0.0558139535 * 100%));
+  padding: min(120px, calc(0.1287553648 * 100vh)) min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100%));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -3132,39 +2438,21 @@ body {
   gap: min(29px, calc(0.0311158798 * 100vh));
 }
 @media screen and (max-height: 481px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-details__body
-    .sc-year-end-spend-reward-details__top
-    .sc-year-end-spend-reward-details__content {
-    padding: min(160px, calc(0.1716738197 * 100vh))
-      min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh))
-      min(24px, calc(0.0558139535 * 100%));
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content {
+    padding: min(160px, calc(0.1716738197 * 100vh)) min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100%));
   }
 }
 @media screen and (min-height: 482px) and (max-height: 732px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-details__body
-    .sc-year-end-spend-reward-details__top
-    .sc-year-end-spend-reward-details__content {
-    padding: min(140px, calc(0.1502145923 * 100vh))
-      min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh))
-      min(24px, calc(0.0558139535 * 100%));
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content {
+    padding: min(140px, calc(0.1502145923 * 100vh)) min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100%));
   }
 }
 @media screen and (min-height: 732px) and (max-height: 812px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-details__body
-    .sc-year-end-spend-reward-details__top
-    .sc-year-end-spend-reward-details__content {
-    padding: min(130px, calc(0.1394849785 * 100vh))
-      min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh))
-      min(24px, calc(0.0558139535 * 100%));
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content {
+    padding: min(130px, calc(0.1394849785 * 100vh)) min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100%));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content-middle {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content-middle {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -3173,10 +2461,7 @@ body {
   justify-content: center;
   gap: min(16px, calc(0.017167382 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content-actions {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content-actions {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -3188,11 +2473,7 @@ body {
   font-style: normal;
   font-weight: 400;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content-actions
-  .sc-year-end-spend-reward-details__terms-link {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content-actions .sc-year-end-spend-reward-details__terms-link {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 100%;
   font-style: normal;
@@ -3205,28 +2486,16 @@ body {
   /* (iPhone SE, 6/7/8) */
 }
 @media screen and (max-height: 740px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-details__body
-    .sc-year-end-spend-reward-details__top
-    .sc-year-end-spend-reward-details__content-actions
-    .sc-year-end-spend-reward-details__terms-link {
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content-actions .sc-year-end-spend-reward-details__terms-link {
     font-size: min(14px, calc(0.0325581395 * 100vw));
   }
 }
 @media screen and (max-height: 667px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-details__body
-    .sc-year-end-spend-reward-details__top
-    .sc-year-end-spend-reward-details__content-actions
-    .sc-year-end-spend-reward-details__terms-link {
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content-actions .sc-year-end-spend-reward-details__terms-link {
     font-size: min(13px, calc(0.0302325581 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content-actions
-  .sc-year-end-spend-reward-details__share-link {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content-actions .sc-year-end-spend-reward-details__share-link {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 100%;
   font-style: normal;
@@ -3237,29 +2506,16 @@ body {
   /* (iPhone SE, 6/7/8) */
 }
 @media screen and (max-height: 740px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-details__body
-    .sc-year-end-spend-reward-details__top
-    .sc-year-end-spend-reward-details__content-actions
-    .sc-year-end-spend-reward-details__share-link {
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content-actions .sc-year-end-spend-reward-details__share-link {
     font-size: min(14px, calc(0.0325581395 * 100vw));
   }
 }
 @media screen and (max-height: 667px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-details__body
-    .sc-year-end-spend-reward-details__top
-    .sc-year-end-spend-reward-details__content-actions
-    .sc-year-end-spend-reward-details__share-link {
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content-actions .sc-year-end-spend-reward-details__share-link {
     font-size: min(13px, calc(0.0302325581 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content-actions
-  .sc-year-end-spend-reward-details__share-link
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content-actions .sc-year-end-spend-reward-details__share-link img {
   width: min(20px, calc(0.0465116279 * 100vw));
   height: auto;
   display: inline-block;
@@ -3267,44 +2523,24 @@ body {
   vertical-align: middle;
 }
 @media screen and (max-height: 740px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-details__body
-    .sc-year-end-spend-reward-details__top
-    .sc-year-end-spend-reward-details__content-actions
-    .sc-year-end-spend-reward-details__share-link
-    img {
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content-actions .sc-year-end-spend-reward-details__share-link img {
     width: min(18px, calc(0.0418604651 * 100vw));
   }
 }
 @media screen and (max-height: 667px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-details__body
-    .sc-year-end-spend-reward-details__top
-    .sc-year-end-spend-reward-details__content-actions
-    .sc-year-end-spend-reward-details__share-link
-    img {
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content-actions .sc-year-end-spend-reward-details__share-link img {
     width: min(17px, calc(0.0395348837 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content-splitter {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content-splitter {
   align-self: center;
   width: 100%;
   position: relative;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content-splitter-line {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content-splitter-line {
   border-top: 0.5px dashed #525355;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content
-  .sc-year-end-spend-reward-details__reward {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content .sc-year-end-spend-reward-details__reward {
   font-size: min(20px, calc(0.0465116279 * 100vw));
   line-height: 30px;
   font-weight: 700;
@@ -3312,26 +2548,13 @@ body {
   letter-spacing: 0;
   text-align: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content
-  .sc-year-end-spend-reward-details__reward-title,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content
-  .sc-year-end-spend-reward-details__reward-name {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content .sc-year-end-spend-reward-details__reward-title, .sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content .sc-year-end-spend-reward-details__reward-name {
   font-size: min(20px, calc(0.0465116279 * 100vw));
   line-height: 1.4;
   font-weight: 700;
   color: #0473ea;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content
-  .sc-year-end-spend-reward-details__expiry {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content .sc-year-end-spend-reward-details__expiry {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 1.3;
   font-weight: 500;
@@ -3342,38 +2565,22 @@ body {
   /* (iPhone SE, 6/7/8) */
 }
 @media screen and (max-height: 740px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-details__body
-    .sc-year-end-spend-reward-details__top
-    .sc-year-end-spend-reward-details__content
-    .sc-year-end-spend-reward-details__expiry {
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content .sc-year-end-spend-reward-details__expiry {
     font-size: min(14px, calc(0.0325581395 * 100vw));
   }
 }
 @media screen and (max-height: 667px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-reward-details__body
-    .sc-year-end-spend-reward-details__top
-    .sc-year-end-spend-reward-details__content
-    .sc-year-end-spend-reward-details__expiry {
+  .sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content .sc-year-end-spend-reward-details__expiry {
     font-size: min(13px, calc(0.0302325581 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content
-  .sc-year-end-spend-reward-details__expiry-details {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content .sc-year-end-spend-reward-details__expiry-details {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content
-  .sc-year-end-spend-reward-details__label {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content .sc-year-end-spend-reward-details__label {
   font-size: min(14px, calc(0.0325581395 * 100vw));
   line-height: 1.3;
   font-weight: 400;
@@ -3381,22 +2588,14 @@ body {
   text-align: center;
   color: #868788;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content
-  .sc-year-end-spend-reward-details__redeem-details {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content .sc-year-end-spend-reward-details__redeem-details {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 4px;
   padding: 0 min(13px, calc(0.0302325581 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__top
-  .sc-year-end-spend-reward-details__content
-  .sc-year-end-spend-reward-details__redeem-message {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__top .sc-year-end-spend-reward-details__content .sc-year-end-spend-reward-details__redeem-message {
   font-size: min(16px, calc(0.0372093023 * 100vw));
   line-height: 1.3;
   font-weight: 400;
@@ -3404,24 +2603,13 @@ body {
   text-align: center;
   color: #525355;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__bottom
-  .sc-year-end-spend-reward-details__close {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__bottom .sc-year-end-spend-reward-details__close {
   width: min(60px, calc(0.1395348837 * 100vw));
   height: auto;
   margin-top: calc(0.0268240343 * 100vh);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__bottom
-  .sc-year-end-spend-reward-details__close
-  img,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-reward-details__body
-  .sc-year-end-spend-reward-details__bottom
-  .sc-year-end-spend-reward-details__close
-  svg {
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__bottom .sc-year-end-spend-reward-details__close img,
+.sc-year-end-spend-campaign .sc-year-end-spend-reward-details__body .sc-year-end-spend-reward-details__bottom .sc-year-end-spend-reward-details__close svg {
   width: 100%;
   height: auto;
 }
@@ -3458,17 +2646,13 @@ body {
   align-items: center;
   gap: min(30px, calc(0.0321888412 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-campaign-end__wrapper
-  .sc-year-end-spend-campaign-end__content {
+.sc-year-end-spend-campaign .sc-year-end-spend-campaign-end__wrapper .sc-year-end-spend-campaign-end__content {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-campaign-end__wrapper
-  .sc-year-end-spend-campaign-end__title {
+.sc-year-end-spend-campaign .sc-year-end-spend-campaign-end__wrapper .sc-year-end-spend-campaign-end__title {
   font-size: 18px;
   line-height: 100%;
   font-weight: 700;
@@ -3476,9 +2660,7 @@ body {
   letter-spacing: 0;
   text-align: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-campaign-end__wrapper
-  .sc-year-end-spend-campaign-end__message {
+.sc-year-end-spend-campaign .sc-year-end-spend-campaign-end__wrapper .sc-year-end-spend-campaign-end__message {
   font-size: 18px;
   line-height: 100%;
   font-weight: 400;
@@ -3486,9 +2668,7 @@ body {
   letter-spacing: 0;
   text-align: center;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-campaign-end__wrapper
-  .sc-year-end-spend-campaign-end__button-back {
+.sc-year-end-spend-campaign .sc-year-end-spend-campaign-end__wrapper .sc-year-end-spend-campaign-end__button-back {
   width: 100%;
   font-size: 20px;
   line-height: 100%;
@@ -3541,28 +2721,20 @@ body {
   width: 100%;
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-error__wrapper
-  .sc-year-end-spend-error__top {
+.sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__top {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: min(56px, calc(0.0600858369 * 100vh))
-    min(24px, calc(0.0558139535 * 100vw)) 0px;
+  padding: min(56px, calc(0.0600858369 * 100vh)) min(24px, calc(0.0558139535 * 100vw)) 0px;
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-error__wrapper
-    .sc-year-end-spend-error__top {
+  .sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__top {
     padding-top: min(30px, calc(0.0321888412 * 100vh));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-error__wrapper
-  .sc-year-end-spend-error__top
-  .sc-year-end-spend-error__header {
+.sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__top .sc-year-end-spend-error__header {
   width: 100%;
   height: 100%;
   display: flex;
@@ -3571,84 +2743,57 @@ body {
   align-items: center;
   gap: min(5px, calc(0.0053648069 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-error__wrapper
-  .sc-year-end-spend-error__top
-  .sc-year-end-spend-error__header-masthead {
+.sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__top .sc-year-end-spend-error__header-masthead {
   width: 100%;
   height: auto;
 }
 @media screen and (max-width: 414px) and (max-height: 736px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-error__wrapper
-    .sc-year-end-spend-error__top
-    .sc-year-end-spend-error__header-masthead {
+  .sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__top .sc-year-end-spend-error__header-masthead {
     width: 95%;
   }
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-error__wrapper
-    .sc-year-end-spend-error__top
-    .sc-year-end-spend-error__header-masthead {
+  .sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__top .sc-year-end-spend-error__header-masthead {
     width: 95%;
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-error__wrapper
-  .sc-year-end-spend-error__middle {
+.sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__middle {
   width: 100%;
   display: flex;
-  padding: min(30px, calc(0.0321888412 * 100vh))
-    min(24px, calc(0.0558139535 * 100vw)) 0px;
+  padding: min(30px, calc(0.0321888412 * 100vh)) min(24px, calc(0.0558139535 * 100vw)) 0px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: min(30px, calc(0.0321888412 * 100vh));
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-error__wrapper
-    .sc-year-end-spend-error__middle {
+  .sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__middle {
     padding-top: min(20px, calc(0.0214592275 * 100vh));
     gap: min(25px, calc(0.0268240343 * 100vh));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-error__wrapper
-  .sc-year-end-spend-error__middle
-  .sc-year-end-spend-error__background-image {
+.sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__middle .sc-year-end-spend-error__background-image {
   width: min(234px, calc(0.5441860465 * 100vw));
   height: auto;
 }
 @media screen and (max-width: 414px) and (max-height: 736px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-error__wrapper
-    .sc-year-end-spend-error__middle
-    .sc-year-end-spend-error__background-image {
+  .sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__middle .sc-year-end-spend-error__background-image {
     width: min(210px, calc(0.488372093 * 100vw));
   }
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-error__wrapper
-    .sc-year-end-spend-error__middle
-    .sc-year-end-spend-error__background-image {
+  .sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__middle .sc-year-end-spend-error__background-image {
     width: min(210px, calc(0.488372093 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-error__wrapper
-  .sc-year-end-spend-error__middle
-  .sc-year-end-spend-error__content {
+.sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__middle .sc-year-end-spend-error__content {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: min(16px, calc(0.017167382 * 100vh));
-  padding: min(24px, calc(0.025751073 * 100vh))
-    min(24px, calc(0.0558139535 * 100vw));
+  padding: min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100vw));
   font-size: min(20px, calc(0.0465116279 * 100vw));
   line-height: 1.3;
   font-weight: 400;
@@ -3658,20 +2803,13 @@ body {
   color: #fff;
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-error__wrapper
-    .sc-year-end-spend-error__middle
-    .sc-year-end-spend-error__content {
+  .sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__middle .sc-year-end-spend-error__content {
     gap: min(14px, calc(0.0150214592 * 100vh));
-    padding: min(20px, calc(0.0214592275 * 100vh))
-      min(20px, calc(0.0465116279 * 100vw));
+    padding: min(20px, calc(0.0214592275 * 100vh)) min(20px, calc(0.0465116279 * 100vw));
     font-size: min(18px, calc(0.0418604651 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-error__wrapper
-  .sc-year-end-spend-error__middle
-  .sc-year-end-spend-error__content-title {
+.sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__middle .sc-year-end-spend-error__content-title {
   font-size: min(26px, calc(0.0604651163 * 100vw));
   line-height: 120%;
   font-weight: 700;
@@ -3681,17 +2819,11 @@ body {
   color: #fff;
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-error__wrapper
-    .sc-year-end-spend-error__middle
-    .sc-year-end-spend-error__content-title {
+  .sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__middle .sc-year-end-spend-error__content-title {
     font-size: min(22px, calc(0.0511627907 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-error__wrapper
-  .sc-year-end-spend-error__middle
-  .sc-year-end-spend-error__content-description {
+.sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__middle .sc-year-end-spend-error__content-description {
   font-size: min(20px, calc(0.0465116279 * 100vw));
   line-height: 1.3;
   font-weight: 400;
@@ -3701,38 +2833,26 @@ body {
   color: #fff;
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-error__wrapper
-    .sc-year-end-spend-error__middle
-    .sc-year-end-spend-error__content-description {
+  .sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__middle .sc-year-end-spend-error__content-description {
     font-size: min(18px, calc(0.0418604651 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-error__wrapper
-  .sc-year-end-spend-error__bottom {
+.sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__bottom {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0px min(24px, calc(0.0558139535 * 100vw))
-    min(30px, calc(0.0321888412 * 100vh));
+  padding: 0px min(24px, calc(0.0558139535 * 100vw)) min(30px, calc(0.0321888412 * 100vh));
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-error__wrapper
-    .sc-year-end-spend-error__bottom {
+  .sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__bottom {
     padding-bottom: min(25px, calc(0.0581395349 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-error__wrapper
-  .sc-year-end-spend-error__bottom
-  .sc-year-end-spend-error__button {
+.sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__bottom .sc-year-end-spend-error__button {
   width: 100%;
-  padding: min(20px, calc(0.0214592275 * 100vh))
-    min(28px, calc(0.0651162791 * 100vw));
+  padding: min(20px, calc(0.0214592275 * 100vh)) min(28px, calc(0.0651162791 * 100vw));
   border: 0;
   border-radius: 100px;
   font-size: min(20px, calc(0.0465116279 * 100vw));
@@ -3745,19 +2865,12 @@ body {
   background-color: #fff;
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-error__wrapper
-    .sc-year-end-spend-error__bottom
-    .sc-year-end-spend-error__button {
-    padding: min(18px, calc(0.0193133047 * 100vh))
-      min(20px, calc(0.0465116279 * 100vw));
+  .sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__bottom .sc-year-end-spend-error__button {
+    padding: min(18px, calc(0.0193133047 * 100vh)) min(20px, calc(0.0465116279 * 100vw));
     font-size: min(18px, calc(0.0418604651 * 100vw));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-error__wrapper
-  .sc-year-end-spend-error__bottom
-  .sc-year-end-spend-error__button-wrapper {
+.sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__bottom .sc-year-end-spend-error__button-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -3766,23 +2879,20 @@ body {
   gap: min(20px, calc(0.0214592275 * 100vh));
 }
 @media screen and (max-width: 375px) and (max-height: 700px) {
-  .sc-year-end-spend-campaign
-    .sc-year-end-spend-error__wrapper
-    .sc-year-end-spend-error__bottom
-    .sc-year-end-spend-error__button-wrapper {
+  .sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__bottom .sc-year-end-spend-error__button-wrapper {
     gap: min(16px, calc(0.017167382 * 100vh));
   }
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-error__wrapper
-  .sc-year-end-spend-error__bottom
-  .sc-year-end-spend-error__button-go-back {
+.sc-year-end-spend-campaign .sc-year-end-spend-error__wrapper .sc-year-end-spend-error__bottom .sc-year-end-spend-error__button-go-back {
   border: 2px solid #fff;
   background: transparent;
   color: #fff;
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-error--hide {
-  display: none !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  visibility: hidden !important;
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-modal {
   display: flex;
@@ -3805,9 +2915,7 @@ body {
   display: flex;
   flex-direction: column;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-modal__wrapper
-  .sc-year-end-spend-modal__header {
+.sc-year-end-spend-campaign .sc-year-end-spend-modal__wrapper .sc-year-end-spend-modal__header {
   width: 100%;
   height: 45px;
   border-bottom: 1px solid #f6f7f6;
@@ -3815,9 +2923,7 @@ body {
   position: relative;
   text-align: left;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-modal__wrapper
-  .sc-year-end-spend-modal__header-close {
+.sc-year-end-spend-campaign .sc-year-end-spend-modal__wrapper .sc-year-end-spend-modal__header-close {
   background-image: url('data:image/svg+xml,<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 21.5C16.799 21.5 21.5 16.799 21.5 11C21.5 5.20101 16.799 0.5 11 0.5C5.20101 0.5 0.5 5.20101 0.5 11C0.5 16.799 5.20101 21.5 11 21.5ZM6.4871 8.09971C6.04776 7.66037 6.04776 6.94806 6.4871 6.50872C6.92644 6.06938 7.63875 6.06938 8.07809 6.50872L11.0172 9.44782L13.9563 6.50872C14.3956 6.06938 15.1079 6.06938 15.5473 6.50872C15.9866 6.94806 15.9866 7.66037 15.5473 8.09971L12.6082 11.0388L15.5473 13.9779C15.9866 14.4173 15.9866 15.1296 15.5473 15.5689C15.1079 16.0082 14.3956 16.0082 13.9563 15.5689L11.0172 12.6298L8.07809 15.5689C7.63875 16.0082 6.92644 16.0082 6.4871 15.5689C6.04776 15.1296 6.04776 14.4173 6.4871 13.9779L9.4262 11.0388L6.4871 8.09971Z" fill="%23939393"/></svg>');
   width: 35px;
   height: 35px;
@@ -3826,22 +2932,41 @@ body {
   border: 5px solid #fff;
   position: absolute;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-modal__wrapper
-  .sc-year-end-spend-modal__content {
+.sc-year-end-spend-campaign .sc-year-end-spend-modal__wrapper .sc-year-end-spend-modal__content {
   width: 100%;
   height: calc(100% - 65px);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-modal__wrapper
-  .sc-year-end-spend-modal__content
-  iframe.modal-frame {
+.sc-year-end-spend-campaign .sc-year-end-spend-modal__wrapper .sc-year-end-spend-modal__content iframe.modal-frame {
   border: none;
   width: 100%;
   height: 100%;
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-modal--hide {
   display: none;
+}
+@keyframes arrowright {
+  0% {
+    right: -20px;
+  }
+  100% {
+    right: -35px;
+  }
+}
+@keyframes arrowleft {
+  0% {
+    left: -20px;
+  }
+  100% {
+    left: -35px;
+  }
+}
+@keyframes sparkles {
+  0% {
+    transform: translate(-50%, -50%) scale(0%);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(100%);
+  }
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game {
   width: 100%;
@@ -3854,16 +2979,13 @@ body {
   touch-action: none;
   -webkit-overflow-scrolling: touch;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game::-webkit-scrollbar {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game::-webkit-scrollbar {
   width: min(4px, calc(0.0093023256 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game::-webkit-scrollbar-track {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game::-webkit-scrollbar-track {
   background: #f0f0f0;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game::-webkit-scrollbar-thumb {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 4px;
 }
@@ -3871,9 +2993,7 @@ body {
   touch-action: auto;
   overflow-y: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game.active-scroll
-  .sc-year-end-spend-polaroid-game__wrapper {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game.active-scroll .sc-year-end-spend-polaroid-game__wrapper {
   height: auto;
   background-position: top left;
   background-size: 100%;
@@ -3881,16 +3001,10 @@ body {
   background-image: url(../images/game/sc-year-end-spend-bg-light-blue.png);
   width: calc(100% + min(4px, calc(0.0093023256 * 100vw)));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game.active-scroll
-  .sc-year-end-spend-polaroid-game__pocket
-  .sc-year-end-spend-polaroid-game__pocket-camera
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game.active-scroll .sc-year-end-spend-polaroid-game__pocket .sc-year-end-spend-polaroid-game__pocket-camera img {
   margin-left: min(4px, calc(0.0093023256 * 100vw));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game.active-scroll
-  .sc-year-end-spend-polaroid-game__slider {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game.active-scroll .sc-year-end-spend-polaroid-game__slider {
   z-index: 0;
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__wrapper {
@@ -3903,8 +3017,7 @@ body {
   left: 0;
   z-index: 5;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__bg-dark-blue,
-.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__bg-light-blue {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__bg-dark-blue, .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__bg-light-blue {
   position: absolute;
   top: 0;
   left: 0;
@@ -3918,8 +3031,7 @@ body {
   opacity: 1;
   background-size: cover;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__bg-dark-blue.dismiss {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__bg-dark-blue.dismiss {
   opacity: 0;
   transition: opacity 0.5s;
 }
@@ -3958,8 +3070,8 @@ body {
   transform-origin: center center;
   touch-action: none;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   -webkit-user-drag: none;
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__slider-img img {
@@ -3985,25 +3097,22 @@ body {
   width: 100%;
   height: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__slider-frame-base {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__slider-frame-base {
   position: relative;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__slider-frame-base::after {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__slider-frame-base::after {
   content: "";
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 100%;
+  left: calc(50% - min(2px, calc(0.0046511628 * 100vw)));
+  bottom: calc(-100% + min(18px, calc(0.0418604651 * 100vw)));
+  transform: translate(-50%, 0%);
+  width: calc(100% - min(40px, calc(0.0930232558 * 100vw)));
+  height: 100%;
   z-index: 10;
-  background-size: 100%;
-  background-position: top left;
-  width: 30px;
-  height: 20px;
+  background: linear-gradient(0deg, transparent 30%, #0473ea);
+  opacity: 0.8;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__slider-frame-base-img::after {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__slider-frame-base-img::after {
   content: "";
   position: absolute;
   right: -30px;
@@ -4014,9 +3123,9 @@ body {
   background-position: top left;
   width: 30px;
   height: 20px;
+  animation: arrowright 0.8s ease-in-out infinite alternate forwards;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__slider-frame-base-img::before {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__slider-frame-base-img::before {
   content: "";
   position: absolute;
   left: -30px;
@@ -4027,6 +3136,7 @@ body {
   background-position: top left;
   width: 30px;
   height: 20px;
+  animation: arrowleft 0.8s ease-in-out infinite alternate forwards;
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket {
   position: absolute;
@@ -4043,10 +3153,7 @@ body {
   display: block;
   width: 100%;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket .sc-year-end-spend-polaroid-game__dispense-polaroid img {
   position: absolute;
   z-index: 14;
   left: 50%;
@@ -4059,115 +3166,221 @@ body {
   transform: translate(-50%, 50%) scale(0.6);
   transition: left, bottom, transform, 0.7s ease-in-out 0.5s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img {
   top: 1300px;
   transform: translate(-50%, 50%) scale(2);
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(1) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__pocket-sparkles {
+  opacity: 1;
+  transition: opacity 1s ease-in 1s;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(1) {
   transition: top, transform, 0.5s ease-in-out 2s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(2) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(2) {
   transition: top, transform, 0.5s ease-in-out 2.2s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(3) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(3) {
   transition: top, transform, 0.5s ease-in-out 2.4s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(4) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(4) {
   transition: top, transform, 0.5s ease-in-out 3.4s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(5) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(5) {
   transition: top, transform, 0.5s ease-in-out 3.6s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(6) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(6) {
   transition: top, transform, 0.5s ease-in-out 3.8s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(7) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(7) {
   transition: top, transform, 0.5s ease-in-out 4.8s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(8) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(8) {
   transition: top, transform, 0.5s ease-in-out 5s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(9) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(9) {
   transition: top, transform, 0.5s ease-in-out 5.2s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(10) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(10) {
   transition: top, transform, 0.5s ease-in-out 6.2s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(11) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(11) {
   transition: top, transform, 0.5s ease-in-out 6.4s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(12) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(12) {
   transition: top, transform, 0.5s ease-in-out 6.6s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active.dismiss-card
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(1),
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active.dismiss-card
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(2),
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket.active.dismiss-card
-  .sc-year-end-spend-polaroid-game__dispense-polaroid
-  img:nth-child(3) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active.dismiss-card .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(1),
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active.dismiss-card .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(2),
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket.active.dismiss-card .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(3) {
   display: none;
 }
-.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-camera-top,
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket-camera-bottom {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-camera-top, .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-camera-bottom {
   position: relative;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket-camera-top {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-camera-top {
   z-index: 15;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__pocket-camera-bottom {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-camera-bottom {
   z-index: 13;
   top: -1px;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__dispense-polaroid-result {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  opacity: 0;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  animation: sparkles 0.8s ease-in infinite alternate forwards;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(1), .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(7), .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(13) {
+  animation-delay: 0.2s;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(2), .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(8), .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(14) {
+  animation-delay: 0.4s;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(3), .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(9), .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(15) {
+  animation-delay: 0.6s;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(4), .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(10), .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(16) {
+  animation-delay: 0.8s;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(5), .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(11), .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img:nth-child(17) {
+  animation-delay: 1s;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-01 {
+  width: min(38px, calc(0.088372093 * 100vw));
+  height: min(38px, calc(0.088372093 * 100vw));
+  background-image: url(../images/game/sc-year-end-spend-sparkles-01.svg);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-02 {
+  width: min(52px, calc(0.1209302326 * 100vw));
+  height: min(52px, calc(0.1209302326 * 100vw));
+  background-image: url(../images/game/sc-year-end-spend-sparkles-02.svg);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-03 {
+  width: min(36px, calc(0.0837209302 * 100vw));
+  height: min(36px, calc(0.0837209302 * 100vw));
+  background-image: url(../images/game/sc-year-end-spend-sparkles-03.svg);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-04 {
+  width: min(54px, calc(0.1255813953 * 100vw));
+  height: min(54px, calc(0.1255813953 * 100vw));
+  background-image: url(../images/game/sc-year-end-spend-sparkles-04.svg);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-05 {
+  width: min(25px, calc(0.0581395349 * 100vw));
+  height: min(25px, calc(0.0581395349 * 100vw));
+  background-image: url(../images/game/sc-year-end-spend-sparkles-05.svg);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-06 {
+  width: min(56px, calc(0.1302325581 * 100vw));
+  height: min(56px, calc(0.1302325581 * 100vw));
+  background-image: url(../images/game/sc-year-end-spend-sparkles-06.svg);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-07 {
+  width: min(49px, calc(0.1139534884 * 100vw));
+  height: min(49px, calc(0.1139534884 * 100vw));
+  background-image: url(../images/game/sc-year-end-spend-sparkles-07.svg);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-08 {
+  width: min(10px, calc(0.023255814 * 100vw));
+  height: min(10px, calc(0.023255814 * 100vw));
+  background-image: url(../images/game/sc-year-end-spend-sparkles-08.svg);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-09 {
+  width: min(11px, calc(0.0255813953 * 100vw));
+  height: min(11px, calc(0.0255813953 * 100vw));
+  background-image: url(../images/game/sc-year-end-spend-sparkles-09.svg);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-img-10 {
+  width: min(46px, calc(0.1069767442 * 100vw));
+  height: min(46px, calc(0.1069767442 * 100vw));
+  background-image: url(../images/game/sc-year-end-spend-sparkles-10.svg);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-01 {
+  top: -60px;
+  left: -13px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-02 {
+  top: 0px;
+  left: -7px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-03 {
+  top: 40px;
+  left: -40px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-04 {
+  top: 70px;
+  left: -20px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-05 {
+  top: 120px;
+  left: -5px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-06 {
+  top: 170px;
+  left: -45px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-07 {
+  top: -35px;
+  left: 35px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-08 {
+  top: -65px;
+  left: 105px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-09 {
+  top: -35px;
+  left: 155px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-10 {
+  top: -55px;
+  left: 185px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-11 {
+  top: -15px;
+  left: 215px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-12 {
+  top: -65px;
+  right: -70px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-13 {
+  top: -35px;
+  right: -20px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-14 {
+  top: -15px;
+  right: -80px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-15 {
+  top: 35px;
+  right: -45px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-16 {
+  top: 80px;
+  right: -85px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-17 {
+  top: 140px;
+  right: -85px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__pocket-sparkles-position-18 {
+  top: 190px;
+  right: -85px;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__dispense-polaroid-result {
   position: relative;
   z-index: 10;
   opacity: 0;
@@ -4177,43 +3390,32 @@ body {
   padding: 0 min(18px, calc(0.0418604651 * 100vw));
   pointer-events: auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__dispense-polaroid-result.result-show
-  .sc-year-end-spend-polaroid-game__polaroid-card {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__dispense-polaroid-result.result-show .sc-year-end-spend-polaroid-game__polaroid-card {
   top: 0;
   opacity: 1;
   transition: top, opacity, 0.5s ease-in-out 2s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__dispense-polaroid-result.result-show
-  .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(2) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__dispense-polaroid-result.result-show .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(2) {
   left: 22%;
   top: -10px;
   transform: translateX(-50%) rotate(-7deg);
   transition: top, transform, 0.5s ease-in-out 3s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__dispense-polaroid-result.result-show
-  .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(3) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__dispense-polaroid-result.result-show .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(3) {
   left: 78%;
   top: -10px;
   transform: translateX(-50%) rotate(7deg);
   transition: top, transform, 0.5s ease-in-out 3s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__dispense-polaroid-result.result-show
-  .sc-year-end-spend-polaroid-game__polaroid-card-img::before {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__dispense-polaroid-result.result-show .sc-year-end-spend-polaroid-game__polaroid-card-img::before {
   opacity: 0;
   transition: opacity 0.5s ease-in-out 4s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__dispense-polaroid-result.result-show
-  .sc-year-end-spend-polaroid-game__prize-detail {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__dispense-polaroid-result.result-show .sc-year-end-spend-polaroid-game__prize-detail {
   opacity: 1;
   transition: opacity 0.5s ease-in-out 4s;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__polaroid-card-result {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__polaroid-card-result {
   position: relative;
   width: 100%;
   top: 30px;
@@ -4229,19 +3431,16 @@ body {
   background-color: #fff;
   border-radius: 3px;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-  padding: min(7px, calc(0.0075107296 * 100vh))
-    min(7px, calc(0.0162790698 * 100vw)) min(40px, calc(0.0429184549 * 100vh));
+  padding: min(7px, calc(0.0075107296 * 100vh)) min(7px, calc(0.0162790698 * 100vw)) min(40px, calc(0.0429184549 * 100vh));
   width: min(156px, calc(0.3627906977 * 100vw));
   top: 40px;
   opacity: 0;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__polaroid-card-img {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__polaroid-card-img {
   position: relative;
   width: 100%;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__polaroid-card-img::before {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__polaroid-card-img::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -4252,23 +3451,17 @@ body {
   left: 0;
   opacity: 1;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__polaroid-card-img
-  img {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__polaroid-card-img img {
   width: 100%;
   position: relative;
   z-index: 1;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(1) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(1) {
   position: relative;
   z-index: 2;
   margin: 0 auto;
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(2),
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(3) {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(2), .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__polaroid-card:nth-child(3) {
   position: absolute;
   top: 0;
   left: 50%;
@@ -4276,8 +3469,7 @@ body {
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__prize-detail {
   background-color: #eee;
-  padding: min(65px, calc(0.0697424893 * 100vh))
-    min(18px, calc(0.0418604651 * 100vw)) min(25px, calc(0.0268240343 * 100vh));
+  padding: min(65px, calc(0.0697424893 * 100vh)) min(18px, calc(0.0418604651 * 100vw)) min(25px, calc(0.0268240343 * 100vh));
   width: 100%;
   border-radius: 10px;
   opacity: 0;
@@ -4300,8 +3492,7 @@ body {
   border-top: 1px solid #525355;
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__action {
-  padding: min(20px, calc(0.0214592275 * 100vh)) 0
-    min(40px, calc(0.0429184549 * 100vh));
+  padding: min(20px, calc(0.0214592275 * 100vh)) 0 min(40px, calc(0.0429184549 * 100vh));
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__action-title {
   font-size: min(20px, calc(0.0465116279 * 100vw));
@@ -4309,9 +3500,7 @@ body {
   font-weight: 400;
   padding-bottom: min(15px, calc(0.0160944206 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game__action-title
-  .sc-year-end-spend-polaroid-game__card-left-no {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__action-title .sc-year-end-spend-polaroid-game__card-left-no {
   font-weight: 500;
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__btn-01 {
@@ -4322,8 +3511,7 @@ body {
   border: 0;
   border-radius: 100px;
   background: #38d200;
-  padding: min(20px, calc(0.0214592275 * 100vh))
-    min(28px, calc(0.0651162791 * 100vw));
+  padding: min(20px, calc(0.0214592275 * 100vh)) min(28px, calc(0.0651162791 * 100vw));
   font-size: min(20px, calc(0.0465116279 * 100vw));
   line-height: 100%;
   font-weight: 700;
@@ -4340,8 +3528,7 @@ body {
   border-radius: 100px;
   border: 2px solid #fff;
   background: transparent;
-  padding: min(20px, calc(0.0214592275 * 100vh))
-    min(28px, calc(0.0651162791 * 100vw));
+  padding: min(20px, calc(0.0214592275 * 100vh)) min(28px, calc(0.0651162791 * 100vw));
   font-size: min(20px, calc(0.0465116279 * 100vw));
   line-height: 100%;
   font-weight: 700;
@@ -4355,18 +3542,9 @@ body {
   gap: min(10px, calc(0.0107296137 * 100vh));
   padding-bottom: min(15px, calc(0.0160944206 * 100vh));
 }
-.sc-year-end-spend-campaign
-  .sc-year-end-spend-polaroid-game
-  #polaroid-game-slider {
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game #polaroid-game-slider {
   display: none;
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game--hide {
   display: none !important;
-}
-.sc-year-end-spend-campaign .sc-year-end-spend-profile--hide {
-  opacity: 0 !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  visibility: hidden !important;
-}
-/*# sourceMappingURL=sc-year-end-spend-campaign.css.map */
+}/*# sourceMappingURL=sc-year-end-spend-campaign.css.map */

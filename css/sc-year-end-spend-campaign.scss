@@ -3439,6 +3439,26 @@ $height-breakpoints-basewidth: (
       0% { transform:translate(-50%,-50%) scale(0%); }
       100% { transform:translate(-50%,-50%) scale(100%);  }
     }
+    @keyframes cameraflash {
+      0% { transform: scale(110%); opacity:1; }
+      52% { transform: scale(0%); opacity:0; }
+      100% { transform: scale(0%); opacity:0; }
+    }
+    @keyframes typingline1 {
+      0%   { opacity: 1; clip-path: inset(0 100% 0 0); }
+      15%  { opacity: 1; clip-path: inset(0 0 0 0); }
+      100% { opacity: 1; clip-path: inset(0 0 0 0); }
+    }
+    @keyframes typingline2 {
+      0%, 15% { opacity: 1; clip-path: inset(0 100% 0 0); }
+      40% { opacity: 1; clip-path: inset(0 0 0 0); }
+      100% { opacity: 1; clip-path: inset(0 0 0 0); }
+    }
+    @keyframes typingline3 {
+      0%, 40% { opacity: 1; clip-path: inset(0 100% 0 0); }
+      60% { opacity: 1; clip-path: inset(0 0 0 0); }
+      100% { opacity: 1; clip-path: inset(0 0 0 0); }
+    }
     
     .sc-year-end-spend-polaroid-game {
       width: 100%;
@@ -3644,6 +3664,21 @@ $height-breakpoints-basewidth: (
 
         &-camera {
           width: calc(min(488px, #{responsive-font(488px)}));
+
+          &-flash{
+            background-image: url(../images/game/sc-year-end-spend-sparkles-05.svg);
+            background-position: center;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            width: 0px;
+            height: 0px;
+            position: absolute;
+            z-index: 20;
+            right: 4.6%;
+            top: 10%;
+            opacity: 0
+          }
+
         }
 
         img {
@@ -3672,6 +3707,13 @@ $height-breakpoints-basewidth: (
           .sc-year-end-spend-polaroid-game__pocket-sparkles{
             opacity: 1;
             transition: opacity 1.0s ease-in 1.0s;
+          }
+          .sc-year-end-spend-polaroid-game__pocket-camera-flash{
+            width: calc(min(110px, #{responsive-font(110px)}));
+            height: calc(min(110px, #{responsive-font(110px)}));
+            animation: cameraflash 1.4s ease-in infinite;
+            animation-delay: 2s;
+            animation-iteration-count: 4;//depend on the dispensing images flow
           }
 
           .sc-year-end-spend-polaroid-game__dispense-polaroid {
@@ -3921,6 +3963,39 @@ $height-breakpoints-basewidth: (
             right: -85px;
           }
         }
+        &-loading {
+          position: absolute;
+          z-index: 20;
+          left: 50%;
+          bottom: calc(-100% + calc(min(50px, #{responsive-height(50px)})));
+          transform: translate(-50%, -50%);
+          text-align: center;
+          
+          &-typing {
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            opacity: 0;
+            text-align: left;
+            font-size: calc(min(40px, #{responsive-font(40px)}));
+            line-height: 1.4;
+            font-weight: 600;
+            color: $color-white;
+
+            &:nth-child(1) {
+              animation: typingline1 3s steps(18) infinite;
+              animation-delay: 3.5s
+            }
+            &:nth-child(2)  {
+              animation: typingline2 3s steps(25) infinite;
+              animation-delay: 3.5s
+            }
+            &:nth-child(3)  {
+              animation: typingline3 3s steps(20) infinite;
+              animation-delay: 3.5s
+            }
+          }
+        }
       }
 
       &__dispense-polaroid-result {
@@ -3934,6 +4009,10 @@ $height-breakpoints-basewidth: (
         pointer-events: auto;
 
         &.result-show {
+          .sc-year-end-spend-polaroid-game__result-title{
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out 1s;
+          }
           .sc-year-end-spend-polaroid-game__polaroid-card {
             top: 0;
             opacity: 1;
@@ -3963,6 +4042,11 @@ $height-breakpoints-basewidth: (
             opacity: 1;
             transition: opacity 0.5s ease-in-out 4s;
           }
+          
+          .sc-year-end-spend-polaroid-game__action{
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out 4s;
+          }
         }
       }
 
@@ -3978,6 +4062,7 @@ $height-breakpoints-basewidth: (
         line-height: 1.3;
         font-weight: 500;
         padding-bottom: calc(min(15px, #{responsive-height(15px)}));
+        opacity: 0;
       }
 
       &__polaroid-card {
@@ -4056,6 +4141,7 @@ $height-breakpoints-basewidth: (
 
       &__action {
         padding: calc(min(20px, #{responsive-height(20px)})) 0 calc(min(40px, #{responsive-height(40px)}));
+        opacity: 0;
 
         &-title {
           font-size: calc(min(20px, #{responsive-font(20px)}));

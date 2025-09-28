@@ -12,11 +12,10 @@ window.addEventListener("load", function () {
 
   generalInstance.init();
   gameInstance.init();
-  console.log("Campaign initialized - Methods available:");
-  console.log("- showSliderScreen()");
-  console.log("- showResultScreen()");
-  console.log("- showGameSection()");
-  console.log("- hideGameSection()");
-  // Example usage
-  console.log("Campaign initialized");
+  // console.log("Campaign initialized - Methods available:");
+  // console.log("- showSliderScreen()");
+  // console.log("- showResultScreen()");
+  // console.log("- showGameSection()");
+  // console.log("- hideGameSection()");
+  // console.log("Campaign initialized");
 });

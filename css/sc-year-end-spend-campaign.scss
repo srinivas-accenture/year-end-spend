@@ -3469,6 +3469,7 @@ $height-breakpoints-basewidth: (
       scroll-behavior: smooth;
       margin: 0 auto;
       touch-action: none;
+      scroll-snap-type: y mandatory;
 
       // always visible purpose
       -webkit-overflow-scrolling: touch;
@@ -4066,11 +4067,40 @@ $height-breakpoints-basewidth: (
               transition: top, transform, 0.5s ease-in-out 3s;
             }
 
+            &:nth-child(2):nth-last-child(4){
+              left: 32%;
+              top: -10px;
+            }
+
             &:nth-child(3) {
               left: 78%;
               top: -10px;
               transform: translateX(-50%) rotate(7deg);
               transition: top, transform, 0.5s ease-in-out 3s;
+            }
+
+            &:nth-child(3):nth-last-child(3){
+              left: 68%;
+              top: -10px;
+            }
+
+            &:nth-child(4) {
+              left: 62%;
+              top: -70px;
+              transform: translateX(-50%) rotate(-5deg);
+              transition: top, transform, 0.5s ease-in-out 3s;
+            }
+
+            &:nth-child(5) {
+              left: 38%;
+              top: -70px;
+              transform: translateX(-50%) rotate(5deg);
+              transition: top, transform, 0.5s ease-in-out 3s;
+            }
+
+            &-text{
+              opacity: 1;
+              transition: opacity 0.5s ease-in-out 4s;
             }
           }
 
@@ -4110,7 +4140,7 @@ $height-breakpoints-basewidth: (
         background-color: $color-white;
         border-radius: 3px;
         box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-        padding: calc(min(7px, #{responsive-height(7px)})) calc(min(7px, #{responsive-font(7px)})) calc(min(40px, #{responsive-height(40px)}));
+        padding: calc(min(7px, #{responsive-height(7px)})) calc(min(7px, #{responsive-font(7px)})) 0px;
         width: calc(min(156px, #{responsive-font(156px)}));
         top: 40px;
         opacity: 0;
@@ -4137,10 +4167,42 @@ $height-breakpoints-basewidth: (
             z-index: 1;
           }
         }
+        
+        &-text {
+          padding: calc(min(15px, #{responsive-height(15px)}));
+          color: $color-grey-dark-9;
+          text-transform: uppercase;
+          font-size: calc(min(14px, #{responsive-font(14px)}));
+          opacity: 0;
+        }
+
+        &:nth-child(1):nth-last-child(5) {
+          margin-top: 40px;
+        }
+
+        &:nth-child(1):nth-last-child(5),
+        &:nth-child(2):nth-last-child(4),
+        &:nth-child(3):nth-last-child(3),
+        &:nth-child(4):nth-last-child(2),
+        &:nth-child(5):nth-last-child(1) {
+          width: calc(min(110px, #{responsive-font(110px)}));
+          padding: calc(min(5px, #{responsive-height(5px)}));
+        }
+
+        &:nth-child(1):nth-last-child(5) .sc-year-end-spend-polaroid-game__polaroid-card-text,
+        &:nth-child(2):nth-last-child(4) .sc-year-end-spend-polaroid-game__polaroid-card-text,
+        &:nth-child(3):nth-last-child(3) .sc-year-end-spend-polaroid-game__polaroid-card-text,
+        &:nth-child(4):nth-last-child(2) .sc-year-end-spend-polaroid-game__polaroid-card-text,
+        &:nth-child(5):nth-last-child(1) .sc-year-end-spend-polaroid-game__polaroid-card-text{
+          opacity: 0;
+          user-select: none;
+          font-size: calc(min(14px, #{responsive-font(8px)}));
+          padding: calc(min(10px, #{responsive-height(10px)}));;
+        }
 
         &:nth-child(1) {
           position: relative;
-          z-index: 2;
+          z-index: 3;
           margin: 0 auto;
         }
 
@@ -4150,21 +4212,55 @@ $height-breakpoints-basewidth: (
           top: 0;
           left: 50%;
           transform: translateX(-50%) rotate(0);
+          z-index: 2;
+        }
+
+        &:nth-child(4),
+        &:nth-child(5) {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%) rotate(0);
+          z-index: 1;
         }
       }
 
       &__prize-detail {
         background-color: $color-grey-light-2;
-        padding: calc(min(65px, #{responsive-height(65px)})) calc(min(18px, #{responsive-font(18px)})) calc(min(25px, #{responsive-height(25px)}));
+        padding: calc(min(18px, #{responsive-font(18px)})) calc(min(10px, #{responsive-font(10px)}));
         width: 100%;
         border-radius: 10px;
         opacity: 0;
         position: relative;
         z-index: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: calc(min(25px, #{responsive-height(25px)}));
+        
+        &-scroll{
+          min-height: calc(min(170px, #{responsive-height(170px)}));
+          max-height: calc(min(275px, #{responsive-height(275px)}));
+          padding:0 calc(min(8px, #{responsive-height(8px)}));
+          overflow-y: auto;
+          justify-content: flex-start;
+          display: flex;
+          flex-direction: column;
+        
+          &::-webkit-scrollbar {
+            width: calc(min(8px, #{responsive-font(8px)}));
+          }
+          &::-webkit-scrollbar-track {
+            background: $color-blue-light-20;
+            border-radius: 50px;
+          }
+      
+          &::-webkit-scrollbar-thumb {
+            background-color: $color-blue-light-21;
+            border-radius: 50px;
+          }
+          
+          &-cell{
+            margin-top: auto;
+            margin-bottom: auto;
+          }
+        }
       }
 
       &__prize-info {
@@ -4172,14 +4268,27 @@ $height-breakpoints-basewidth: (
         color: $color-blue-22;
         line-height: 1.3;
         font-weight: 400;
-      }
-
-      &__line {
-        align-self: center;
-        width: 100%;
-        position: relative;
+        padding: calc(min(15px, #{responsive-height(15px)})) 0 calc(min(15px, #{responsive-height(15px)}));
         border-top: 1px dashed $color-grey-dark-23;
       }
+
+      &__prize-info:nth-child(1){
+        padding-top: calc(min(35px, #{responsive-height(35px)}));
+        border: none;
+      }
+
+      &__prize-info:last-child{
+        padding-bottom: calc(min(5px, #{responsive-height(5px)}));
+      }
+
+      
+
+      // &__line {
+      //   align-self: center;
+      //   width: 100%;
+      //   position: relative;
+      //   border-top: 1px dashed $color-grey-dark-23;
+      // }
 
       &__action {
         padding: calc(min(20px, #{responsive-height(20px)})) 0 calc(min(40px, #{responsive-height(40px)}));
@@ -4189,7 +4298,6 @@ $height-breakpoints-basewidth: (
           font-size: calc(min(20px, #{responsive-font(20px)}));
           line-height: 1.3;
           font-weight: 400;
-          padding-bottom: calc(min(15px, #{responsive-height(15px)}));
 
           .sc-year-end-spend-polaroid-game__card-left-no {
             font-weight: 500;
@@ -4232,11 +4340,18 @@ $height-breakpoints-basewidth: (
         color: $color-white;
       }
 
+      &__1-btn-row {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: calc(min(15px, #{responsive-height(15px)}));
+        padding-top: calc(min(15px, #{responsive-height(15px)}));
+      }
+
       &__2-btn-row {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: calc(min(10px, #{responsive-height(10px)}));
-        padding-bottom: calc(min(15px, #{responsive-height(15px)}));
+        padding-top: calc(min(15px, #{responsive-height(15px)}));
       }
 
       #polaroid-game-slider {

@@ -102,6 +102,7 @@ class ScYESGameScreen {
     this.isInitialized = false;
     this.debugMode = true;
     this.restartButton = null;
+    this.openAllButton = null;
   }
 
   // Set the general instance
@@ -344,10 +345,19 @@ class ScYESGameScreen {
       this.restartButton = document.querySelector(
         ".sc-year-end-spend-polaroid-game__open-another"
       );
-
+      this.openAllButton = document.querySelector(
+        ".sc-year-end-spend-polaroid-game__open-all"
+      );
       if (this.restartButton) {
         this.addEventListenerWithCleanup(this.restartButton, "click", (e) => {
           this.showSliderScreen();
+        });
+      }
+      if (this.openAllButton) {
+        this.addEventListenerWithCleanup(this.openAllButton, "click", (e) => {
+          this.hideSection("slider");
+          this.resetToGameState();
+          this.executeSliderFadeOut("all");
         });
       }
     } catch (error) {
@@ -740,7 +750,7 @@ class ScYESGameScreen {
       onComplete: () => {
         this.activeAnimations.delete(dropAnimation);
         this.activeItem.style.display = "none";
-        this.executeSliderFadeOut();
+        this.executeSliderFadeOut("one");
       },
     });
 
@@ -750,7 +760,7 @@ class ScYESGameScreen {
   /**
    * Execute slider fade out animation
    */
-  executeSliderFadeOut() {
+  executeSliderFadeOut(chances = "one") {
     const fadeAnimation = gsap.to(this.elements.slider, {
       opacity: 0,
       ...this.CONFIG.ANIMATIONS.SLIDER_FADE,
@@ -765,7 +775,7 @@ class ScYESGameScreen {
         this.generalInstance.handleClickImpressionOnEvent(
           this.elements.slider,
           "game-play",
-          "one"
+          chances.toLowerCase()
         );
         // Get a session item
         const collectedCurrentCardGroup =
@@ -993,7 +1003,7 @@ class ScYESGameScreen {
     console.log("Hiding game section - cleaning up");
 
     // Reset everything first
-    this.completeGameReset();
+    this.resetToGameState();
 
     // Then hide
     if (this.elements.section) {
@@ -1019,7 +1029,6 @@ class ScYESGameScreen {
 
       // Get current card group from session storage
       const currentCardGroupRaw = sessionStorage.getItem("currentCardGroup");
-
       if (!currentCardGroupRaw) {
         console.error("No 'currentCardGroup' found in session storage");
         return false;
@@ -1172,7 +1181,11 @@ class ScYESGameScreen {
 
       // Update packs left count with error handling
       try {
-        const packsRaw = sessionStorage.getItem("packs");
+        const packsRaw = sessionStorage.getItem("packsCount");
+        console.log(
+          "🚀 ~ ScYESGameScreen ~ updateResultFromSessionStorage ~ packsRaw:",
+          packsRaw
+        );
         const packsLeft = packsRaw ? parseInt(packsRaw, 10) : 0;
 
         if (isNaN(packsLeft)) {
@@ -1184,6 +1197,11 @@ class ScYESGameScreen {
         );
         if (packsLeftElement) {
           packsLeftElement.textContent = packsLeft;
+          // if (packsLeft < 5 && this.openAllButton) {
+          //   this.openAllButton.style.display = "none";
+          // } else {
+          //   this.openAllButton.style.display = "block";
+          // }
         } else {
           console.warn("Packs left element not found in DOM");
         }

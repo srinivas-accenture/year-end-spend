@@ -18,6 +18,20 @@ class ScYESGeneralScreen {
     this.issuedRewards = [];
     this.acquiredRewards = [];
     this.isRewardPopupClosed = false;
+    this.instructionSourcePage = "";
+    this.acquiredCardCount = {
+      restaurant1: 0,
+      restaurant2: 0,
+      restaurant3: 0,
+      restaurant4: 0,
+      travel1: 0,
+      travel2: 0,
+      travel3: 0,
+      travel4: 0,
+      luggage: 0,
+      grandPrizeDraw: 0,
+      bonusCard: 0,
+    };
 
     // Set DOM elements references
     this.yesCampaignContainer = document.querySelector(
@@ -35,9 +49,6 @@ class ScYESGeneralScreen {
       ".sc-year-end-spend-checkin-modal"
     );
     this.profilePage = document.querySelector(".sc-year-end-spend-profile");
-    this.instructionModalPage = document.querySelector(
-      ".sc-year-end-spend-instruction-modal"
-    );
     this.instructionPage = document.querySelector(
       ".sc-year-end-spend-instruction"
     );
@@ -125,7 +136,7 @@ class ScYESGeneralScreen {
   /**
    * Initializes all event listeners required for the general flow of the year-end spend campaign.
    * This includes setting up events for registration, confirmation, landing, check-in, profile customization,
-   * instruction modals and pages, gameplay, card collection, reward popups and details, end campaign page,
+   * instruction page, gameplay, card collection, reward popups and details, end campaign page,
    * common modals, and error pages. Additionally, attaches click event listeners to terms and conditions links.
    *
    * @throws {Error} Throws an error if any event initialization fails.
@@ -139,7 +150,6 @@ class ScYESGeneralScreen {
       that.initiateLandingPageEvents();
       that.initiateCheckinPageEvents();
       that.initiateProfilePageEvents();
-      that.initiateInstructionModalEvents();
       that.initiateInstructionPageEvents();
       that.initiateCardCollectionPageEvents();
       that.initiateRewardPopupEvents();
@@ -218,9 +228,7 @@ class ScYESGeneralScreen {
       howToUnlockLink.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        that.showInstructionModal("registration");
-        // that.registrationPage.classList.add('sc-year-end-spend-registration--hide');
-        // that.showInstructionPage('registration');
+        that.showInstructionPage("registration");
       });
 
       // Get the register button and add a click event listener
@@ -289,7 +297,6 @@ class ScYESGeneralScreen {
       unlockPackButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        that.landingPage.classList.add("sc-year-end-spend-landing--hide");
         that.showInstructionPage("landing");
       });
 
@@ -301,12 +308,16 @@ class ScYESGeneralScreen {
         event.preventDefault();
         event.stopPropagation();
         that.landingPage.classList.add("sc-year-end-spend-landing--hide");
+        // that.gamePlayPage.classList.remove('sc-year-end-spend-polaroid-game--hide');
         if (
           that.gameInstance &&
           typeof that.gameInstance.showGameSection === "function"
         ) {
           that.gameInstance.showGameSection();
         }
+
+        // const gameContainer = that.gamePlayPage.querySelector('.sc-year-end-spend-polaroid-game__wrapper');
+        // that.handleClickImpressionOnEvent(gameContainer, 'game-play', 'one');
       });
 
       // Get the view prizes button and add a click event listener
@@ -339,7 +350,7 @@ class ScYESGeneralScreen {
       howToPlayLink.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        that.landingPage.classList.add("sc-year-end-spend-landing--hide");
+        // that.landingPage.classList.add('sc-year-end-spend-landing--hide');
         that.showInstructionPage("landing");
       });
 
@@ -389,50 +400,6 @@ class ScYESGeneralScreen {
   }
 
   /**
-   * Initializes event listeners for the instruction modal, specifically the close button.
-   * When the close button is clicked, the instruction modal is closed.
-   * Throws an error if initialization fails.
-   *
-   * @throws {Error} If the instruction modal events cannot be initiated.
-   */
-  initiateInstructionModalEvents() {
-    const that = this;
-    try {
-      // Get the instruction modal close button and add a click event listener
-      const instructionModalCloseButton =
-        that.instructionModalPage.querySelector(
-          ".sc-year-end-spend-instruction-modal__button-close"
-        );
-      instructionModalCloseButton.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        that.closeInstructionModal();
-      });
-
-      // Get the instruction modal tabs and add click event listeners
-      const allTabs = that.instructionModalPage.querySelectorAll(
-        ".sc-year-end-spend-instruction-modal__tab"
-      );
-      allTabs.forEach((tab) => {
-        tab.addEventListener("click", (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          that.handleTabToggle(
-            tab,
-            that.instructionModalPage,
-            ".sc-year-end-spend-instruction-modal__tab",
-            ".sc-year-end-spend-instruction-modal__tab-body"
-          );
-        });
-      });
-    } catch (error) {
-      throw new Error(
-        `Failed to initiate instruction modal events: ${error.message}`
-      );
-    }
-  }
-
-  /**
    * Initializes event listeners for the instruction page's navigation buttons.
    *
    * Adds click event handlers to the instruction page's "back" and "home" buttons.
@@ -451,7 +418,6 @@ class ScYESGeneralScreen {
         event.preventDefault();
         event.stopPropagation();
         that.closeInstructionPage();
-        that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
       });
 
       // Get the instruction back button and add a click event listener
@@ -462,7 +428,6 @@ class ScYESGeneralScreen {
         event.preventDefault();
         event.stopPropagation();
         that.closeInstructionPage();
-        that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
       });
 
       // Get the unlock packs link and add a click event listener
@@ -586,7 +551,7 @@ class ScYESGeneralScreen {
         event.preventDefault();
         event.stopPropagation();
         that.closeCardCollectionPage();
-        that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
+        // that.landingPage.classList.remove('sc-year-end-spend-landing--hide');
       });
 
       // Get the how to unlock link and add a click event listener
@@ -597,7 +562,7 @@ class ScYESGeneralScreen {
         event.preventDefault();
         event.stopPropagation();
         that.closeCardCollectionPage();
-        that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
+        // that.landingPage.classList.remove('sc-year-end-spend-landing--hide');
       });
 
       // Get the tab buttons and add click event listeners
@@ -1154,13 +1119,13 @@ class ScYESGeneralScreen {
           key: "RewardGroupID",
         },
       ];
+
+      if (window.general.environment === "dev") {
+        that.handleGamePlayImpressionSuccess(rewardValue);
+      }
     }
 
     that.updateClickImpression(impressionObj, successCallback);
-
-    if (window.general.environment === "dev") {
-      that.handleGamePlayImpressionSuccess(rewardValue);
-    }
   }
 
   /**
@@ -1249,6 +1214,7 @@ class ScYESGeneralScreen {
           issuedCards,
           issuedRewards,
           acquiredRewards,
+          acquiredCardCount,
         } = offerData.fields.reduce(
           (acc, field) => {
             if (
@@ -1304,6 +1270,94 @@ class ScYESGeneralScreen {
             ) {
               acc.acquiredRewards = JSON.parse(field.value);
             }
+            if (
+              field.name ===
+                (campaignConfigData?.offer?.fields?.restaurant1AcquiredCount ||
+                  "Restaurant1AcquiredCardCount") &&
+              field.value
+            ) {
+              acc.acquiredCardCount.restaurant1 = parseInt(field.value);
+            }
+            if (
+              field.name ===
+                (campaignConfigData?.offer?.fields?.restaurant2AcquiredCount ||
+                  "Restaurant2AcquiredCardCount") &&
+              field.value
+            ) {
+              acc.acquiredCardCount.restaurant2 = parseInt(field.value);
+            }
+            if (
+              field.name ===
+                (campaignConfigData?.offer?.fields?.restaurant3AcquiredCount ||
+                  "Restaurant3AcquiredCardCount") &&
+              field.value
+            ) {
+              acc.acquiredCardCount.restaurant3 = parseInt(field.value);
+            }
+            if (
+              field.name ===
+                (campaignConfigData?.offer?.fields?.restaurant4AcquiredCount ||
+                  "Restaurant4AcquiredCardCount") &&
+              field.value
+            ) {
+              acc.acquiredCardCount.restaurant4 = parseInt(field.value);
+            }
+            if (
+              field.name ===
+                (campaignConfigData?.offer?.fields?.travel1AcquiredCount ||
+                  "Travel1AcquiredCardCount") &&
+              field.value
+            ) {
+              acc.acquiredCardCount.travel1 = parseInt(field.value);
+            }
+            if (
+              field.name ===
+                (campaignConfigData?.offer?.fields?.travel2AcquiredCount ||
+                  "Travel2AcquiredCardCount") &&
+              field.value
+            ) {
+              acc.acquiredCardCount.travel2 = parseInt(field.value);
+            }
+            if (
+              field.name ===
+                (campaignConfigData?.offer?.fields?.travel3AcquiredCount ||
+                  "Travel3AcquiredCardCount") &&
+              field.value
+            ) {
+              acc.acquiredCardCount.travel3 = parseInt(field.value);
+            }
+            if (
+              field.name ===
+                (campaignConfigData?.offer?.fields?.travel4AcquiredCount ||
+                  "Travel4AcquiredCardCount") &&
+              field.value
+            ) {
+              acc.acquiredCardCount.travel4 = parseInt(field.value);
+            }
+            if (
+              field.name ===
+                (campaignConfigData?.offer?.fields?.luggageAcquiredCount ||
+                  "LuggageAcquiredCardCount") &&
+              field.value
+            ) {
+              acc.acquiredCardCount.luggage = parseInt(field.value);
+            }
+            if (
+              field.name ===
+                (campaignConfigData?.offer?.fields?.grandPrizeAcquiredCount ||
+                  "GrandPrizeDrawAcquiredCardCount") &&
+              field.value
+            ) {
+              acc.acquiredCardCount.grandPrize = parseInt(field.value);
+            }
+            if (
+              field.name ===
+                (campaignConfigData?.offer?.fields?.bounsCardAcquiredCount ||
+                  "BounsCardAcquiredCardCount") &&
+              field.value
+            ) {
+              acc.acquiredCardCount.bounsCard = parseInt(field.value);
+            }
             return acc;
           },
           {
@@ -1313,6 +1367,7 @@ class ScYESGeneralScreen {
             issuedCards: [],
             issuedRewards: [],
             acquiredRewards: [],
+            acquiredCardCount: that.acquiredCardCount,
           }
         );
 
@@ -1323,6 +1378,7 @@ class ScYESGeneralScreen {
         that.issuedCardGroups = issuedCardGroups;
         that.issuedRewards = issuedRewards;
         that.acquiredRewards = acquiredRewards;
+        that.acquiredCardCount = acquiredCardCount;
 
         // Store values in sessionStorage
         window.sessionStorage.setItem("isRegistered", isRegistered);
@@ -1480,6 +1536,7 @@ class ScYESGeneralScreen {
    */
   closeCardCollectionPage() {
     try {
+      this.showLandingPage();
       this.cardsCollectionPage.classList.add(
         "sc-year-end-spend-card-collection--hide"
       );
@@ -1526,66 +1583,24 @@ class ScYESGeneralScreen {
   }
 
   /**
-   * Closes the instruction modal by adding a CSS class to hide it.
-   * Handles any errors that occur during the process and logs them.
-   *
-   * @returns {void}
-   */
-  closeInstructionModal() {
-    try {
-      this.instructionModalPage.classList.add(
-        "sc-year-end-spend-instruction-modal--hide"
-      );
-    } catch (error) {
-      this.handleErrorPage(
-        `Failed to close instruction modal: ${error.message}`,
-        "loader"
-      );
-      console.error("closeInstructionModal error:", error);
-    }
-  }
-
-  /**
-   * Displays the instruction modal for the specified source page.
-   * Initializes the modal by activating the default tab and making the modal visible.
-   * Handles errors by displaying an error page and logging the error to the console.
-   *
-   * @param {string} sourcePage - The identifier of the page from which the instruction modal is triggered.
-   */
-  showInstructionModal(sourcePage) {
-    const that = this;
-    try {
-      that.sourcePage = sourcePage;
-      const initialActiveTab = that.instructionModalPage.querySelector(
-        '.sc-year-end-spend-instruction-modal__tab[data-tabid="instruction-modal-tab-spend"]'
-      );
-      that.handleTabToggle(
-        initialActiveTab,
-        that.instructionModalPage,
-        ".sc-year-end-spend-instruction-modal__tab",
-        ".sc-year-end-spend-instruction-modal__tab-body"
-      );
-
-      that.instructionModalPage.classList.remove(
-        "sc-year-end-spend-instruction-modal--hide"
-      );
-    } catch (error) {
-      that.handleErrorPage(
-        `Failed to show instruction modal: ${error.message}`,
-        "loader"
-      );
-      console.error("showInstructionModal error:", error);
-    }
-  }
-
-  /**
    * Closes the instruction page by adding a CSS class to hide it.
    * Handles any errors that occur during the process and logs them.
    *
    * @returns {void}
    */
   closeInstructionPage() {
+    const that = this;
     try {
+      if (that.instructionSourcePage === "game-screen")
+        that.gamePlayPage.classList.remove(
+          "sc-year-end-spend-polaroid-game--hide"
+        );
+      else if (that.instructionSourcePage === "registration")
+        that.registrationPage.classList.remove(
+          "sc-year-end-spend-registration--hide"
+        );
+      else that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
+
       this.instructionPage.classList.add("sc-year-end-spend-instruction--hide");
     } catch (error) {
       this.handleErrorPage(
@@ -1609,22 +1624,34 @@ class ScYESGeneralScreen {
   showInstructionPage(sourcePage = "landing") {
     const that = this;
     try {
-      that.sourcePage = sourcePage;
+      that.instructionSourcePage = sourcePage;
       let initialActiveTab = that.instructionPage.querySelector(
         '.sc-year-end-spend-instruction__tabs-button[data-tabid="instruction-tab"]'
       );
-
+      const instructionBottom = that.instructionPage.querySelector(
+        ".sc-year-end-spend-instruction__bottom"
+      );
       const packsCountEle = that.instructionPage.querySelector(
         ".sc-year-end-spend-instruction__bottom-packs"
       );
+
       packsCountEle.textContent = parseInt(
         window.sessionStorage.getItem("packsCount"),
         10
+      );
+      instructionBottom.classList.remove(
+        "sc-year-end-spend-instruction__bottom--hide"
       );
 
       if (sourcePage === "registration") {
         initialActiveTab = that.instructionPage.querySelector(
           '.sc-year-end-spend-instruction__tabs-button[data-tabid="unlock-packs-tab"]'
+        );
+        instructionBottom.classList.add(
+          "sc-year-end-spend-instruction__bottom--hide"
+        );
+        that.registrationPage.classList.add(
+          "sc-year-end-spend-registration--hide"
         );
       }
 
@@ -1636,6 +1663,12 @@ class ScYESGeneralScreen {
       );
 
       that.expandFirstAccordianInActiveTab("instruction");
+      if (sourcePage === "game-screen")
+        that.gamePlayPage.classList.add(
+          "sc-year-end-spend-polaroid-game--hide"
+        );
+      else that.landingPage.classList.add("sc-year-end-spend-landing--hide");
+
       that.instructionPage.classList.remove(
         "sc-year-end-spend-instruction--hide"
       );

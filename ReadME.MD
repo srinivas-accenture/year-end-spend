@@ -216,3 +216,35 @@ end-campaign page:
     "key": "RewardGroupID"
   }
 ]
+
+
+packs - 3
+issuedcard  - 9, 6, 3 (3 res1, 3 travel1, 3 luggage) ->  2r, 2t, 2l, -> 2r, 1t, 1l -> 
+issuedRewards - 3 (1 res1, 1 travel1, 1 luggage)
+
+RewardType && RewardProvider from the issued card
+
+acquired res1 - 0 - 1 - 2
+acquired res2 - 0
+acquired res3 - 0
+acquired res4 - 0
+acquired travel1 - 0 -1  - 2
+acquired travel2 - 0
+acquired travel3 - 0
+acquired travel4 - 0
+acquired luggage - 0 -1 - 2 
+acquired bonus - 0
+acquired grandprize - 0
+
+
+
+Will they send all restaurant/travel acquired card count always or monthly based card count
+
+If res/travel/luggage/bonus card count is 0, shall we show the tile or not
+
+if i am new user, navigating to card collection page, what should be displayed. 
+needs to show grand rize tile with 0 value. is it correct 
+
+once the customer collected one type gift, is it possible to get another gift of same type.
+if luggage and dine
+

@@ -80,6 +80,7 @@ body {
   /* Error page style */
   /* Popup modal styles start */
   /* Polaroid game page styles */
+  /* Polaroid game open all modal page styles */
   /* Animation for dynamically added dispensing cards */
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-loader {
@@ -3787,4 +3788,174 @@ body {
 }
 .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game--hide {
   display: none !important;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup {
+  width: 100%;
+  height: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  z-index: 5;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__container {
+  pointer-events: none;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  padding: 30% min(20px, calc(0.0465116279 * 100vw)) min(24px, calc(0.025751073 * 100vh)) min(20px, calc(0.0465116279 * 100vw));
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top {
+  width: 100%;
+  border-radius: 16px;
+  border: 4px solid #0473ea;
+  background: #fff;
+  position: relative;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__card {
+  height: auto;
+  position: absolute;
+  width: min(138px, calc(0.3209302326 * 100vw));
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.3490196078));
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__card-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: max(-150px, calc(-0.160944206 * 100vh));
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__card--1 {
+  left: 8%;
+  z-index: 1;
+  transform: rotate(-6.92deg);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__card--2 {
+  left: 30%;
+  z-index: 3;
+  top: min(18px, calc(0.0193133047 * 100vh));
+  transform: rotate(-1.22deg);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__card--3 {
+  right: 9%;
+  z-index: 2;
+  transform: rotate(9.8deg);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__content {
+  width: 100%;
+  border-radius: 0px 0px 24px 24px;
+  padding: min(80px, calc(0.0858369099 * 100vh)) min(20px, calc(0.0465116279 * 100%)) min(35px, calc(0.0375536481 * 100vh)) min(20px, calc(0.0465116279 * 100%));
+}
+@media screen and (max-height: 604px) {
+  .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__content {
+    padding: min(175px, calc(0.1877682403 * 100vh)) min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100%));
+  }
+}
+@media screen and (min-height: 605px) and (max-height: 732px) {
+  .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__content {
+    padding: min(125px, calc(0.1341201717 * 100vh)) min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100%));
+  }
+}
+@media screen and (min-height: 732px) and (max-height: 812px) {
+  .sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__content {
+    padding: min(90px, calc(0.0965665236 * 100vh)) min(24px, calc(0.0558139535 * 100%)) min(24px, calc(0.025751073 * 100vh)) min(24px, calc(0.0558139535 * 100%));
+  }
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__content-top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  padding-bottom: min(32px, calc(0.0343347639 * 100vh));
+  gap: min(16px, calc(0.017167382 * 100vh));
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__content-bottom {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: min(10px, calc(0.0107296137 * 100vh));
+  align-items: center;
+  gap: min(16px, calc(0.017167382 * 100vh));
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__content .sc-year-end-spend-polaroid-game-open-all-popup__open-all {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: min(8px, calc(0.008583691 * 100vh));
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__content .sc-year-end-spend-polaroid-game-open-all-popup__open-all-title {
+  font-size: min(20px, calc(0.0465116279 * 100vw));
+  line-height: 1.5;
+  font-weight: 700;
+  color: #0473ea;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__content .sc-year-end-spend-polaroid-game-open-all-popup__open-all-message {
+  font-size: min(20px, calc(0.0465116279 * 100vw));
+  line-height: 1;
+  font-weight: 400;
+  font-style: Medium;
+  letter-spacing: 0%;
+  color: #525355;
+  text-align: center;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__top .sc-year-end-spend-polaroid-game-open-all-popup__content .sc-year-end-spend-polaroid-game-open-all-popup__reward-name {
+  font-size: min(20px, calc(0.0465116279 * 100vw));
+  line-height: 1.5;
+  font-weight: 700;
+  color: #0473ea;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__bottom .sc-year-end-spend-polaroid-game-open-all-popup__close {
+  width: min(60px, calc(0.1395348837 * 100vw));
+  height: auto;
+  margin-top: calc(0.0268240343 * 100vh);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__body .sc-year-end-spend-polaroid-game-open-all-popup__bottom .sc-year-end-spend-polaroid-game-open-all-popup__close img {
+  width: 100%;
+  height: auto;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__button {
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: calc(0.0348837209 * 100%) calc(0.0418604651 * 100%);
+  font-size: min(19px, calc(0.0441860465 * 100vw));
+  border-radius: 30px;
+  display: block;
+  font-weight: 700;
+  background: #0473ea;
+  color: #fff;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__back {
+  font-size: min(14px, calc(0.0325581395 * 100vw));
+  color: #A3A3A3;
+  font-weight: 500;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup__close {
+  margin-top: calc(0.0268240343 * 100vh);
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup--show {
+  display: block !important;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game-open-all-popup--hide {
+  opacity: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  visibility: hidden !important;
 }/*# sourceMappingURL=sc-year-end-spend-campaign.css.map */

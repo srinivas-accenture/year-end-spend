@@ -3439,6 +3439,26 @@ $height-breakpoints-basewidth: (
       0% { transform:translate(-50%,-50%) scale(0%); }
       100% { transform:translate(-50%,-50%) scale(100%);  }
     }
+    @keyframes cameraflash {
+      0% { transform: scale(110%); opacity:1; }
+      52% { transform: scale(0%); opacity:0; }
+      100% { transform: scale(0%); opacity:0; }
+    }
+    @keyframes typingline1 {
+      0%   { opacity: 1; clip-path: inset(0 100% 0 0); }
+      15%  { opacity: 1; clip-path: inset(0 0 0 0); }
+      100% { opacity: 1; clip-path: inset(0 0 0 0); }
+    }
+    @keyframes typingline2 {
+      0%, 15% { opacity: 1; clip-path: inset(0 100% 0 0); }
+      40% { opacity: 1; clip-path: inset(0 0 0 0); }
+      100% { opacity: 1; clip-path: inset(0 0 0 0); }
+    }
+    @keyframes typingline3 {
+      0%, 40% { opacity: 1; clip-path: inset(0 100% 0 0); }
+      60% { opacity: 1; clip-path: inset(0 0 0 0); }
+      100% { opacity: 1; clip-path: inset(0 0 0 0); }
+    }
     
     .sc-year-end-spend-polaroid-game {
       width: 100%;
@@ -3591,7 +3611,7 @@ $height-breakpoints-basewidth: (
           &-base{
             position: relative;
 
-            &::after{
+            &::before{
               content:'';
               position: absolute;
               left:calc(50% - calc(min(2px, #{responsive-font(2px)})));
@@ -3602,6 +3622,35 @@ $height-breakpoints-basewidth: (
               z-index: 10;
               background: linear-gradient(0deg, transparent 30%, $color-blue-22);
               opacity: 0.8;
+            }
+
+            &::after{
+              content: "";
+              position: absolute;
+              left: 50%;
+              bottom: calc(max(-75px, #{responsive-height(-75px)}));
+              z-index: 15;
+              transform: translate(-50%,0%);
+              background-image: url(../images/game/sc-year-end-spend-arrow-down.svg);
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: contain;
+              width: calc(min(35px, #{responsive-height(40px)}));
+              height: calc(min(64px, #{responsive-height(74px)}));
+            }
+
+            &-slidedown{
+              position: absolute;
+              left: 0;
+              bottom: calc(max(-150px, #{responsive-height(-150px)}));
+              z-index: 15;
+              left: 50%;
+              transform: translate(-50%, 0%);
+              width: 75%;
+              color: $color-white;
+              font-size: calc(min(22px, #{responsive-height(22px)}));
+              font-weight: 600;
+              text-align: center
             }
 
             &-img::after{
@@ -3630,7 +3679,20 @@ $height-breakpoints-basewidth: (
               height: 20px;
               animation: arrowleft 0.8s ease-in-out infinite alternate forwards;
             }
+            
           }
+        }
+        &-title{
+          position: absolute;
+          top: calc(min(210px, #{responsive-height(210px)}));
+          left: 50%;
+          width: calc(min(250px, #{responsive-size(250px)}));
+          transform: translate(-50%,0);
+          font-size: calc(min(26px, #{responsive-font(26px)}));
+          font-weight: 600;
+          color:$color-white;
+          text-align: center;
+          line-height: 1.2;
         }
       }
 
@@ -3644,6 +3706,21 @@ $height-breakpoints-basewidth: (
 
         &-camera {
           width: calc(min(488px, #{responsive-font(488px)}));
+
+          &-flash{
+            background-image: url(../images/game/sc-year-end-spend-sparkles-05.svg);
+            background-position: center;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            width: 0px;
+            height: 0px;
+            position: absolute;
+            z-index: 20;
+            right: 4.6%;
+            top: 10%;
+            opacity: 0
+          }
+
         }
 
         img {
@@ -3673,57 +3750,64 @@ $height-breakpoints-basewidth: (
             opacity: 1;
             transition: opacity 1.0s ease-in 1.0s;
           }
+          .sc-year-end-spend-polaroid-game__pocket-camera-flash{
+            width: calc(min(110px, #{responsive-font(110px)}));
+            height: calc(min(110px, #{responsive-font(110px)}));
+            animation: cameraflash 1.6s ease-in infinite;
+            animation-delay: 1.6s;
+            animation-iteration-count: 4;//depend on the dispensing images flow
+          }
 
           .sc-year-end-spend-polaroid-game__dispense-polaroid {
             img:nth-child(1) {
-              transition: top, transform, 0.5s ease-in-out 2s;
+              transition: top, transform, 0.6s ease-in-out 2s;
             }
 
             img:nth-child(2) {
-              transition: top, transform, 0.5s ease-in-out 2.2s;
+              transition: top, transform, 0.6s ease-in-out 2.3s;
             }
 
             img:nth-child(3) {
-              transition: top, transform, 0.5s ease-in-out 2.4s;
+              transition: top, transform, 0.6s ease-in-out 2.6s;
             }
 
             // next 3 images
             img:nth-child(4) {
-              transition: top, transform, 0.5s ease-in-out 3.4s;// +1s on delay for next 3 images
+              transition: top, transform, 0.6s ease-in-out 3.6s;// +1s on delay for next 3 images
             }
 
             img:nth-child(5) {
-              transition: top, transform, 0.5s ease-in-out 3.6s;
+              transition: top, transform, 0.6s ease-in-out 3.9s;
             }
 
             img:nth-child(6) {
-              transition: top, transform, 0.5s ease-in-out 3.8s;
+              transition: top, transform, 0.6s ease-in-out 4.2s;
             }
 
             // next 3 images
             img:nth-child(7) {
-              transition: top, transform, 0.5s ease-in-out 4.8s;// +1s on delay for next 3 images
+              transition: top, transform, 0.6s ease-in-out 5.2s;// +1s on delay for next 3 images
             }
 
             img:nth-child(8) {
-              transition: top, transform, 0.5s ease-in-out 5.0s;
+              transition: top, transform, 0.6s ease-in-out 5.5s;
             }
 
             img:nth-child(9) {
-              transition: top, transform, 0.5s ease-in-out 5.2s;
+              transition: top, transform, 0.6s ease-in-out 5.8s;
             }
 
             // next 3 images
             img:nth-child(10) {
-              transition: top, transform, 0.5s ease-in-out 6.2s;// +1s on delay for next 3 images
+              transition: top, transform, 0.6s ease-in-out 6.8s;// +1s on delay for next 3 images
             }
 
             img:nth-child(11) {
-              transition: top, transform, 0.5s ease-in-out 6.4s;
+              transition: top, transform, 0.6s ease-in-out 7.1s;
             }
 
             img:nth-child(12) {
-              transition: top, transform, 0.5s ease-in-out 6.6s;
+              transition: top, transform, 0.6s ease-in-out 7.4s;
             }
           }
 
@@ -3734,6 +3818,18 @@ $height-breakpoints-basewidth: (
             .sc-year-end-spend-polaroid-game__dispense-polaroid img:nth-child(3) {
               display: none;
             }
+          }
+          .sc-year-end-spend-polaroid-game__pocket-loading-typing:nth-child(1) {
+            animation: typingline1 3s steps(18) infinite;
+            animation-delay: 1.5s;
+          }
+          .sc-year-end-spend-polaroid-game__pocket-loading-typing:nth-child(2) {
+            animation: typingline2 3s steps(25) infinite;
+            animation-delay: 1.5s;
+          }
+          .sc-year-end-spend-polaroid-game__pocket-loading-typing:nth-child(3) {
+            animation: typingline3 3s steps(20) infinite;
+            animation-delay: 1.5s;
           }
         }
 
@@ -3921,6 +4017,26 @@ $height-breakpoints-basewidth: (
             right: -85px;
           }
         }
+        &-loading {
+          position: absolute;
+          z-index: 20;
+          left: 50%;
+          bottom: calc(-100% + calc(min(50px, #{responsive-height(50px)})));
+          transform: translate(-50%, -50%);
+          text-align: center;
+          
+          &-typing {
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            opacity: 0;
+            text-align: left;
+            font-size: calc(min(40px, #{responsive-font(40px)}));
+            line-height: 1.4;
+            font-weight: 600;
+            color: $color-white;
+          }
+        }
       }
 
       &__dispense-polaroid-result {
@@ -3934,6 +4050,10 @@ $height-breakpoints-basewidth: (
         pointer-events: auto;
 
         &.result-show {
+          .sc-year-end-spend-polaroid-game__result-title{
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out 1s;
+          }
           .sc-year-end-spend-polaroid-game__polaroid-card {
             top: 0;
             opacity: 1;
@@ -3963,6 +4083,11 @@ $height-breakpoints-basewidth: (
             opacity: 1;
             transition: opacity 0.5s ease-in-out 4s;
           }
+          
+          .sc-year-end-spend-polaroid-game__action{
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out 4s;
+          }
         }
       }
 
@@ -3978,6 +4103,7 @@ $height-breakpoints-basewidth: (
         line-height: 1.3;
         font-weight: 500;
         padding-bottom: calc(min(15px, #{responsive-height(15px)}));
+        opacity: 0;
       }
 
       &__polaroid-card {
@@ -4043,19 +4169,21 @@ $height-breakpoints-basewidth: (
 
       &__prize-info {
         font-size: calc(min(18px, #{responsive-font(18px)}));
-        color: $color-grey-dark-9;
+        color: $color-blue-22;
         line-height: 1.3;
+        font-weight: 400;
       }
 
       &__line {
         align-self: center;
         width: 100%;
         position: relative;
-        border-top: 1px solid $color-grey-dark-9;
+        border-top: 1px dashed $color-grey-dark-23;
       }
 
       &__action {
         padding: calc(min(20px, #{responsive-height(20px)})) 0 calc(min(40px, #{responsive-height(40px)}));
+        opacity: 0;
 
         &-title {
           font-size: calc(min(20px, #{responsive-font(20px)}));

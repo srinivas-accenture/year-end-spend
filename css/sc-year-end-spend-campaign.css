@@ -3761,6 +3761,22 @@ body {
   gap: min(10px, calc(0.0107296137 * 100vh));
   border: 0;
   border-radius: 100px;
+  background: #38d200;
+  padding: min(20px, calc(0.0214592275 * 100vh)) min(28px, calc(0.0651162791 * 100vw));
+  font-size: min(20px, calc(0.0465116279 * 100vw));
+  line-height: 100%;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-align: center;
+  color: #fff;
+}
+.sc-year-end-spend-campaign .sc-year-end-spend-polaroid-game__btn-03 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: min(10px, calc(0.0107296137 * 100vh));
+  border: 0;
+  border-radius: 100px;
   border: 2px solid #fff;
   background: transparent;
   padding: min(20px, calc(0.0214592275 * 100vh)) min(28px, calc(0.0651162791 * 100vw));

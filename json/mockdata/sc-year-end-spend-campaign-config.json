@@ -8,13 +8,89 @@
         "checkin": "EGCCYESDigitialReactivation",
         "summary": "EGCCYESSummary",
         "fields": {
-          "Registered": "Registered",
-          "CampaignExpiryDate": "CampaignExpiryDate",
-          "PacksCount": "Chances",
-          "AllCards": "AllCards",
-          "AllRewards": "AllRewards"
+          "registered": "Registered",
+          "campaignExpiryDate": "CampaignEndDate",
+          "packsCount": "Chances",
+          "allCards": "AllCards",
+          "allRewards": "AllRewards",
+          "restaurant1AcquiredCount": "Restaurant1AcquiredCardCount",
+          "restaurant2AcquiredCount": "Restaurant2AcquiredCardCount",
+          "restaurant3AcquiredCount": "Restaurant3AcquiredCardCount",
+          "restaurant4AcquiredCount": "Restaurant4AcquiredCardCount",
+          "travel1AcquiredCount": "Travel1AcquiredCardCount",
+          "travel2AcquiredCount": "Travel2AcquiredCardCount",
+          "travel3AcquiredCount": "Travel3AcquiredCardCount",
+          "travel4AcquiredCount": "Travel4AcquiredCardCount",
+          "luggageAcquiredCount": "LuggageAcquiredCardCount",
+          "grandPrizeAcquiredCount": "GrandPrizeDrawAcquiredCardCount",
+          "bounsCardAcquiredCount": "BounsCardAcquiredCardCount"
         },
-        "groupId": "groupId"
+        "groupId": "groupId",
+        "reward": {
+          "grandPrize": {
+            "name": "Grand Prize: Private jet to the Maldives",
+            "expiry": "",
+            "message": "",
+            "image": "./images/sc-year-end-spend-prize-card-private-jet.png"
+          },
+          "dineIn": {
+            "name": "rewardName",
+            "expiry": "rewardExpiryDate",
+            "message": "rewardMessage",
+            "cardLimit": 3,
+            "restaurant1": {
+              "name": "Labyrinth",
+              "image": "./images/sc-year-end-spend-prize-card-dining-restaurant1.png"
+            },
+            "restaurant2": {
+              "name": "Lerouy",
+              "image": "./images/sc-year-end-spend-prize-card-dining-restaurant2.png"
+            },
+            "restaurant3": {
+              "name": "Seroja",
+              "image": "./images/sc-year-end-spend-prize-card-dining-restaurant3.png"
+            },
+            "restaurant4": {
+              "name": "Pangium",
+              "image": "./images/sc-year-end-spend-prize-card-dining-restaurant4.png"
+            }
+          },
+          "travel": {
+            "name": "rewardName",
+            "expiry": "rewardExpiryDate",
+            "message": "rewardMessage",
+            "cardLimit": 3,
+            "travel1": {
+              "name": "Bali",
+              "image": "./images/sc-year-end-spend-prize-card-dining-country1.png"
+            },
+            "travel2": {
+              "name": "Hong Kong",
+              "image": "./images/sc-year-end-spend-prize-card-dining-country2.png"
+            },
+            "travel3": {
+              "name": "Shanghai",
+              "image": "./images/sc-year-end-spend-prize-card-dining-country3.png"
+            },
+            "travel4": {
+              "name": "Taipei",
+              "image": "./images/sc-year-end-spend-prize-card-dining-country4.png"
+            }
+          },
+          "luggage": {
+            "name": "rewardName",
+            "expiry": "rewardExpiryDate",
+            "message": "rewardMessage",
+            "cardLimit": 3,
+            "image": "./images/sc-year-end-spend-prize-card-luggage.png"
+          },
+          "bonus": {
+            "name": "rewardName",
+            "expiry": "rewardExpiryDate",
+            "message": "rewardMessage",
+            "image": "./images/sc-year-end-spend-prize-card-bonus.png"
+          }
+        }
       },
       "expiryDayDelay": 14,
       "termsLink": "https://www.sc.com/sg/terms-and-conditions/pinballsurewin/"

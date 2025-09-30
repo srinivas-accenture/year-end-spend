@@ -4329,6 +4329,23 @@ $height-breakpoints-basewidth: (
         gap: calc(min(10px, #{responsive-height(10px)}));
         border: 0;
         border-radius: 100px;
+        //border: 2px solid $color-white;
+        background: $color-green-light-14;
+        padding: calc(min(20px, #{responsive-height(20px)})) calc(min(28px, #{responsive-font(28px)}));
+        font-size: calc(min(20px, #{responsive-font(20px)}));
+        line-height: 100%;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-align: center;
+        color: $color-white;
+      }
+      &__btn-03 {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: calc(min(10px, #{responsive-height(10px)}));
+        border: 0;
+        border-radius: 100px;
         border: 2px solid $color-white;
         background: transparent;
         padding: calc(min(20px, #{responsive-height(20px)})) calc(min(28px, #{responsive-font(28px)}));

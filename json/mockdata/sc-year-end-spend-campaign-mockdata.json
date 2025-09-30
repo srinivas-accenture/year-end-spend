@@ -6,7 +6,7 @@
       "offers": [
         {
           "__typename": "CustomerOffer",
-          "id": "EGCCYESRegistration1",
+          "id": "EGCCYESRegistration",
           "title": "<span style='font-size:10; color: white;'>Your loan is pre-approved</span>",
           "message": "<span style='font-size:10; color: white;'>Fast-track your way to</span><br>n<span style='font-size:14; color: white;'><b>S$0</b></span><br>n<span style='font-size:10; color: white;'>at <b>6.88</b>% p.a.<br>(EIR <b>22.22</b>% p.a.)<br><br>Valid for this month</span>",
           "images": {
@@ -45,7 +45,7 @@
             },
             {
               "__typename": "NameValuePair",
-              "name": "CampaignExpiryDate",
+              "name": "CampaignEndDate",
               "value": "28 February 2026"
             }
           ]
@@ -91,7 +91,7 @@
             },
             {
               "__typename": "NameValuePair",
-              "name": "CampaignExpiryDate",
+              "name": "CampaignEndDate",
               "value": "28 February 2026"
             },
             {
@@ -147,12 +147,40 @@
             },
             {
               "__typename": "NameValuePair",
-              "name": "CampaignExpiryDate",
+              "name": "CampaignEndDate",
               "value": "28 February 2026"
             },
             {
               "__typename": "NameValuePair",
               "name": "Chances",
+              "value": "3"
+            },
+            {
+              "name": "Restaurant1AcquiredCardCount",
+              "value": "3"
+            },
+            {
+              "name": "Restaurant2AcquiredCardCount",
+              "value": "2"
+            },
+            {
+              "name": "Travel1AcquiredCardCount",
+              "value": "1"
+            },
+            {
+              "name": "Travel2AcquiredCardCount",
+              "value": "3"
+            },
+            {
+              "name": "GrandPrizeDrawAcquiredCardCount",
+              "value": "1"
+            },
+            {
+              "name": "BounsCardAcquiredCardCount",
+              "value": "1"
+            },
+            {
+              "name": "LuggageAcquiredCardCount",
               "value": "3"
             },
             {
@@ -192,7 +220,7 @@
           },
           "feedback": {
             "__typename": "CustomerOfferFeedback",
-            "name": "EGCCMidYearSpend_Summary",
+            "name": "EGCCYESSummary",
             "group": "Borrow",
             "interactionId": "847407551958252077",
             "issue": "Sales1",
@@ -203,39 +231,55 @@
           "fields": [
             {
               "value": "Y",
-              "name": "ActiveCustomer"
-            },
-            {
-              "value": "Y",
               "name": "Registered"
             },
             {
-              "value": "31 July 2025",
-              "name": "CampaignExpiryDate"
+              "value": "28 February 2026",
+              "name": "CampaignEndDate"
             },
             {
-              "name": "CashbackAggregated",
-              "value": "1500"
+              "name": "Restaurant1AcquiredCardCount",
+              "value": "3"
             },
             {
-              "name": "MilesAggregated",
-              "value": "1500"
+              "name": "Restaurant2AcquiredCardCount",
+              "value": "2"
             },
             {
-              "name": "GiftAggregated",
-              "value": "100"
-            },
-            {
-              "name": "VoucherAggregated",
-              "value": "20"
-            },
-            {
-              "name": "GrandPrize",
+              "name": "Travel1AcquiredCardCount",
               "value": "1"
             },
             {
+              "name": "Travel2AcquiredCardCount",
+              "value": "3"
+            },
+            {
+              "name": "GrandPrizeDrawAcquiredCardCount",
+              "value": "1"
+            },
+            {
+              "name": "BounsCardAcquiredCardCount",
+              "value": "1"
+            },
+            {
+              "name": "LuggageAcquiredCardCount",
+              "value": "3"
+            },
+            {
+              "value": "Y",
+              "name": "Restaurant1GiftFlag"
+            },
+            {
+              "value": "Y",
+              "name": "Travel2GiftFlag"
+            },
+            {
+              "value": "Y",
+              "name": "LuggageGiftFlag"
+            },
+            {
               "name": "AllRewards",
-              "value": "[{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":0,\"RewardType\":\"1x All-Expenses Paid Paris Getaway For Two\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"08 April 2024\",\"RewardStatus\":\"Acquired\",\"Reward\":\"GrandPrize_001\",\"RewardProvider\":\"External\",\"RewardIssueType\":\"Grand Prize\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":1,\"RewardType\":\"Cashback\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"08 July 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"CCCashBack_000001\",\"RewardProvider\":\"Internal\",\"RewardIssueType\":\"Cashback\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":50,\"RewardType\":\"Miles\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"08 April 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"Miles_000001\",\"RewardProvider\":\"Internal\",\"RewardIssueType\":\"Miles\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":0,\"RewardType\":\"1GB Klook eSIM\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"16 April 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"ONR1CJGIH6AI3AU8\",\"RewardProvider\":\"Grab\",\"RewardIssueType\":\"Coupon\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":0,\"RewardType\":\"Abalone\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"05 May 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"Gift_00001\",\"RewardProvider\":\"External\",\"RewardIssueType\":\"Gift\",\"RewardExpiryDate\":\"30 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":10,\"RewardType\":\"Cashback\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"26 May 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"CCCashBack_000002\",\"RewardProvider\":\"Internal\",\"RewardIssueType\":\"Cashback\",\"RewardExpiryDate\":\"28 April 2025\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":15,\"RewardType\":\"Shopback Voucher\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"15 Jun 2025\",\"RewardStatus\":\"Acquired\",\"Reward\":\"ONR1CJGIH6dd3AU8\",\"RewardProvider\":\"Grab\",\"RewardIssueType\":\"Coupon\",\"RewardAvailableDate\":\"08 April 2025\",\"RewardAcquiredDate\":\"08 April 2025\",\"RewardExpiryDate\":\"27 April 2025\"}]"
+              "value": "[{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":381,\"RewardProvider\":\"Restaurant1\",\"RedeemStartDate\":\"17 August 2071\",\"RewardType\":\"Travel\",\"RewardAcquiredDate\":\"\",\"RewardIssueType\":\"Gift\",\"RewardStatus\":\"Acquired\",\"Reward\":\"Reward381\",\"RewardGroupID\":\"\",\"RedeemEndDate\":\"17 August 2071\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":318,\"RewardProvider\":\"Travel2\",\"RedeemStartDate\":\"17 August 2071\",\"RewardType\":\"Travel\",\"RewardAcquiredDate\":\"\",\"RewardIssueType\":\"Gift\",\"RewardStatus\":\"Acquired\",\"Reward\":\"Reward318\",\"RewardGroupID\":\"\",\"RedeemEndDate\":\"17 August 2071\"},{\"pxObjClass\":\"SCB-CDH-Data-Rewards\",\"RewardAmount\":484,\"RewardProvider\":\"Luggage\",\"RedeemStartDate\":\"17 August 2079\",\"RewardType\":\"Luggage\",\"RewardAcquiredDate\":\"\",\"RewardIssueType\":\"Gift\",\"RewardStatus\":\"Acquired\",\"Reward\":\"Reward484\",\"RewardGroupID\":\"\",\"RedeemEndDate\":\"17 August 2079\"}]"
             }
           ]
         }

@@ -47,7 +47,7 @@ class ScYESGameScreen {
         SNAP_BACK_EXTENDED: { duration: 0.32, ease: "power2.out" },
         CARD_DROP: { duration: 0.6, ease: "back.in" },
         SLIDER_FADE: { duration: 0.4, ease: "power2.in" },
-        POCKET_FADE: { duration: 0.1, ease: "power2.out" },
+        POCKET_FADE: { duration: 0.4, ease: "power2.out" },
         RESULT_SHOW: { duration: 0.8, delay: 1, ease: "power2.in" },
       },
 
@@ -103,6 +103,11 @@ class ScYESGameScreen {
     this.debugMode = true;
     this.restartButton = null;
     this.openAllButton = null;
+    this.openAllPopup = null;
+    this.openAllPopupBackButton = null;
+    this.openAllPopupProceedButton = null;
+    this.unlockButton = null;
+    this.cardsAndCollectionsButton = null;
   }
 
   // Set the general instance
@@ -345,23 +350,136 @@ class ScYESGameScreen {
       this.restartButton = document.querySelector(
         ".sc-year-end-spend-polaroid-game__open-another"
       );
-      this.openAllButton = document.querySelector(
-        ".sc-year-end-spend-polaroid-game__open-all"
-      );
+
       if (this.restartButton) {
         this.addEventListenerWithCleanup(this.restartButton, "click", (e) => {
           this.showSliderScreen();
         });
       }
+    } catch (error) {
+      console.warn("Error binding restart button:", error.message);
+    }
+    try {
+      this.openAllPopup = document.querySelector(
+        ".sc-year-end-spend-polaroid-game-open-all-popup"
+      );
+      this.openAllButton = document.querySelector(
+        ".sc-year-end-spend-polaroid-game__open-all"
+      );
+
+      this.openAllPopupBackButton = document.querySelector(
+        ".sc-year-end-spend-polaroid-game-open-all-popup__back"
+      );
+      this.openAllPopupProceedButton = document.querySelector(
+        ".sc-year-end-spend-polaroid-game-open-all-popup__button-view-details"
+      );
+
+      if (this.openAllPopupProceedButton) {
+        this.addEventListenerWithCleanup(
+          this.openAllPopupProceedButton,
+          "click",
+          (e) => {
+            this.hideSection("slider");
+            this.openAllPopup.classList.add(
+              "sc-year-end-spend-polaroid-game-open-all-popup--hide"
+            );
+            this.resetToGameState();
+            this.executeSliderFadeOut("all");
+          }
+        );
+      }
+      if (this.openAllPopupBackButton) {
+        this.addEventListenerWithCleanup(
+          this.openAllPopupBackButton,
+          "click",
+          (e) => {
+            this.openAllPopup.classList.add(
+              "sc-year-end-spend-polaroid-game-open-all-popup--hide"
+            );
+          }
+        );
+      }
+
       if (this.openAllButton) {
         this.addEventListenerWithCleanup(this.openAllButton, "click", (e) => {
-          this.hideSection("slider");
-          this.resetToGameState();
-          this.executeSliderFadeOut("all");
+          console.log(
+            "🚀 ~ ScYESGameScreen ~ bindEventListeners ~ this.openAllPopup:",
+            this.openAllPopup
+          );
+          this.openAllPopup.classList.remove(
+            "sc-year-end-spend-polaroid-game-open-all-popup--hide"
+          );
         });
       }
     } catch (error) {
       console.warn("Error binding restart button:", error.message);
+    }
+    try {
+      this.unlockButton = document.querySelector(
+        ".sc-year-end-spend-polaroid-game__unlock-packs"
+      );
+
+      console.log("Unlock button found:", this.unlockButton);
+
+      if (this.unlockButton) {
+        this.addEventListenerWithCleanup(this.unlockButton, "click", (e) => {
+          console.log("✅ Unlock button clicked!", e);
+          if (
+            this.generalInstance &&
+            this.generalInstance.showInstructionPage
+          ) {
+            console.log("Using generalInstance instead");
+            this.generalInstance.showInstructionPage("game-screen");
+          } else {
+            console.error(
+              "Neither gameflowInstance nor generalInstance available"
+            );
+          }
+        });
+
+        console.log("✅ Unlock button event listener attached");
+      } else {
+        console.warn("Unlock button not found in DOM");
+      }
+    } catch (error) {
+      console.error("Error binding unlock button:", error);
+    }
+    try {
+      this.cardsAndCollectionsButton = document.querySelector(
+        ".sc-year-end-spend-polaroid-game__cards-collections"
+      );
+
+      console.log(
+        "Cards and Collections button found:",
+        this.cardsAndCollectionsButton
+      );
+
+      if (this.cardsAndCollectionsButton) {
+        this.addEventListenerWithCleanup(
+          this.cardsAndCollectionsButton,
+          "click",
+          (e) => {
+            console.log("✅ Cards and Collections button clicked!", e);
+            if (
+              this.generalInstance &&
+              this.generalInstance.showCardCollectionPage
+            ) {
+              console.log("Using generalInstance instead");
+              this.generalInstance.showCardCollectionPage("game-screen");
+            } else {
+              console.error(
+                "Neither gameflowInstance nor generalInstance available"
+              );
+            }
+          }
+        );
+
+        console.log("✅ Unlock button event listener attached");
+      } else {
+        console.warn("Unlock button not found in DOM");
+      }
+    } catch (error) {
+      console.error("Error binding unlock button:", error);
     }
   }
 
@@ -765,6 +883,11 @@ class ScYESGameScreen {
       opacity: 0,
       ...this.CONFIG.ANIMATIONS.SLIDER_FADE,
       onComplete: () => {
+        // const gamePocket = document.querySelector(
+        //   ".sc-year-end-spend-polaroid-game__pocket"
+        // );
+
+        // gamePocket.style.display = "block !important";
         this.activeAnimations.delete(fadeAnimation);
         this.elements.slider.style.display = "none";
 
@@ -787,7 +910,7 @@ class ScYESGameScreen {
 
         setTimeout(() => {
           // console.log("About to execute pocket fade out after delay");
-          this.executePocketFadeOut();
+          this.executePocketFadeOut(chances);
         }, this.CONFIG.TIMING.POCKET_DELAY);
       },
     });
@@ -798,13 +921,13 @@ class ScYESGameScreen {
   /**
    * Execute pocket fade out animation
    */
-  executePocketFadeOut() {
+  executePocketFadeOut(chances = "one") {
     const pocketAnimation = gsap.to(this.elements.pocket, {
       opacity: 0,
       ...this.CONFIG.ANIMATIONS.POCKET_FADE,
       onComplete: () => {
         this.activeAnimations.delete(pocketAnimation);
-        this.showGameResult();
+        this.showGameResult(chances);
       },
     });
 
@@ -814,11 +937,11 @@ class ScYESGameScreen {
   /**
    * Show final game result with animation - ORIGINAL behavior for first completion
    */
-  showGameResult() {
+  showGameResult(chances = "one") {
     // Use the section management for basic show/hide
     this.showResultState();
     // Update with session storage data
-    this.updateResultFromSessionStorage();
+    this.updateResultFromSessionStorage(chances);
     // CRITICAL: Use requestAnimationFrame to ensure class is added in next render cycle
     // This allows the browser to properly recognize the state change and trigger CSS animations
     requestAnimationFrame(() => {
@@ -980,6 +1103,7 @@ class ScYESGameScreen {
     // Use existing reset
     this.resetToGameState();
     this.renderCarousel();
+
     console.log(`Slider centered - offset: ${this.offset}`);
   }
 
@@ -1017,17 +1141,424 @@ class ScYESGameScreen {
    * Update result screen with data from session storage
    */
 
-  updateResultFromSessionStorage() {
-    // Remove ALL items from sessionStorage for testing error handling
-    //sessionStorage.clear();
+  // updateResultFromSessionStorage() {
+  //   // Remove ALL items from sessionStorage for testing error handling
+  //   //sessionStorage.clear();
+  //   try {
+  //     // Check if sessionStorage is available
+  //     if (typeof sessionStorage === "undefined") {
+  //       console.error("SessionStorage is not available");
+  //       return false;
+  //     }
+
+  //     // Get current card group from session storage
+  //     const currentCardGroupRaw = sessionStorage.getItem("currentCardGroup");
+  //     if (!currentCardGroupRaw) {
+  //       console.error("No 'currentCardGroup' found in session storage");
+  //       return false;
+  //     }
+
+  //     let currentCardGroupData;
+  //     try {
+  //       currentCardGroupData = JSON.parse(currentCardGroupRaw);
+  //     } catch (parseError) {
+  //       console.error("Failed to parse currentCardGroup JSON:", parseError);
+  //       return false;
+  //     }
+
+  //     if (
+  //       !Array.isArray(currentCardGroupData) ||
+  //       currentCardGroupData.length === 0
+  //     ) {
+  //       console.error("currentCardGroup is not a valid array or is empty");
+  //       return false;
+  //     }
+
+  //     // Extract rewards from nested structure
+  //     const firstGroup = currentCardGroupData[0];
+  //     if (!firstGroup || typeof firstGroup !== "object") {
+  //       console.error("Invalid first group structure");
+  //       return false;
+  //     }
+
+  //     const groupKey = Object.keys(firstGroup)[0];
+  //     if (!groupKey) {
+  //       console.error("No group key found in first group");
+  //       return false;
+  //     }
+
+  //     const currentCardGroup = firstGroup[groupKey];
+  //     if (!Array.isArray(currentCardGroup) || currentCardGroup.length === 0) {
+  //       console.error("No rewards array found in group:", groupKey);
+  //       return false;
+  //     }
+
+  //     console.log("Updating result with data:", currentCardGroup);
+
+  //     // Update card images with error handling
+  //     const cardImages = document.querySelectorAll(
+  //       ".sc-year-end-spend-polaroid-game__polaroid-card-img img"
+  //     );
+
+  //     if (cardImages.length === 0) {
+  //       console.warn("No card image elements found in DOM");
+  //     }
+
+  //     const cardImageMap = {
+  //       Dining: "./images/game/sc-year-end-spend-photo-card-dining.png",
+  //       Travel: "./images/game/sc-year-end-spend-photo-card-travel.png",
+  //       Luggage: "./images/game/sc-year-end-spend-photo-card-luggage.png",
+  //       Bonus: "./images/game/sc-year-end-spend-photo-card-bonus.png",
+  //     };
+
+  //     currentCardGroup.forEach((reward, index) => {
+  //       try {
+  //         if (!reward || typeof reward !== "object") {
+  //           console.warn(`Invalid reward at index ${index}:`, reward);
+  //           return;
+  //         }
+
+  //         if (cardImages[index]) {
+  //           const rewardType = reward.RewardType || "Unknown";
+  //           const imagePath =
+  //             cardImageMap[rewardType] ||
+  //             "./images/game/sc-year-end-spend-photo-card-1.png";
+
+  //           cardImages[index].src = imagePath;
+  //           cardImages[index].alt = `${rewardType} card`;
+  //         }
+  //       } catch (imageError) {
+  //         console.error(
+  //           `Error updating card image at index ${index}:`,
+  //           imageError
+  //         );
+  //       }
+  //     });
+
+  //     // Update prize details with error handling
+  //     const prizeDetailContainer = document.querySelector(
+  //       ".sc-year-end-spend-polaroid-game__prize-detail"
+  //     );
+
+  //     if (!prizeDetailContainer) {
+  //       console.error("Prize detail container not found in DOM");
+  //       return false;
+  //     }
+
+  //     try {
+  //       let prizeHTML = "";
+
+  //       currentCardGroup.forEach((reward, index) => {
+  //         try {
+  //           if (!reward || typeof reward !== "object") {
+  //             console.warn(`Invalid reward at index ${index}`);
+  //             return;
+  //           }
+
+  //           if (index > 0) {
+  //             prizeHTML +=
+  //               '<div class="sc-year-end-spend-polaroid-game__line"></div>';
+  //           }
+
+  //           const rewardAmount =
+  //             reward.RewardAmount !== undefined ? reward.RewardAmount : 0;
+  //           const rewardType = reward.RewardType || "Unknown";
+  //           const rewardProvider = reward.RewardProvider || "Unknown";
+
+  //           let description = "";
+
+  //           switch (rewardType) {
+  //             case "Dining":
+  //               description = `${rewardAmount} ${rewardProvider} Michelin-starred dining<br>experience (for two) card`;
+  //               break;
+  //             case "Travel":
+  //               description = `${rewardAmount} pair of flight tickets to ${rewardProvider} card`;
+  //               break;
+  //             case "Luggage":
+  //               description = `${rewardAmount} designer travel luggage card`;
+  //               break;
+  //             case "Bonus":
+  //               description = `${rewardAmount} bonus mystery prize card`;
+  //               break;
+  //             default:
+  //               description = `${rewardAmount} ${rewardProvider} ${rewardType} card`;
+  //           }
+
+  //           prizeHTML += `
+  //           <div class="sc-year-end-spend-polaroid-game__prize-info">
+  //             ${description}
+  //           </div>
+  //         `;
+  //         } catch (descError) {
+  //           console.error(
+  //             `Error building description for reward at index ${index}:`,
+  //             descError
+  //           );
+  //         }
+  //       });
+
+  //       prizeDetailContainer.innerHTML = prizeHTML;
+  //     } catch (htmlError) {
+  //       console.error("Error updating prize details HTML:", htmlError);
+  //       return false;
+  //     }
+
+  //     // Update packs left count with error handling
+  //     try {
+  //       const packsRaw = sessionStorage.getItem("packsCount");
+  //       console.log(
+  //         "🚀 ~ ScYESGameScreen ~ updateResultFromSessionStorage ~ packsRaw:",
+  //         packsRaw
+  //       );
+  //       const packsLeft = packsRaw ? parseInt(packsRaw, 10) : 0;
+
+  //       if (isNaN(packsLeft)) {
+  //         console.warn("Invalid packs value in session storage:", packsRaw);
+  //       }
+
+  //       const packsLeftElement = document.querySelector(
+  //         ".sc-year-end-spend-polaroid-game__card-left-no"
+  //       );
+  //       if (packsLeftElement) {
+  //         packsLeftElement.textContent = packsLeft;
+  //         // if (packsLeft < 5 && this.openAllButton) {
+  //         //   this.openAllButton.style.display = "none";
+  //         // } else {
+  //         //   this.openAllButton.style.display = "block";
+  //         // }
+  //       } else {
+  //         console.warn("Packs left element not found in DOM");
+  //       }
+  //     } catch (packsError) {
+  //       console.error("Error updating packs count:", packsError);
+  //     }
+
+  //     console.log("Result screen updated successfully");
+  //     return true;
+  //   } catch (error) {
+  //     console.error("Critical error in updateResultFromSessionStorage:", error);
+  //     return false;
+  //   }
+  // }
+
+  // updateResultFromSessionStorage(chances = "one") {
+  //   try {
+  //     if (typeof sessionStorage === "undefined") {
+  //       console.error("SessionStorage is not available");
+  //       return false;
+  //     }
+
+  //     const currentCardGroupRaw = sessionStorage.getItem("currentCardGroup");
+  //     if (!currentCardGroupRaw) {
+  //       console.error("No 'currentCardGroup' found in session storage");
+  //       return false;
+  //     }
+
+  //     let currentCardGroupData;
+  //     try {
+  //       currentCardGroupData = JSON.parse(currentCardGroupRaw);
+  //     } catch (parseError) {
+  //       console.error("Failed to parse currentCardGroup JSON:", parseError);
+  //       return false;
+  //     }
+
+  //     if (
+  //       !Array.isArray(currentCardGroupData) ||
+  //       currentCardGroupData.length === 0
+  //     ) {
+  //       console.error("currentCardGroup is not a valid array or is empty");
+  //       return false;
+  //     }
+
+  //     // Extract rewards from nested structure
+  //     const firstGroup = currentCardGroupData[0];
+  //     if (!firstGroup || typeof firstGroup !== "object") {
+  //       console.error("Invalid first group structure");
+  //       return false;
+  //     }
+
+  //     const groupKey = Object.keys(firstGroup)[0];
+  //     if (!groupKey) {
+  //       console.error("No group key found in first group");
+  //       return false;
+  //     }
+
+  //     const currentCardGroup = firstGroup[groupKey];
+  //     if (!Array.isArray(currentCardGroup) || currentCardGroup.length === 0) {
+  //       console.error("No rewards array found in group:", groupKey);
+  //       return false;
+  //     }
+
+  //     console.log("Original reward data:", currentCardGroup);
+
+  //     // GROUP BY RewardType and RewardProvider, count occurrences
+  //     const groupedRewards = {};
+
+  //     currentCardGroup.forEach((reward) => {
+  //       const rewardType = reward.RewardType || "Unknown";
+  //       const rewardProvider = reward.RewardProvider || "Unknown";
+  //       const rewardAmount =
+  //         reward.RewardAmount !== undefined ? reward.RewardAmount : 0;
+
+  //       // Create unique key for each type+provider combination
+  //       const key = `${rewardType}_${rewardProvider}`;
+
+  //       if (!groupedRewards[key]) {
+  //         groupedRewards[key] = {
+  //           type: rewardType,
+  //           provider: rewardProvider,
+  //           amount: rewardAmount,
+  //           count: 0,
+  //           rewards: [],
+  //         };
+  //       }
+
+  //       groupedRewards[key].count++;
+  //       groupedRewards[key].rewards.push(reward);
+  //     });
+
+  //     console.log("Grouped rewards:", groupedRewards);
+
+  //     // Card image mapping
+  //     const cardImageMap = {
+  //       Dining: "./images/game/sc-year-end-spend-photo-card-dining.png",
+  //       Travel: "./images/game/sc-year-end-spend-photo-card-travel.png",
+  //       Luggage: "./images/game/sc-year-end-spend-photo-card-luggage.png",
+  //       Bonus: "./images/game/sc-year-end-spend-photo-card-bonus.png",
+  //     };
+
+  //     // Update card images dynamically based on grouped count
+  //     const cardResultContainer = document.querySelector(
+  //       ".sc-year-end-spend-polaroid-game__polaroid-card-result"
+  //     );
+
+  //     if (!cardResultContainer) {
+  //       console.error("Card result container not found");
+  //       return false;
+  //     }
+
+  //     // Clear existing cards
+  //     cardResultContainer.innerHTML = "";
+
+  //     // Create cards based on grouped rewards
+  //     Object.values(groupedRewards).forEach((group) => {
+  //       // Create 'count' number of cards for this group
+  //       for (let i = 0; i < group.count; i++) {
+  //         const cardHTML = `
+  //         <div class="sc-year-end-spend-polaroid-game__polaroid-card">
+  //           <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
+  //             <img src="${
+  //               cardImageMap[group.type] ||
+  //               "./images/game/sc-year-end-spend-photo-card-1.png"
+  //             }"
+  //                  alt="${group.type} card">
+  //           </div>
+  //           <div class="sc-year-end-spend-polaroid-game__polaroid-card-text">
+  //             ${group.provider !== "Unknown" ? group.provider : ""}
+  //           </div>
+  //         </div>
+  //       `;
+  //         cardResultContainer.innerHTML += cardHTML;
+  //       }
+  //     });
+
+  //     // Update prize details with grouped data
+  //     const prizeDetailScroll = document.querySelector(
+  //       ".sc-year-end-spend-polaroid-game__prize-detail-scroll-cell"
+  //     );
+
+  //     if (!prizeDetailScroll) {
+  //       console.error("Prize detail scroll container not found");
+  //       return false;
+  //     }
+
+  //     let prizeHTML = "";
+
+  //     Object.values(groupedRewards).forEach((group, index) => {
+  //       let description = "";
+
+  //       // Build description based on type
+  //       if (group.amount > 0) {
+  //         description = `${group.amount} additional chance(s)<br>in the Grand Draw`;
+  //       } else {
+  //         switch (group.type) {
+  //           case "Dining":
+  //             description = `${group.count} ${
+  //               group.provider
+  //             } Michelin-starred dining<br>experience (for two) card${
+  //               group.count > 1 ? "s" : ""
+  //             }`;
+  //             break;
+  //           case "Travel":
+  //             description = `${group.count} pair${
+  //               group.count > 1 ? "s" : ""
+  //             } of flight tickets to ${group.provider}`;
+  //             break;
+  //           case "Luggage":
+  //             description = `${group.count} designer travel luggage card${
+  //               group.count > 1 ? "s" : ""
+  //             }`;
+  //             break;
+  //           case "Bonus":
+  //             description = `${group.count} bonus mystery prize card${
+  //               group.count > 1 ? "s" : ""
+  //             }`;
+  //             break;
+  //           default:
+  //             description = `${group.count} ${group.provider} ${
+  //               group.type
+  //             } card${group.count > 1 ? "s" : ""}`;
+  //         }
+  //       }
+
+  //       prizeHTML += `
+  //       <div class="sc-year-end-spend-polaroid-game__prize-info">
+  //         ${description}
+  //       </div>
+  //     `;
+  //     });
+
+  //     prizeDetailScroll.innerHTML = prizeHTML;
+
+  //     // Update packs left count
+  //     try {
+  //       const packsRaw = sessionStorage.getItem("packsCount");
+  //       const packsLeft = packsRaw ? parseInt(packsRaw, 10) : 0;
+
+  //       const packsLeftElement = document.querySelector(
+  //         ".sc-year-end-spend-polaroid-game__card-left-no"
+  //       );
+  //       if (packsLeftElement) {
+  //         packsLeftElement.textContent = packsLeft;
+  //       }
+  //     } catch (packsError) {
+  //       console.error("Error updating packs count:", packsError);
+  //     }
+
+  //     console.log("Result screen updated successfully with grouped data");
+  //     return true;
+  //   } catch (error) {
+  //     console.error("Critical error in updateResultFromSessionStorage:", error);
+  //     return false;
+  //   }
+  // }
+  /**
+   * Update result screen with data from session storage
+   * @param {string} playType - "one" for single play, "all" for open all
+   */
+  /**
+   * Update result screen with data from session storage
+   * @param {string} playType - "one" for single play, "all" for open all
+   */
+  updateResultFromSessionStorage(playType = "one") {
     try {
-      // Check if sessionStorage is available
       if (typeof sessionStorage === "undefined") {
         console.error("SessionStorage is not available");
         return false;
       }
 
-      // Get current card group from session storage
+      console.log("Play type:", playType);
+
       const currentCardGroupRaw = sessionStorage.getItem("currentCardGroup");
       if (!currentCardGroupRaw) {
         console.error("No 'currentCardGroup' found in session storage");
@@ -1050,7 +1581,6 @@ class ScYESGameScreen {
         return false;
       }
 
-      // Extract rewards from nested structure
       const firstGroup = currentCardGroupData[0];
       if (!firstGroup || typeof firstGroup !== "object") {
         console.error("Invalid first group structure");
@@ -1069,147 +1599,213 @@ class ScYESGameScreen {
         return false;
       }
 
-      console.log("Updating result with data:", currentCardGroup);
+      console.log("Original reward data:", currentCardGroup);
 
-      // Update card images with error handling
-      const cardImages = document.querySelectorAll(
-        ".sc-year-end-spend-polaroid-game__polaroid-card-img img"
-      );
+      // GROUP BY RewardType and RewardProvider
+      const groupedRewards = {};
 
-      if (cardImages.length === 0) {
-        console.warn("No card image elements found in DOM");
-      }
+      currentCardGroup.forEach((reward) => {
+        const rewardType = reward.RewardType || "Unknown";
+        const rewardProvider = reward.RewardProvider || "Unknown";
+        const rewardAmount =
+          reward.RewardAmount !== undefined ? reward.RewardAmount : 0;
 
-      const cardImageMap = {
-        Dining: "./images/game/sc-year-end-spend-photo-card-dining.png",
-        Travel: "./images/game/sc-year-end-spend-photo-card-travel.png",
-        Luggage: "./images/game/sc-year-end-spend-photo-card-luggage.png",
-        Bonus: "./images/game/sc-year-end-spend-photo-card-bonus.png",
-      };
+        const key = `${rewardType}_${rewardProvider}`;
 
-      currentCardGroup.forEach((reward, index) => {
-        try {
-          if (!reward || typeof reward !== "object") {
-            console.warn(`Invalid reward at index ${index}:`, reward);
-            return;
-          }
-
-          if (cardImages[index]) {
-            const rewardType = reward.RewardType || "Unknown";
-            const imagePath =
-              cardImageMap[rewardType] ||
-              "./images/game/sc-year-end-spend-photo-card-1.png";
-
-            cardImages[index].src = imagePath;
-            cardImages[index].alt = `${rewardType} card`;
-          }
-        } catch (imageError) {
-          console.error(
-            `Error updating card image at index ${index}:`,
-            imageError
-          );
+        if (!groupedRewards[key]) {
+          groupedRewards[key] = {
+            type: rewardType,
+            provider: rewardProvider,
+            amount: rewardAmount,
+            count: 0,
+            rewards: [],
+          };
         }
+
+        groupedRewards[key].count++;
+        groupedRewards[key].rewards.push(reward);
       });
 
-      // Update prize details with error handling
-      const prizeDetailContainer = document.querySelector(
-        ".sc-year-end-spend-polaroid-game__prize-detail"
+      console.log("Grouped rewards:", groupedRewards);
+
+      const cardResultContainer = document.querySelector(
+        ".sc-year-end-spend-polaroid-game__polaroid-card-result"
       );
 
-      if (!prizeDetailContainer) {
-        console.error("Prize detail container not found in DOM");
+      if (!cardResultContainer) {
+        console.error("Card result container not found");
         return false;
       }
 
-      try {
-        let prizeHTML = "";
+      cardResultContainer.innerHTML = "";
 
-        currentCardGroup.forEach((reward, index) => {
-          try {
-            if (!reward || typeof reward !== "object") {
-              console.warn(`Invalid reward at index ${index}`);
-              return;
-            }
+      // CONDITIONAL LOGIC: Default images for "all", dynamic for "one"
+      if (playType === "all") {
+        // Show 5 default placeholder images
+        const defaultCards = [
+          "./images/game/sc-year-end-spend-photo-card-1.png",
+          "./images/game/sc-year-end-spend-photo-card-2.png",
+          "./images/game/sc-year-end-spend-photo-card-3.png",
+          "./images/game/sc-year-end-spend-photo-card-1.png",
+          "./images/game/sc-year-end-spend-photo-card-2.png",
+        ];
 
-            if (index > 0) {
-              prizeHTML +=
-                '<div class="sc-year-end-spend-polaroid-game__line"></div>';
-            }
+        defaultCards.forEach((imagePath, index) => {
+          const cardHTML = `
+          <div class="sc-year-end-spend-polaroid-game__polaroid-card">
+            <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
+              <img src="${imagePath}" alt="card-${index + 1}">
+            </div>
+            <div class="sc-year-end-spend-polaroid-game__polaroid-card-text">
+            </div>
+          </div>
+        `;
+          cardResultContainer.innerHTML += cardHTML;
+        });
+      } else {
+        // Show dynamic images based on session storage data
+        const cardImageMap = {
+          Dining: "./images/game/sc-year-end-spend-photo-card-dining.png",
+          Travel: "./images/game/sc-year-end-spend-photo-card-travel.png",
+          Luggage: "./images/game/sc-year-end-spend-photo-card-luggage.png",
+          Bonus: "./images/game/sc-year-end-spend-photo-card-bonus.png",
+        };
 
-            const rewardAmount =
-              reward.RewardAmount !== undefined ? reward.RewardAmount : 0;
-            const rewardType = reward.RewardType || "Unknown";
-            const rewardProvider = reward.RewardProvider || "Unknown";
-
-            let description = "";
-
-            switch (rewardType) {
-              case "Dining":
-                description = `${rewardAmount} ${rewardProvider} Michelin-starred dining<br>experience (for two) card`;
-                break;
-              case "Travel":
-                description = `${rewardAmount} pair of flight tickets to ${rewardProvider} card`;
-                break;
-              case "Luggage":
-                description = `${rewardAmount} designer travel luggage card`;
-                break;
-              case "Bonus":
-                description = `${rewardAmount} bonus mystery prize card`;
-                break;
-              default:
-                description = `${rewardAmount} ${rewardProvider} ${rewardType} card`;
-            }
-
-            prizeHTML += `
-            <div class="sc-year-end-spend-polaroid-game__prize-info">
-              ${description}
+        Object.values(groupedRewards).forEach((group) => {
+          for (let i = 0; i < group.count; i++) {
+            const cardHTML = `
+            <div class="sc-year-end-spend-polaroid-game__polaroid-card">
+              <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
+                <img src="${
+                  cardImageMap[group.type] ||
+                  "./images/game/sc-year-end-spend-photo-card-1.png"
+                }" 
+                     alt="${group.type} card">
+              </div>
+              <div class="sc-year-end-spend-polaroid-game__polaroid-card-text">
+                ${group.provider !== "Unknown" ? group.provider : ""}
+              </div>
             </div>
           `;
-          } catch (descError) {
-            console.error(
-              `Error building description for reward at index ${index}:`,
-              descError
-            );
+            cardResultContainer.innerHTML += cardHTML;
           }
         });
+      }
 
-        prizeDetailContainer.innerHTML = prizeHTML;
-      } catch (htmlError) {
-        console.error("Error updating prize details HTML:", htmlError);
+      // ALWAYS DYNAMIC: Prize details from session storage (for both "one" and "all")
+      const prizeDetailScroll = document.querySelector(
+        ".sc-year-end-spend-polaroid-game__prize-detail-scroll-cell"
+      );
+
+      if (!prizeDetailScroll) {
+        console.error("Prize detail scroll container not found");
         return false;
       }
 
-      // Update packs left count with error handling
-      try {
-        const packsRaw = sessionStorage.getItem("packsCount");
-        console.log(
-          "🚀 ~ ScYESGameScreen ~ updateResultFromSessionStorage ~ packsRaw:",
-          packsRaw
-        );
-        const packsLeft = packsRaw ? parseInt(packsRaw, 10) : 0;
+      let prizeHTML = "";
 
-        if (isNaN(packsLeft)) {
-          console.warn("Invalid packs value in session storage:", packsRaw);
+      Object.values(groupedRewards).forEach((group) => {
+        let description = "";
+
+        switch (group.type) {
+          case "Dining":
+            description = `${group.count} ${
+              group.provider
+            } Michelin-starred dining<br>experience (for two) card${
+              group.count > 1 ? "s" : ""
+            }`;
+            break;
+          case "Travel":
+            description = `${group.count} pair${
+              group.count > 1 ? "s" : ""
+            } of flight tickets to ${group.provider}`;
+            break;
+          case "Luggage":
+            description = `${group.count} designer travel luggage card${
+              group.count > 1 ? "s" : ""
+            }`;
+            break;
+          case "Bonus":
+            description = `${group.count} bonus mystery prize card${
+              group.count > 1 ? "s" : ""
+            }`;
+            break;
+          default:
+            description = `${group.count} ${group.provider} ${group.type} card${
+              group.count > 1 ? "s" : ""
+            }`;
         }
 
-        const packsLeftElement = document.querySelector(
-          ".sc-year-end-spend-polaroid-game__card-left-no"
+        prizeHTML += `
+        <div class="sc-year-end-spend-polaroid-game__prize-info">
+          ${description}
+        </div>
+      `;
+      });
+
+      prizeDetailScroll.innerHTML = prizeHTML;
+
+      // ALWAYS DYNAMIC: Update packs count from session storage
+      const packsRaw = sessionStorage.getItem("packsCount");
+      const packsLeft = packsRaw ? parseInt(packsRaw, 10) : 0;
+
+      const packsLeftElement = document.querySelector(
+        ".sc-year-end-spend-polaroid-game__card-left-no"
+      );
+      if (packsLeftElement) {
+        packsLeftElement.textContent = packsLeft;
+        const openAllPopupTitle = document.querySelector(
+          ".sc-year-end-spend-polaroid-game-open-all-popup__open-all-title"
         );
-        if (packsLeftElement) {
-          packsLeftElement.textContent = packsLeft;
-          // if (packsLeft < 5 && this.openAllButton) {
-          //   this.openAllButton.style.display = "none";
-          // } else {
-          //   this.openAllButton.style.display = "block";
-          // }
+        // Button visibility logic
+        const openAnotherButton = document.querySelector(
+          ".sc-year-end-spend-polaroid-game__open-another"
+        );
+        const openAllButton = document.querySelector(
+          ".sc-year-end-spend-polaroid-game__open-all"
+        );
+        const unlockButton = document.querySelector(
+          ".sc-year-end-spend-polaroid-game__unlock-packs"
+        );
+        const twoButtonRow = document.querySelector(
+          ".sc-year-end-spend-polaroid-game__2-btn-row"
+        );
+        const oneButtonRow = document.querySelector(
+          ".sc-year-end-spend-polaroid-game__1-btn-row"
+        );
+
+        if (packsLeft === 0) {
+          // No packs left: Hide both "Open Another" and "Open All", show "Unlock" button
+          if (twoButtonRow) twoButtonRow.style.display = "none";
+          if (openAnotherButton) openAnotherButton.style.display = "none";
+          if (openAllButton) openAllButton.style.display = "block";
+          if (unlockButton) unlockButton.style.display = "block";
+
+          console.log("No packs left - showing unlock button only");
+        } else if (packsLeft < 5) {
+          // Less than 5 packs: Show "Open Another" only, hide "Open All"
+          if (twoButtonRow) twoButtonRow.style.display = "flex";
+          if (openAnotherButton) openAnotherButton.style.display = "block";
+          if (openAllButton) openAllButton.style.display = "block";
+          if (unlockButton) unlockButton.style.display = "none";
+
+          console.log(
+            `${packsLeft} packs left - showing open another and unlock`
+          );
         } else {
-          console.warn("Packs left element not found in DOM");
+          // 5 or more packs: Show both "Open Another" and "Open All"
+          if (twoButtonRow) twoButtonRow.style.display = "flex";
+          if (openAnotherButton) openAnotherButton.style.display = "block";
+          if (openAllButton) openAllButton.style.display = "block";
+          if (unlockButton) unlockButton.style.display = "block";
+
+          console.log(`${packsLeft} packs left - showing all buttons`);
         }
-      } catch (packsError) {
-        console.error("Error updating packs count:", packsError);
       }
 
-      console.log("Result screen updated successfully");
+      console.log(
+        `Result screen updated successfully for playType: ${playType}`
+      );
       return true;
     } catch (error) {
       console.error("Critical error in updateResultFromSessionStorage:", error);

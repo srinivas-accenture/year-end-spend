@@ -369,7 +369,6 @@ class ScYESGameScreen {
       this.openAllPopupProceedButton = document.querySelector(
         ".sc-year-end-spend-polaroid-game-open-all-popup__button-view-details"
       );
-
       if (this.openAllPopupProceedButton) {
         this.addEventListenerWithCleanup(
           this.openAllPopupProceedButton,

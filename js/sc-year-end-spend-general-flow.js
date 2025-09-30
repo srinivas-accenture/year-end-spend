@@ -1691,9 +1691,9 @@ class ScYESGeneralScreen {
       );
 
       console.log("handleGamePlayImpressionSuccess is over");
-      setTimeout(() => {
-        that.gameInstance.executePocketFadeOut(rewardValue);
-      }, that.gameInstance.CONFIG.TIMING.POCKET_DELAY);
+      // setTimeout(() => {
+      //   that.gameInstance.executePocketFadeOut(rewardValue);
+      // }, that.gameInstance.CONFIG.TIMING.POCKET_DELAY);
 
       // that.gameInstance.showGameResult(rewardValue);
     } catch (error) {

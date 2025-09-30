@@ -108,14 +108,11 @@ class ScYESGameScreen {
     this.openAllPopupProceedButton = null;
     this.unlockButton = null;
     this.cardsAndCollectionsButton = null;
+    this.campaignConfig = null;
   }
 
   // Set the general instance
   setGeneralInstance(instance) {
-    // console.log(
-    //   "🚀 ~ ScYESGameScreen ~ setGeneralInstance ~ instance:",
-    //   instance
-    // );
     this.generalInstance = instance;
   }
 
@@ -124,6 +121,7 @@ class ScYESGameScreen {
    */
   init() {
     try {
+      this.loadAndCacheConfig();
       this.initializeElements();
       this.parseDatasetConfiguration();
       this.setupGameState();
@@ -131,8 +129,6 @@ class ScYESGameScreen {
       this.updateLayoutDimensions();
       this.renderCarousel();
       this.isInitialized = true;
-
-      // console.log("ScYESGameScreen: Initialized successfully");
     } catch (error) {
       console.error("ScYESGameScreen: Initialization failed:", error.message);
       throw error;
@@ -402,10 +398,11 @@ class ScYESGameScreen {
 
       if (this.openAllButton) {
         this.addEventListenerWithCleanup(this.openAllButton, "click", (e) => {
-          console.log(
-            "🚀 ~ ScYESGameScreen ~ bindEventListeners ~ this.openAllPopup:",
-            this.openAllPopup
-          );
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+
           this.openAllPopup.classList.remove(
             "sc-year-end-spend-polaroid-game-open-all-popup--hide"
           );
@@ -886,7 +883,6 @@ class ScYESGameScreen {
         // const gamePocket = document.querySelector(
         //   ".sc-year-end-spend-polaroid-game__pocket"
         // );
-
         // gamePocket.style.display = "block !important";
         this.activeAnimations.delete(fadeAnimation);
         this.elements.slider.style.display = "none";
@@ -908,10 +904,10 @@ class ScYESGameScreen {
           collectedCurrentCardGroup
         );
 
-        setTimeout(() => {
-          console.log("About to execute pocket fade out after delay");
-          this.executePocketFadeOut(chances);
-        }, this.CONFIG.TIMING.POCKET_DELAY);
+        // setTimeout(() => {
+        //   console.log("About to execute pocket fade out after delay");
+        //   this.executePocketFadeOut(chances);
+        // }, this.CONFIG.TIMING.POCKET_DELAY);
       },
     });
 
@@ -938,9 +934,7 @@ class ScYESGameScreen {
    * Show final game result with animation - ORIGINAL behavior for first completion
    */
   showGameResult(chances = "one") {
-    // Use the section management for basic show/hide
     this.showResultState();
-    // Update with session storage data
     this.updateResultFromSessionStorage(chances);
     // CRITICAL: Use requestAnimationFrame to ensure class is added in next render cycle
     // This allows the browser to properly recognize the state change and trigger CSS animations
@@ -1099,19 +1093,14 @@ class ScYESGameScreen {
   }
 
   showSliderScreen() {
-    console.log("Showing slider screen");
-    // Use existing reset
     this.resetToGameState();
     this.renderCarousel();
-
-    console.log(`Slider centered - offset: ${this.offset}`);
   }
 
   /**
    * Show game section (parent container)
    */
   showGameSection() {
-    console.log("Showing game section");
     if (this.elements.section) {
       this.elements.section.classList.remove(
         "sc-year-end-spend-polaroid-game--hide"
@@ -1136,7 +1125,6 @@ class ScYESGameScreen {
       );
     }
   }
-
   /**
    * Update result screen with data from session storage
    * @param {string} playType - "one" for single play, "all" for open all
@@ -1144,15 +1132,17 @@ class ScYESGameScreen {
   updateResultFromSessionStorage(playType = "one") {
     try {
       if (typeof sessionStorage === "undefined") {
-        console.error("SessionStorage is not available");
         return false;
       }
 
-      console.log("Play type:", playType);
+      if (!this.campaignConfig) {
+        console.error("Campaign config not loaded");
+        return false;
+      }
 
+      const rewardConfig = this.campaignConfig;
       const currentCardGroupRaw = sessionStorage.getItem("currentCardGroup");
       if (!currentCardGroupRaw) {
-        console.error("No 'currentCardGroup' found in session storage");
         return false;
       }
 
@@ -1190,34 +1180,30 @@ class ScYESGameScreen {
         return false;
       }
 
-      console.log("Original reward data:", currentCardGroup);
-
-      // GROUP BY RewardType and RewardProvider
+      // GROUP BY RewardType ONLY and get config details
       const groupedRewards = {};
 
       currentCardGroup.forEach((reward) => {
         const rewardType = reward.RewardType || "Unknown";
         const rewardProvider = reward.RewardProvider || "Unknown";
-        const rewardAmount =
-          reward.RewardAmount !== undefined ? reward.RewardAmount : 0;
+        // Get config details based on type and provider
+        const configDetails = this.getRewardConfigDetails(
+          rewardType,
+          rewardProvider,
+          rewardConfig
+        );
 
-        const key = `${rewardType}_${rewardProvider}`;
-
-        if (!groupedRewards[key]) {
-          groupedRewards[key] = {
-            type: rewardType,
-            provider: rewardProvider,
-            amount: rewardAmount,
-            count: 0,
-            rewards: [],
-          };
+        if (!groupedRewards[rewardType]) {
+          groupedRewards[rewardType] = [];
         }
 
-        groupedRewards[key].count++;
-        groupedRewards[key].rewards.push(reward);
+        groupedRewards[rewardType].push({
+          ...reward,
+          configDetails,
+        });
       });
 
-      console.log("Grouped rewards:", groupedRewards);
+      console.log("Grouped rewards by type:", groupedRewards);
 
       const cardResultContainer = document.querySelector(
         ".sc-year-end-spend-polaroid-game__polaroid-card-result"
@@ -1230,16 +1216,8 @@ class ScYESGameScreen {
 
       cardResultContainer.innerHTML = "";
 
-      // CONDITIONAL LOGIC: Default images for "all", dynamic for "one"
       if (playType === "all") {
-        // Show 5 default placeholder images
-        const defaultCards = [
-          "./images/game/sc-year-end-spend-photo-card-1.png",
-          "./images/game/sc-year-end-spend-photo-card-2.png",
-          "./images/game/sc-year-end-spend-photo-card-3.png",
-          "./images/game/sc-year-end-spend-photo-card-1.png",
-          "./images/game/sc-year-end-spend-photo-card-2.png",
-        ];
+        const defaultCards = window.prizeDefaultImages || [];
 
         defaultCards.forEach((imagePath, index) => {
           const cardHTML = `
@@ -1254,36 +1232,28 @@ class ScYESGameScreen {
           cardResultContainer.innerHTML += cardHTML;
         });
       } else {
-        // Show dynamic images based on session storage data
-        const cardImageMap = {
-          Dining: "./images/game/sc-year-end-spend-photo-card-dining.png",
-          Travel: "./images/game/sc-year-end-spend-photo-card-travel.png",
-          Luggage: "./images/game/sc-year-end-spend-photo-card-luggage.png",
-          Bonus: "./images/game/sc-year-end-spend-photo-card-bonus.png",
-        };
-
-        Object.values(groupedRewards).forEach((group) => {
-          for (let i = 0; i < group.count; i++) {
+        Object.entries(groupedRewards).forEach(([rewardType, rewards]) => {
+          rewards.forEach((reward) => {
+            console.log(
+              "🚀 ~ ScYESGameScreen ~ updateResultFromSessionStorage ~ reward:",
+              reward
+            );
             const cardHTML = `
             <div class="sc-year-end-spend-polaroid-game__polaroid-card">
               <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
-                <img src="${
-                  cardImageMap[group.type] ||
-                  "./images/game/sc-year-end-spend-photo-card-1.png"
-                }"
-                     alt="${group.type} card">
+                <img src="${reward.configDetails.image}"
+                     alt="${rewardType} card">
               </div>
               <div class="sc-year-end-spend-polaroid-game__polaroid-card-text">
-                ${group.provider !== "Unknown" ? group.provider : ""}
+                <!--{reward.configDetails.providerName}-->
               </div>
             </div>
           `;
             cardResultContainer.innerHTML += cardHTML;
-          }
+          });
         });
       }
 
-      // ALWAYS DYNAMIC: Prize details from session storage (for both "one" and "all")
       const prizeDetailScroll = document.querySelector(
         ".sc-year-end-spend-polaroid-game__prize-detail-scroll-cell"
       );
@@ -1295,108 +1265,72 @@ class ScYESGameScreen {
 
       let prizeHTML = "";
 
-      Object.values(groupedRewards).forEach((group) => {
-        let description = "";
+      if (playType === "one") {
+        // GROUPED: Group by RewardType and show counts
+        const groupedRewards = {};
 
-        switch (group.type) {
-          case "Dining":
-            description = `${group.count} ${
-              group.provider
-            } Michelin-starred dining<br>experience (for two) card${
-              group.count > 1 ? "s" : ""
-            }`;
-            break;
-          case "Travel":
-            description = `${group.count} pair${
-              group.count > 1 ? "s" : ""
-            } of flight tickets to ${group.provider}`;
-            break;
-          case "Luggage":
-            description = `${group.count} designer travel luggage card${
-              group.count > 1 ? "s" : ""
-            }`;
-            break;
-          case "Bonus":
-            description = `${group.count} bonus mystery prize card${
-              group.count > 1 ? "s" : ""
-            }`;
-            break;
-          default:
-            description = `${group.count} ${group.provider} ${group.type} card${
-              group.count > 1 ? "s" : ""
-            }`;
-        }
+        currentCardGroup.forEach((reward) => {
+          const rewardType = reward.RewardType || "Unknown";
 
-        prizeHTML += `
-        <div class="sc-year-end-spend-polaroid-game__prize-info">
-          ${description}
-        </div>
-      `;
-      });
+          if (!groupedRewards[rewardType]) {
+            groupedRewards[rewardType] = [];
+          }
+
+          groupedRewards[rewardType].push(reward);
+        });
+
+        Object.entries(groupedRewards).forEach(([rewardType, rewards]) => {
+          const count = rewards.length;
+          const firstReward = rewards[0];
+          const rewardProvider = firstReward.RewardProvider || "Unknown";
+
+          const configDetails = this.getRewardConfigDetails(
+            rewardType,
+            rewardProvider,
+            rewardConfig
+          );
+          const description = this.buildPrizeDescription(
+            rewardType,
+            count,
+            configDetails
+          );
+
+          prizeHTML += `
+          <div class="sc-year-end-spend-polaroid-game__prize-info">
+            ${description}
+          </div>
+        `;
+        });
+      } else {
+        // INDIVIDUAL: List each card separately with count of 1
+        currentCardGroup.forEach((reward) => {
+          const rewardType = reward.RewardType || "Unknown";
+          const rewardProvider = reward.RewardProvider || "Unknown";
+
+          const configDetails = this.getRewardConfigDetails(
+            rewardType,
+            rewardProvider,
+            rewardConfig
+          );
+          const description = this.buildPrizeDescription(
+            rewardType,
+            1,
+            configDetails
+          );
+
+          prizeHTML += `
+          <div class="sc-year-end-spend-polaroid-game__prize-info">
+            ${description}
+          </div>
+        `;
+        });
+      }
 
       prizeDetailScroll.innerHTML = prizeHTML;
 
-      // ALWAYS DYNAMIC: Update packs count from session storage
-      const packsRaw = sessionStorage.getItem("packsCount");
-      const packsLeft = packsRaw ? parseInt(packsRaw, 10) : 0;
+      // Update packs count and button visibility
+      this.updatePacksAndButtons();
 
-      const packsLeftElement = document.querySelector(
-        ".sc-year-end-spend-polaroid-game__card-left-no"
-      );
-      if (packsLeftElement) {
-        packsLeftElement.textContent = packsLeft;
-        const openAllPopupTitle = document.querySelector(
-          ".sc-year-end-spend-polaroid-game-open-all-popup__open-all-title"
-        );
-        // Button visibility logic
-        const openAnotherButton = document.querySelector(
-          ".sc-year-end-spend-polaroid-game__open-another"
-        );
-        const openAllButton = document.querySelector(
-          ".sc-year-end-spend-polaroid-game__open-all"
-        );
-        const unlockButton = document.querySelector(
-          ".sc-year-end-spend-polaroid-game__unlock-packs"
-        );
-        const twoButtonRow = document.querySelector(
-          ".sc-year-end-spend-polaroid-game__2-btn-row"
-        );
-        const oneButtonRow = document.querySelector(
-          ".sc-year-end-spend-polaroid-game__1-btn-row"
-        );
-
-        if (packsLeft === 0) {
-          // No packs left: Hide both "Open Another" and "Open All", show "Unlock" button
-          if (twoButtonRow) twoButtonRow.style.display = "none";
-          if (openAnotherButton) openAnotherButton.style.display = "none";
-          if (openAllButton) openAllButton.style.display = "block";
-          if (unlockButton) unlockButton.style.display = "block";
-
-          console.log("No packs left - showing unlock button only");
-        } else if (packsLeft < 5) {
-          // Less than 5 packs: Show "Open Another" only, hide "Open All"
-          if (twoButtonRow) twoButtonRow.style.display = "flex";
-          if (openAnotherButton) openAnotherButton.style.display = "block";
-          if (openAllButton) openAllButton.style.display = "block";
-          if (unlockButton) unlockButton.style.display = "none";
-
-          console.log(
-            `${packsLeft} packs left - showing open another and unlock`
-          );
-        } else {
-          // 5 or more packs: Show both "Open Another" and "Open All"
-          if (twoButtonRow) twoButtonRow.style.display = "flex";
-          if (openAnotherButton) openAnotherButton.style.display = "block";
-          if (openAllButton) openAllButton.style.display = "block";
-          if (unlockButton) unlockButton.style.display = "block";
-
-          console.log(`${packsLeft} packs left - showing all buttons`);
-        }
-      }
-
-      console.log(
-        `Result screen updated successfully for playType: ${playType}`
-      );
       return true;
     } catch (error) {
       console.error("Critical error in updateResultFromSessionStorage:", error);
@@ -1405,346 +1339,180 @@ class ScYESGameScreen {
   }
 
   /**
-   * Update result screen with data from session storage
-   * @param {string} playType - "one" for single play, "all" for open all
+   * Get reward config details based on type and provider
    */
-  // async updateResultFromSessionStorage(playType = "one") {
-  //   try {
-  //     if (typeof sessionStorage === "undefined") {
-  //       console.error("SessionStorage is not available");
-  //       return false;
-  //     }
+  getRewardConfigDetails(rewardType, rewardProvider, rewardConfig) {
+    const details = {
+      image: "./images/game/sc-year-end-spend-photo-card-1.png",
+      title: "",
+      providerName: "",
+      name: "",
+    };
 
-  //     console.log("Play type:", playType);
+    switch (rewardType) {
+      case "Dining":
+        const diningConfig = rewardConfig.dining;
+        // Use provider directly as key: rewardProvider = "restaurant1"
+        if (diningConfig[rewardProvider]) {
+          const restaurant = diningConfig[rewardProvider];
+          details.image = restaurant.image;
+          details.title = restaurant.title;
+          details.providerName = restaurant.name;
+          details.name = diningConfig.name;
+        }
+        break;
 
-  //     // Load config JSON
-  //     const configData = await this.generalInstance.fetchCampaignConfigData();
-  //     console.log(
-  //       "🚀 ~ ScYESGameScreen ~ updateResultFromSessionStorage ~ configData:",
-  //       configData
-  //     );
-  //     if (!configData) {
-  //       console.error("Failed to load config data");
-  //       return false;
-  //     }
+      case "Travel":
+        const travelConfig = rewardConfig.travel;
+        // Use provider directly as key: rewardProvider = "travel1"
+        if (travelConfig[rewardProvider]) {
+          const destination = travelConfig[rewardProvider];
+          details.image = destination.image;
+          details.title = destination.title;
+          details.providerName = destination.name;
+          details.name = travelConfig.name;
+        }
+        break;
 
-  //     const rewardConfig = configData[0].campaign.reward;
-  //     console.log("Reward config loaded:", rewardConfig);
+      case "Luggage":
+        details.image = rewardConfig.luggage.image;
+        details.title = rewardConfig.luggage.title;
+        details.providerName = "";
+        details.name = rewardConfig.luggage.name;
+        break;
 
-  //     const currentCardGroupRaw = sessionStorage.getItem("currentCardGroup");
-  //     if (!currentCardGroupRaw) {
-  //       console.error("No 'currentCardGroup' found in session storage");
-  //       return false;
-  //     }
+      case "Bonus":
+        details.image = rewardConfig.bonus.image;
+        details.title = rewardConfig.bonus.name;
+        details.providerName = "";
+        details.name = rewardConfig.bonus.name;
+        break;
 
-  //     let currentCardGroupData;
-  //     try {
-  //       currentCardGroupData = JSON.parse(currentCardGroupRaw);
-  //     } catch (parseError) {
-  //       console.error("Failed to parse currentCardGroup JSON:", parseError);
-  //       return false;
-  //     }
+      default:
+        console.warn(`Unknown reward type: ${rewardType}`);
+        break;
+    }
 
-  //     if (
-  //       !Array.isArray(currentCardGroupData) ||
-  //       currentCardGroupData.length === 0
-  //     ) {
-  //       console.error("currentCardGroup is not a valid array or is empty");
-  //       return false;
-  //     }
+    console.log("Final details:", details);
+    return details;
+  }
 
-  //     const firstGroup = currentCardGroupData[0];
-  //     if (!firstGroup || typeof firstGroup !== "object") {
-  //       console.error("Invalid first group structure");
-  //       return false;
-  //     }
+  /**
+   * Build prize description with count and config details
+   */
+  buildPrizeDescription(rewardType, count, configDetails) {
+    switch (rewardType) {
+      case "Dining":
+        return `${count} ${
+          configDetails.title ||
+          configDetails.providerName +
+            " Michelin-starred dining experience (for two)"
+        }`;
 
-  //     const groupKey = Object.keys(firstGroup)[0];
-  //     if (!groupKey) {
-  //       console.error("No group key found in first group");
-  //       return false;
-  //     }
+      case "Travel":
+        return `${count} ${
+          configDetails.title ||
+          "pair of flight tickets " + configDetails.providerName
+        }${count > 1 ? "s" : ""}`;
 
-  //     const currentCardGroup = firstGroup[groupKey];
-  //     if (!Array.isArray(currentCardGroup) || currentCardGroup.length === 0) {
-  //       console.error("No rewards array found in group:", groupKey);
-  //       return false;
-  //     }
+      case "Luggage":
+        return `${count} ${configDetails.title || configDetails.name} card${
+          count > 1 ? "s" : ""
+        }`;
 
-  //     console.log("Original reward data:", currentCardGroup);
+      case "Bonus":
+        return `${count} ${configDetails.title || configDetails.name} card${
+          count > 1 ? "s" : ""
+        }`;
 
-  //     // GROUP BY RewardType ONLY and get config details
-  //     const groupedRewards = {};
+      default:
+        return `${count} ${configDetails.title || configDetails.name} card${
+          count > 1 ? "s" : ""
+        }`;
+    }
+  }
 
-  //     currentCardGroup.forEach((reward) => {
-  //       const rewardType = reward.RewardType || "Unknown";
-  //       const rewardProvider = reward.RewardProvider || "Unknown";
+  /**
+   * Update packs count and button visibility
+   */
+  updatePacksAndButtons() {
+    try {
+      const packsRaw = sessionStorage.getItem("packsCount");
+      const packsLeft = packsRaw ? parseInt(packsRaw, 10) : 0;
 
-  //       // Get config details based on type and provider
-  //       const configDetails = this.getRewardConfigDetails(
-  //         rewardType,
-  //         rewardProvider,
-  //         rewardConfig
-  //       );
+      const packsLeftElement = document.querySelector(
+        ".sc-year-end-spend-polaroid-game__card-left-no"
+      );
+      const openAllButtonTitleElement = document.querySelector(
+        ".sc-year-end-spend-polaroid-game-open-all-popup__open-all-title"
+      );
+      if (packsLeftElement) {
+        packsLeftElement.textContent = packsLeft;
+        openAllButtonTitleElement.textContent = `Open all ${packsLeft} card packs in one go`;
+      }
 
-  //       if (!groupedRewards[rewardType]) {
-  //         groupedRewards[rewardType] = [];
-  //       }
+      // Button visibility logic
+      const openAnotherButton = document.querySelector(
+        ".sc-year-end-spend-polaroid-game__open-another"
+      );
+      const openAllButton = document.querySelector(
+        ".sc-year-end-spend-polaroid-game__open-all"
+      );
+      const unlockButton = document.querySelector(
+        ".sc-year-end-spend-polaroid-game__unlock-packs"
+      );
+      const twoButtonRow = document.querySelector(
+        ".sc-year-end-spend-polaroid-game__2-btn-row"
+      );
 
-  //       groupedRewards[rewardType].push({
-  //         ...reward,
-  //         configDetails,
-  //       });
-  //     });
-
-  //     console.log("Grouped rewards by type:", groupedRewards);
-
-  //     const cardResultContainer = document.querySelector(
-  //       ".sc-year-end-spend-polaroid-game__polaroid-card-result"
-  //     );
-
-  //     if (!cardResultContainer) {
-  //       console.error("Card result container not found");
-  //       return false;
-  //     }
-
-  //     cardResultContainer.innerHTML = "";
-
-  //     // CONDITIONAL LOGIC: Default images for "all", dynamic for "one"
-  //     if (playType === "all") {
-  //       // Show 5 default placeholder images
-  //       const defaultCards = [
-  //         "./images/game/sc-year-end-spend-photo-card-1.png",
-  //         "./images/game/sc-year-end-spend-photo-card-2.png",
-  //         "./images/game/sc-year-end-spend-photo-card-3.png",
-  //         "./images/game/sc-year-end-spend-photo-card-1.png",
-  //         "./images/game/sc-year-end-spend-photo-card-2.png",
-  //       ];
-
-  //       defaultCards.forEach((imagePath, index) => {
-  //         const cardHTML = `
-  //         <div class="sc-year-end-spend-polaroid-game__polaroid-card">
-  //           <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
-  //             <img src="${imagePath}" alt="card-${index + 1}">
-  //           </div>
-  //           <div class="sc-year-end-spend-polaroid-game__polaroid-card-text">
-  //           </div>
-  //         </div>
-  //       `;
-  //         cardResultContainer.innerHTML += cardHTML;
-  //       });
-  //     } else {
-  //       // Show dynamic images from config
-  //       Object.entries(groupedRewards).forEach(([rewardType, rewards]) => {
-  //         rewards.forEach((reward) => {
-  //           const cardHTML = `
-  //           <div class="sc-year-end-spend-polaroid-game__polaroid-card">
-  //             <div class="sc-year-end-spend-polaroid-game__polaroid-card-img">
-  //               <img src="${reward.configDetails.image}"
-  //                    alt="${rewardType} card">
-  //             </div>
-  //             <div class="sc-year-end-spend-polaroid-game__polaroid-card-text">
-  //               ${reward.configDetails.providerName}
-  //             </div>
-  //           </div>
-  //         `;
-  //           cardResultContainer.innerHTML += cardHTML;
-  //         });
-  //       });
-  //     }
-
-  //     // ALWAYS DYNAMIC: Prize details from config
-  //     const prizeDetailScroll = document.querySelector(
-  //       ".sc-year-end-spend-polaroid-game__prize-detail-scroll-cell"
-  //     );
-
-  //     if (!prizeDetailScroll) {
-  //       console.error("Prize detail scroll container not found");
-  //       return false;
-  //     }
-
-  //     let prizeHTML = "";
-
-  //     Object.entries(groupedRewards).forEach(([rewardType, rewards]) => {
-  //       const count = rewards.length;
-  //       const firstReward = rewards[0];
-  //       const description = this.buildPrizeDescription(
-  //         rewardType,
-  //         count,
-  //         firstReward.configDetails
-  //       );
-
-  //       prizeHTML += `
-  //       <div class="sc-year-end-spend-polaroid-game__prize-info">
-  //         ${description}
-  //       </div>
-  //     `;
-  //     });
-
-  //     prizeDetailScroll.innerHTML = prizeHTML;
-
-  //     // Update packs count and button visibility
-  //     this.updatePacksAndButtons();
-
-  //     console.log(
-  //       `Result screen updated successfully for playType: ${playType}`
-  //     );
-  //     return true;
-  //   } catch (error) {
-  //     console.error("Critical error in updateResultFromSessionStorage:", error);
-  //     return false;
-  //   }
-  // }
-
-  // /**
-  //  * Get reward config details based on type and provider
-  //  */
-  // getRewardConfigDetails(rewardType, rewardProvider, rewardConfig) {
-  //   const details = {
-  //     image: "./images/game/sc-year-end-spend-photo-card-1.png",
-  //     title: "",
-  //     providerName: "",
-  //     name: "",
-  //   };
-
-  //   switch (rewardType) {
-  //     case "Dining":
-  //       // Map provider to restaurant
-  //       const restaurantMap = {
-  //         Labyrinth: "restaurant1",
-  //         Lerouy: "restaurant2",
-  //         Seroja: "restaurant3",
-  //         Pangium: "restaurant4",
-  //       };
-  //       const restaurantKey = restaurantMap[rewardProvider];
-  //       if (restaurantKey && rewardConfig.dining[restaurantKey]) {
-  //         details.image = rewardConfig.dining[restaurantKey].image;
-  //         details.title = rewardConfig.dining[restaurantKey].title;
-  //         details.providerName = rewardConfig.dining[restaurantKey].name;
-  //         details.name = rewardConfig.dining.name;
-  //       }
-  //       break;
-
-  //     case "Travel":
-  //       // Map provider to travel destination
-  //       const travelMap = {
-  //         Bali: "travel1",
-  //         "Hong Kong": "travel2",
-  //         Shanghai: "travel3",
-  //         Taipei: "travel4",
-  //       };
-  //       const travelKey = travelMap[rewardProvider];
-  //       if (travelKey && rewardConfig.travel[travelKey]) {
-  //         details.image = rewardConfig.travel[travelKey].image;
-  //         details.title = rewardConfig.travel[travelKey].title;
-  //         details.providerName = rewardConfig.travel[travelKey].name;
-  //         details.name = rewardConfig.travel.name;
-  //       }
-  //       break;
-
-  //     case "Luggage":
-  //       details.image = rewardConfig.luggage.image;
-  //       details.title = rewardConfig.luggage.title;
-  //       details.providerName = "";
-  //       details.name = rewardConfig.luggage.name;
-  //       break;
-
-  //     case "Bonus":
-  //       details.image = rewardConfig.bonus.image;
-  //       details.title = rewardConfig.bonus.name;
-  //       details.providerName = "";
-  //       details.name = rewardConfig.bonus.name;
-  //       break;
-
-  //     default:
-  //       break;
-  //   }
-
-  //   return details;
-  // }
-
-  // /**
-  //  * Build prize description text
-  //  */
-  // buildPrizeDescription(rewardType, count, configDetails) {
-  //   switch (rewardType) {
-  //     case "Dining":
-  //       return `${count} ${
-  //         configDetails.providerName
-  //       } Michelin-starred dining<br>experience (for two) card${
-  //         count > 1 ? "s" : ""
-  //       }`;
-
-  //     case "Travel":
-  //       return `${count} pair${count > 1 ? "s" : ""} of flight tickets ${
-  //         configDetails.providerName
-  //       }`;
-
-  //     case "Luggage":
-  //       return `${count} ${configDetails.name} card${count > 1 ? "s" : ""}`;
-
-  //     case "Bonus":
-  //       return `${count} ${configDetails.name} card${count > 1 ? "s" : ""}`;
-
-  //     default:
-  //       return `${count} ${configDetails.name} card${count > 1 ? "s" : ""}`;
-  //   }
-  // }
-
-  // /**
-  //  * Update packs count and button visibility
-  //  */
-  // updatePacksAndButtons() {
-  //   try {
-  //     const packsRaw = sessionStorage.getItem("packsCount");
-  //     const packsLeft = packsRaw ? parseInt(packsRaw, 10) : 0;
-
-  //     const packsLeftElement = document.querySelector(
-  //       ".sc-year-end-spend-polaroid-game__card-left-no"
-  //     );
-  //     if (packsLeftElement) {
-  //       packsLeftElement.textContent = packsLeft;
-  //     }
-
-  //     // Button visibility logic
-  //     const openAnotherButton = document.querySelector(
-  //       ".sc-year-end-spend-polaroid-game__open-another"
-  //     );
-  //     const openAllButton = document.querySelector(
-  //       ".sc-year-end-spend-polaroid-game__open-all"
-  //     );
-  //     const unlockButton = document.querySelector(
-  //       ".sc-year-end-spend-polaroid-game__unlock-packs"
-  //     );
-  //     const twoButtonRow = document.querySelector(
-  //       ".sc-year-end-spend-polaroid-game__2-btn-row"
-  //     );
-
-  //     if (packsLeft === 0) {
-  //       if (twoButtonRow) twoButtonRow.style.display = "none";
-  //       if (openAnotherButton) openAnotherButton.style.display = "none";
-  //       if (openAllButton) openAllButton.style.display = "none";
-  //       if (unlockButton) unlockButton.style.display = "block";
-  //       console.log("No packs left - showing unlock button only");
-  //     } else if (packsLeft < 5) {
-  //       if (twoButtonRow) twoButtonRow.style.display = "flex";
-  //       if (openAnotherButton) openAnotherButton.style.display = "block";
-  //       if (openAllButton) openAllButton.style.display = "none";
-  //       if (unlockButton) unlockButton.style.display = "block";
-  //       console.log(
-  //         `${packsLeft} packs left - showing open another and unlock`
-  //       );
-  //     } else {
-  //       if (twoButtonRow) twoButtonRow.style.display = "flex";
-  //       if (openAnotherButton) openAnotherButton.style.display = "block";
-  //       if (openAllButton) openAllButton.style.display = "block";
-  //       if (unlockButton) unlockButton.style.display = "block";
-  //       console.log(`${packsLeft} packs left - showing all buttons`);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error updating packs and buttons:", error);
-  //   }
-  // }
+      if (packsLeft === 0) {
+        if (twoButtonRow) twoButtonRow.style.display = "none";
+        if (openAnotherButton) openAnotherButton.style.display = "none";
+        if (openAllButton) openAllButton.style.display = "none";
+        if (unlockButton) unlockButton.style.display = "block";
+        console.log("No packs left - showing unlock button only");
+      } else if (packsLeft < 5) {
+        if (twoButtonRow) twoButtonRow.style.display = "flex";
+        if (openAnotherButton) openAnotherButton.style.display = "block";
+        if (openAllButton) openAllButton.style.display = "none";
+        if (unlockButton) unlockButton.style.display = "block";
+        console.log(
+          `${packsLeft} packs left - showing open another and unlock`
+        );
+      } else {
+        if (twoButtonRow) twoButtonRow.style.display = "flex";
+        if (openAnotherButton) openAnotherButton.style.display = "block";
+        if (openAllButton) openAllButton.style.display = "block";
+        if (unlockButton) unlockButton.style.display = "block";
+        console.log(`${packsLeft} packs left - showing all buttons`);
+      }
+    } catch (error) {
+      console.error("Error updating packs and buttons:", error);
+    }
+  }
+  /**
+   * Load and cache config JSON during initialization
+   */
+  async loadAndCacheConfig() {
+    try {
+      const response = await fetch(window?.general?.configJsonUrl);
+      if (!response.ok) {
+        throw new Error("Failed to load config");
+      }
+      const configData = await response.json();
+      this.campaignConfig = configData[0].campaign.reward;
+      console.log("Campaign config cached:", this.campaignConfig);
+    } catch (error) {
+      console.error("Error loading config JSON:", error);
+      // Set default config to prevent errors
+      this.campaignConfig = {
+        dining: {},
+        travel: {},
+        luggage: {},
+        bonus: {},
+      };
+    }
+  }
 }
 
 // Create and export instance

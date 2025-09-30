@@ -7,6 +7,7 @@ class ScYESGeneralScreen {
   constructor() {
     this.gameInstance = null;
     this.isRequireOfferUpdate = false;
+    this.landingOffer = null;
     this.isRegistered = false;
     this.campaignExpiryDate = "";
     this.isCampaignExpired = false;
@@ -19,18 +20,39 @@ class ScYESGeneralScreen {
     this.acquiredRewards = [];
     this.isRewardPopupClosed = false;
     this.instructionSourcePage = "";
+    this.isAfterGamePlay = false;
+    this.isAutoModalShown = false;
+    this.giftFlag = {
+      dining: {
+        restaurant1: false,
+        restaurant2: false,
+        restaurant3: false,
+        restaurant4: false,
+      },
+      travel: {
+        travel1: false,
+        travel2: false,
+        travel3: false,
+        travel4: false,
+      },
+      luggage: false,
+    };
     this.acquiredCardCount = {
-      restaurant1: 0,
-      restaurant2: 0,
-      restaurant3: 0,
-      restaurant4: 0,
-      travel1: 0,
-      travel2: 0,
-      travel3: 0,
-      travel4: 0,
+      dining: {
+        restaurant1: 0,
+        restaurant2: 0,
+        restaurant3: 0,
+        restaurant4: 0,
+      },
+      travel: {
+        travel1: 0,
+        travel2: 0,
+        travel3: 0,
+        travel4: 0,
+      },
       luggage: 0,
-      grandPrizeDraw: 0,
-      bonusCard: 0,
+      grandPrize: 0,
+      bonus: 0,
     };
 
     // Set DOM elements references
@@ -69,6 +91,9 @@ class ScYESGeneralScreen {
     );
     this.errorPage = document.querySelector(".sc-year-end-spend-error");
     this.commonModalPage = document.querySelector(".sc-year-end-spend-modal");
+    this.cardsCollectionTemplate = document.querySelector(
+      ".sc-year-end-spend-card-collection-template"
+    );
   }
 
   /**
@@ -101,11 +126,8 @@ class ScYESGeneralScreen {
           window.location.hostname === "pt.sc.com" ? "stage" : "production";
       }
 
+      // Set session storage items
       window.sessionStorage.setItem("packsCount", that.packsCount);
-      window.sessionStorage.setItem(
-        "issuedCards",
-        JSON.stringify(that.issuedCards)
-      );
       window.sessionStorage.setItem(
         "issuedCardGroups",
         JSON.stringify(that.issuedCardGroups)
@@ -114,21 +136,25 @@ class ScYESGeneralScreen {
         "currentCardGroup",
         JSON.stringify(that.currentCardGroup)
       );
-      window.sessionStorage.setItem(
-        "issuedRewards",
-        JSON.stringify(that.issuedRewards)
+
+      // Get the error page back button and add a click event listener
+      const errorPageBackButton = that.errorPage.querySelector(
+        ".sc-year-end-spend-error__button-back"
       );
-      window.sessionStorage.setItem(
-        "acquiredRewards",
-        JSON.stringify(that.acquiredRewards)
-      );
-      that.initiateEvents();
+      errorPageBackButton.addEventListener("click", () => {
+        that.handleExitCampaignPage();
+      });
+
+      that.initiatePageEvents();
       that.initiateSpendCampaign();
     } catch (error) {
       console.error("Running function  => init on Error", error);
       setTimeout(() => {
         const loader = document.querySelector(".sc-year-end-spend-loader");
+        const errorPage = document.querySelector(".sc-year-end-spend-error");
+
         loader.classList.add("sc-year-end-spend-loader--hide");
+        errorPage.classList.remove("sc-year-end-spend-error--hide");
       }, 2000);
     }
   }
@@ -141,7 +167,7 @@ class ScYESGeneralScreen {
    *
    * @throws {Error} Throws an error if any event initialization fails.
    */
-  initiateEvents() {
+  initiatePageEvents() {
     const that = this;
     // eslint-disable-next-line no-useless-catch
     try {
@@ -156,7 +182,6 @@ class ScYESGeneralScreen {
       that.initiateRewardDetailPopupEvents();
       that.initiateEndCampaignPageEvents();
       that.initiateCommonModalEvents();
-      that.initiateErrorPageEvents();
 
       // Get the terms and conditions links and add click event listeners
       const termsLinks = that.yesCampaignContainer.querySelectorAll(
@@ -228,6 +253,9 @@ class ScYESGeneralScreen {
       howToUnlockLink.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
+        that.registrationPage.classList.add(
+          "sc-year-end-spend-registration--hide"
+        );
         that.showInstructionPage("registration");
       });
 
@@ -297,6 +325,7 @@ class ScYESGeneralScreen {
       unlockPackButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
+        that.landingPage.classList.add("sc-year-end-spend-landing--hide");
         that.showInstructionPage("landing");
       });
 
@@ -308,16 +337,9 @@ class ScYESGeneralScreen {
         event.preventDefault();
         event.stopPropagation();
         that.landingPage.classList.add("sc-year-end-spend-landing--hide");
-        // that.gamePlayPage.classList.remove('sc-year-end-spend-polaroid-game--hide');
-        if (
-          that.gameInstance &&
-          typeof that.gameInstance.showGameSection === "function"
-        ) {
+        if (that.gameInstance && typeof that.gameInstance.init === "function") {
           that.gameInstance.showGameSection();
         }
-
-        // const gameContainer = that.gamePlayPage.querySelector('.sc-year-end-spend-polaroid-game__wrapper');
-        // that.handleClickImpressionOnEvent(gameContainer, 'game-play', 'one');
       });
 
       // Get the view prizes button and add a click event listener
@@ -350,7 +372,7 @@ class ScYESGeneralScreen {
       howToPlayLink.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        // that.landingPage.classList.add('sc-year-end-spend-landing--hide');
+        that.landingPage.classList.add("sc-year-end-spend-landing--hide");
         that.showInstructionPage("landing");
       });
 
@@ -447,7 +469,6 @@ class ScYESGeneralScreen {
           ".sc-year-end-spend-instruction__tabs-button",
           ".sc-year-end-spend-instruction__tabs-content"
         );
-        that.expandFirstAccordianInActiveTab();
       });
 
       // Get the tab buttons and add click event listeners
@@ -464,7 +485,6 @@ class ScYESGeneralScreen {
             ".sc-year-end-spend-instruction__tabs-button",
             ".sc-year-end-spend-instruction__tabs-content"
           );
-          that.expandFirstAccordianInActiveTab("instruction");
         });
       });
 
@@ -551,7 +571,6 @@ class ScYESGeneralScreen {
         event.preventDefault();
         event.stopPropagation();
         that.closeCardCollectionPage();
-        // that.landingPage.classList.remove('sc-year-end-spend-landing--hide');
       });
 
       // Get the how to unlock link and add a click event listener
@@ -562,7 +581,6 @@ class ScYESGeneralScreen {
         event.preventDefault();
         event.stopPropagation();
         that.closeCardCollectionPage();
-        // that.landingPage.classList.remove('sc-year-end-spend-landing--hide');
       });
 
       // Get the tab buttons and add click event listeners
@@ -579,8 +597,6 @@ class ScYESGeneralScreen {
             ".sc-year-end-spend-card-collection__tabs-button",
             ".sc-year-end-spend-card-collection__tabs-content"
           );
-
-          that.expandFirstAccordianInActiveTab("card-collection");
         });
       });
 
@@ -644,46 +660,24 @@ class ScYESGeneralScreen {
         });
       });
 
-      // Get the view details buttons from card tab and add click event listeners
-      const viewCardTabDetailsButtons =
-        that.cardsCollectionPage.querySelectorAll(
-          ".sc-year-end-spend-card-collection__tabs-reward-prize"
-        );
-      viewCardTabDetailsButtons.forEach((viewCardTabDetailsButton) => {
-        viewCardTabDetailsButton.addEventListener("click", (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          that.rewardPopupModal.classList.remove(
-            "sc-year-end-spend-reward-popup--hide"
-          );
-
-          that.timeoutId = setTimeout(() => {
-            that.rewardPopupModal.classList.add(
-              "sc-year-end-spend-reward-popup--hide"
-            );
-          }, 5000);
-        });
+      // Get the play button from prize tab and add click event listeners
+      const collectionPagePlayButton = that.cardsCollectionPage.querySelector(
+        ".sc-year-end-spend-card-collection__tabs-prize-button-play"
+      );
+      collectionPagePlayButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        that.closeCardCollectionPage();
       });
 
-      // Get the view details buttons from prize tab and add click event listeners
-      const viewPrizeTabDetailsButtons =
-        that.cardsCollectionPage.querySelectorAll(
-          ".sc-year-end-spend-card-collection__tabs-prize-tile-info"
-        );
-      viewPrizeTabDetailsButtons.forEach((viewPrizeTabDetailsButton) => {
-        viewPrizeTabDetailsButton.addEventListener("click", (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          that.rewardPopupModal.classList.remove(
-            "sc-year-end-spend-reward-popup--hide"
-          );
-
-          that.timeoutId = setTimeout(() => {
-            that.rewardPopupModal.classList.add(
-              "sc-year-end-spend-reward-popup--hide"
-            );
-          }, 5000);
-        });
+      // Get the unlock button from prize tab and add click event listeners
+      const collectionPageUnlockButton = that.cardsCollectionPage.querySelector(
+        ".sc-year-end-spend-card-collection__tabs-prize-button-unlock"
+      );
+      collectionPageUnlockButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        that.showInstructionPage("card-collection");
       });
     } catch (error) {
       throw new Error(
@@ -779,7 +773,9 @@ class ScYESGeneralScreen {
       rewardDetailsShareLink.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        that.handleShareClick("YES-RewardDetails");
+        const rewardName =
+          rewardDetailsShareLink.getAttribute("data-reward-name") || "";
+        that.handleShareClick(rewardName);
       });
     } catch (error) {
       throw new Error(
@@ -840,30 +836,10 @@ class ScYESGeneralScreen {
     }
   }
 
-  /**
-   * Initializes event listeners for the error page, specifically the back button.
-   * When the back button is clicked, triggers the campaign exit handler.
-   * Throws an error if initialization fails.
-   *
-   * @throws {Error} If event listener initialization fails.
-   */
-  initiateErrorPageEvents() {
-    const that = this;
-    try {
-      const errorPageBackButton = that.errorPage.querySelector(
-        ".sc-year-end-spend-error__button-go-back"
-      );
-      errorPageBackButton.addEventListener("click", () => {
-        that.handleExitCampaignPage();
-      });
-    } catch (error) {
-      throw new Error(`Failed to initiate error page events: ${error.message}`);
-    }
-  }
-
   handleShareClick(rewardName) {
     try {
-      let shareMessage = window?.general?.shareObject?.message || "";
+      let shareMessage = campaignConfigData?.reward?.share?.message || "";
+      let shareImageUrl = campaignConfigData?.reward?.share?.image || "";
 
       if (!shareMessage) return;
 
@@ -873,6 +849,7 @@ class ScYESGeneralScreen {
         shareTitle: "",
         shareSubject: "",
         shareMessage: shareMessage,
+        shareImage: shareImageUrl,
       };
 
       if (window.cordova) {
@@ -880,6 +857,7 @@ class ScYESGeneralScreen {
           title: "",
           subject: "",
           message: shareMessage,
+          shareImageUrl: shareImageUrl,
           url: "",
         };
 
@@ -1039,7 +1017,9 @@ class ScYESGeneralScreen {
             } else if (status === "200" || status === 200) {
               successCallback(response);
             } else {
-              console.error("Error on Click Impression", response);
+              that.handleErrorPage(
+                `Failed to update impression: ${JSON.stringify(response)}`
+              );
             }
           } catch (error) {
             console.error(
@@ -1081,51 +1061,89 @@ class ScYESGeneralScreen {
    * @param {string} rewardValue - The reward value from the offer data
    *
    */
-  handleClickImpressionOnEvent(sourceEle, onEvent, rewardValue) {
+  handleClickImpressionOnEvent(
+    sourceEle,
+    onEvent,
+    rewardValue,
+    isAutoModal = false
+  ) {
     const that = this;
-    const successCallback = (response) => {
-      switch (onEvent) {
-        case "registration":
+    try {
+      const successCallback = (response) => {
+        switch (onEvent) {
+          case "registration":
+            setTimeout(() => {
+              that.handleRegConfirmationPage();
+            }, 1000);
+            break;
+          case "game-play":
+            that.handleGamePlayImpressionSuccess(rewardValue);
+            break;
+          case "reward-acquired": {
+            that.handleRewardRedemptionSuccess(sourceEle, rewardValue);
+            break;
+          }
+          default:
+            console.error(
+              "Success on Click Impression: " + JSON.stringify(response)
+            ); // Successfully obtaining data will trigger this callback
+        }
+      };
+
+      let impressionObj = that.getImpressionObject(sourceEle, "Clicked");
+
+      if (onEvent === "game-play") {
+        const issuedCardGroups =
+          JSON.parse(window.sessionStorage.getItem("issuedCardGroups")) || [];
+        const currentCardGroup = issuedCardGroups.shift();
+        that.currentCardGroupId = Object.keys(currentCardGroup)[0];
+        let contextValue =
+          rewardValue.toLowerCase() === "all"
+            ? "AllCards"
+            : that.currentCardGroupId;
+
+        impressionObj.contexts = [
+          {
+            type: "StatusUpdate",
+            value: contextValue,
+            key: "RewardGroupID",
+          },
+        ];
+
+        if (window.general.environment === "dev") {
           setTimeout(() => {
-            that.handleRegConfirmationPage();
-          }, 1000);
-          break;
-        case "game-play":
-          that.handleGamePlayImpressionSuccess(rewardValue);
-          break;
-        default:
-          console.error(
-            "Success on Click Impression: " + JSON.stringify(response)
-          ); // Successfully obtaining data will trigger this callback
+            that.handleGamePlayImpressionSuccess(rewardValue);
+          }, 2000);
+        }
       }
-    };
 
-    let impressionObj = that.getImpressionObject(sourceEle, "Clicked");
+      if (onEvent === "reward-acquired") {
+        impressionObj.contexts = [
+          {
+            type: "StatusUpdate",
+            value: rewardValue,
+            key: "Reward",
+          },
+        ];
 
-    if (onEvent === "game-play") {
-      const issuedCardGroups =
-        JSON.parse(window.sessionStorage.getItem("issuedCardGroups")) || [];
-      const currentCardGroup = issuedCardGroups.shift();
-      that.currentCardGroupId = Object.keys(currentCardGroup)[0];
-      let contextValue =
-        rewardValue.toLowerCase() === "all"
-          ? "AllCards"
-          : that.currentCardGroupId;
-
-      impressionObj.contexts = [
-        {
-          type: "StatusUpdate",
-          value: contextValue,
-          key: "RewardGroupID",
-        },
-      ];
-
-      if (window.general.environment === "dev") {
-        that.handleGamePlayImpressionSuccess(rewardValue);
+        if (window.general.environment === "dev") {
+          setTimeout(() => {
+            that.handleRewardRedemptionSuccess(
+              sourceEle,
+              rewardValue,
+              isAutoModal
+            );
+          }, 2000);
+        }
       }
+
+      that.updateClickImpression(impressionObj, successCallback);
+    } catch (error) {
+      that.handleErrorPage(
+        `Failed to send click impression on event: ${error.message}`
+      );
+      console.error("handleClickImpressionOnEvent error:", error);
     }
-
-    that.updateClickImpression(impressionObj, successCallback);
   }
 
   /**
@@ -1177,29 +1195,260 @@ class ScYESGeneralScreen {
    * @returns {Object[]} An array of objects, each containing a group of cards keyed by the property value.
    */
   groupCardsByProperty(cards, propertyName) {
-    const cardGroups = cards.reduce((acc, card) => {
-      const groupId = card[propertyName];
-      if (!acc[groupId]) {
-        acc[groupId] = [];
-      }
-      acc[groupId].push(card);
-      return acc;
-    }, {});
+    try {
+      const cardGroups = cards.reduce((acc, card) => {
+        const groupId = card[propertyName];
+        if (!acc[groupId]) {
+          acc[groupId] = [];
+        }
+        acc[groupId].push(card);
+        return acc;
+      }, {});
 
-    return Object.keys(cardGroups).map((groupId) => ({
-      [groupId]: cardGroups[groupId],
-    }));
+      return Object.keys(cardGroups).map((groupId) => ({
+        [groupId]: cardGroups[groupId],
+      }));
+    } catch (error) {
+      throw new Error(
+        `Failed to group cards by property error: ${error.message}`
+      );
+    }
+  }
+
+  getGiftFlagValue(field, giftFlag) {
+    try {
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.restaurant1GiftFlag ||
+            "Restaurant1GiftFlag") &&
+        field.value.toLowerCase() === "y"
+      ) {
+        giftFlag.dining.restaurant1 = true;
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.restaurant2GiftFlag ||
+            "Restaurant2GiftFlag") &&
+        field.value.toLowerCase() === "y"
+      ) {
+        giftFlag.dining.restaurant2 = true;
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.restaurant3GiftFlag ||
+            "Restaurant3GiftFlag") &&
+        field.value.toLowerCase() === "y"
+      ) {
+        giftFlag.dining.restaurant3 = true;
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.restaurant4GiftFlag ||
+            "Restaurant4GiftFlag") &&
+        field.value.toLowerCase() === "y"
+      ) {
+        giftFlag.dining.restaurant4 = true;
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.travel1GiftFlag ||
+            "Travel1GiftFlag") &&
+        field.value.toLowerCase() === "y"
+      ) {
+        giftFlag.travel.travel1 = true;
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.travel2GiftFlag ||
+            "Travel2GiftFlag") &&
+        field.value.toLowerCase() === "y"
+      ) {
+        giftFlag.travel.travel2 = true;
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.travel3GiftFlag ||
+            "Travel3GiftFlag") &&
+        field.value.toLowerCase() === "y"
+      ) {
+        giftFlag.travel.travel3 = true;
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.travel4GiftFlag ||
+            "Travel4GiftFlag") &&
+        field.value.toLowerCase() === "y"
+      ) {
+        giftFlag.travel.travel4 = true;
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.luggageGiftFlag ||
+            "LuggageGiftFlag") &&
+        field.value.toLowerCase() === "y"
+      ) {
+        giftFlag.luggage = true;
+      }
+
+      return giftFlag;
+    } catch (error) {
+      throw new Error(`Failed to get gift flag value error: ${error.message}`);
+    }
+  }
+
+  getAcquiredCountValue(field, acquiredCount) {
+    try {
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.restaurant1AcquiredCount ||
+            "Restaurant1AcquiredCardCount") &&
+        field.value
+      ) {
+        acquiredCount.dining.restaurant1 = parseInt(field.value);
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.restaurant2AcquiredCount ||
+            "Restaurant2AcquiredCardCount") &&
+        field.value
+      ) {
+        acquiredCount.dining.restaurant2 = parseInt(field.value);
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.restaurant3AcquiredCount ||
+            "Restaurant3AcquiredCardCount") &&
+        field.value
+      ) {
+        acquiredCount.dining.restaurant3 = parseInt(field.value);
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.restaurant4AcquiredCount ||
+            "Restaurant4AcquiredCardCount") &&
+        field.value
+      ) {
+        acquiredCount.dining.restaurant4 = parseInt(field.value);
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.travel1AcquiredCount ||
+            "Travel1AcquiredCardCount") &&
+        field.value
+      ) {
+        acquiredCount.travel.travel1 = parseInt(field.value);
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.travel2AcquiredCount ||
+            "Travel2AcquiredCardCount") &&
+        field.value
+      ) {
+        acquiredCount.travel.travel2 = parseInt(field.value);
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.travel3AcquiredCount ||
+            "Travel3AcquiredCardCount") &&
+        field.value
+      ) {
+        acquiredCount.travel.travel3 = parseInt(field.value);
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.travel4AcquiredCount ||
+            "Travel4AcquiredCardCount") &&
+        field.value
+      ) {
+        acquiredCount.travel.travel4 = parseInt(field.value);
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.luggageAcquiredCount ||
+            "LuggageAcquiredCardCount") &&
+        field.value
+      ) {
+        acquiredCount.luggage = parseInt(field.value);
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.grandPrizeAcquiredCount ||
+            "grandPrizeAcquiredCardCount") &&
+        field.value
+      ) {
+        acquiredCount.grandPrize = parseInt(field.value);
+      }
+      if (
+        field.name ===
+          (campaignConfigData?.offer?.fields?.bonusAcquiredCount ||
+            "BonusCardAcquiredCardCount") &&
+        field.value
+      ) {
+        acquiredCount.bonus = parseInt(field.value);
+      }
+
+      return acquiredCount;
+    } catch (error) {
+      throw new Error(
+        `Failed to get acquired count value error: ${error.message}`
+      );
+    }
+  }
+
+  setSummaryOfferValues(offerData) {
+    // eslint-disable-next-line no-useless-catch
+    const that = this;
+    try {
+      if (typeof offerData === "object" && offerData !== null) {
+        const { acquiredRewards, acquiredCardCount, giftFlag } =
+          offerData.fields.reduce(
+            (acc, field) => {
+              if (
+                field.name ===
+                  (campaignConfigData?.offer?.fields?.allRewards ||
+                    "AllRewards") &&
+                field.value
+              ) {
+                acc.acquiredRewards = JSON.parse(field.value);
+              }
+
+              acc.acquiredCardCount = that.getAcquiredCountValue(
+                field.name,
+                acc.acquiredCardCount
+              );
+              acc.giftFlag = that.getGiftFlagValue(field, acc.giftFlag);
+
+              return acc;
+            },
+            {
+              acquiredRewards: [],
+              acquiredCardCount: that.acquiredCardCount,
+              giftFlag: that.giftFlag,
+            }
+          );
+
+        that.acquiredRewards = acquiredRewards;
+        that.acquiredCardCount = acquiredCardCount;
+        that.giftFlag = giftFlag;
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
   /**
    * Sets offer-related values from the provided offer data object.
-   * Extracts registration status, campaign expiry date, packs count, issued cards, and issued rewards
-   * from the `fields` array in the offer data, and assigns them to instance properties.
-   * Also stores packs count, issued cards, and issued rewards in sessionStorage.
    *
-   * @param {Object} offerData - The offer data object containing fields to extract.
-   * @param {Array<Object>} offerData.fields - Array of field objects with `name` and `value` properties.
-   * @throws {Error} Throws if an error occurs during processing.
+   * This method extracts various fields from the `offerData` object, updates the instance properties accordingly,
+   * groups issued cards, and stores relevant values in `sessionStorage`. It expects `offerData.fields` to be an array
+   * of field objects with `name` and `value` properties. The method also relies on the `campaignConfigData` global/config object
+   * for field name mappings.
+   *
+   * @param {Object} offerData - The offer data object containing fields to extract and set.
+   * @param {Array<Object>} offerData.fields - Array of field objects, each with `name` and `value` properties.
+   * @param {string|number} offerData.id - The identifier for the offer, used for conditional logic.
+   *
+   * @throws {Error} Throws an error if processing the offer data fails.
    */
   setOfferValues(offerData) {
     const that = this;
@@ -1213,8 +1462,8 @@ class ScYESGeneralScreen {
           packsCount,
           issuedCards,
           issuedRewards,
-          acquiredRewards,
           acquiredCardCount,
+          giftFlag,
         } = offerData.fields.reduce(
           (acc, field) => {
             if (
@@ -1248,116 +1497,23 @@ class ScYESGeneralScreen {
               acc.issuedCards = JSON.parse(field.value);
               issuedCardGroups = that.groupCardsByProperty(
                 acc.issuedCards,
-                campaignConfigData?.offer?.groupId || "groupId"
+                campaignConfigData?.offer?.groupId || "RewardGroupID"
               );
             }
             if (
               field.name ===
                 (campaignConfigData?.offer?.fields?.allRewards ||
                   "AllRewards") &&
-              field.value &&
-              offerData.id ===
-                (campaignConfigData?.offer?.landing || "EGCCYESLanding")
+              field.value
             ) {
               acc.issuedRewards = JSON.parse(field.value);
             }
-            if (
-              field.name ===
-                (campaignConfigData?.offer?.fields?.allCards || "AllCards") &&
-              field.value &&
-              offerData.id ===
-                (campaignConfigData?.offer?.summary || "EGCCYESSummary")
-            ) {
-              acc.acquiredRewards = JSON.parse(field.value);
-            }
-            if (
-              field.name ===
-                (campaignConfigData?.offer?.fields?.restaurant1AcquiredCount ||
-                  "Restaurant1AcquiredCardCount") &&
-              field.value
-            ) {
-              acc.acquiredCardCount.restaurant1 = parseInt(field.value);
-            }
-            if (
-              field.name ===
-                (campaignConfigData?.offer?.fields?.restaurant2AcquiredCount ||
-                  "Restaurant2AcquiredCardCount") &&
-              field.value
-            ) {
-              acc.acquiredCardCount.restaurant2 = parseInt(field.value);
-            }
-            if (
-              field.name ===
-                (campaignConfigData?.offer?.fields?.restaurant3AcquiredCount ||
-                  "Restaurant3AcquiredCardCount") &&
-              field.value
-            ) {
-              acc.acquiredCardCount.restaurant3 = parseInt(field.value);
-            }
-            if (
-              field.name ===
-                (campaignConfigData?.offer?.fields?.restaurant4AcquiredCount ||
-                  "Restaurant4AcquiredCardCount") &&
-              field.value
-            ) {
-              acc.acquiredCardCount.restaurant4 = parseInt(field.value);
-            }
-            if (
-              field.name ===
-                (campaignConfigData?.offer?.fields?.travel1AcquiredCount ||
-                  "Travel1AcquiredCardCount") &&
-              field.value
-            ) {
-              acc.acquiredCardCount.travel1 = parseInt(field.value);
-            }
-            if (
-              field.name ===
-                (campaignConfigData?.offer?.fields?.travel2AcquiredCount ||
-                  "Travel2AcquiredCardCount") &&
-              field.value
-            ) {
-              acc.acquiredCardCount.travel2 = parseInt(field.value);
-            }
-            if (
-              field.name ===
-                (campaignConfigData?.offer?.fields?.travel3AcquiredCount ||
-                  "Travel3AcquiredCardCount") &&
-              field.value
-            ) {
-              acc.acquiredCardCount.travel3 = parseInt(field.value);
-            }
-            if (
-              field.name ===
-                (campaignConfigData?.offer?.fields?.travel4AcquiredCount ||
-                  "Travel4AcquiredCardCount") &&
-              field.value
-            ) {
-              acc.acquiredCardCount.travel4 = parseInt(field.value);
-            }
-            if (
-              field.name ===
-                (campaignConfigData?.offer?.fields?.luggageAcquiredCount ||
-                  "LuggageAcquiredCardCount") &&
-              field.value
-            ) {
-              acc.acquiredCardCount.luggage = parseInt(field.value);
-            }
-            if (
-              field.name ===
-                (campaignConfigData?.offer?.fields?.grandPrizeAcquiredCount ||
-                  "GrandPrizeDrawAcquiredCardCount") &&
-              field.value
-            ) {
-              acc.acquiredCardCount.grandPrize = parseInt(field.value);
-            }
-            if (
-              field.name ===
-                (campaignConfigData?.offer?.fields?.bounsCardAcquiredCount ||
-                  "BounsCardAcquiredCardCount") &&
-              field.value
-            ) {
-              acc.acquiredCardCount.bounsCard = parseInt(field.value);
-            }
+            acc.acquiredCardCount = that.getAcquiredCountValue(
+              field,
+              acc.acquiredCardCount
+            );
+            acc.giftFlag = that.getGiftFlagValue(field, acc.giftFlag);
+
             return acc;
           },
           {
@@ -1366,8 +1522,8 @@ class ScYESGeneralScreen {
             packsCount: 0,
             issuedCards: [],
             issuedRewards: [],
-            acquiredRewards: [],
             acquiredCardCount: that.acquiredCardCount,
+            giftFlag: that.giftFlag,
           }
         );
 
@@ -1377,28 +1533,14 @@ class ScYESGeneralScreen {
         that.issuedCards = issuedCards;
         that.issuedCardGroups = issuedCardGroups;
         that.issuedRewards = issuedRewards;
-        that.acquiredRewards = acquiredRewards;
         that.acquiredCardCount = acquiredCardCount;
+        that.giftFlag = giftFlag;
 
         // Store values in sessionStorage
-        window.sessionStorage.setItem("isRegistered", isRegistered);
-        window.sessionStorage.setItem("campaignExpiryDate", campaignExpiryDate);
         window.sessionStorage.setItem("packsCount", packsCount);
-        window.sessionStorage.setItem(
-          "issuedCards",
-          JSON.stringify(issuedCards)
-        );
         window.sessionStorage.setItem(
           "issuedCardGroups",
           JSON.stringify(issuedCardGroups)
-        );
-        window.sessionStorage.setItem(
-          "issuedRewards",
-          JSON.stringify(issuedRewards)
-        );
-        window.sessionStorage.setItem(
-          "acquiredRewards",
-          JSON.stringify(acquiredRewards)
         );
       }
     } catch (error) {
@@ -1406,10 +1548,17 @@ class ScYESGeneralScreen {
     }
   }
 
+  /**
+   * Sets game page attributes based on the provided offer data.
+   * If the user has remaining packs (as stored in sessionStorage), it locates the game container
+   * and adds impression attributes to it. Handles errors by displaying an error page and logging the error.
+   *
+   * @param {Object} offerData - The data related to the current offer, used to set impression attributes.
+   */
   setGamePageAttributes(offerData) {
     const that = this;
     try {
-      if (parseInt(window.localStorage.getItem("turnsCount")) > 0) {
+      if (parseInt(window.sessionStorage.getItem("packsCount")) > 0) {
         const gameContainer = that.gamePlayPage.querySelector(
           ".sc-year-end-spend-polaroid-game__wrapper"
         );
@@ -1417,11 +1566,9 @@ class ScYESGeneralScreen {
         that.addImpressionAttributes(offerData, [gameContainer]);
       }
     } catch (error) {
-      this.handleErrorPage(
-        `Failed to set game page attributes: ${error.message}`,
-        "loader"
+      throw new Error(
+        `Failed to set game page attributes error: ${error.message}`
       );
-      console.error("setGamePageAttributes error:", error);
     }
   }
 
@@ -1481,6 +1628,31 @@ class ScYESGeneralScreen {
     }
   }
 
+  handleRewardRedemptionSuccess(sourceEle, rewardValue, isAutoModal) {
+    const that = this;
+    try {
+      if (isAutoModal === true && that.isAutoModalShown === false) {
+        that.isAutoModalShown = true;
+        // invoke auto popup
+      } else {
+        let earnedReward = that.issuedRewards.filter(
+          (reward) => reward["Reward"] === rewardValue
+        );
+        that.issuedRewards = that.issuedRewards.filter(
+          (reward) => reward["Reward"] !== rewardValue
+        );
+        that.acquiredRewards = [...that.acquiredRewards, ...earnedReward];
+        that.handleRewardDetailsModal(sourceEle);
+      }
+    } catch (error) {
+      that.handleErrorPage(
+        `Failed to handle reward redemption success: ${error.message}`,
+        "loader"
+      );
+      console.error("handleRewardRedemptionSuccess error:", error);
+    }
+  }
+
   handleGamePlayImpressionSuccess(rewardValue) {
     const that = this;
     try {
@@ -1507,6 +1679,7 @@ class ScYESGeneralScreen {
         currentCardGroup = [...earnedCardGroup];
       }
 
+      this.isAfterGamePlay = true;
       window.sessionStorage.setItem("packsCount", packsCount);
       window.sessionStorage.setItem(
         "issuedCardGroups",
@@ -1518,11 +1691,14 @@ class ScYESGeneralScreen {
       );
 
       console.log("handleGamePlayImpressionSuccess is over");
-      // that.gameInstance.invokePrizePopup();
+      setTimeout(() => {
+        that.gameInstance.executePocketFadeOut(rewardValue);
+      }, that.gameInstance.CONFIG.TIMING.POCKET_DELAY);
+
+      // that.gameInstance.showGameResult(rewardValue);
     } catch (error) {
       that.handleErrorPage(
-        `Failed to handle game play impression success: ${error.message}`,
-        "loader"
+        `Failed to handle game play impression success: ${error.message}`
       );
       console.error("handleGamePlayImpressionSuccess error:", error);
     }
@@ -1530,30 +1706,34 @@ class ScYESGeneralScreen {
 
   /**
    * Closes the card collection page by adding a CSS class to hide it.
+   * Navigates back to the landing page.
    * Handles any errors that occur during the process and logs them.
    *
    * @returns {void}
    */
   closeCardCollectionPage() {
     try {
-      this.showLandingPage();
       this.cardsCollectionPage.classList.add(
         "sc-year-end-spend-card-collection--hide"
       );
+      this.showLandingPage();
     } catch (error) {
       this.handleErrorPage(
-        `Failed to close card collection page: ${error.message}`,
-        "loader"
+        `Failed to close card collection page: ${error.message}`
       );
       console.error("closeCardCollectionPage error:", error);
     }
   }
 
   /**
-   * Displays the card collection page, initializes the active tab, and sets up event handlers
-   * for tab toggling and accordion functionality. Handles errors by displaying an error page.
+   * Displays the card collection page and initializes its state.
    *
-   * @param {string} [sourcePage=''] - The source page identifier to track where the navigation originated from.
+   * Sets the source page, activates the "my-cards" tab by default,
+   * toggles the appropriate tab and content, shows the loader,
+   * and fetches RTIM offer data to populate the card collection page.
+   * Handles and logs errors if any step fails.
+   *
+   * @param {string} [sourcePage=''] - The identifier of the page from which the card collection page is accessed.
    */
   showCardCollectionPage(sourcePage = "") {
     const that = this;
@@ -1569,14 +1749,11 @@ class ScYESGeneralScreen {
         ".sc-year-end-spend-card-collection__tabs-button",
         ".sc-year-end-spend-card-collection__tabs-content"
       );
-      that.expandFirstAccordianInActiveTab("card-collection");
-      that.cardsCollectionPage.classList.remove(
-        "sc-year-end-spend-card-collection--hide"
-      );
+      that.loader.classList.remove("sc-year-end-spend-loader--hide");
+      that.fetchRTIMOfferData(that.handleCardCollectionPage);
     } catch (error) {
       that.handleErrorPage(
-        `Failed to show card collection page: ${error.message}`,
-        "loader"
+        `Failed to show card collection page: ${error.message}`
       );
       console.error("showCardCollectionPage error:", error);
     }
@@ -1584,49 +1761,49 @@ class ScYESGeneralScreen {
 
   /**
    * Closes the instruction page by adding a CSS class to hide it.
+   * Navigates back to the appropriate source page (registration or landing).
    * Handles any errors that occur during the process and logs them.
    *
    * @returns {void}
-   */
+   * */
   closeInstructionPage() {
     const that = this;
     try {
-      if (that.instructionSourcePage === "game-screen")
-        that.gamePlayPage.classList.remove(
-          "sc-year-end-spend-polaroid-game--hide"
-        );
-      else if (that.instructionSourcePage === "registration")
+      this.instructionPage.classList.add("sc-year-end-spend-instruction--hide");
+
+      if (that.instructionSourcePage === "registration")
         that.registrationPage.classList.remove(
           "sc-year-end-spend-registration--hide"
         );
-      else that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
-
-      this.instructionPage.classList.add("sc-year-end-spend-instruction--hide");
+      else that.showLandingPage();
+      // that.landingPage.classList.remove('sc-year-end-spend-landing--hide');
     } catch (error) {
       this.handleErrorPage(
-        `Failed to close instruction page: ${error.message}`,
-        "loader"
+        `Failed to close instruction page: ${error.message}`
       );
       console.error("closeInstructionPage error:", error);
     }
   }
 
   /**
-   * Displays the instruction page modal and initializes its state based on the source page.
+   * Displays the instruction page based on the provided source page.
+   * Handles tab activation, pack count display, and visibility of instruction sections.
+   * Also manages hiding the game section if invoked from the game screen.
    *
-   * - Sets the active tab depending on the source page (defaults to "instruction-tab" or "unlock-packs-tab" for "game-screen").
-   * - Handles tab toggling and initializes the first tile's "view more" accordion in the active tab.
-   * - Makes the instruction page visible by removing the hide class.
-   * - Handles and logs errors if any step fails.
+   * @param {string} [sourcePage='landing'] - The source page from which the instruction page is invoked.
+   *   Possible values: 'landing', 'registration', 'game-screen'.
+   *   - 'landing': Shows the instruction tab and displays the packs count.
+   *   - 'registration': Hides the packs count section.
+   *   - 'game-screen': Hides the game section before showing instructions.
    *
-   * @param {string} [sourcePage=''] - The source page from which the instruction modal is invoked (e.g., 'game-screen').
+   * @throws Will call handleErrorPage and log to console if an error occurs while displaying the instruction page.
    */
   showInstructionPage(sourcePage = "landing") {
     const that = this;
     try {
       that.instructionSourcePage = sourcePage;
       let initialActiveTab = that.instructionPage.querySelector(
-        '.sc-year-end-spend-instruction__tabs-button[data-tabid="instruction-tab"]'
+        '.sc-year-end-spend-instruction__tabs-button[data-tabid="unlock-packs-tab"]'
       );
       const instructionBottom = that.instructionPage.querySelector(
         ".sc-year-end-spend-instruction__bottom"
@@ -1643,17 +1820,17 @@ class ScYESGeneralScreen {
         "sc-year-end-spend-instruction__bottom--hide"
       );
 
-      if (sourcePage === "registration") {
-        initialActiveTab = that.instructionPage.querySelector(
-          '.sc-year-end-spend-instruction__tabs-button[data-tabid="unlock-packs-tab"]'
-        );
+      if (sourcePage === "registration")
         instructionBottom.classList.add(
           "sc-year-end-spend-instruction__bottom--hide"
         );
-        that.registrationPage.classList.add(
-          "sc-year-end-spend-registration--hide"
+
+      if (sourcePage === "landing")
+        initialActiveTab = that.instructionPage.querySelector(
+          '.sc-year-end-spend-instruction__tabs-button[data-tabid="instruction-tab"]'
         );
-      }
+
+      if (sourcePage === "game-screen") that.gameInstance.hideGameSection(); // need to inform them to hide and call showInstructionPage function
 
       that.handleTabToggle(
         initialActiveTab,
@@ -1661,22 +1838,11 @@ class ScYESGeneralScreen {
         ".sc-year-end-spend-instruction__tabs-button",
         ".sc-year-end-spend-instruction__tabs-content"
       );
-
-      that.expandFirstAccordianInActiveTab("instruction");
-      if (sourcePage === "game-screen")
-        that.gamePlayPage.classList.add(
-          "sc-year-end-spend-polaroid-game--hide"
-        );
-      else that.landingPage.classList.add("sc-year-end-spend-landing--hide");
-
       that.instructionPage.classList.remove(
         "sc-year-end-spend-instruction--hide"
       );
     } catch (error) {
-      that.handleErrorPage(
-        `Failed to show instruction page: ${error.message}`,
-        "loader"
-      );
+      that.handleErrorPage(`Failed to show instruction page: ${error.message}`);
       console.error("showInstructionPage error:", error);
     }
   }
@@ -1691,40 +1857,42 @@ class ScYESGeneralScreen {
   showLandingPage() {
     const that = this;
     try {
-      const packsCountEle = that.landingPage.querySelector(
-        ".sc-year-end-spend-landing__packs-count"
-      );
-      if (packsCountEle)
-        packsCountEle.textContent = parseInt(
-          window.sessionStorage.getItem("packsCount"),
-          10
+      if (that.isAfterGamePlay === true) {
+        that.isRequireOfferUpdate = true;
+        that.isAfterGamePlay = false;
+        that.loader.classList.remove("sc-year-end-spend-loader--hide");
+        that.fetchRTIMOfferData(that.handleLandingPage);
+      } else {
+        const packsCountEle = that.landingPage.querySelector(
+          ".sc-year-end-spend-landing__packs-count"
         );
+        if (packsCountEle)
+          packsCountEle.textContent = parseInt(
+            window.sessionStorage.getItem("packsCount"),
+            10
+          );
 
-      this.landingPage.classList.remove("sc-year-end-spend-landing--hide");
+        that.landingPage.classList.remove("sc-year-end-spend-landing--hide");
+      }
     } catch (error) {
-      this.handleErrorPage(
-        `Failed to show landing page: ${error.message}`,
-        "loader"
-      );
+      that.handleErrorPage(`Failed to show landing page: ${error.message}`);
       console.error("showLandingPage error:", error);
     }
   }
 
   /**
-   * Expands the first accordion in the currently active tab of the specified source page.
+   * Expands the first accordion (tile) in the currently active tab and collapses all others.
+   * The behavior adapts based on the provided source page name, supporting both the instruction page
+   * and the card collection page, with special handling for the "my-cards" tab.
    *
-   * Depending on the `sourcePageName`, it selects the appropriate tab content and tile element class.
-   * If the active tab is "my-prizes" within the "card-collection" page, it uses a different tile class.
-   * Then, it finds the "view more" button within the first tile and triggers the accordion toggle handler.
-   *
-   * @param {string} [sourcePageName='instruction'] - The name of the source page to operate on.
-   *        Valid values are 'instruction' or 'card-collection'.
-   * @throws {Error} Throws an error if the expansion process fails.
+   * @param {string} [sourcePageName='instruction'] - The source page context.
+   *        Accepts 'instruction' (default) or 'card-collection'.
+   * @throws {Error} Throws an error if the expansion or collapse operation fails.
    */
   expandFirstAccordianInActiveTab(sourcePageName = "instruction") {
     const that = this;
     try {
-      let tileElementClass = "sc-year-end-spend-instruction__tabs-tile";
+      let accordionClass = "sc-year-end-spend-instruction__tabs-tile";
       let activeTabContent = that.instructionPage.querySelector(
         ".sc-year-end-spend-instruction__tabs-content.active"
       );
@@ -1733,25 +1901,22 @@ class ScYESGeneralScreen {
         activeTabContent = that.cardsCollectionPage.querySelector(
           ".sc-year-end-spend-card-collection__tabs-content.active"
         );
-        tileElementClass = "sc-year-end-spend-card-collection__tabs-tile";
+        accordionClass = "sc-year-end-spend-card-collection__tabs-prize-tile";
 
-        if (activeTabContent.id === "my-prizes") {
-          tileElementClass =
-            "sc-year-end-spend-card-collection__tabs-prize-tile";
-        }
+        if (activeTabContent.id === "my-cards")
+          accordionClass = "has-cards-collected";
       }
 
-      const tileElement = activeTabContent.querySelector(
-        `.${tileElementClass}`
+      // Expand the first tile and collapse the rest
+      const accordions = activeTabContent.querySelectorAll(
+        `.${accordionClass}`
       );
-      const viewMoreButton = tileElement.querySelector(
-        `.${tileElementClass}-view-more`
+      accordions.forEach((accordion, index) =>
+        accordion.classList.toggle("expanded", index === 0)
       );
-
-      that.handleAccordianToggle(viewMoreButton, tileElementClass, true);
     } catch (error) {
       throw new Error(
-        `Failed to expand first accordion in active tab: ${error.message}`
+        `Failed to expand first accordion and collapse others in active tab: ${error.message}`
       );
     }
   }
@@ -1772,32 +1937,586 @@ class ScYESGeneralScreen {
 
       allTabs.forEach((tab, index) => {
         const isActive = tab === eventTarget;
+        const isActiveTabContent =
+          allTabContents[index].id === eventTarget.getAttribute("data-tabid");
+
         tab.classList.toggle("active", isActive);
         allTabContents[index].classList.toggle(
           "active",
-          isActive &&
-            eventTarget.getAttribute("data-tabid") === allTabContents[index].id
+          isActive && isActiveTabContent
         );
       });
+
+      if (tabClass.includes("card-collection"))
+        this.expandFirstAccordianInActiveTab("card-collection");
+      else this.expandFirstAccordianInActiveTab("instruction");
     } catch (error) {
       throw new Error(`Failed to toggle tabs: ${error.message}`);
     }
   }
 
   /**
-   * Toggles the 'expanded' class on the closest parent container with the specified class.
+   * Toggles the expanded state of an accordion element within a parent container.
+   * When expanding, collapses all other expanded accordions in the same parent.
    *
-   * @param {HTMLElement} eventTarget - The DOM element that triggered the event.
-   * @param {string} parentContainerClass - The class name of the parent container to search for.
-   * @param {boolean} [expand=true] - Whether to add ('true') or remove ('false') the 'expanded' class.
+   * @param {HTMLElement} eventTarget - The element that triggered the toggle event.
+   * @param {string} parentContainerClass - The CSS class name of the parent container for the accordion.
+   * @param {boolean} [expand=true] - Whether to expand (true) or collapse (false) the accordion.
    * @throws {Error} Throws an error if the toggle operation fails.
    */
   handleAccordianToggle(eventTarget, parentContainerClass, expand = true) {
     try {
       const parentContainer = eventTarget.closest(`.${parentContainerClass}`);
+      if (expand) {
+        // Collapse all other expanded accordions in the same parent
+        const allAccordions = parentContainer.parentElement.querySelectorAll(
+          `.${parentContainerClass}.expanded`
+        );
+
+        allAccordions.forEach((acc) =>
+          acc.classList.toggle("expanded", acc === parentContainer)
+        );
+      }
       parentContainer.classList.toggle("expanded", expand);
     } catch (error) {
       throw new Error(`Failed to toggle accordion: ${error.message}`);
+    }
+  }
+
+  handleRewardDetailsModal(eventTarget) {
+    const that = this;
+    try {
+      const rewardConfig = campaignConfigData["reward"];
+      const rewardProvider =
+        eventTarget.getAttribute("data-reward-provider") || "";
+      const rewardType = eventTarget.getAttribute("data-reward-type") || "";
+      const rewardValue = eventTarget.getAttribute("data-reward-value") || "";
+
+      const modalRewardImageList = that.rewardDetailsModal.querySelectorAll(
+        ".sc-year-end-spend-reward-details__card-stack img"
+      );
+      const modalTitleEle = that.rewardDetailsModal.querySelector(
+        ".sc-year-end-spend-reward-details__reward-title"
+      );
+      const modalExpiryEle = that.rewardDetailsModal.querySelector(
+        ".sc-year-end-spend-reward-details__expiry"
+      );
+      const modalRedeemMessageEle = that.rewardDetailsModal.querySelector(
+        ".sc-year-end-spend-reward-details__redeem-message"
+      );
+      const modalTermsLink = that.rewardDetailsModal.querySelector(
+        ".sc-year-end-spend-reward-details__terms-link"
+      );
+      const modalShareLink = that.rewardDetailsModal.querySelector(
+        ".sc-year-end-spend-reward-details__share-link"
+      );
+      let rewardTitle = "",
+        rewardImage = "";
+
+      if (rewardType === "luggage") {
+        rewardTitle = rewardProvider;
+        rewardImage = rewardConfig[rewardType]["image"] || "";
+      } else {
+        rewardTitle = rewardConfig[rewardType][rewardProvider]["title"] || "";
+        rewardImage = rewardConfig[rewardType][rewardProvider]["image"] || "";
+      }
+
+      modalRewardImageList.forEach((imageEle) => {
+        imageEle.src = rewardImage;
+        imageEle.alt = `${rewardType}-reward-image`;
+      });
+
+      if (modalTitleEle) modalTitleEle.textContent = rewardTitle.trim();
+      if (modalExpiryEle)
+        modalExpiryEle.textContent = rewardConfig[rewardType]["expiry"] || "";
+      if (modalRedeemMessageEle)
+        modalRedeemMessageEle.textContent = rewardValue;
+      if (modalTermsLink)
+        modalTermsLink.setAttribute(
+          "data-link",
+          rewardConfig[rewardType]["termsLink"] || ""
+        );
+      if (modalShareLink)
+        modalShareLink.setAttribute("data-reward-name", rewardTitle.trim());
+
+      that.rewardDetailsModal.classList.remove(
+        "sc-year-end-spend-reward-details--hide"
+      );
+    } catch (error) {
+      throw new Error(
+        `Failed to handle reward details modal: ${error.message}`
+      );
+    }
+  }
+
+  addRewardMapping(
+    rewardTile,
+    rewardProvider,
+    rewardType = "luggage",
+    isPrizeTile = false
+  ) {
+    const that = this;
+    try {
+      let earnedReward = that.acquiredRewards.filter((reward) => {
+        if (rewardType === "luggage")
+          return reward["RewardType"].toLowerCase() === rewardType;
+        else
+          return (
+            reward["RewardProvider"].toLowerCase() === rewardProvider &&
+            reward["RewardType"].toLowerCase() === rewardType
+          );
+      });
+
+      if (earnedReward.length === 0) {
+        earnedReward = that.issuedRewards.filter((reward) => {
+          if (rewardType === "luggage")
+            return reward["RewardType"].toLowerCase() === rewardType;
+          else
+            return (
+              reward["RewardProvider"].toLowerCase() === rewardProvider &&
+              reward["RewardType"].toLowerCase() === rewardType
+            );
+        });
+      }
+
+      if (earnedReward.length === 0)
+        throw new Error(
+          `Reward not found for: ${rewardType}-${rewardProvider}`
+        );
+
+      if (rewardTile && earnedReward.length > 0) {
+        const viewRewardDetailsButton = rewardTile.querySelector(
+          ".sc-year-end-spend-card-collection__reward-view-details, " +
+            ".sc-year-end-spend-card-collection__tabs-prize-tile-info"
+        );
+
+        if (rewardType === "luggage") {
+          rewardProvider = earnedReward[0]["RewardProvider"] || "";
+
+          if (isPrizeTile === true) {
+            const rewardName = rewardTile.querySelector(
+              ".sc-year-end-spend-card-collection__tabs-prize-tile-name"
+            );
+
+            if (rewardName) rewardName.textContent = rewardProvider;
+          }
+        }
+
+        if (viewRewardDetailsButton) {
+          viewRewardDetailsButton.setAttribute(
+            "data-reward-provider",
+            rewardProvider
+          );
+          viewRewardDetailsButton.setAttribute("data-reward-type", rewardType);
+          viewRewardDetailsButton.setAttribute(
+            "data-reward-value",
+            earnedReward[0]["Reward"] || ""
+          );
+
+          viewRewardDetailsButton.addEventListener("click", (event) => {
+            try {
+              event.preventDefault();
+              event.stopPropagation();
+
+              if (earnedReward[0]["RewardStatus"].toLowerCase() === "issued") {
+                that.addImpressionAttributes(that.landingOffer, [
+                  viewRewardDetailsButton,
+                ]);
+                that.handleClickImpressionOnEvent(
+                  viewRewardDetailsButton,
+                  "reward-acquired",
+                  earnedReward[0]["Reward"]
+                );
+              } else that.handleRewardDetailsModal(viewRewardDetailsButton);
+            } catch (error) {
+              that.handleErrorPage(
+                `Failed to handle reward details click event: ${error.message}`
+              );
+            }
+          });
+        }
+      }
+    } catch (error) {
+      throw new Error(`Failed to add reward mapping data: ${error.message}`);
+    }
+  }
+
+  handlePrizeTabTileData(giftFlag, rewardCategory) {
+    const that = this;
+    try {
+      let rewardCount = 0;
+      const rewardConfig = campaignConfigData["reward"];
+      const rewardTileWrapper = that.cardsCollectionPage.querySelector(
+        `.sc-year-end-spend-card-collection__tabs-prize-tile-${rewardCategory} 
+        .sc-year-end-spend-card-collection__tabs-prize-tile-wrapper`
+      );
+      const parentTile = rewardTileWrapper.closest(
+        ".sc-year-end-spend-card-collection__tabs-prize-tile"
+      );
+      const rewardTemplate = that.cardsCollectionTemplate.querySelector(
+        ".sc-year-end-spend-card-collection__tabs-prize-tile-content"
+      );
+
+      rewardTileWrapper.innerHTML = "";
+
+      for (const key in giftFlag) {
+        if (!Object.hasOwn(giftFlag, key)) continue;
+
+        const rewardTile = rewardTemplate.cloneNode(true);
+
+        if (giftFlag[key] === true && rewardTile) {
+          const rewardName = rewardTile.querySelector(
+            ".sc-year-end-spend-card-collection__tabs-prize-tile-name"
+          );
+          const tileSplitter = that.cardsCollectionTemplate
+            .querySelector(
+              ".sc-year-end-spend-card-collection__tabs-prize-tile-line"
+            )
+            .cloneNode(true);
+
+          if (rewardName && rewardCategory !== "luggage")
+            rewardName.textContent = rewardConfig[rewardCategory][key]["name"];
+
+          rewardCount = rewardCount + 1;
+          that.addRewardMapping(rewardTile, key, rewardCategory, true);
+          rewardTileWrapper.appendChild(rewardTile);
+          rewardTileWrapper.appendChild(tileSplitter);
+        }
+      }
+
+      if (rewardCount > 0 && parentTile) {
+        const tileNumberEle = parentTile.querySelector(
+          ".sc-year-end-spend-card-collection__tabs-prize-tile-number"
+        );
+
+        if (tileNumberEle) tileNumberEle.textContent = rewardCount;
+        parentTile.classList.add("has-prize-collected");
+      }
+    } catch (error) {
+      throw new Error(`Failed to render prize tab tile data: ${error.message}`);
+    }
+  }
+
+  handlePrizeCollectionTabsData() {
+    const that = this;
+    try {
+      const acquiredCardCountObj = that.acquiredCardCount;
+      const giftFlag = that.giftFlag;
+
+      for (const key in acquiredCardCountObj) {
+        if (!Object.hasOwn(acquiredCardCountObj, key)) continue;
+
+        const cardCount = acquiredCardCountObj[key];
+
+        switch (key) {
+          case "grandPrize": {
+            const grandPrizeCount = that.cardsCollectionPage.querySelector(
+              ".sc-year-end-spend-card-collection__grandprize-prize-acquired"
+            );
+
+            if (grandPrizeCount) grandPrizeCount.textContent = cardCount;
+            break;
+          }
+          case "dining":
+            that.handlePrizeTabTileData(giftFlag[key], key);
+            break;
+          case "travel":
+            that.handlePrizeTabTileData(giftFlag[key], key);
+            break;
+          case "luggage":
+            that.handlePrizeTabTileData(giftFlag, key);
+            break;
+          //   case 'bonus':
+          //     that.handleBonusTileData(cardCount);
+          //     break;
+          //   default:
+          //     break;
+        }
+      }
+    } catch (error) {
+      throw new Error(
+        `Failed to render prize collection tabs: ${error.message}`
+      );
+    }
+  }
+
+  handleRewardTileData(cardCountObj, giftFlag, rewardCategory) {
+    const that = this;
+    try {
+      const rewardConfig = campaignConfigData["reward"][rewardCategory];
+      const cardLimit = rewardConfig["cardLimit"];
+      const rewardTileWrapper = that.cardsCollectionPage.querySelector(
+        `.sc-year-end-spend-card-collection__tabs-tile-${rewardCategory} 
+        .sc-year-end-spend-card-collection__tabs-tile-wrapper`
+      );
+      const rewardTemplate = that.cardsCollectionTemplate.querySelector(
+        ".sc-year-end-spend-card-collection__tabs-reward"
+      );
+
+      rewardTileWrapper.innerHTML = "";
+
+      for (const key in cardCountObj) {
+        if (!Object.hasOwn(cardCountObj, key)) continue;
+
+        const cardCount = cardCountObj[key];
+        const rewardTile = rewardTemplate.cloneNode(true);
+
+        if (rewardTile) {
+          if (cardCount >= cardLimit && giftFlag[key] === true) {
+            rewardTile.classList.add("all-cards-collected");
+            that.addRewardMapping(rewardTile, key, rewardCategory);
+          } else if (
+            (cardCount < cardLimit && giftFlag[key] === true) ||
+            (cardCount >= cardLimit && giftFlag[key] === false)
+          )
+            throw new Error(
+              `${
+                String(key).charAt(0).toUpperCase() + String(key).slice(1)
+              } card count and gift flag do not match the criteria`
+            );
+        }
+
+        const rewardCardTitle = rewardTile.querySelector(
+          ".sc-year-end-spend-card-collection__tabs-reward-title"
+        );
+        const rewardCardImage = rewardTile.querySelectorAll(
+          ".sc-year-end-spend-card-collection__tabs-reward-cards-image img"
+        );
+        const rewardCardCountEle = rewardTile.querySelector(
+          ".sc-year-end-spend-card-collection__reward-cards-acquired"
+        );
+        const rewardCardLimitEle = rewardTile.querySelector(
+          ".sc-year-end-spend-card-collection__reward-cards-limit"
+        );
+
+        if (rewardCardTitle)
+          rewardCardTitle.textContent = rewardConfig[key]["name"];
+        if (rewardCardCountEle) rewardCardCountEle.textContent = cardCount;
+        if (rewardCardLimitEle) rewardCardLimitEle.textContent = cardLimit;
+
+        rewardCardImage.forEach((cardImage, index) => {
+          if (index + 1 <= cardCount) {
+            cardImage.src = rewardConfig[key]["image"];
+            cardImage.alt = `${key}-prize-card`;
+          }
+        });
+
+        if (cardCount > 0 && rewardTileWrapper) {
+          if (rewardTileWrapper.children.length > 0) {
+            const tileSplitter = that.cardsCollectionTemplate
+              .querySelector(
+                ".sc-year-end-spend-card-collection__tabs-tile-line"
+              )
+              .cloneNode(true);
+            rewardTileWrapper.appendChild(tileSplitter);
+          }
+
+          const parentTile = rewardTileWrapper.closest(
+            ".sc-year-end-spend-card-collection__tabs-tile"
+          );
+          parentTile.classList.add("has-cards-collected");
+          rewardTileWrapper.appendChild(rewardTile);
+        }
+      }
+    } catch (error) {
+      throw new Error(`Failed to render reward tile data: ${error.message}`);
+    }
+  }
+
+  handleBonusTileData(cardCount) {
+    const that = this;
+    try {
+      const bonusConfig = campaignConfigData["reward"]["bonus"];
+      const bonusImageWrapper = that.cardsCollectionPage.querySelector(
+        ".sc-year-end-spend-card-collection__tabs-bonus-cards"
+      );
+
+      if (bonusImageWrapper) {
+        for (let index = 0; index < cardCount; index++) {
+          const imgElement = document.createElement("img");
+          imgElement.src = bonusConfig["image"];
+          imgElement.alt = "bonus-prize-card";
+          bonusImageWrapper.appendChild(imgElement);
+        }
+
+        if (cardCount > 0) {
+          const parentTile = bonusImageWrapper.closest(
+            ".sc-year-end-spend-card-collection__tabs-tile"
+          );
+          parentTile.classList.add("has-cards-collected");
+        }
+      }
+    } catch (error) {
+      throw new Error(`Failed to render bonus tile data: ${error.message}`);
+    }
+  }
+
+  handleLuggageTileData(cardCount, giftFlag, key) {
+    const that = this;
+    try {
+      const luggageConfig = campaignConfigData["reward"][key];
+      const cardLimit = luggageConfig["cardLimit"];
+      const luggageTile = that.cardsCollectionPage.querySelector(
+        ".sc-year-end-spend-card-collection__tabs-luggage"
+      );
+
+      if (luggageTile) {
+        if (cardCount > 0) {
+          const parentTile = luggageTile.closest(
+            ".sc-year-end-spend-card-collection__tabs-tile"
+          );
+          parentTile.classList.add("has-cards-collected");
+        }
+        if (cardCount >= cardLimit && giftFlag[key] === true) {
+          luggageTile.classList.add("all-cards-collected");
+          that.addRewardMapping(luggageTile, key);
+        } else if (
+          (cardCount < cardLimit && giftFlag[key] === true) ||
+          (cardCount >= cardLimit && giftFlag[key] === false)
+        )
+          throw new Error(
+            "Luggage card count and gift flag do not match the criteria"
+          );
+      }
+
+      const luggageCardImage = luggageTile.querySelectorAll(
+        ".sc-year-end-spend-card-collection__tabs-luggage-cards img"
+      );
+      const luggageCardCountEle = luggageTile.querySelector(
+        ".sc-year-end-spend-card-collection__luggage-cards-acquired"
+      );
+      const luggageCardLimitEle = luggageTile.querySelector(
+        ".sc-year-end-spend-card-collection__luggage-cards-limit"
+      );
+
+      if (luggageCardCountEle) luggageCardCountEle.textContent = cardCount;
+      if (luggageCardLimitEle) luggageCardLimitEle.textContent = cardLimit;
+
+      luggageCardImage.forEach((cardImage, index) => {
+        if (index + 1 <= cardCount) {
+          cardImage.src = luggageConfig["image"];
+          cardImage.alt = "luggage-prize-card";
+        }
+      });
+    } catch (error) {
+      throw new Error(`Failed to render luggage tile data: ${error.message}`);
+    }
+  }
+
+  handleCardCollectionTabData() {
+    const that = this;
+    try {
+      const acquiredCardCountObj = that.acquiredCardCount;
+      const giftFlag = that.giftFlag;
+
+      for (const key in acquiredCardCountObj) {
+        if (!Object.hasOwn(acquiredCardCountObj, key)) continue;
+
+        const cardCount = acquiredCardCountObj[key];
+
+        switch (key) {
+          case "grandPrize": {
+            const grandPrizeCount = that.cardsCollectionPage.querySelector(
+              ".sc-year-end-spend-card-collection__grandprize-cards-acquired"
+            );
+
+            if (grandPrizeCount) grandPrizeCount.textContent = cardCount;
+            break;
+          }
+          case "dining":
+            that.handleRewardTileData(cardCount, giftFlag[key], key);
+            break;
+          case "travel":
+            that.handleRewardTileData(cardCount, giftFlag[key], key);
+            break;
+          case "luggage":
+            that.handleLuggageTileData(cardCount, giftFlag, key);
+            break;
+          case "bonus":
+            that.handleBonusTileData(cardCount);
+            break;
+          default:
+            break;
+        }
+      }
+    } catch (error) {
+      throw new Error(`Failed to render card collection tab: ${error.message}`);
+    }
+  }
+
+  /**
+   * Handles the rendering and initialization of the landing page for the year-end spend campaign.
+   * Sets offer values, updates expiry date, adds impression attributes, and manages loader visibility.
+   * If the expected offer is not available, displays an error page.
+   *
+   * @param {Object} that - The context object containing references to DOM elements and utility methods.
+   * @param {HTMLElement} that.landingPage - The landing page DOM element.
+   * @param {HTMLElement} that.loader - The loader DOM element.
+   * @param {string} that.campaignExpiryDate - The expiry date string for the campaign.
+   * @param {Function} that.setOfferValues - Method to set offer values on the page.
+   * @param {Function} that.addImpressionAttributes - Method to add impression attributes to elements.
+   * @param {Function} that.updateViewImpression - Method to update view impression for analytics.
+   * @param {Function} that.handleErrorPage - Method to render the error page.
+   */
+  handleCardCollectionPage(that) {
+    try {
+      if (that.isAfterGamePlay === true) {
+        const landingOfferId =
+          campaignConfigData?.offer?.landing || "EGCCYESLanding";
+
+        const landingOffer = Array.isArray(yearEndSpendOfferData?.offers)
+          ? yearEndSpendOfferData.offers.filter(
+              (offer) => offer?.id === landingOfferId
+            )[0]
+          : null;
+
+        if (typeof landingOffer === "object" && landingOffer !== null) {
+          that.setOfferValues(landingOffer);
+          that.landingOffer = landingOffer;
+          that.isAfterGamePlay = false;
+        } else {
+          throw new Error("Year end spend landing offer is not available");
+        }
+      }
+
+      const summaryOfferId =
+        campaignConfigData?.offer?.summary || "EGCCYESSummary";
+      const summaryOffer = Array.isArray(yearEndSpendOfferData?.offers)
+        ? yearEndSpendOfferData.offers.filter(
+            (offer) => offer?.id === summaryOfferId
+          )[0]
+        : null;
+
+      if (typeof summaryOffer === "object" && summaryOffer !== null) {
+        that.setSummaryOfferValues(summaryOffer);
+        that.handleCardCollectionTabData();
+        that.handlePrizeCollectionTabsData();
+        that.expandFirstAccordianInActiveTab("card-collection");
+
+        const packsCount = parseInt(
+          window.sessionStorage.getItem("packsCount"),
+          10
+        );
+        if (packsCount === 0) {
+          that.cardsCollectionPage.classList.add("zero-packs");
+        } else {
+          that.cardsCollectionPage.classList.remove("zero-packs");
+        }
+
+        that.addImpressionAttributes(summaryOffer, [that.cardsCollectionPage]);
+        that.updateViewImpression(that.cardsCollectionPage);
+        that.loader.classList.add("sc-year-end-spend-loader--hide");
+        that.cardsCollectionPage.classList.remove(
+          "sc-year-end-spend-card-collection--hide"
+        );
+      } else {
+        throw new Error("Year end spend summary offer is not available");
+      }
+    } catch (error) {
+      that.handleErrorPage(
+        `Failed to render card collection page: ${error.message}`
+      );
+      console.error("handleCardCollectionPage error:", error);
     }
   }
 
@@ -1826,8 +2545,11 @@ class ScYESGeneralScreen {
         : null;
 
       if (typeof expectedOffer === "object" && expectedOffer !== null) {
-        if (that.isRequireOfferUpdate === true)
+        if (that.isRequireOfferUpdate === true) {
           that.setOfferValues(expectedOffer);
+          that.landingOffer = expectedOffer;
+          that.isRequireOfferUpdate = false;
+        }
 
         const packsCount = parseInt(
           window.sessionStorage.getItem("packsCount"),
@@ -1855,9 +2577,9 @@ class ScYESGeneralScreen {
         const packsCountEle = that.landingPage.querySelector(
           ".sc-year-end-spend-landing__packs-count"
         );
-        if (packsCountEle) packsCountEle.textContent = that.packsCount;
+        if (packsCountEle) packsCountEle.textContent = packsCount;
 
-        if (that.packsCount === 0) {
+        if (packsCount === 0) {
           that.landingPage.classList.add("zero-packs");
         } else {
           that.landingPage.classList.remove("zero-packs");
@@ -1872,10 +2594,7 @@ class ScYESGeneralScreen {
         throw new Error("Year end spend landing offer is not available");
       }
     } catch (error) {
-      that.handleErrorPage(
-        `Failed to render landing page: ${error.message}`,
-        "loader"
-      );
+      that.handleErrorPage(`Failed to render landing page: ${error.message}`);
       console.error("handleLandingPage error:", error);
     }
   }
@@ -1898,29 +2617,36 @@ class ScYESGeneralScreen {
       );
 
       getStartedButton.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        that.loader.classList.remove("sc-year-end-spend-loader--hide");
-        that.registrationPage.classList.add(
-          "sc-year-end-spend-registration--hide"
-        );
-        that.regConfirmationPage.classList.add(
-          "sc-year-end-spend-reg-confirmation--hide"
-        );
+        try {
+          event.preventDefault();
+          event.stopPropagation();
+          that.loader.classList.remove("sc-year-end-spend-loader--hide");
+          that.registrationPage.classList.add(
+            "sc-year-end-spend-registration--hide"
+          );
+          that.regConfirmationPage.classList.add(
+            "sc-year-end-spend-reg-confirmation--hide"
+          );
 
-        setTimeout(() => {
-          that.isRequireOfferUpdate = true;
-          that.fetchRTIMOfferData(that.handleLandingPage);
-        }, 2000);
+          setTimeout(() => {
+            that.isRequireOfferUpdate = true;
+            that.fetchRTIMOfferData(that.handleLandingPage);
+          }, 2000);
+        } catch (error) {
+          that.handleErrorPage(
+            `Failed to handle Get Started button click: ${error.message}`
+          );
+          console.error("Get Started button click error:", error);
+        }
       });
+
       that.loader.classList.add("sc-year-end-spend-loader--hide");
       that.regConfirmationPage.classList.remove(
         "sc-year-end-spend-reg-confirmation--hide"
       );
     } catch (error) {
       that.handleErrorPage(
-        `Failed to render registration confirmation page: ${error.message}`,
-        "loader"
+        `Failed to render registration confirmation page: ${error.message}`
       );
       console.error("handleRegConfirmationPage error:", error);
     }
@@ -1946,8 +2672,7 @@ class ScYESGeneralScreen {
       }
     } catch (error) {
       that.handleErrorPage(
-        `Failed to handle registration click: ${error.message}`,
-        "loader"
+        `Failed to handle registration click: ${error.message}`
       );
       console.error("handleRegistrationClick error:", error);
     }
@@ -1983,8 +2708,7 @@ class ScYESGeneralScreen {
       );
     } catch (error) {
       that.handleErrorPage(
-        `Failed to render registration page: ${error.message}`,
-        "loader"
+        `Failed to render registration page: ${error.message}`
       );
       console.error("handleRegistrationPage error:", error);
     }
@@ -2005,8 +2729,7 @@ class ScYESGeneralScreen {
       );
     } catch (error) {
       that.handleErrorPage(
-        `Failed to render end campaign page: ${error.message}`,
-        "loader"
+        `Failed to render end campaign page: ${error.message}`
       );
       console.error("handleEndCampaignPage error:", error);
     }
@@ -2089,8 +2812,7 @@ class ScYESGeneralScreen {
       }
     } catch (error) {
       that.handleErrorPage(
-        `Failed to initialize year end spend page: ${error.message}`,
-        "loader"
+        `Failed to initialize year end spend page: ${error.message}`
       );
       console.error("handleYearEndSpendPage error:", error);
     }
@@ -2185,10 +2907,7 @@ class ScYESGeneralScreen {
         }
       }
     } catch (error) {
-      that.handleErrorPage(
-        `Failed to get RTIM offer data: ${error.message}`,
-        "loader"
-      );
+      that.handleErrorPage(`Failed to get RTIM offer data: ${error.message}`);
       console.error("fetchRTIMOfferData error:", error);
     }
   }
@@ -2221,8 +2940,7 @@ class ScYESGeneralScreen {
       }
     } catch (error) {
       that.handleErrorPage(
-        `Failed to fetch and handle offer data: ${error.message}`,
-        "loader"
+        `Failed to fetch and handle offer data: ${error.message}`
       );
       console.error("handleYearEndSpendOffer error:", error);
     }
@@ -2251,7 +2969,6 @@ class ScYESGeneralScreen {
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("fetchCampaignConfigData error:", error);
       throw error;
     }
   }
@@ -2277,8 +2994,7 @@ class ScYESGeneralScreen {
       await this.handleYearEndSpendOffer();
     } catch (error) {
       that.handleErrorPage(
-        `Failed to fetch config and offer data: ${error.message}`,
-        "loader"
+        `Failed to fetch config and offer data: ${error.message}`
       );
       console.error("initiateSpendCampaign error:", error);
     }

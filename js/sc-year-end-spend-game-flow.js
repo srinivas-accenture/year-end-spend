@@ -908,10 +908,10 @@ class ScYESGameScreen {
           collectedCurrentCardGroup
         );
 
-        setTimeout(() => {
-          // console.log("About to execute pocket fade out after delay");
-          this.executePocketFadeOut(chances);
-        }, this.CONFIG.TIMING.POCKET_DELAY);
+        // setTimeout(() => {
+        //   console.log("About to execute pocket fade out after delay");
+        //   this.executePocketFadeOut(chances);
+        // }, this.CONFIG.TIMING.POCKET_DELAY);
       },
     });
 

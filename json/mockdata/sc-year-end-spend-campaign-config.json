@@ -23,73 +23,100 @@
           "travel4AcquiredCount": "Travel4AcquiredCardCount",
           "luggageAcquiredCount": "LuggageAcquiredCardCount",
           "grandPrizeAcquiredCount": "GrandPrizeDrawAcquiredCardCount",
-          "bounsCardAcquiredCount": "BounsCardAcquiredCardCount"
+          "bonusAcquiredCount": "BonusCardAcquiredCardCount",
+          "restaurant1GiftFlag": "Restaurant1GiftFlag",
+          "restaurant2GiftFlag": "Restaurant2GiftFlag",
+          "restaurant3GiftFlag": "Restaurant3GiftFlag",
+          "restaurant4GiftFlag": "Restaurant4GiftFlag",
+          "travel1GiftFlag": "Travel1GiftFlag",
+          "travel2GiftFlag": "Travel2GiftFlag",
+          "travel3GiftFlag": "Travel3GiftFlag",
+          "travel4GiftFlag": "Travel4GiftFlag",
+          "luggageGiftFlag": "LuggageGiftFlag"
         },
-        "groupId": "groupId",
-        "reward": {
-          "grandPrize": {
-            "name": "Grand Prize: Private jet to the Maldives",
-            "expiry": "",
-            "message": "",
-            "image": "./images/sc-year-end-spend-prize-card-private-jet.png"
+        "groupId": "RewardGroupID"
+      },
+      "reward": {
+        "grandPrize": {
+          "name": "Grand Prize: Private jet to the Maldives",
+          "expiry": "6 months from redemption",
+          "message": "",
+          "image": "./images/sc-year-end-spend-prize-card-private-jet.png",
+          "termsLink": "https://www.sc.com/sg/terms-and-conditions/pinballsurewin/"
+        },
+        "dining": {
+          "name": "Michelin-starred dining experience (for two)",
+          "expiry": "6 months from redemption",
+          "message": "rewardMessage",
+          "cardLimit": 3,
+          "restaurant1": {
+            "name": "Labyrinth",
+            "title": "Michelin-starred dining experience (for two) at Labyrinth",
+            "image": "./images/sc-year-end-spend-prize-card-dining-restaurant1.png"
           },
-          "dineIn": {
-            "name": "rewardName",
-            "expiry": "rewardExpiryDate",
-            "message": "rewardMessage",
-            "cardLimit": 3,
-            "restaurant1": {
-              "name": "Labyrinth",
-              "image": "./images/sc-year-end-spend-prize-card-dining-restaurant1.png"
-            },
-            "restaurant2": {
-              "name": "Lerouy",
-              "image": "./images/sc-year-end-spend-prize-card-dining-restaurant2.png"
-            },
-            "restaurant3": {
-              "name": "Seroja",
-              "image": "./images/sc-year-end-spend-prize-card-dining-restaurant3.png"
-            },
-            "restaurant4": {
-              "name": "Pangium",
-              "image": "./images/sc-year-end-spend-prize-card-dining-restaurant4.png"
-            }
+          "restaurant2": {
+            "name": "Lerouy",
+            "title": "Michelin-starred dining experience (for two) at Lerouy",
+            "image": "./images/sc-year-end-spend-prize-card-dining-restaurant2.png"
           },
-          "travel": {
-            "name": "rewardName",
-            "expiry": "rewardExpiryDate",
-            "message": "rewardMessage",
-            "cardLimit": 3,
-            "travel1": {
-              "name": "Bali",
-              "image": "./images/sc-year-end-spend-prize-card-dining-country1.png"
-            },
-            "travel2": {
-              "name": "Hong Kong",
-              "image": "./images/sc-year-end-spend-prize-card-dining-country2.png"
-            },
-            "travel3": {
-              "name": "Shanghai",
-              "image": "./images/sc-year-end-spend-prize-card-dining-country3.png"
-            },
-            "travel4": {
-              "name": "Taipei",
-              "image": "./images/sc-year-end-spend-prize-card-dining-country4.png"
-            }
+          "restaurant3": {
+            "name": "Seroja",
+            "title": "Michelin-starred dining experience (for two) at Seroja",
+            "image": "./images/sc-year-end-spend-prize-card-dining-restaurant3.png"
           },
-          "luggage": {
-            "name": "rewardName",
-            "expiry": "rewardExpiryDate",
-            "message": "rewardMessage",
-            "cardLimit": 3,
-            "image": "./images/sc-year-end-spend-prize-card-luggage.png"
+          "restaurant4": {
+            "name": "Pangium",
+            "title": "Michelin-starred dining experience (for two) at Pangium",
+            "image": "./images/sc-year-end-spend-prize-card-dining-restaurant4.png"
           },
-          "bonus": {
-            "name": "rewardName",
-            "expiry": "rewardExpiryDate",
-            "message": "rewardMessage",
-            "image": "./images/sc-year-end-spend-prize-card-bonus.png"
-          }
+          "termsLink": "https://www.sc.com/sg/terms-and-conditions/pinballsurewin/"
+        },
+        "travel": {
+          "name": "Pair of flight tickets",
+          "expiry": "6 months from redemption",
+          "message": "rewardMessage",
+          "cardLimit": 3,
+          "travel1": {
+            "name": "To Bali",
+            "title": "Pair of flight tickets to Bali",
+            "image": "./images/sc-year-end-spend-prize-card-travel-country1.png"
+          },
+          "travel2": {
+            "name": "To Hong Kong",
+            "title": "Pair of flight tickets to Hong Kong",
+            "image": "./images/sc-year-end-spend-prize-card-travel-country2.png"
+          },
+          "travel3": {
+            "name": "To Shanghai",
+            "title": "Pair of flight tickets to Shanghai",
+            "image": "./images/sc-year-end-spend-prize-card-travel-country3.png"
+          },
+          "travel4": {
+            "name": "To Taipei",
+            "title": "Pair of flight tickets to Taipei",
+            "image": "./images/sc-year-end-spend-prize-card-travel-country4.png"
+          },
+          "termsLink": "https://www.sc.com/sg/terms-and-conditions/pinballsurewin/"
+        },
+        "luggage": {
+          "name": "Designer travel luggage",
+          "title": "Designer travel luggage",
+          "expiry": "6 months from redemption",
+          "message": "rewardMessage",
+          "cardLimit": 3,
+          "image": "./images/sc-year-end-spend-prize-card-luggage.png",
+          "termsLink": "https://www.sc.com/sg/terms-and-conditions/pinballsurewin/"
+        },
+        "bonus": {
+          "name": "Bonus mystery prize",
+          "expiry": "6 months from redemption",
+          "message": "rewardMessage",
+          "image": "./images/sc-year-end-spend-prize-card-bonus.png",
+          "termsLink": "https://www.sc.com/sg/terms-and-conditions/pinballsurewin/"
+        },
+        "share": {
+          "message": "Register for SC Million Reasons to be Happier and win {{reward}}.\n\nHere's how:\n1.Download SC Mobile\n2.Tap on 'SC Million Reasons to be Happier' promotion on the Discover tab\n3.Tap on 'Register now'\n4.Start doing eligible action and win prizes!",
+          "image": ""
         }
       },
       "expiryDayDelay": 14,

@@ -4032,7 +4032,7 @@ $height-breakpoints-basewidth: (
 
             &:nth-child(2):nth-last-child(4){
               left: 32%;
-              top: -10px;
+              top: 10px;
             }
 
             &:nth-child(3) {
@@ -4044,21 +4044,21 @@ $height-breakpoints-basewidth: (
 
             &:nth-child(3):nth-last-child(3){
               left: 68%;
-              top: -10px;
+              top: 10px;
             }
 
             &:nth-child(4) {
-              left: 62%;
-              top: -70px;
-              transform: translateX(-50%) rotate(-5deg);
-              transition: top, transform, 0.5s ease-in-out 3s;
+              left: 82%;
+              top: 30px;
+              transform: translateX(-50%) rotate(14deg);
+              transition: top, transform, 0.5s ease-in-out 3.2s;
             }
 
             &:nth-child(5) {
-              left: 38%;
-              top: -70px;
-              transform: translateX(-50%) rotate(5deg);
-              transition: top, transform, 0.5s ease-in-out 3s;
+              left: 18%;
+              top: 30px;
+              transform: translateX(-50%) rotate(-14deg);
+              transition: top, transform, 0.5s ease-in-out 3.2s;
             }
 
             &-text{
@@ -4103,10 +4103,13 @@ $height-breakpoints-basewidth: (
         background-color: $color-white;
         border-radius: 3px;
         box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-        padding: calc(min(7px, #{responsive-height(7px)})) calc(min(7px, #{responsive-font(7px)})) 0px;
         width: calc(min(156px, #{responsive-font(156px)}));
         top: 40px;
         opacity: 0;
+
+        img{
+          width: 100%;
+        }
 
         &-img {
           position: relative;
@@ -4118,7 +4121,10 @@ $height-breakpoints-basewidth: (
             width: 100%;
             height: 100%;
             z-index: 3;
-            background-color: $color-blue-dark-16;
+            background-image: url(../images/game/sc-year-end-spend-prize-card-blank.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
             top: 0;
             left: 0;
             opacity: 1;
@@ -4140,7 +4146,7 @@ $height-breakpoints-basewidth: (
         }
 
         &:nth-child(1):nth-last-child(5) {
-          margin-top: 40px;
+          margin-bottom: calc(min(30px, #{responsive-height(30px)}));
         }
 
         &:nth-child(1):nth-last-child(5),
@@ -4149,7 +4155,6 @@ $height-breakpoints-basewidth: (
         &:nth-child(4):nth-last-child(2),
         &:nth-child(5):nth-last-child(1) {
           width: calc(min(110px, #{responsive-font(110px)}));
-          padding: calc(min(5px, #{responsive-height(5px)}));
         }
 
         &:nth-child(1):nth-last-child(5) .sc-year-end-spend-polaroid-game__polaroid-card-text,
